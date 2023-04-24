@@ -1,30 +1,31 @@
 // React
-import React, { useContext } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ThreeDots } from "react-loader-spinner";
+import React, { useContext } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThreeDots } from 'react-loader-spinner';
 
 // css
-import "./index.css";
+import './index.css';
 
 // Components
-import Navigation from "./components/Navigation/Navigation";
-import Login from "./components/Login/Login";
-import Workout from "./components/Workouts/Workout";
-import SplitGrid from "./components/Splits/SplitGrid";
-import WorkoutGrid from "./components/Workouts/WorkoutGrid";
-import NotFound from "./components/NotFound/NotFound";
+import Navigation from './components/Navigation/Navigation';
+import Login from './components/Login/Login';
+import Workout from './components/Workouts/Workout';
+import SplitGrid from './components/Splits/SplitGrid';
+import WorkoutGrid from './components/Workouts/WorkoutGrid';
+import NotFound from './components/NotFound/NotFound';
 
 // Context
-import { GlobalContext } from "./context/GlobalContext";
+import { GlobalContext } from './context/GlobalContext';
 
 function App() {
   const { loading } = useContext(GlobalContext);
+  const { user } = useContext(GlobalContext);
 
   return (
     <Router>
       <div className="App">
         <div className="content">
-          {<Navigation />}
+          {user && <Navigation />}
           {loading ? (
             <div className="loading">
               <ThreeDots
@@ -46,7 +47,6 @@ function App() {
               <Route path="workouts/:split_id" element={<WorkoutGrid />} />
               <Route path="workout/:id" element={<Workout />} />
               <Route path="*" element={<NotFound />} />
-              {/* <Route path="test" element={<Timer />} /> */}
             </Routes>
           )}
         </div>
