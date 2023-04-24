@@ -1,7 +1,6 @@
 // React
 import React, { useContext, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { ThreeDots } from 'react-loader-spinner';
 import { useNavigate } from 'react-router-dom';
 
 // css
@@ -19,7 +18,7 @@ import NotFound from './components/NotFound/NotFound';
 import { GlobalContext } from './context/GlobalContext';
 
 function App() {
-  const { loading, setIsModalOpen, setIsMenuOpen } = useContext(GlobalContext);
+  const { setIsModalOpen, setIsMenuOpen } = useContext(GlobalContext);
   const { user } = useContext(GlobalContext);
 
   const navigate = useNavigate();

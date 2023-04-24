@@ -76,15 +76,11 @@ const WorkoutSplit = () => {
             <p>{currentWorkout.workout_name}</p>
             <p>{`Workout #${currentWorkout.day}`}</p>
             <Timer />
-            {/* <button className="buttonFinish">Finish</button> */}
             {/* <div>Notes</div> */}
           </div>
-          {/* <Scroll> */}
           {prevTrackData.map((el) => {
             return <Exercise key={el.exercise_id} el={el} />;
           })}
-          {/* </Scroll> */}
-
           <div className="button-container">
             <button onClick={() => handleModal()} disabled={isModalOpen} className="workoutBtn add">
               Add exercise
