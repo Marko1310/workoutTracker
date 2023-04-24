@@ -22,11 +22,18 @@ export const GlobalProvider = ({ children }) => {
   const [workouts, setWorkouts] = useState([]);
   const [currentWorkout, setCurrentWorkout] = useState([]);
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const [errors, setErrors] = useState({});
+
+  let timeout;
+  const setLoadingTimeout = () => {
+    timeout = setTimeout(() => {
+      setLoading(true);
+    }, 1000);
+  };
 
   useEffect(() => {
     getCurrentUser();
@@ -37,12 +44,10 @@ export const GlobalProvider = ({ children }) => {
     setIsMenuOpen(false);
   }, [user]);
 
-  let timeout;
-  const setLoadingTimeout = () => {
-    timeout = setTimeout(() => {
-      setLoading(true);
-    }, 1000);
-  };
+  useEffect(() => {
+    setLoading(false);
+    clearTimeout(timeout);
+  }, [splits, workouts]);
 
   ///////////////////////////// USER ////////////////////////////
   const getCurrentUser = () => {
@@ -55,16 +60,16 @@ export const GlobalProvider = ({ children }) => {
           setUser(null);
         } else {
           setUser(user.data);
-          axios
-            .get(`${API_URL}/api/auth/splits/current`, {
-              withCredentials: true,
-            })
-            .then(() => {
-              setLoading(false);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+          //     axios
+          //       .get(`${API_URL}/api/auth/splits/current`, {
+          //         withCredentials: true,
+          //       })
+          //       .then(() => {
+          //         setLoading(false);
+          //       })
+          //       .catch((error) => {
+          //         console.log(error);
+          //       });
         }
       })
       .catch((error) => {
@@ -91,13 +96,14 @@ export const GlobalProvider = ({ children }) => {
 
   ///////////////////////////// RETRIEVE DATA ////////////////////////////
   const getSplits = () => {
+    console.log('aaaa');
     axios
       .get(`${API_URL}/api/auth/splits/current`, {
         withCredentials: true,
       })
       .then((data) => {
         setSplits(data.data);
-        clearTimeout(timeout);
+        // clearTimeout(timeout);
         setLoading(false);
       })
       .catch((error) => {
