@@ -12,13 +12,15 @@
   justify-content: center;
 }
 
-.choose {
-  font-weight: 600;
-  font-size: 1.5rem;
+.choose-title {
+  font-weight: 400;
+  font-size: 1.3rem;
   display: flex;
-  justify-content: center;
-  text-decoration: underline;
-  color: #fff;
+  justify-content: start;
+  padding-left: 1rem;
+  text-transform: uppercase;
+  color: black;
+  margin-bottom: 2rem;
 }
 
 .workout-grid {
@@ -27,7 +29,7 @@
   margin-bottom: 3rem;
   display: grid;
   gap: 3rem;
-  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
 }
 
 .workout-container {
@@ -35,7 +37,6 @@
   padding: 1rem;
   flex-direction: column;
   align-items: center;
-  background-color: aliceblue;
   width: 100%;
   height: auto;
   border-style: solid;
@@ -43,48 +44,60 @@
   font-size: large;
   border-style: solid;
   border-color: white;
-  border-radius: 0.8rem;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 6px 50px;
-  transition: 0.5s;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  transition: 0.2s;
+  background-color: #ffff;
 }
 
 .workout-container:hover {
-  scale: 1.05;
+  scale: 1.02;
 }
 
 .image-and-delete-container {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: space-between;
   position: relative;
   width: 100%;
 }
 
 .workout-image {
-  height: 5rem;
+  height: 3rem;
 }
 
 .delete-split {
   position: absolute;
   right: 0rem;
   top: 0rem;
+  font-size: 0.8rem;
+  color: #d42c1d;
+  font-weight: 500;
+  transition: all 0.4s;
+}
+
+.delete-split:hover {
+  cursor: pointer;
+}
+
+.enter-split {
   height: 2rem;
-  width: 5rem;
   font-size: 1rem;
   color: #fff;
   padding: 0rem 0.5rem 0rem 0.5rem;
   border-radius: 3px;
-  font-weight: 600;
-  background-color: #d42c1d;
+  font-weight: 400;
+  /* background-color: rgb(16, 172, 224); */
+  background-color: #bbbcbc;
   outline: none;
   border: none;
   transition: all 0.4s;
-  font-family: "Montserrat", sans-serif;
+  margin-top: 1rem;
 }
 
-.delete-split:hover {
-  scale: 1.05;
-  filter: brightness(1.05);
+.enter-split:hover {
+  cursor: pointer;
+  background-color: #2c2d2d;
 }
 
 .workout-card {
@@ -92,11 +105,24 @@
   flex-direction: column;
   list-style-type: none;
   margin-top: 10px;
+  flex-grow: 1;
 }
 
 .workout-card-title {
-  font-weight: 800;
+  color: black;
+  text-transform: uppercase;
+  text-decoration: underline;
+  font-weight: 400;
   font-size: large;
   margin-bottom: 10px;
   align-self: center;
+}
+
+.workout-card-workouts-days {
+  font-weight: 300;
+}
+
+.workout-card-workouts {
+  padding-left: 1rem;
+  font-weight: 300;
 }
