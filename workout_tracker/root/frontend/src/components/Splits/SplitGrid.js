@@ -52,6 +52,7 @@ const WorkoutSplitGrid = () => {
 
   const changeRoute = (id) => {
     getWorkouts(id);
+    setLoading(true);
     navigate(`/workouts/${id}`);
   };
 

@@ -25,10 +25,10 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (user) navigate('/dashboard');
     setIsModalOpen(false);
     setIsMenuOpen(false);
-    if (user) navigate('/dashboard');
-  }, [user, navigate]);
+  }, [user]);
 
   return (
     <div className="App">

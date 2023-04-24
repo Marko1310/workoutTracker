@@ -73,12 +73,12 @@ export const GlobalProvider = ({ children }) => {
   };
 
   const logout = () => {
+    setUser(null);
     axios
       .get(`${API_URL}/api/auth/logout`, {
         withCredentials: true,
       })
       .then(() => {
-        setUser(null);
         clearTimeout(timeout);
         setLoading(false);
       })
@@ -91,7 +91,6 @@ export const GlobalProvider = ({ children }) => {
 
   ///////////////////////////// RETRIEVE DATA ////////////////////////////
   const getSplits = () => {
-    console.log('aaaa');
     axios
       .get(`${API_URL}/api/auth/splits/current`, {
         withCredentials: true,

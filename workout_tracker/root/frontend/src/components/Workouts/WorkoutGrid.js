@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import NewWorkoutModal from './NewWorkoutModal.js';
 import AddWorkoutBtn from './AddWorkoutBtn.js';
 import HelpModal from '../HelpModal/HelpModal';
+import Loading from '../Loading/Loading';
 
 // Context
 import { GlobalContext } from '../../context/GlobalContext.js';
@@ -18,7 +19,7 @@ import './WorkoutGrid.css';
 import logo from '../../images/workout.png';
 
 const WorkoutGrid = () => {
-  const { isModalOpen, isMenuOpen } = useContext(GlobalContext);
+  const { isModalOpen, isMenuOpen, loading } = useContext(GlobalContext);
   const { user } = useContext(GlobalContext);
   const { workouts, getWorkouts } = useContext(GlobalContext);
   const { getPrevTrackData } = useContext(GlobalContext);
@@ -70,7 +71,9 @@ const WorkoutGrid = () => {
     e.stopPropagation();
   };
 
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <>
       {helpModalOpen ? (
         <HelpModal message={'workouts'} />
