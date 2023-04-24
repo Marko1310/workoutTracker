@@ -32,6 +32,11 @@ export const GlobalProvider = ({ children }) => {
     getCurrentUser();
   }, []);
 
+  useEffect(() => {
+    setIsModalOpen(false);
+    setIsMenuOpen(false);
+  }, [user]);
+
   let timeout;
   const setLoadingTimeout = () => {
     timeout = setTimeout(() => {
