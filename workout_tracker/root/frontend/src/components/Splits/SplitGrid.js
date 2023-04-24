@@ -9,6 +9,8 @@ import HelpModal from '../HelpModal/HelpModal';
 // Components
 import { useNavigate } from 'react-router-dom';
 
+import Loading from '../Loading/Loading';
+
 // Context
 import { GlobalContext } from '../../context/GlobalContext.js';
 
@@ -45,12 +47,8 @@ const WorkoutSplitGrid = () => {
       setHelpModalOpen(true);
     } else setHelpModalOpen(false);
     clearTimeout(timeout);
+    // setLoading(false);
   }, [splits]);
-
-  useEffect(() => {
-    clearTimeout(timeout);
-    setLoading(false);
-  }, []);
 
   const changeRoute = (id) => {
     getWorkouts(id);
@@ -66,7 +64,9 @@ const WorkoutSplitGrid = () => {
     e.stopPropagation();
   };
 
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <>
       <p className="choose-title">Choose your Workout Split:</p>
       {!loading && helpModalOpen && <HelpModal message={'splits'} />}

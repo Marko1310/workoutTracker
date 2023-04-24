@@ -44,11 +44,6 @@ export const GlobalProvider = ({ children }) => {
     setIsMenuOpen(false);
   }, [user]);
 
-  useEffect(() => {
-    setLoading(false);
-    clearTimeout(timeout);
-  }, [splits, workouts]);
-
   ///////////////////////////// USER ////////////////////////////
   const getCurrentUser = () => {
     axios
@@ -60,16 +55,16 @@ export const GlobalProvider = ({ children }) => {
           setUser(null);
         } else {
           setUser(user.data);
-          //     axios
-          //       .get(`${API_URL}/api/auth/splits/current`, {
-          //         withCredentials: true,
-          //       })
-          //       .then(() => {
-          //         setLoading(false);
-          //       })
-          //       .catch((error) => {
-          //         console.log(error);
-          //       });
+          // axios
+          //   .get(`${API_URL}/api/auth/splits/current`, {
+          //     withCredentials: true,
+          //   })
+          //   .then(() => {
+          //     setLoading(false);
+          //   })
+          //   .catch((error) => {
+          //     console.log(error);
+          //   });
         }
       })
       .catch((error) => {

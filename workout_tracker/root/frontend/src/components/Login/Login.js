@@ -36,14 +36,14 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setBackgroundImage(images[Math.floor(Math.random() * 7)].img);
-  }, []);
-
-  useEffect(() => {
     if (user && navigate) {
-      navigate('/dashboard');
+      setLoading(false);
     }
   }, [user, navigate]);
+
+  useEffect(() => {
+    setBackgroundImage(images[Math.floor(Math.random() * 7)].img);
+  }, []);
 
   let timeout;
   const setLoadingTimeout = () => {

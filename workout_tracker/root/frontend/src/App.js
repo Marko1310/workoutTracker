@@ -27,35 +27,20 @@ function App() {
   useEffect(() => {
     setIsModalOpen(false);
     setIsMenuOpen(false);
+    if (user) navigate('/dashboard');
   }, [user, navigate]);
 
   return (
     <div className="App">
       <div className="content">
         {user && <Navigation />}
-        {loading ? (
-          <div className="loading">
-            <ThreeDots
-              height="80"
-              width="80"
-              radius="9"
-              color="#fff"
-              ariaLabel="three-dots-loading"
-              wrapperStyle={{}}
-              wrapperClassName=""
-              visible={true}
-            />
-            <h2 className="loading-title">Loading</h2>
-          </div>
-        ) : (
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="dashboard" element={<SplitGrid />} />
-            <Route path="workouts/:split_id" element={<WorkoutGrid />} />
-            <Route path="workout/:id" element={<Workout />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        )}
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="dashboard" element={<SplitGrid />} />
+          <Route path="workouts/:split_id" element={<WorkoutGrid />} />
+          <Route path="workout/:id" element={<Workout />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </div>
     </div>
   );
