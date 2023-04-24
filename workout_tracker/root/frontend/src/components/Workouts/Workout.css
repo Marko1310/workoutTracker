@@ -68,7 +68,6 @@
   border: none;
   transition: all 0.4s;
   margin-bottom: 1rem;
-  font-family: 'Montserrat', sans-serif;
 }
 
 .add {
@@ -85,7 +84,6 @@
   outline: none;
   border: none;
   transition: all 0.4s;
-  font-family: 'Montserrat', sans-serif;
   height: 1.8rem;
 }
 

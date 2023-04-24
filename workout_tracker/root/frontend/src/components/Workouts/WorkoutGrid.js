@@ -97,8 +97,7 @@ const WorkoutGrid = () => {
                       <p>Exercises: </p>
                       {el.array_agg.map((name, index) => {
                         return (
-                          <li>
-                            {' '}
+                          <li key={index}>
                             - Exercise {index + 1} : {name}
                           </li>
                         );

@@ -89,7 +89,7 @@ const WorkoutSplitGrid = () => {
                       <li className="workout-card-workouts-days">{el.days} day split:</li>
                       {el.array_agg.map((name, index) => {
                         return (
-                          <li className="workout-card-workouts">
+                          <li key={index} className="workout-card-workouts">
                             - Day {index + 1} : {name} day
                           </li>
                         );
