@@ -24,6 +24,8 @@ export const GlobalProvider = ({ children }) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -395,6 +397,8 @@ export const GlobalProvider = ({ children }) => {
     setForm,
     input,
     setInput,
+    isMenuOpen,
+    setIsMenuOpen,
   };
 
   return <GlobalContext.Provider value={globalState}>{children}</GlobalContext.Provider>;
