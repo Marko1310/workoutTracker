@@ -1,21 +1,22 @@
 // React
-import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // Components
-import Exercise from "./Exercise";
-import NewExerciseModal from "./NewExerciseModal";
-import Message from "./Message";
+import Exercise from './Exercise';
+import NewExerciseModal from './NewExerciseModal';
+import Message from './Message';
+import Timer from '../Timer/Timer';
 
 // css
-import "./Workout.css";
+import './Workout.css';
 
 // Context
-import { GlobalContext } from "../../context/GlobalContext";
+import { GlobalContext } from '../../context/GlobalContext';
 
 const WorkoutSplit = () => {
-  const { isModalOpen, setIsModalOpen } = useContext(GlobalContext);
+  const { isModalOpen, setIsModalOpen, isMenuOpen } = useContext(GlobalContext);
   const { user } = useContext(GlobalContext);
   const { prevTrackData } = useContext(GlobalContext);
   const { setError } = useContext(GlobalContext);
@@ -33,7 +34,7 @@ const WorkoutSplit = () => {
 
   useEffect(() => {
     if (!user) {
-      navigate("/");
+      navigate('/');
     }
   }, [user, navigate]);
 
@@ -43,39 +44,39 @@ const WorkoutSplit = () => {
     addTrackData(id)
       .then((response) => {
         if (response) {
-          setSuccessMsg("success");
+          setSuccessMsg('success');
           setIsModalOpen(true);
           success();
           updateWorkoutDay(id);
         }
       })
       .catch(() => {
-        setSuccessMsg("error");
+        setSuccessMsg('error');
         success();
       });
   };
 
   const handleModal = () => {
-    setError("");
+    setError('');
     setIsModalOpen((setIsModalOpen) => !setIsModalOpen);
   };
 
   const success = () => {
     setTimeout(() => {
       setIsModalOpen(false);
-      navigate("/");
+      navigate('/');
     }, 2000);
   };
 
   return (
     <div className="workout-main-container">
-      <div className={`workout ${isModalOpen ? "blurred" : ""}`}>
+      <div className={`workout ${isModalOpen || isMenuOpen ? 'blurred' : ''}`}>
         <div className="container">
           <div className="description-container">
             <p>{currentWorkout.workout_name}</p>
             <p>{`Workout #${currentWorkout.day}`}</p>
-            {/* <Timer /> */}
-            <button className="buttonFinish">Finish</button>
+            <Timer />
+            {/* <button className="buttonFinish">Finish</button> */}
             {/* <div>Notes</div> */}
           </div>
           {/* <Scroll> */}
@@ -85,18 +86,10 @@ const WorkoutSplit = () => {
           {/* </Scroll> */}
 
           <div className="button-container">
-            <button
-              onClick={() => handleModal()}
-              disabled={isModalOpen}
-              className="workoutBtn add"
-            >
+            <button onClick={() => handleModal()} disabled={isModalOpen} className="workoutBtn add">
               Add exercise
             </button>
-            <button
-              disabled={isModalOpen}
-              onClick={(e) => handleSubmit(e)}
-              className="workoutBtn"
-            >
+            <button disabled={isModalOpen} onClick={(e) => handleSubmit(e)} className="workoutBtn">
               Save workout
             </button>
           </div>
