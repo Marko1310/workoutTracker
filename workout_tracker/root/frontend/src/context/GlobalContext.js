@@ -1,6 +1,9 @@
 import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
 
+// services
+import userServices from '../services/userServices';
+
 //create context
 export const GlobalContext = createContext();
 
@@ -25,7 +28,6 @@ export const GlobalProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const [errors, setErrors] = useState({});
 
   let timeout;
@@ -36,7 +38,8 @@ export const GlobalProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    getCurrentUser();
+    // getCurrentUser();
+    userServices.getCurrentUser().then((user) => setUser(user));
   }, []);
 
   useEffect(() => {
@@ -45,32 +48,23 @@ export const GlobalProvider = ({ children }) => {
   }, [user]);
 
   ///////////////////////////// USER ////////////////////////////
-  const getCurrentUser = () => {
-    axios
-      .get(`${API_URL}/api/auth/current`, {
-        withCredentials: true,
-      })
-      .then((user) => {
-        if (!user) {
-          setUser(null);
-        } else {
-          setUser(user.data);
-          // axios
-          //   .get(`${API_URL}/api/auth/splits/current`, {
-          //     withCredentials: true,
-          //   })
-          //   .then(() => {
-          //     setLoading(false);
-          //   })
-          //   .catch((error) => {
-          //     console.log(error);
-          //   });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const getCurrentUser = () => {
+  //   axios
+  //     .get(`${API_URL}/api/auth/current`, {
+  //       withCredentials: true,
+  //     })
+  //     .then((response) => {
+  //       console.log(response);
+  //       if (!response) {
+  //         setUser(null);
+  //       } else {
+  //         setUser(response.data);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   const logout = () => {
     setUser(null);
@@ -369,7 +363,7 @@ export const GlobalProvider = ({ children }) => {
     workouts,
     setWorkouts,
     prevTrackData,
-    getCurrentUser,
+    // getCurrentUser,
     logout,
     getSplits,
     getWorkouts,

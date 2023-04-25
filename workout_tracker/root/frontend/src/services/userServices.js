@@ -1,24 +1,22 @@
-import { API_URL } from './serverConfig';
-
-import axios from 'axios';
+import api from './Api/api';
 
 const getCurrentUser = () => {
-  return axios
-    .get(`${API_URL}/api/auth/current`, {
-      withCredentials: true,
-    })
-    .then((data) => {
-      return data;
+  return api
+    .get('/api/auth/current')
+    .then((response) => {
+      if (!response) {
+        return null;
+      } else {
+        return response.data;
+      }
     })
     .catch((error) => {
       console.log(error);
     });
 };
 
-const logout = async () => {
-  return axios.get(`${API_URL}/api/auth/logout`, {
-    withCredentials: true,
-  });
+const logout = () => {
+  return api.get('/api/auth/logout');
 };
 
 export default {
