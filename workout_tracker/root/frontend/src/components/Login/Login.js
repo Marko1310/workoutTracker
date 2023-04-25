@@ -20,7 +20,7 @@ import { GlobalContext } from '../../context/GlobalContext';
 
 // images
 import logo from '../../images/workout-icon.jpg';
-import loginServices from '../../services/loginServices';
+import loginServices from '../../services/login_signupServices';
 
 // const API_URL = "https://workouttracker-server.onrender.com";
 const API_URL = 'http://localhost:8000';
@@ -57,20 +57,12 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    let data = {};
 
-    if (form === 'signup') {
-      data = {
-        name: input.name,
-        email: input.email,
-        password: input.password,
-      };
-    } else {
-      data = {
-        email: input.email,
-        password: input.password,
-      };
-    }
+    const data = {
+      name: input.name,
+      email: input.email,
+      password: input.password,
+    };
 
     // 1. login or signup depending on form
     // 2. call getCurrent user and setUser
