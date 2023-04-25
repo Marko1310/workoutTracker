@@ -3,6 +3,12 @@ import { NavLink } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
+// Context
+import { GlobalContext } from '../../context/GlobalContext';
+
+// services
+import userServices from '../../services/userServices';
+
 // components
 import Popmenu from './Popmenu';
 
@@ -13,14 +19,11 @@ import './Navigation.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
-// Context
-import { GlobalContext } from '../../context/GlobalContext';
-
 const Navigation = () => {
   // Context
-  const { user } = useContext(GlobalContext);
+  const { user, setUser } = useContext(GlobalContext);
   const { logout } = useContext(GlobalContext);
-  const { setLoadingTimeout } = useContext(GlobalContext);
+  const { setLoading } = useContext(GlobalContext);
 
   // current location
   const location = useLocation();
@@ -39,8 +42,17 @@ const Navigation = () => {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    setLoadingTimeout();
-    logout();
+    setUser(null);
+    setLoading(true);
+    userServices
+      .logout()
+      .then(() => {
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
   };
 
   return (

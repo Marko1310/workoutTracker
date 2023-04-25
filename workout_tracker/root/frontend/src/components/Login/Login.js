@@ -40,7 +40,7 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setLoading(false);
+    // setLoading(false);
   }, [user, navigate]);
 
   useEffect(() => {
@@ -63,12 +63,11 @@ function Login() {
       .login_signup(form, data)
       .then(() => {
         userServices.getCurrentUser().then((user) => setUser(user));
-        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
         setErrors(error.response.data);
-        setLoading(false);
+        // setLoading(false);
       });
   };
 
@@ -88,7 +87,6 @@ function Login() {
     <div className="login-container">
       <div className="image-container">
         <img
-          alt="background"
           className="image-login"
           style={{
             backgroundImage: `url(${backgroundImage})`,

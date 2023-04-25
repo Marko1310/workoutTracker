@@ -38,7 +38,6 @@ const WorkoutSplitGrid = () => {
     if (!user) {
       navigate('/');
     }
-
     getSplits();
   }, [user, navigate]);
 
@@ -47,7 +46,7 @@ const WorkoutSplitGrid = () => {
       setHelpModalOpen(true);
     } else setHelpModalOpen(false);
     clearTimeout(timeout);
-    // setLoading(false);
+    setLoading(false);
   }, [splits]);
 
   const changeRoute = (id) => {

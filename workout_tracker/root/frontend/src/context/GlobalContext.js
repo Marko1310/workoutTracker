@@ -59,22 +59,22 @@ export const GlobalProvider = ({ children }) => {
       });
   };
 
-  const logout = () => {
-    setUser(null);
-    axios
-      .get(`${API_URL}/api/auth/logout`, {
-        withCredentials: true,
-      })
-      .then(() => {
-        clearTimeout(timeout);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        clearTimeout(timeout);
-        setLoading(false);
-      });
-  };
+  // const logout = () => {
+  //   setUser(null);
+  //   axios
+  //     .get(`${API_URL}/api/auth/logout`, {
+  //       withCredentials: true,
+  //     })
+  //     .then(() => {
+  //       clearTimeout(timeout);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       clearTimeout(timeout);
+  //       setLoading(false);
+  //     });
+  // };
 
   ///////////////////////////// RETRIEVE DATA ////////////////////////////
   const getSplits = () => {
@@ -357,7 +357,7 @@ export const GlobalProvider = ({ children }) => {
     setWorkouts,
     prevTrackData,
     getCurrentUser,
-    logout,
+    // logout,
     getSplits,
     getWorkouts,
     getCurrentWorkout,
