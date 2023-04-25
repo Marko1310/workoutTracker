@@ -7,21 +7,22 @@ import userServices from '../services/userServices';
 //create context
 export const GlobalContext = createContext();
 
-// const API_URL = "https://workouttracker-server.onrender.com";
 const API_URL = 'http://localhost:8000';
 
 //provider component
 export const GlobalProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const [prevTrackData, setPrevTrackData] = useState([]);
   const [currentTrackData, setCurrentTrackData] = useState(null);
-  const [user, setUser] = useState(null);
+
   const [splits, setSplits] = useState([]);
   const [workouts, setWorkouts] = useState([]);
   const [currentWorkout, setCurrentWorkout] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   let timeout;
   const setLoadingTimeout = () => {
@@ -41,23 +42,23 @@ export const GlobalProvider = ({ children }) => {
   }, [user]);
 
   ///////////////////////////// USER ////////////////////////////
-  const getCurrentUser = () => {
-    axios
-      .get(`${API_URL}/api/auth/current`, {
-        withCredentials: true,
-      })
-      .then((response) => {
-        console.log(response);
-        if (!response) {
-          setUser(null);
-        } else {
-          setUser(response.data);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const getCurrentUser = () => {
+  //   axios
+  //     .get(`${API_URL}/api/auth/current`, {
+  //       withCredentials: true,
+  //     })
+  //     .then((response) => {
+  //       console.log(response);
+  //       if (!response) {
+  //         setUser(null);
+  //       } else {
+  //         setUser(response.data);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   // const logout = () => {
   //   setUser(null);
@@ -356,9 +357,9 @@ export const GlobalProvider = ({ children }) => {
     workouts,
     setWorkouts,
     prevTrackData,
-    getCurrentUser,
+    // getCurrentUser,
     // logout,
-    getSplits,
+    // getSplits,
     getWorkouts,
     getCurrentWorkout,
     getCurrentTrackData,

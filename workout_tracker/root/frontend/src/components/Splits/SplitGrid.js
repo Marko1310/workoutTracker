@@ -1,6 +1,9 @@
 // React
 import React, { useContext, useEffect, useState } from 'react';
 
+// services
+import splitServices from '../../services/splitServices';
+
 // Components
 import AddSplitBtn from './AddSplitBtn';
 import NewSplit from './NewSplitModal.js';
@@ -23,7 +26,7 @@ import calendar from '../../images/calendar.png';
 const WorkoutSplitGrid = () => {
   const { isModalOpen, isMenuOpen, loading } = useContext(GlobalContext);
   const { user } = useContext(GlobalContext);
-  const { splits } = useContext(GlobalContext);
+  const { splits, setSplits } = useContext(GlobalContext);
   const { getWorkouts } = useContext(GlobalContext);
   const { getSplits } = useContext(GlobalContext);
   const { deleteSplit } = useContext(GlobalContext);
@@ -38,14 +41,16 @@ const WorkoutSplitGrid = () => {
     if (!user) {
       navigate('/');
     }
-    getSplits();
+    splitServices.getSplits().then((data) => {
+      setSplits(data);
+      setLoading(false);
+    });
   }, [user, navigate]);
 
   useEffect(() => {
     if (splits.length === 0) {
       setHelpModalOpen(true);
     } else setHelpModalOpen(false);
-    clearTimeout(timeout);
     setLoading(false);
   }, [splits]);
 
@@ -56,10 +61,13 @@ const WorkoutSplitGrid = () => {
   };
 
   const handleDelete = (e, split_id) => {
+    e.preventDefault();
     if (window.confirm('Are you sure you want to delete this Workout Split?')) {
-      deleteSplit(e, split_id);
-      // setLoadingTimeout();
       setLoading(true);
+      splitServices.deleteSplit(split_id).then((data) => {
+        setSplits(data);
+        setLoading(false);
+      });
     }
     e.stopPropagation();
   };

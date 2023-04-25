@@ -22,7 +22,6 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 const Navigation = () => {
   // Context
   const { user, setUser } = useContext(GlobalContext);
-  const { logout } = useContext(GlobalContext);
   const { setLoading } = useContext(GlobalContext);
 
   // current location
@@ -31,9 +30,9 @@ const Navigation = () => {
 
   // state
   const [navigationTitle, setNavigationTitle] = useState('');
-  // const [menuOpen, setMenuOpen] = useState(false);
   const { isMenuOpen, setIsMenuOpen } = useContext(GlobalContext);
 
+  // FIX LATER!!!!
   useEffect(() => {
     if (currentRoute.includes('dashboard')) setNavigationTitle('Dashboard');
     else if (currentRoute.includes('workouts')) setNavigationTitle('Workouts');

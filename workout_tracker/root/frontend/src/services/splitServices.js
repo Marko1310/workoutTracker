@@ -1,18 +1,27 @@
-import { API_URL } from './serverConfig';
-import axios from 'axios';
+import api from './Api/api';
 
 const getSplits = () => {
-  return axios
-    .get(`${API_URL}/api/auth/splits/current`, {
-      withCredentials: true,
-    })
-    .then((data) => {
-      console.log(data);
-      return data.data;
+  return api
+    .get(`/api/auth/splits/current`)
+    .then((response) => {
+      console.log(response);
+      return response.data;
     })
     .catch((error) => {
       console.log(error);
     });
 };
 
-export default { getSplits };
+const deleteSplit = (split_id) => {
+  console.log(split_id);
+  return api
+    .delete(`/api/auth/split/delete`, { data: { split_id } })
+    .then(() => {
+      return getSplits();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export default { getSplits, deleteSplit };
