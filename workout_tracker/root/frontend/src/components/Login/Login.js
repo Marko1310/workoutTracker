@@ -1,13 +1,9 @@
 // React
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 // services
-import userServices from '../../services/userServices';
-
-// images
-import { images } from './images';
+import login_signupServices from '../../services/login_signupServices';
 
 // Css
 import './Login.css';
@@ -15,25 +11,29 @@ import './Login.css';
 // components
 import Loading from '../Loading/Loading';
 
+// services
+import userServices from '../../services/userServices';
+
 // Context
 import { GlobalContext } from '../../context/GlobalContext';
 
 // images
+import { images } from './images';
 import logo from '../../images/workout-icon.jpg';
-import loginServices from '../../services/login_signupServices';
-
-// const API_URL = "https://workouttracker-server.onrender.com";
-const API_URL = 'http://localhost:8000';
 
 function Login() {
-  // States
+  // global context
   const { user, setUser } = useContext(GlobalContext);
-  const { input, setInput } = useContext(GlobalContext);
-  const { form, setForm } = useContext(GlobalContext);
   const { loading, setLoading } = useContext(GlobalContext);
-  const { getCurrentUser } = useContext(GlobalContext);
-  const { errors, setErrors } = useContext(GlobalContext);
 
+  // States
+  const [form, setForm] = useState('login');
+  const [input, setInput] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+  const [errors, setErrors] = useState({});
   const [backgroundImage, setBackgroundImage] = useState('');
 
   // Routing
@@ -47,13 +47,6 @@ function Login() {
     setBackgroundImage(images[Math.floor(Math.random() * 7)].img);
   }, []);
 
-  let timeout;
-  const setLoadingTimeout = () => {
-    timeout = setTimeout(() => {
-      setLoading(true);
-    }, 1000);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -64,9 +57,9 @@ function Login() {
       password: input.password,
     };
 
-    // 1. login or signup depending on form
-    // 2. call getCurrent user and setUser
-    loginServices
+    // 1. login or signup a user depending on form
+    // 2. call getCurrent user and setUser to user
+    login_signupServices
       .login_signup(form, data)
       .then(() => {
         userServices.getCurrentUser().then((user) => setUser(user));
@@ -79,12 +72,23 @@ function Login() {
       });
   };
 
+  const changeForm = (form) => {
+    setErrors({});
+    setInput({
+      name: '',
+      email: '',
+      password: '',
+    });
+    setForm(form);
+  };
+
   return loading ? (
     <Loading />
   ) : (
     <div className="login-container">
       <div className="image-container">
         <img
+          alt="background"
           className="image-login"
           style={{
             backgroundImage: `url(${backgroundImage})`,
@@ -159,116 +163,21 @@ function Login() {
         {form === 'login' ? (
           <div className="login-footer">
             <p>Not a member? </p>
-            <a onClick={() => setForm('signup')} className="sign-up">
+            <p onClick={() => changeForm('signup')} className="sign-up">
               Sign up now
-            </a>
+            </p>
           </div>
         ) : (
           <div className="login-footer">
             <p>Already a member? </p>
-            <a onClick={() => setForm('login')} className="sign-up">
+            <p onClick={() => changeForm('login')} className="sign-up">
               Login
-            </a>
+            </p>
           </div>
         )}
       </form>
     </div>
   );
-
-  // return (
-  //   <div className="login-container">
-  //     <form onSubmit={(e) => handleSubmit(e)} className="form-validate">
-  //       <p className="title">{form === 'login' ? `Login` : `Signup`}</p>
-  //       <div className="buttons-container">
-  //         <button
-  //           onClick={(e) => {
-  //             setForm('login');
-  //             setErrors({});
-  //             e.preventDefault();
-  //           }}
-  //           className={`loginButtons ${form === 'login' ? 'current' : ''}`}
-  //         >
-  //           Login
-  //         </button>
-  //         <button
-  //           onClick={(e) => {
-  //             setForm('signup');
-  //             setErrors({});
-  //             e.preventDefault('signup');
-  //           }}
-  //           className={`loginButtons ${form === 'signup' ? 'current' : ''}`}
-  //         >
-  //           Signup
-  //         </button>
-  //       </div>
-
-  //       {form === 'signup' && (
-  //         <>
-  //           <label htmlFor="name"></label>
-  //           <input
-  //             onChange={(e) =>
-  //               setInput((prevInput) => ({
-  //                 ...prevInput,
-  //                 name: e.target.value,
-  //               }))
-  //             }
-  //             className="login-forms"
-  //             type="text"
-  //             id="fname"
-  //             name="fname"
-  //             placeholder="Name"
-  //             value={input.name}
-  //           ></input>
-  //           {errors.name && form === 'signup' && <p className="error">{errors.name}</p>}
-  //         </>
-  //       )}
-
-  //       <label htmlFor="email"></label>
-  //       <input
-  //         onChange={(e) =>
-  //           setInput((prevInput) => ({
-  //             ...prevInput,
-  //             email: e.target.value,
-  //           }))
-  //         }
-  //         className="login-forms"
-  //         type="text"
-  //         id="email"
-  //         name="email"
-  //         placeholder="Email"
-  //         value={input.email}
-  //       ></input>
-  //       {errors.email && form === 'signup' && <p className="error">{errors.email}</p>}
-
-  //       <label htmlFor="password"></label>
-  //       <input
-  //         onChange={(e) =>
-  //           setInput((prevInput) => ({
-  //             ...prevInput,
-  //             password: e.target.value,
-  //           }))
-  //         }
-  //         className="login-forms"
-  //         type="password"
-  //         placeholder="Password"
-  //         value={input.password}
-  //       ></input>
-  //       {errors.password && form === 'signup' && <p className="error">{errors.password}</p>}
-  //       {errors && form === 'login' && <p className="error">{errors.error}</p>}
-  //       {errors && form === 'signup' && <p className="error">{errors.existing}</p>}
-
-  //       <button className="login-button">{form === 'login' ? 'Login' : 'Register'}</button>
-  //       {form === 'login' && (
-  //         <div className="login-footer">
-  //           <p>Not a member? </p>
-  //           <a onClick={() => setForm('signup')} className="sign-up">
-  //             Sign up now
-  //           </a>
-  //         </div>
-  //       )}
-  //     </form>
-  //   </div>
-  // );
 }
 
 export default Login;

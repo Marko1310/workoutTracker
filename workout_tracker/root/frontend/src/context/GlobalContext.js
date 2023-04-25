@@ -12,12 +12,6 @@ const API_URL = 'http://localhost:8000';
 
 //provider component
 export const GlobalProvider = ({ children }) => {
-  const [form, setForm] = useState('login');
-  const [input, setInput] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
   const [prevTrackData, setPrevTrackData] = useState([]);
   const [currentTrackData, setCurrentTrackData] = useState(null);
   const [user, setUser] = useState(null);
@@ -28,7 +22,6 @@ export const GlobalProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [errors, setErrors] = useState({});
 
   let timeout;
   const setLoadingTimeout = () => {
@@ -390,12 +383,6 @@ export const GlobalProvider = ({ children }) => {
     currentTrackData,
     updateWorkoutDay,
     timeout,
-    errors,
-    setErrors,
-    form,
-    setForm,
-    input,
-    setInput,
     isMenuOpen,
     setIsMenuOpen,
   };
