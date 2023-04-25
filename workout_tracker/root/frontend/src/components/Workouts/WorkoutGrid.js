@@ -60,10 +60,10 @@ const WorkoutGrid = () => {
   // 2. update workout day +1
   // 3. get previous track
   // 4. get new track data
-  const changeRoute = function (id) {
-    getCurrentTrackData(id);
-    getPrevTrackData(id);
-    navigate(`/workout/${id}`);
+  const changeRoute = function (workout_id) {
+    // getCurrentTrackData(workout_id);
+    getPrevTrackData(workout_id);
+    navigate(`/workout/${workout_id}`);
   };
 
   // Delete workout

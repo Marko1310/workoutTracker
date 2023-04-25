@@ -386,6 +386,7 @@ export const GlobalProvider = ({ children }) => {
     isMenuOpen,
     setIsMenuOpen,
     setCurrentWorkout,
+    setPrevTrackData,
   };
 
   return <GlobalContext.Provider value={globalState}>{children}</GlobalContext.Provider>;

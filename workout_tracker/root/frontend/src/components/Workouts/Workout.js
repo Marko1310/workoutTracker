@@ -27,6 +27,9 @@ const WorkoutSplit = () => {
   const { addTrackData } = useContext(GlobalContext);
   const { updateWorkoutDay } = useContext(GlobalContext);
   const { setLoading } = useContext(GlobalContext);
+  const { getCurrentTrackData } = useContext(GlobalContext);
+  const { setCurrentTrackData } = useContext(GlobalContext);
+  const { setPrevTrackData } = useContext(GlobalContext);
 
   // state
   const [sucessMsg, setSuccessMsg] = useState(null);
@@ -39,11 +42,33 @@ const WorkoutSplit = () => {
   useEffect(() => {
     if (!user) {
       navigate('/');
+    } else {
+      // get current workout
+      workoutServices.getCurrentWorkout(id).then((data) => {
+        setCurrentWorkout(data);
+        setLoading(false);
+      });
+
+      // FIX LATER  (make a query to autoomaticly recieve an array, avoid double mappiing)
+      // get current track data
+      workoutServices.getCurrentTrackData(id).then((data) => {
+        const newArray = [];
+        console.log(data);
+        data.map((el) => {
+          el.trackdata.map((data) => newArray.push(data));
+        });
+        setCurrentTrackData(newArray);
+        setLoading(false);
+      });
+
+      // get previous track data
+      workoutServices.getPrevTrackData(id).then((data) => {
+        setPrevTrackData(data);
+        setLoading(false);
+      });
+
+      // get previous track data
     }
-    workoutServices.getCurrentWorkout(id).then((data) => {
-      setCurrentWorkout(data);
-      setLoading(false);
-    });
   }, [user, navigate]);
 
   const handleSubmit = (e) => {
