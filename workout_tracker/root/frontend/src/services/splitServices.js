@@ -12,8 +12,8 @@ const getSplits = () => {
     });
 };
 
+// delete split and after that return splits from database
 const deleteSplit = (split_id) => {
-  console.log(split_id);
   return api
     .delete(`/api/auth/split/delete`, { data: { split_id } })
     .then(() => {

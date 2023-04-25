@@ -13,8 +13,6 @@ router.delete('/split/delete', requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
     const { split_id } = req.body;
-    console.log(user_id);
-    console.log(split_id);
 
     const isValidSplitId = await databaseCheck.checkSplitId(split_id, user_id);
     if (isValidSplitId === 0) {
@@ -25,8 +23,6 @@ router.delete('/split/delete', requiresAuth, async (req, res) => {
       split_id,
       user_id,
     ]);
-    console.log(deletedSplit.rows);
-
     res.json(deletedSplit.rows);
   } catch (err) {
     return res.status(500).send(err.message);
