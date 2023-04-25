@@ -78,52 +78,52 @@ export const GlobalProvider = ({ children }) => {
   // };
 
   ///////////////////////////// RETRIEVE DATA ////////////////////////////
-  const getSplits = () => {
-    axios
-      .get(`${API_URL}/api/auth/splits/current`, {
-        withCredentials: true,
-      })
-      .then((data) => {
-        setSplits(data.data);
-        // clearTimeout(timeout);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  };
+  // const getSplits = () => {
+  //   axios
+  //     .get(`${API_URL}/api/auth/splits/current`, {
+  //       withCredentials: true,
+  //     })
+  //     .then((data) => {
+  //       setSplits(data.data);
+  //       // clearTimeout(timeout);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setLoading(false);
+  //     });
+  // };
 
-  const getWorkouts = (split_id) => {
-    axios
-      .get(`${API_URL}/api/auth/splits/workouts/${split_id}`, {
-        withCredentials: true,
-      })
-      .then((data) => {
-        setWorkouts(data.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  };
+  // const getWorkouts = (split_id) => {
+  //   axios
+  //     .get(`${API_URL}/api/auth/splits/workouts/${split_id}`, {
+  //       withCredentials: true,
+  //     })
+  //     .then((data) => {
+  //       setWorkouts(data.data);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setLoading(false);
+  //     });
+  // };
 
-  const getCurrentWorkout = (workout_id) => {
-    axios
-      .get(`${API_URL}/api/auth/splits/workout/${workout_id}`, {
-        withCredentials: true,
-      })
-      .then((data) => {
-        setCurrentWorkout(data.data[0]);
-        clearTimeout(timeout);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  };
+  // const getCurrentWorkout = (workout_id) => {
+  //   axios
+  //     .get(`${API_URL}/api/auth/splits/workout/${workout_id}`, {
+  //       withCredentials: true,
+  //     })
+  //     .then((data) => {
+  //       setCurrentWorkout(data.data[0]);
+  //       clearTimeout(timeout);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setLoading(false);
+  //     });
+  // };
 
   const getPrevTrackData = (workout_id) => {
     axios
@@ -141,55 +141,55 @@ export const GlobalProvider = ({ children }) => {
       });
   };
 
-  const getCurrentTrackData = (workout_id) => {
-    axios
-      .get(`${API_URL}/api/auth/splits/workouts/exercises/currentData/${workout_id}`, {
-        withCredentials: true,
-      })
-      .then((data) => {
-        const newArray = [];
-        data.data.map((el) => {
-          el.trackdata.map((data) => newArray.push(data));
-        });
-        setCurrentTrackData(newArray);
-        clearTimeout(timeout);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  };
+  // const getCurrentTrackData = (workout_id) => {
+  //   axios
+  //     .get(`${API_URL}/api/auth/splits/workouts/exercises/currentData/${workout_id}`, {
+  //       withCredentials: true,
+  //     })
+  //     .then((data) => {
+  //       const newArray = [];
+  //       data.data.map((el) => {
+  //         el.trackdata.map((data) => newArray.push(data));
+  //       });
+  //       setCurrentTrackData(newArray);
+  //       clearTimeout(timeout);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setLoading(false);
+  //     });
+  // };
 
   ///////////////////////////// ADD DATA ////////////////////////////
-  const addSplit = (e, title, days) => {
-    e.preventDefault();
-    axios
-      .post(`${API_URL}/api/auth/split/new`, { title, days }, { withCredentials: true })
-      .then((data) => {
-        if (data) {
-          setIsModalOpen(false);
-          getSplits();
-        }
-      })
-      .catch((error) => {
-        setError(error.response.data);
-        setLoading(false);
-      });
-  };
+  // const addSplit = (e, title, days) => {
+  //   e.preventDefault();
+  //   axios
+  //     .post(`${API_URL}/api/auth/split/new`, { title, days }, { withCredentials: true })
+  //     .then((data) => {
+  //       if (data) {
+  //         setIsModalOpen(false);
+  //         getSplits();
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       setError(error.response.data);
+  //       setLoading(false);
+  //     });
+  // };
 
-  const addWorkout = (e, title, split_id) => {
-    axios
-      .post(`${API_URL}/api/auth/split/workout/new`, { title, split_id }, { withCredentials: true })
-      .then(() => {
-        getWorkouts(split_id);
-        setIsModalOpen(false);
-      })
-      .catch((error) => {
-        setError(error.response.data);
-        setLoading(false);
-      });
-  };
+  // const addWorkout = (e, title, split_id) => {
+  //   axios
+  //     .post(`${API_URL}/api/auth/split/workout/new`, { title, split_id }, { withCredentials: true })
+  //     .then(() => {
+  //       getWorkouts(split_id);
+  //       setIsModalOpen(false);
+  //     })
+  //     .catch((error) => {
+  //       setError(error.response.data);
+  //       setLoading(false);
+  //     });
+  // };
 
   const addExercise = (e, title, goal_sets, goal_reps, workout_id) => {
     e.preventDefault();
@@ -274,25 +274,25 @@ export const GlobalProvider = ({ children }) => {
   //     });
   // };
 
-  const deleteWorkout = (e, split_id, workout_id) => {
-    e.preventDefault();
+  // const deleteWorkout = (e, split_id, workout_id) => {
+  //   e.preventDefault();
 
-    fetch(`${API_URL}/api/auth/split/workout/delete`, {
-      method: 'DELETE',
-      credentials: 'include', // include cookies in the request
-      body: JSON.stringify({ split_id: split_id, workout_id: workout_id }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(() => {
-        getWorkouts(split_id);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  };
+  //   fetch(`${API_URL}/api/auth/split/workout/delete`, {
+  //     method: 'DELETE',
+  //     credentials: 'include', // include cookies in the request
+  //     body: JSON.stringify({ split_id: split_id, workout_id: workout_id }),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   })
+  //     .then(() => {
+  //       getWorkouts(split_id);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setLoading(false);
+  //     });
+  // };
 
   const deleteExercise = (e, workout_id, exercise_id) => {
     e.preventDefault();
@@ -359,17 +359,17 @@ export const GlobalProvider = ({ children }) => {
     // getCurrentUser,
     // logout,
     // getSplits,
-    getWorkouts,
-    getCurrentWorkout,
-    getCurrentTrackData,
+    // getWorkouts,
+    // getCurrentWorkout,
+    // getCurrentTrackData,
     getPrevTrackData,
     loading,
-    addSplit,
-    addWorkout,
+    // addSplit,
+    // addWorkout,
     addExercise,
     addNewSet,
     // deleteSplit,
-    deleteWorkout,
+    // deleteWorkout,
     deleteExercise,
     deleteSet,
     isModalOpen,
