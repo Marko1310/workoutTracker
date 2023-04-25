@@ -28,7 +28,7 @@ const WorkoutGrid = () => {
   const { getPrevTrackData } = useContext(GlobalContext);
   const { deleteWorkout } = useContext(GlobalContext);
   const { setLoading } = useContext(GlobalContext);
-  const { getCurrentWorkout } = useContext(GlobalContext);
+  const { setCurrentWorkout } = useContext(GlobalContext);
   const { getCurrentTrackData } = useContext(GlobalContext);
 
   // state
@@ -61,7 +61,6 @@ const WorkoutGrid = () => {
   // 3. get previous track
   // 4. get new track data
   const changeRoute = function (id) {
-    getCurrentWorkout(id);
     getCurrentTrackData(id);
     getPrevTrackData(id);
     navigate(`/workout/${id}`);

@@ -31,7 +31,7 @@ const NewWorkoutSplit = () => {
       .then((data) => {
         setSplits(data);
         setIsModalOpen(false);
-        setLoading(true);
+        setLoading(false);
       })
       .catch((error) => {
         setError(error.response.data);

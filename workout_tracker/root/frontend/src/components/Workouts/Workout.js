@@ -3,6 +3,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
+// services
+import workoutServices from '../../services/workoutServices';
+
 // Components
 import Exercise from './Exercise';
 import NewExerciseModal from './NewExerciseModal';
@@ -20,9 +23,10 @@ const WorkoutSplit = () => {
   const { user } = useContext(GlobalContext);
   const { prevTrackData } = useContext(GlobalContext);
   const { setError } = useContext(GlobalContext);
-  const { currentWorkout } = useContext(GlobalContext);
+  const { currentWorkout, setCurrentWorkout } = useContext(GlobalContext);
   const { addTrackData } = useContext(GlobalContext);
   const { updateWorkoutDay } = useContext(GlobalContext);
+  const { setLoading } = useContext(GlobalContext);
 
   // state
   const [sucessMsg, setSuccessMsg] = useState(null);
@@ -36,6 +40,10 @@ const WorkoutSplit = () => {
     if (!user) {
       navigate('/');
     }
+    workoutServices.getCurrentWorkout(id).then((data) => {
+      setCurrentWorkout(data);
+      setLoading(false);
+    });
   }, [user, navigate]);
 
   const handleSubmit = (e) => {

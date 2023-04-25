@@ -30,6 +30,17 @@ const addWorkout = (title, split_id) => {
   });
 };
 
-const workoutServices = { getWorkouts, deleteWorkout, addWorkout };
+const getCurrentWorkout = (workout_id) => {
+  return api
+    .get(`/api/auth/splits/workout/${workout_id}`)
+    .then((data) => {
+      return data.data[0];
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+const workoutServices = { getWorkouts, deleteWorkout, addWorkout, getCurrentWorkout };
 
 export default workoutServices;

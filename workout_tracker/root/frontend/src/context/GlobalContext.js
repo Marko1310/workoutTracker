@@ -385,6 +385,7 @@ export const GlobalProvider = ({ children }) => {
     timeout,
     isMenuOpen,
     setIsMenuOpen,
+    setCurrentWorkout,
   };
 
   return <GlobalContext.Provider value={globalState}>{children}</GlobalContext.Provider>;
