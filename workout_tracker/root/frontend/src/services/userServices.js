@@ -19,7 +19,6 @@ const logout = () => {
   return api.get('/api/auth/logout');
 };
 
-export default {
-  getCurrentUser,
-  logout,
-};
+const userServices = { getCurrentUser, logout };
+
+export default userServices;

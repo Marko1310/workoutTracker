@@ -101,7 +101,6 @@ export const GlobalProvider = ({ children }) => {
       })
       .then((data) => {
         setWorkouts(data.data);
-        clearTimeout(timeout);
         setLoading(false);
       })
       .catch((error) => {

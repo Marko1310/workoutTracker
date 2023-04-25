@@ -30,4 +30,6 @@ const addSplit = (title, days) => {
   });
 };
 
-export default { getSplits, deleteSplit, addSplit };
+const splitServices = { getSplits, deleteSplit, addSplit };
+
+export default splitServices;

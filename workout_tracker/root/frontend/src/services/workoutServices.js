@@ -1,11 +1,8 @@
-import { API_URL } from './serverConfig';
-import axios from 'axios';
+import api from './Api/api';
 
 const getWorkouts = (split_id) => {
-  return axios
-    .get(`${API_URL}/api/auth/splits/workouts/${split_id}`, {
-      withCredentials: true,
-    })
+  return api
+    .get(`/api/auth/splits/workouts/${split_id}`)
     .then((data) => {
       return data.data;
     })
@@ -14,4 +11,6 @@ const getWorkouts = (split_id) => {
     });
 };
 
-export default { getWorkouts };
+const workoutServices = { getWorkouts };
+
+export default workoutServices;

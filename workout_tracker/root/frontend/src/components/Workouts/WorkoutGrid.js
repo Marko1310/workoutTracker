@@ -3,6 +3,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
+// services
+import workoutServices from '../../services/workoutServices.js';
+
 // Components
 import NewWorkoutModal from './NewWorkoutModal.js';
 import AddWorkoutBtn from './AddWorkoutBtn.js';
@@ -21,7 +24,7 @@ import logo from '../../images/workout.png';
 const WorkoutGrid = () => {
   const { isModalOpen, isMenuOpen, loading } = useContext(GlobalContext);
   const { user } = useContext(GlobalContext);
-  const { workouts, getWorkouts } = useContext(GlobalContext);
+  const { workouts, setWorkouts } = useContext(GlobalContext);
   const { getPrevTrackData } = useContext(GlobalContext);
   const { deleteWorkout } = useContext(GlobalContext);
   const { setLoading } = useContext(GlobalContext);
@@ -37,12 +40,14 @@ const WorkoutGrid = () => {
   const { split_id } = useParams();
 
   useEffect(() => {
-    if (!user && navigate) {
+    if (!user) {
       navigate('/');
-    } else {
-      getWorkouts(split_id);
     }
-  }, []);
+    workoutServices.getWorkouts(split_id).then((data) => {
+      setWorkouts(data);
+      setLoading(false);
+    });
+  }, [navigate, setLoading, setWorkouts, split_id, user]);
 
   useEffect(() => {
     if (workouts.length === 0) {

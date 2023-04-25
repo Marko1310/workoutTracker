@@ -4,4 +4,6 @@ const login_signup = (form, data) => {
   return api.post(`/api/auth/${form}`, data);
 };
 
-export default { login_signup };
+const login_signupServices = { login_signup };
+
+export default login_signupServices;
