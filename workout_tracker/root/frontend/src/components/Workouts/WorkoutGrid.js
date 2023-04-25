@@ -69,9 +69,14 @@ const WorkoutGrid = () => {
 
   // Delete workout
   const handleDelete = (e, split_id, workout_id) => {
+    e.preventDefault();
+    setLoading(true);
+
     if (window.confirm('Are you sure you want to delete this Workout?')) {
-      deleteWorkout(e, split_id, workout_id);
-      setLoading(true);
+      workoutServices.deleteWorkout(split_id, workout_id).then((data) => {
+        setWorkouts(data);
+        setLoading(false);
+      });
     }
     e.stopPropagation();
   };
