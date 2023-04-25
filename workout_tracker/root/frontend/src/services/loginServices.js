@@ -1,22 +1,7 @@
-import { API_URL } from './serverConfig';
-import axios from 'axios';
+import api from './Api/api';
 
-const login = (data) => {
-  console.log(data);
-  return axios.post(`${API_URL}/api/auth/login`, data, {
-    withCredentials: true,
-  });
-  // .then(() => {
-  //   getCurrentUser();
-  //   clearTimeout(timeout);
-  //   setLoading(false);
-  // })
-  // .catch((error) => {
-  //   console.log(error);
-  //   setErrors(error.response.data);
-  //   clearTimeout(timeout);
-  //   setLoading(false);
-  // });
+const login_signup = (form, data) => {
+  return api.post(`/api/auth/${form}`, data);
 };
 
-export default { login };
+export default { login_signup };

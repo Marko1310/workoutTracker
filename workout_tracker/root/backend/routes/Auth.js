@@ -5,10 +5,10 @@ const jwt = require('jsonwebtoken');
 const requiresAuth = require('../middleware/permission');
 const pool = require('../databse/db');
 
-// @route   POST /api/auth/register
+// @route   POST /api/auth/signup
 // @desc    Create a new user
 // @access  Public
-router.post('/register', async (req, res) => {
+router.post('/signup', async (req, res) => {
   try {
     const { name, email, password } = req.body;
     const hashedPassword = bcrypt.hashSync(password);

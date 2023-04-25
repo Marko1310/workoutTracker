@@ -48,23 +48,23 @@ export const GlobalProvider = ({ children }) => {
   }, [user]);
 
   ///////////////////////////// USER ////////////////////////////
-  // const getCurrentUser = () => {
-  //   axios
-  //     .get(`${API_URL}/api/auth/current`, {
-  //       withCredentials: true,
-  //     })
-  //     .then((response) => {
-  //       console.log(response);
-  //       if (!response) {
-  //         setUser(null);
-  //       } else {
-  //         setUser(response.data);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
+  const getCurrentUser = () => {
+    axios
+      .get(`${API_URL}/api/auth/current`, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        console.log(response);
+        if (!response) {
+          setUser(null);
+        } else {
+          setUser(response.data);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const logout = () => {
     setUser(null);
@@ -363,7 +363,7 @@ export const GlobalProvider = ({ children }) => {
     workouts,
     setWorkouts,
     prevTrackData,
-    // getCurrentUser,
+    getCurrentUser,
     logout,
     getSplits,
     getWorkouts,

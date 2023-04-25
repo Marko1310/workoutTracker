@@ -3,6 +3,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+// services
+import userServices from '../../services/userServices';
+
 // images
 import { images } from './images';
 
@@ -17,13 +20,14 @@ import { GlobalContext } from '../../context/GlobalContext';
 
 // images
 import logo from '../../images/workout-icon.jpg';
+import loginServices from '../../services/loginServices';
 
 // const API_URL = "https://workouttracker-server.onrender.com";
 const API_URL = 'http://localhost:8000';
 
 function Login() {
   // States
-  const { user } = useContext(GlobalContext);
+  const { user, setUser } = useContext(GlobalContext);
   const { input, setInput } = useContext(GlobalContext);
   const { form, setForm } = useContext(GlobalContext);
   const { loading, setLoading } = useContext(GlobalContext);
@@ -36,9 +40,7 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user && navigate) {
-      setLoading(false);
-    }
+    setLoading(false);
   }, [user, navigate]);
 
   useEffect(() => {
@@ -54,7 +56,7 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoadingTimeout();
+    setLoading(true);
     let data = {};
 
     if (form === 'signup') {
@@ -69,19 +71,18 @@ function Login() {
         password: input.password,
       };
     }
-    axios
-      .post(form === 'signup' ? `${API_URL}/api/auth/register` : `${API_URL}/api/auth/login`, data, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        getCurrentUser();
-        clearTimeout(timeout);
+
+    // 1. login or signup depending on form
+    // 2. call getCurrent user and setUser
+    loginServices
+      .login_signup(form, data)
+      .then(() => {
+        userServices.getCurrentUser().then((user) => setUser(user));
         setLoading(false);
       })
       .catch((error) => {
         console.log(error);
         setErrors(error.response.data);
-        clearTimeout(timeout);
         setLoading(false);
       });
   };
