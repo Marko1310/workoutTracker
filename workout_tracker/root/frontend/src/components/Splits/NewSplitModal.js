@@ -1,6 +1,9 @@
 // React
 import React, { useContext, useState } from 'react';
 
+// services
+import splitServices from '../../services/splitServices';
+
 // Context
 import { GlobalContext } from '../../context/GlobalContext';
 
@@ -11,21 +14,29 @@ const NewWorkoutSplit = () => {
   // component state
   const [title, setTitle] = useState('');
   const [days, setDays] = useState('');
+  const [error, setError] = useState('');
 
   // Context
-  const { isModalOpen } = useContext(GlobalContext);
-  const { setIsModalOpen } = useContext(GlobalContext);
-  const { addSplit } = useContext(GlobalContext);
-  const { setLoadingTimeout, setLoading } = useContext(GlobalContext);
-  const { error } = useContext(GlobalContext);
+  const { isModalOpen, setIsModalOpen } = useContext(GlobalContext);
+  const { setLoading } = useContext(GlobalContext);
+  const { setSplits } = useContext(GlobalContext);
 
   const handleNewSplit = (e) => {
     e.preventDefault();
     if (title && days) {
       setLoading(true);
-      // setLoadingTimeout();
     }
-    addSplit(e, title, days);
+    splitServices
+      .addSplit(title, days)
+      .then((data) => {
+        setSplits(data);
+        setIsModalOpen(false);
+        setLoading(true);
+      })
+      .catch((error) => {
+        setError(error.response.data);
+        setLoading(false);
+      });
   };
 
   return (

@@ -255,25 +255,25 @@ export const GlobalProvider = ({ children }) => {
   };
 
   ///////////////////////////// DELETE DATA ////////////////////////////
-  const deleteSplit = (e, split_id) => {
-    e.preventDefault();
+  // const deleteSplit = (e, split_id) => {
+  //   e.preventDefault();
 
-    fetch(`${API_URL}/api/auth/split/delete`, {
-      method: 'DELETE',
-      credentials: 'include', // include cookies in the request
-      body: JSON.stringify({ split_id: split_id }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(() => {
-        getSplits();
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  };
+  //   fetch(`${API_URL}/api/auth/split/delete`, {
+  //     method: 'DELETE',
+  //     credentials: 'include', // include cookies in the request
+  //     body: JSON.stringify({ split_id: split_id }),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   })
+  //     .then(() => {
+  //       getSplits();
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setLoading(false);
+  //     });
+  // };
 
   const deleteWorkout = (e, split_id, workout_id) => {
     e.preventDefault();
@@ -369,7 +369,7 @@ export const GlobalProvider = ({ children }) => {
     addWorkout,
     addExercise,
     addNewSet,
-    deleteSplit,
+    // deleteSplit,
     deleteWorkout,
     deleteExercise,
     deleteSet,
