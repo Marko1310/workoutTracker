@@ -11,7 +11,7 @@ import './Exercise.css';
 // Context
 import { GlobalContext } from '../../context/GlobalContext';
 
-const Exercise = ({ el }) => {
+const Exercise = ({ exercise }) => {
   // global context
   const { setLoading } = useContext(GlobalContext);
   const { currentWorkout } = useContext(GlobalContext);
@@ -25,7 +25,7 @@ const Exercise = ({ el }) => {
     e.preventDefault();
     setLoading(true);
     exererciseServices
-      .addNewSet(el.exercise_id, id, currentWorkout.day)
+      .addNewSet(exercise.exercise_id, id, currentWorkout.day)
       .then((data) => {
         trackServices.getPrevTrackData(id).then((data) => {
           setPrevTrackData(data);
@@ -46,7 +46,7 @@ const Exercise = ({ el }) => {
     exererciseServices
       .deleteSet(workout_id, exercise_id, track_id)
       .then((data) => {
-        const newArray = currentTrackData.filter((el) => el.track_id !== data.data[0].track_id);
+        const newArray = currentTrackData.filter((exercise) => exercise.track_id !== data.data[0].track_id);
         setCurrentTrackData(newArray);
         trackServices.getPrevTrackData(id).then((data) => {
           setPrevTrackData(data);
@@ -69,7 +69,7 @@ const Exercise = ({ el }) => {
           trackServices.getPrevTrackData(id).then((data) => {
             setPrevTrackData(data);
           });
-          const newTrackData = currentTrackData.filter((el) => el.exercise_id !== data.data[0].exercise_id);
+          const newTrackData = currentTrackData.filter((exercise) => exercise.exercise_id !== data.data[0].exercise_id);
           setCurrentTrackData(newTrackData);
         })
         .catch((error) => {
@@ -82,42 +82,42 @@ const Exercise = ({ el }) => {
 
   // update state with weight
   const handleChangeWeight = (e, track_id) => {
-    const updateWeight = currentTrackData.map((el) => {
-      if (el.track_id === track_id) {
-        return { ...el, weight: e.target.value };
+    const updateWeight = currentTrackData.map((exercise) => {
+      if (exercise.track_id === track_id) {
+        return { ...exercise, weight: e.target.value };
       }
-      return el;
+      return exercise;
     });
     setCurrentTrackData(updateWeight);
   };
 
   // update state with reps
   const handleChangeReps = (e, track_id) => {
-    const updateReps = currentTrackData.map((el) => {
-      if (el.track_id === track_id) {
-        return { ...el, reps: e.target.value };
+    const updateReps = currentTrackData.map((exercise) => {
+      if (exercise.track_id === track_id) {
+        return { ...exercise, reps: e.target.value };
       }
-      return el;
+      return exercise;
     });
     setCurrentTrackData(updateReps);
   };
 
   // if no data -> don't render empty list item
-  const isTrackEmpty = el.trackdata[0].track_id === null;
+  const isTrackEmpty = exercise.trackdata[0].track_id === null;
 
   // disable deleting sets in between, only last one
   let lastSet = 0;
-  el.trackdata.map((el) => {
-    if (el.set > lastSet) lastSet = el.set;
+  exercise.trackdata.map((exercise) => {
+    if (exercise.set > lastSet) lastSet = exercise.set;
   });
 
   return (
     <div className="exercise-container">
       <div className="title-container">
         <p className="exercise-title">
-          {el.exercise_name} ({el.goal_sets} x {el.goal_reps})
+          {exercise.exercise_name} ({exercise.goal_sets} x {exercise.goal_reps})
         </p>
-        <p onClick={(e) => handleDeleteExercise(e, id, el.exercise_id)} className="delete-exercise">
+        <p onClick={(e) => handleDeleteExercise(e, id, exercise.exercise_id)} className="delete-exercise">
           Delete
         </p>
       </div>
@@ -128,7 +128,7 @@ const Exercise = ({ el }) => {
         <p className="exercise-navbar-title">Reps</p>
       </div>
       {!isTrackEmpty &&
-        el.trackdata.map((track) => {
+        exercise.trackdata.map((track) => {
           return (
             <div parent-id={track.exercise_id} key={track.track_id} className="exercise">
               <p className="set">{track.set}</p>
@@ -156,7 +156,7 @@ const Exercise = ({ el }) => {
               {lastSet === track.set && (
                 <p
                   onClick={(e) => {
-                    handleDeleteSet(e, id, el.exercise_id, track.track_id);
+                    handleDeleteSet(e, id, exercise.exercise_id, track.track_id);
                   }}
                   className="delete-set"
                 >

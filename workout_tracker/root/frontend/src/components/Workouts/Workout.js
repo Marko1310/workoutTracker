@@ -32,6 +32,7 @@ const WorkoutSplit = () => {
 
   // state
   const [sucessMsg, setSuccessMsg] = useState(null);
+  const [prevArray, setPrevArray] = useState();
 
   // Extract workout_id
   const { id } = useParams();
@@ -65,6 +66,13 @@ const WorkoutSplit = () => {
       });
     }
   }, [user, navigate]);
+
+  useEffect(() => {
+    const tempArray = prevTrackData.map((data) => {
+      return data.trackdata;
+    });
+    setPrevArray(tempArray);
+  }, [prevTrackData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -110,7 +118,7 @@ const WorkoutSplit = () => {
             {/* <div>Notes</div> */}
           </div>
           {prevTrackData.map((el) => {
-            return <Exercise key={el.exercise_id} el={el} />;
+            return <Exercise key={el.exercise_id} exercise={el} />;
           })}
           <div className="button-container">
             <button onClick={() => handleModal()} disabled={isModalOpen} className="workoutBtn add">
