@@ -13,16 +13,20 @@ import { GlobalContext } from '../../context/GlobalContext';
 import './NewExerciseModal.css';
 
 const NewExerciseModal = ({ successMsg }) => {
+  // global context
   const { isModalOpen, setIsModalOpen } = useContext(GlobalContext);
   const { setLoading } = useContext(GlobalContext);
   const { setLoadingTimeout } = useContext(GlobalContext);
   const { error, setError } = useContext(GlobalContext);
-  const { id } = useParams();
   const { setPrevTrackData } = useContext(GlobalContext);
 
+  // component state
   const [title, setTitle] = useState('');
   const [goal_sets, setGoal_sets] = useState(0);
   const [goal_reps, setGoal_reps] = useState(0);
+
+  // extract workout_id
+  const { id } = useParams();
 
   const handleNewExercise = (e) => {
     e.preventDefault();

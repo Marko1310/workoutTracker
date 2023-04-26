@@ -1,5 +1,6 @@
 // React
 import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // services
 import splitServices from '../../services/splitServices';
@@ -8,10 +9,6 @@ import splitServices from '../../services/splitServices';
 import AddSplitBtn from './AddSplitBtn';
 import NewSplit from './NewSplitModal.js';
 import HelpModal from '../HelpModal/HelpModal';
-
-// Components
-import { useNavigate } from 'react-router-dom';
-
 import Loading from '../Loading/Loading';
 
 // Context
@@ -24,12 +21,13 @@ import './SplitGrid.css';
 import calendar from '../../images/calendar.png';
 
 const WorkoutSplitGrid = () => {
+  // global context
   const { user } = useContext(GlobalContext);
-  const { isModalOpen, isMenuOpen, loading, setLoading } = useContext(GlobalContext);
+  const { isModalOpen, isMenuOpen } = useContext(GlobalContext);
+  const { loading, setLoading } = useContext(GlobalContext);
   const { splits, setSplits } = useContext(GlobalContext);
-  const { getWorkouts } = useContext(GlobalContext);
 
-  // state
+  // component state
   const [helpModalOpen, setHelpModalOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -88,7 +86,7 @@ const WorkoutSplitGrid = () => {
                       </p>
                     </div>
                     <div className="workout-card">
-                      <li className="workout-card-title">{el.split_name} workout</li>
+                      <li className="workout-card-title">{el.split_name} split</li>
                       <li className="workout-card-workouts-days">{el.days} day split:</li>
                       {el.array_agg.map((name, index) => {
                         return (

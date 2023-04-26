@@ -9,6 +9,7 @@ import addLogo from '../../images/plus-circle.png';
 import { GlobalContext } from '../../context/GlobalContext';
 
 const AddNewWorkoutBtn = () => {
+  //global context
   const { isModalOpen, setIsModalOpen, isMenuOpen } = useContext(GlobalContext);
 
   return (

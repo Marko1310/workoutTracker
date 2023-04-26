@@ -16,7 +16,7 @@ const NewWorkoutSplit = () => {
   const [days, setDays] = useState('');
   const [error, setError] = useState('');
 
-  // Context
+  // global Context
   const { isModalOpen, setIsModalOpen } = useContext(GlobalContext);
   const { setLoading } = useContext(GlobalContext);
   const { setSplits } = useContext(GlobalContext);

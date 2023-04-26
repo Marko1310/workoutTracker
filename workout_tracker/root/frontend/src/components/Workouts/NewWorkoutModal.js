@@ -16,7 +16,7 @@ const NewWorkoutModal = () => {
   const [title, setTitle] = useState('');
   const [error, setError] = useState('');
 
-  // Context
+  // global context
   const { isModalOpen, setIsModalOpen } = useContext(GlobalContext);
   const { setLoading } = useContext(GlobalContext);
   const { setWorkouts } = useContext(GlobalContext);

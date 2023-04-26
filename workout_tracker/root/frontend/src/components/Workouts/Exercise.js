@@ -12,6 +12,7 @@ import './Exercise.css';
 import { GlobalContext } from '../../context/GlobalContext';
 
 const Exercise = ({ el }) => {
+  // global context
   const { setLoading } = useContext(GlobalContext);
   const { currentWorkout } = useContext(GlobalContext);
   const { currentTrackData, setCurrentTrackData } = useContext(GlobalContext);

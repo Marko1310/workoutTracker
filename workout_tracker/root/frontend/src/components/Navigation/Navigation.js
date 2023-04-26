@@ -20,17 +20,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 const Navigation = () => {
-  // Context
+  // global Context
   const { user, setUser } = useContext(GlobalContext);
   const { setLoading } = useContext(GlobalContext);
+  const { isMenuOpen, setIsMenuOpen } = useContext(GlobalContext);
 
   // current location
   const location = useLocation();
   const currentRoute = location.pathname;
 
-  // state
+  // component state
   const [navigationTitle, setNavigationTitle] = useState('');
-  const { isMenuOpen, setIsMenuOpen } = useContext(GlobalContext);
 
   // FIX LATER!!!!
   useEffect(() => {

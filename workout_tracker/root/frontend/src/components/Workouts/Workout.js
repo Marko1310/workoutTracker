@@ -20,16 +20,15 @@ import './Workout.css';
 import { GlobalContext } from '../../context/GlobalContext';
 
 const WorkoutSplit = () => {
-  const { isModalOpen, setIsModalOpen, isMenuOpen } = useContext(GlobalContext);
+  // global context
   const { user } = useContext(GlobalContext);
-  const { prevTrackData } = useContext(GlobalContext);
+  const { isModalOpen, setIsModalOpen } = useContext(GlobalContext);
+  const { isMenuOpen } = useContext(GlobalContext);
+  const { prevTrackData, setPrevTrackData } = useContext(GlobalContext);
   const { setError } = useContext(GlobalContext);
   const { currentWorkout, setCurrentWorkout } = useContext(GlobalContext);
-  const { addTrackData } = useContext(GlobalContext);
-  const { updateWorkoutDay } = useContext(GlobalContext);
   const { setLoading } = useContext(GlobalContext);
   const { currentTrackData, setCurrentTrackData } = useContext(GlobalContext);
-  const { setPrevTrackData } = useContext(GlobalContext);
 
   // state
   const [sucessMsg, setSuccessMsg] = useState(null);
@@ -43,6 +42,10 @@ const WorkoutSplit = () => {
     if (!user) {
       navigate('/');
     } else {
+      // 1. get current workout
+      // 2. get new track data
+      // 3. get previous track data
+
       // get current workout
       workoutServices.getCurrentWorkout(id).then((data) => {
         setCurrentWorkout(data);

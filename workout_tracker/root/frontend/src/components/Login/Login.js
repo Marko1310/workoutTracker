@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // services
+import userServices from '../../services/userServices';
 import login_signupServices from '../../services/login_signupServices';
 
 // Css
@@ -10,9 +11,6 @@ import './Login.css';
 
 // components
 import Loading from '../Loading/Loading';
-
-// services
-import userServices from '../../services/userServices';
 
 // Context
 import { GlobalContext } from '../../context/GlobalContext';
@@ -26,7 +24,7 @@ function Login() {
   const { user, setUser } = useContext(GlobalContext);
   const { loading, setLoading } = useContext(GlobalContext);
 
-  // States
+  // component states
   const [form, setForm] = useState('login');
   const [input, setInput] = useState({
     name: '',
@@ -87,6 +85,7 @@ function Login() {
     <div className="login-container">
       <div className="image-container">
         <img
+          alt=""
           className="image-login"
           style={{
             backgroundImage: `url(${backgroundImage})`,

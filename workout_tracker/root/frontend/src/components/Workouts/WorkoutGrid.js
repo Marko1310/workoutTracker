@@ -22,14 +22,10 @@ import './WorkoutGrid.css';
 import logo from '../../images/workout.png';
 
 const WorkoutGrid = () => {
-  const { isModalOpen, isMenuOpen, loading } = useContext(GlobalContext);
+  const { isModalOpen, isMenuOpen } = useContext(GlobalContext);
   const { user } = useContext(GlobalContext);
   const { workouts, setWorkouts } = useContext(GlobalContext);
-  const { getPrevTrackData } = useContext(GlobalContext);
-  const { deleteWorkout } = useContext(GlobalContext);
-  const { setLoading } = useContext(GlobalContext);
-  const { setCurrentWorkout } = useContext(GlobalContext);
-  const { getCurrentTrackData } = useContext(GlobalContext);
+  const { loading, setLoading } = useContext(GlobalContext);
 
   // state
   const [helpModalOpen, setHelpModalOpen] = useState(false);
@@ -56,13 +52,7 @@ const WorkoutGrid = () => {
   }, [workouts]);
 
   // When card clicked -> change route:
-  // 1. get current workout
-  // 2. update workout day +1
-  // 3. get previous track
-  // 4. get new track data
   const changeRoute = function (workout_id) {
-    // getCurrentTrackData(workout_id);
-    // getPrevTrackData(workout_id);
     navigate(`/workout/${workout_id}`);
   };
 
@@ -100,9 +90,8 @@ const WorkoutGrid = () => {
                         Delete
                       </p>
                     </div>
-
                     <div className="exercise-card">
-                      <li className="exercise-card-title">{el.workout_name}</li>
+                      <li className="exercise-card-title">{el.workout_name} workout</li>
                       <p>Exercises: </p>
                       {el.array_agg.map((name, index) => {
                         return (

@@ -16,7 +16,7 @@
   font-weight: 400;
   font-size: 1.3rem;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   padding-left: 1rem;
   text-transform: uppercase;
   color: black;
