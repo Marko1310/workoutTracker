@@ -40,8 +40,22 @@ const Exercise = ({ el }) => {
 
   // delete set
   const handleDeleteSet = (e, workout_id, exercise_id, track_id) => {
-    deleteSet(e, workout_id, exercise_id, track_id);
-    setLoadingTimeout();
+    e.preventDefault();
+    setLoading(true);
+
+    exererciseServices
+      .deleteSet(workout_id, exercise_id, track_id)
+      .then((data) => {
+        const newArray = currentTrackData.filter((el) => el.track_id !== data.data[0].track_id);
+        setCurrentTrackData(newArray);
+        trackServices.getPrevTrackData(id).then((data) => {
+          setPrevTrackData(data);
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
   };
 
   // delete exercise

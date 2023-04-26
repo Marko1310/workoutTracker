@@ -320,32 +320,32 @@ export const GlobalProvider = ({ children }) => {
   //     });
   // };
 
-  const deleteSet = (e, workout_id, exercise_id, track_id) => {
-    e.preventDefault();
+  // const deleteSet = (e, workout_id, exercise_id, track_id) => {
+  //   e.preventDefault();
 
-    fetch(`${API_URL}/api/auth/split/workout/exercise/set/delete`, {
-      method: 'DELETE',
-      credentials: 'include', // include cookies in the request
-      body: JSON.stringify({
-        workout_id: workout_id,
-        exercise_id: exercise_id,
-        track_id: track_id,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        const newArray = currentTrackData.filter((el) => el.track_id !== data[0].track_id);
-        setCurrentTrackData(newArray);
-        getPrevTrackData(workout_id);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  };
+  //   fetch(`${API_URL}/api/auth/split/workout/exercise/set/delete`, {
+  //     method: 'DELETE',
+  //     credentials: 'include', // include cookies in the request
+  //     body: JSON.stringify({
+  //       workout_id: workout_id,
+  //       exercise_id: exercise_id,
+  //       track_id: track_id,
+  //     }),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       const newArray = currentTrackData.filter((el) => el.track_id !== data[0].track_id);
+  //       setCurrentTrackData(newArray);
+  //       getPrevTrackData(workout_id);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setLoading(false);
+  //     });
+  // };
 
   const globalState = {
     user,
@@ -371,7 +371,7 @@ export const GlobalProvider = ({ children }) => {
     // deleteSplit,
     // deleteWorkout,
     // deleteExercise,
-    deleteSet,
+    // deleteSet,
     isModalOpen,
     setIsModalOpen,
     setLoading,
