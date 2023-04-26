@@ -2,8 +2,12 @@
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
+// services
 import exererciseServices from '../../services/exerciseServices';
 import trackServices from '../../services/trackServices';
+
+// components
+import Set from './Set';
 
 // css
 import './Exercise.css';
@@ -128,42 +132,53 @@ const Exercise = ({ exercise }) => {
         <p className="exercise-navbar-title">Reps</p>
       </div>
       {!isTrackEmpty &&
-        exercise.trackdata.map((track) => {
+        exercise.trackdata.map((trackdata) => {
           return (
-            <div parent-id={track.exercise_id} key={track.track_id} className="exercise">
-              <p className="set">{track.set}</p>
-              <p className="previous">
-                {track.weight} kg x {track.reps}
-              </p>
-              <input
-                onChange={(e) => {
-                  handleChangeWeight(e, track.track_id);
-                }}
-                className="exercise-forms"
-                type="number"
-                id="kg"
-                name="kg"
-                placeholder="kg"
-              ></input>
-              <input
-                onChange={(e) => handleChangeReps(e, track.track_id)}
-                className="exercise-forms"
-                type="number"
-                id="reps"
-                name="reps"
-                placeholder="reps"
-              ></input>
-              {lastSet === track.set && (
-                <p
-                  onClick={(e) => {
-                    handleDeleteSet(e, id, exercise.exercise_id, track.track_id);
-                  }}
-                  className="delete-set"
-                >
-                  x
-                </p>
-              )}
-            </div>
+            <Set
+              key={trackdata.track_id}
+              trackdata={trackdata}
+              exercise={exercise}
+              handleChangeReps={handleChangeReps}
+              handleChangeWeight={handleChangeWeight}
+              handleDeleteSet={handleDeleteSet}
+              lastSet={lastSet}
+              id={id}
+            />
+
+            // <div parent-id={track.exercise_id} key={track.track_id} className="exercise">
+            //   <p className="set">{track.set}</p>
+            //   <p className="previous">
+            //     {track.weight} kg x {track.reps}
+            //   </p>
+            //   <input
+            //     onChange={(e) => {
+            //       handleChangeWeight(e, track.track_id);
+            //     }}
+            //     className="exercise-forms"
+            //     type="number"
+            //     id="kg"
+            //     name="kg"
+            //     placeholder="kg"
+            //   ></input>
+            //   <input
+            //     onChange={(e) => handleChangeReps(e, track.track_id)}
+            //     className="exercise-forms"
+            //     type="number"
+            //     id="reps"
+            //     name="reps"
+            //     placeholder="reps"
+            //   ></input>
+            //   {lastSet === track.set && (
+            //     <p
+            //       onClick={(e) => {
+            //         handleDeleteSet(e, id, exercise.exercise_id, track.track_id);
+            //       }}
+            //       className="delete-set"
+            //     >
+            //       x
+            //     </p>
+            //   )}
+            // </div>
           );
         })}
       <button onClick={(e) => handleNewSet(e)} className="addSetBtn">

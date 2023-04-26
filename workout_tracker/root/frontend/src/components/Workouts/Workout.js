@@ -32,7 +32,6 @@ const WorkoutSplit = () => {
 
   // state
   const [sucessMsg, setSuccessMsg] = useState(null);
-  const [prevArray, setPrevArray] = useState();
 
   // Extract workout_id
   const { id } = useParams();
@@ -66,13 +65,6 @@ const WorkoutSplit = () => {
       });
     }
   }, [user, navigate]);
-
-  useEffect(() => {
-    const tempArray = prevTrackData.map((data) => {
-      return data.trackdata;
-    });
-    setPrevArray(tempArray);
-  }, [prevTrackData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
