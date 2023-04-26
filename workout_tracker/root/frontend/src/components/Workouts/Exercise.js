@@ -136,7 +136,8 @@ const Exercise = ({ exercise }) => {
           return (
             <Set
               key={trackdata.track_id}
-              trackdata={trackdata}
+              prevTrackdata={trackdata}
+              currentTrackData={currentTrackData.filter((data) => data.track_id === trackdata.track_id)}
               exercise={exercise}
               handleChangeReps={handleChangeReps}
               handleChangeWeight={handleChangeWeight}

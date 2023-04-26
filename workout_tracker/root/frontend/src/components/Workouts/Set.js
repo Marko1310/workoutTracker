@@ -2,13 +2,22 @@
 import React, { useContext, useEffect, useState } from 'react';
 
 // Context
-import { GlobalContext } from '../../context/GlobalContext.js';
+// import { GlobalContext } from '../../context/GlobalContext.js';
 
 // css
 import './Set.css';
 
-const Set = ({ trackdata, exercise, handleChangeReps, handleChangeWeight, handleDeleteSet, lastSet, id }) => {
-  const { currentTrackData } = useContext(GlobalContext);
+const Set = ({
+  prevTrackdata,
+  currentTrackData,
+  exercise,
+  handleChangeReps,
+  handleChangeWeight,
+  handleDeleteSet,
+  lastSet,
+  id,
+}) => {
+  // const { currentTrackData } = useContext(GlobalContext);
 
   // state
   const [prevNumbers, setPrevNumbers] = useState();
@@ -16,45 +25,35 @@ const Set = ({ trackdata, exercise, handleChangeReps, handleChangeWeight, handle
   const [isPR, setIsPR] = useState(false);
 
   useEffect(() => {
-    const tempArray = currentTrackData.filter((data) => {
-      return data.track_id === trackdata.track_id;
-    });
-    setCurrentNumbers(tempArray[0].reps * tempArray[0].weight);
-  }, [handleChangeWeight, handleChangeReps]);
+    setPrevNumbers(prevTrackdata.reps * prevTrackdata.weight);
+
+    if (currentTrackData.length !== 0) {
+      setCurrentNumbers(currentTrackData[0].reps * currentTrackData[0].weight);
+    }
+  }, [handleChangeWeight, handleChangeReps, prevTrackdata, currentTrackData]);
 
   useEffect(() => {
-    const tempArray = currentTrackData.filter((data) => {
-      return data.track_id === trackdata.track_id;
-    });
-    // console.log(tempArray);
-    setPrevNumbers(trackdata.reps * trackdata.weight);
-    console.log(currentNumbers, prevNumbers);
     if (currentNumbers > prevNumbers) {
-      console.log('aaa');
       setIsPR(true);
     } else {
       setIsPR(false);
     }
-    console.log(prevNumbers);
-    console.log(currentNumbers);
-  }, [currentNumbers]);
-
-  // useEffect(() => {
-  //   // console.log(prevArray[0]);
-  //   // if (prevArray[0].reps * prevArray[0].weight > trackdata.reps * trackdata.weight) {
-  //   //   console.log('aaaa');
-  //   // }
-  // }, [handleChangeReps, handleChangeWeight]);
+  }, [currentNumbers, prevNumbers]);
 
   return (
-    <div parent-id={trackdata.exercise_id} key={trackdata.track_id} className={`exercise ${isPR ? 'green' : ''}`}>
-      <p className="set">{trackdata.set}</p>
+    <div
+      parent-id={prevTrackdata.exercise_id}
+      key={prevTrackdata.track_id}
+      className={`exercise ${isPR ? 'green' : ''}`}
+    >
+      <p className="set">{prevTrackdata.set}</p>
+      {isPR && <p className="pr">PR!</p>}
       <p className="previous">
-        {trackdata.weight} kg x {trackdata.reps}
+        {prevTrackdata.weight} kg x {prevTrackdata.reps}
       </p>
       <input
         onChange={(e) => {
-          handleChangeWeight(e, trackdata.track_id);
+          handleChangeWeight(e, prevTrackdata.track_id);
         }}
         className="exercise-forms"
         type="number"
@@ -63,17 +62,17 @@ const Set = ({ trackdata, exercise, handleChangeReps, handleChangeWeight, handle
         placeholder="kg"
       ></input>
       <input
-        onChange={(e) => handleChangeReps(e, trackdata.track_id)}
+        onChange={(e) => handleChangeReps(e, prevTrackdata.track_id)}
         className="exercise-forms"
         type="number"
         id="reps"
         name="reps"
         placeholder="reps"
       ></input>
-      {lastSet === trackdata.set && (
+      {lastSet === prevTrackdata.set && (
         <p
           onClick={(e) => {
-            handleDeleteSet(e, id, exercise.exercise_id, trackdata.track_id);
+            handleDeleteSet(e, id, exercise.exercise_id, prevTrackdata.track_id);
           }}
           className="delete-set"
         >
