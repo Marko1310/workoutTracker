@@ -41,17 +41,6 @@ const getCurrentWorkout = (workout_id) => {
     });
 };
 
-const getCurrentTrackData = (workout_id) => {
-  return api
-    .get(`/api/auth/splits/workouts/exercises/currentData/${workout_id}`)
-    .then((data) => {
-      return data.data;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
-
 const getPrevTrackData = (workout_id) => {
   return api
     .get(`/api/auth/splits/workouts/exercises/prevData/${workout_id}`)
@@ -69,7 +58,6 @@ const workoutServices = {
   deleteWorkout,
   addWorkout,
   getCurrentWorkout,
-  getCurrentTrackData,
   getPrevTrackData,
 };
 

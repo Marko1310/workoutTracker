@@ -27,7 +27,6 @@ const WorkoutSplit = () => {
   const { addTrackData } = useContext(GlobalContext);
   const { updateWorkoutDay } = useContext(GlobalContext);
   const { setLoading } = useContext(GlobalContext);
-  const { getCurrentTrackData } = useContext(GlobalContext);
   const { setCurrentTrackData } = useContext(GlobalContext);
   const { setPrevTrackData } = useContext(GlobalContext);
 
@@ -52,29 +51,22 @@ const WorkoutSplit = () => {
       // get previous track data
       workoutServices.getPrevTrackData(id).then((data) => {
         setPrevTrackData(data);
+
         setLoading(false);
       });
-
-      // FIX LATER  (make a query to autoomaticly recieve an array, avoid double mappiing)
-      // get current track data
-      // workoutServices.getCurrentTrackData(id).then((data) => {
-      //   const newArray = [];
-      //   console.log(data);
-      //   data.map((el) => {
-      //     el.trackdata.map((data) => newArray.push(data));
-      //   });
-      //   setCurrentTrackData(newArray);
-      //   setLoading(false);
-      // });
     }
   }, [user, navigate]);
 
   useEffect(() => {
+    console.log(prevTrackData);
     const prevTrackDataCopy = prevTrackData.map((el) => el.trackdata).flat();
+
     const newTrackData = prevTrackDataCopy.map((el) => ({ ...el, weight: 0, reps: 0 }));
+    console.log(newTrackData);
+
     setCurrentTrackData(newTrackData);
     setLoading(false);
-  }, [prevTrackData]);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();

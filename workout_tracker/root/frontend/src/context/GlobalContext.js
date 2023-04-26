@@ -228,6 +228,7 @@ export const GlobalProvider = ({ children }) => {
 
   const addTrackData = async (workout_id) => {
     try {
+      console.log(currentTrackData);
       const response = axios.post(
         `${API_URL}/api/auth/split/workout/exercise/track`,
         { workout_id, currentTrackData },

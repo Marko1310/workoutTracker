@@ -157,6 +157,8 @@ router.post('/split/workout/exercise/track', requiresAuth, async (req, res) => {
       })
       .join(',');
 
+    console.log(queryValues);
+
     const query = `
           INSERT INTO track (set, reps, weight, user_id, exercise_id, workout_day, workout_id) VALUES ${queryValues}`;
     await pool.query(query);
