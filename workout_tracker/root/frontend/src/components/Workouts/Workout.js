@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 // services
 import workoutServices from '../../services/workoutServices';
+import trackServices from '../../services/trackServices';
 
 // Components
 import Exercise from './Exercise';
@@ -27,6 +28,7 @@ const WorkoutSplit = () => {
   const { addTrackData } = useContext(GlobalContext);
   const { updateWorkoutDay } = useContext(GlobalContext);
   const { setLoading } = useContext(GlobalContext);
+  const { getCurrentTrackData } = useContext(GlobalContext);
   const { setCurrentTrackData } = useContext(GlobalContext);
   const { setPrevTrackData } = useContext(GlobalContext);
 
@@ -48,8 +50,20 @@ const WorkoutSplit = () => {
         setLoading(false);
       });
 
+      // FIX LATER  (make a query to autoomaticly recieve an array, avoid double mappiing)
+      // get current track data
+      workoutServices.getCurrentTrackData(id).then((data) => {
+        const newArray = [];
+        console.log(data);
+        data.map((el) => {
+          el.trackdata.map((data) => newArray.push(data));
+        });
+        setCurrentTrackData(newArray);
+        setLoading(false);
+      });
+
       // get previous track data
-      workoutServices.getPrevTrackData(id).then((data) => {
+      trackServices.getPrevTrackData(id).then((data) => {
         setPrevTrackData(data);
 
         setLoading(false);
@@ -70,20 +84,23 @@ const WorkoutSplit = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    addTrackData(id)
-      .then((response) => {
-        if (response) {
+    if (currentTrackData.length === 0) {
+      navigate('/dashboard');
+    } else {
+      trackServices
+        .addTrackData(id, currentTrackData)
+        .then((data) => {
+          setPrevTrackData(data);
           setSuccessMsg('success');
           setIsModalOpen(true);
           success();
-          updateWorkoutDay(id);
-        }
-      })
-      .catch(() => {
-        setSuccessMsg('error');
-        success();
-      });
+          workoutServices.updateWorkoutDay(id);
+        })
+        .catch(() => {
+          setSuccessMsg('error');
+          success();
+        });
+    }
   };
 
   const handleModal = () => {
@@ -94,7 +111,7 @@ const WorkoutSplit = () => {
   const success = () => {
     setTimeout(() => {
       setIsModalOpen(false);
-      navigate('/');
+      navigate('/dashboard');
     }, 2000);
   };
 

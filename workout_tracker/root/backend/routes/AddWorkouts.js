@@ -148,7 +148,6 @@ router.post('/split/workout/exercise/track', requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
     const { currentTrackData } = req.body;
-    console.log(currentTrackData);
 
     const queryValues = currentTrackData
       .map((data) => {
@@ -157,11 +156,12 @@ router.post('/split/workout/exercise/track', requiresAuth, async (req, res) => {
       })
       .join(',');
 
-    console.log(queryValues);
-
-    const query = `
-          INSERT INTO track (set, reps, weight, user_id, exercise_id, workout_day, workout_id) VALUES ${queryValues}`;
+    const query = format(
+      'INSERT INTO track (set, reps, weight, user_id, date, exercise_id, workout_day, workout_id) VALUES %L',
+      queryValues,
+    );
     await pool.query(query);
+    console.log(query);
 
     res.json({ success: true, updatedRows: currentTrackData });
   } catch (err) {

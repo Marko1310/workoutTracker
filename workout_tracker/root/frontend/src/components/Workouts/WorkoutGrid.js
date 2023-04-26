@@ -62,7 +62,7 @@ const WorkoutGrid = () => {
   // 4. get new track data
   const changeRoute = function (workout_id) {
     // getCurrentTrackData(workout_id);
-    getPrevTrackData(workout_id);
+    // getPrevTrackData(workout_id);
     navigate(`/workout/${workout_id}`);
   };
 

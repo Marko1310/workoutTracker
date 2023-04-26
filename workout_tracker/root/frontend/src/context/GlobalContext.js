@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
 
 // services
@@ -6,8 +5,6 @@ import userServices from '../services/userServices';
 
 //create context
 export const GlobalContext = createContext();
-
-const API_URL = 'http://localhost:8000';
 
 //provider component
 export const GlobalProvider = ({ children }) => {
@@ -32,7 +29,6 @@ export const GlobalProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    // getCurrentUser();
     userServices.getCurrentUser().then((user) => setUser(user));
   }, []);
 
@@ -228,7 +224,6 @@ export const GlobalProvider = ({ children }) => {
 
   const addTrackData = async (workout_id) => {
     try {
-      console.log(currentTrackData);
       const response = axios.post(
         `${API_URL}/api/auth/split/workout/exercise/track`,
         { workout_id, currentTrackData },
@@ -352,40 +347,23 @@ export const GlobalProvider = ({ children }) => {
     user,
     setUser,
     setLoadingTimeout,
+    timeout,
+    loading,
+    setLoading,
+    isModalOpen,
+    setIsModalOpen,
+    isMenuOpen,
+    setIsMenuOpen,
     splits,
     setSplits,
     workouts,
     setWorkouts,
     prevTrackData,
-    // getCurrentUser,
-    // logout,
-    // getSplits,
-    // getWorkouts,
-    // getCurrentWorkout,
-    // getCurrentTrackData,
-    getPrevTrackData,
-    loading,
-    // addSplit,
-    // addWorkout,
-    addExercise,
-    addNewSet,
-    // deleteSplit,
-    // deleteWorkout,
-    deleteExercise,
-    deleteSet,
-    isModalOpen,
-    setIsModalOpen,
-    setLoading,
     error,
     setError,
     currentWorkout,
-    addTrackData,
     setCurrentTrackData,
     currentTrackData,
-    updateWorkoutDay,
-    timeout,
-    isMenuOpen,
-    setIsMenuOpen,
     setCurrentWorkout,
     setPrevTrackData,
   };
