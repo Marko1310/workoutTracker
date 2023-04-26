@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 // services
 import workoutServices from '../../services/workoutServices';
+import trackServices from '../../services/trackServices';
 
 // Components
 import Exercise from './Exercise';
@@ -27,8 +28,7 @@ const WorkoutSplit = () => {
   const { addTrackData } = useContext(GlobalContext);
   const { updateWorkoutDay } = useContext(GlobalContext);
   const { setLoading } = useContext(GlobalContext);
-  const { getCurrentTrackData } = useContext(GlobalContext);
-  const { setCurrentTrackData } = useContext(GlobalContext);
+  const { currentTrackData, setCurrentTrackData } = useContext(GlobalContext);
   const { setPrevTrackData } = useContext(GlobalContext);
 
   // state
@@ -50,13 +50,13 @@ const WorkoutSplit = () => {
       });
 
       // get current track data
-      workoutServices.getCurrentTrackData(id).then((data) => {
+      trackServices.getCurrentTrackData(id).then((data) => {
         setCurrentTrackData(data);
         setLoading(false);
       });
 
       // get previous track data
-      workoutServices.getPrevTrackData(id).then((data) => {
+      trackServices.getPrevTrackData(id).then((data) => {
         setPrevTrackData(data);
         setLoading(false);
       });
@@ -65,20 +65,23 @@ const WorkoutSplit = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    addTrackData(id)
-      .then((response) => {
-        if (response) {
+    if (currentTrackData.length === 0) {
+      navigate('/dashboard');
+    } else {
+      trackServices
+        .addTrackData(id, currentTrackData)
+        .then((data) => {
+          setPrevTrackData(data);
           setSuccessMsg('success');
           setIsModalOpen(true);
           success();
           updateWorkoutDay(id);
-        }
-      })
-      .catch(() => {
-        setSuccessMsg('error');
-        success();
-      });
+        })
+        .catch(() => {
+          setSuccessMsg('error');
+          success();
+        });
+    }
   };
 
   const handleModal = () => {
