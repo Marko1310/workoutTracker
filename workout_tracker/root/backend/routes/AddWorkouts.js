@@ -151,28 +151,17 @@ router.post('/split/workout/exercise/track', requiresAuth, async (req, res) => {
     const { currentTrackData } = req.body;
     const date = new Date();
 
-    // const queryValues = currentTrackData
-    //   .map((data) => {
-    //     const nextDay = data.workout_day + 1;
-    //     return `(${data.set}, ${data.reps}, ${data.weight}, ${data.user_id}, ${date}, ${data.exercise_id}, ${nextDay}, ${data.workout_id})`;
-    //   })
-    //   .join(',');
-
     const queryValues = currentTrackData.map((data) => {
       const nextDay = data.workout_day + 1;
       return [data.set, data.reps, data.weight, req.user.id, date, data.exercise_id, nextDay, data.workout_id];
     });
-
-    // const query = `
-    //       INSERT INTO track (set, reps, weight, user_id, date, exercise_id, workout_day, workout_id) VALUES ${queryValues}`;
-    // console.log(query);
-    // await pool.query(query);
 
     const query = format(
       'INSERT INTO track (set, reps, weight, user_id, date, exercise_id, workout_day, workout_id) VALUES %L',
       queryValues,
     );
     await pool.query(query);
+    console.log(query);
 
     res.json({ success: true, updatedRows: currentTrackData });
   } catch (err) {

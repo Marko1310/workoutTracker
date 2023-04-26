@@ -41,11 +41,23 @@ const getCurrentWorkout = (workout_id) => {
     });
 };
 
+const updateWorkoutDay = (workout_id) => {
+  api
+    .post(`/api/auth/split/workout/editDay`, { workout_id })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
 const workoutServices = {
   getWorkouts,
   deleteWorkout,
   addWorkout,
   getCurrentWorkout,
+  updateWorkoutDay,
 };
 
 export default workoutServices;

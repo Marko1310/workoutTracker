@@ -75,7 +75,7 @@ const WorkoutSplit = () => {
           setSuccessMsg('success');
           setIsModalOpen(true);
           success();
-          updateWorkoutDay(id);
+          workoutServices.updateWorkoutDay(id);
         })
         .catch(() => {
           setSuccessMsg('error');

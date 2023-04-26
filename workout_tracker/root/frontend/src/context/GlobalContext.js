@@ -226,32 +226,32 @@ export const GlobalProvider = ({ children }) => {
       });
   };
 
-  const addTrackData = async (workout_id) => {
-    try {
-      const response = axios.post(
-        `${API_URL}/api/auth/split/workout/exercise/track`,
-        { workout_id, currentTrackData },
-        { withCredentials: true },
-      );
-      getPrevTrackData(workout_id);
+  // const addTrackData = async (workout_id) => {
+  //   try {
+  //     const response = axios.post(
+  //       `${API_URL}/api/auth/split/workout/exercise/track`,
+  //       { workout_id, currentTrackData },
+  //       { withCredentials: true },
+  //     );
+  //     getPrevTrackData(workout_id);
 
-      return response;
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  };
+  //     return response;
+  //   } catch (error) {
+  //     console.log(error);
+  //     throw error;
+  //   }
+  // };
 
-  const updateWorkoutDay = (workout_id) => {
-    axios
-      .post(`${API_URL}/api/auth/split/workout/editDay`, { workout_id }, { withCredentials: true })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const updateWorkoutDay = (workout_id) => {
+  //   axios
+  //     .post(`${API_URL}/api/auth/split/workout/editDay`, { workout_id }, { withCredentials: true })
+  //     .then((data) => {
+  //       console.log(data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   ///////////////////////////// DELETE DATA ////////////////////////////
   // const deleteSplit = (e, split_id) => {
@@ -378,10 +378,10 @@ export const GlobalProvider = ({ children }) => {
     error,
     setError,
     currentWorkout,
-    addTrackData,
+    // addTrackData,
     setCurrentTrackData,
     currentTrackData,
-    updateWorkoutDay,
+    // updateWorkoutDay,
     timeout,
     isMenuOpen,
     setIsMenuOpen,
