@@ -92,7 +92,7 @@ const WorkoutSplit = () => {
   const success = () => {
     setTimeout(() => {
       setIsModalOpen(false);
-      navigate('/');
+      navigate('/dashboard');
     }, 2000);
   };
 

@@ -1,18 +1,9 @@
-import { API_URL } from './serverConfig';
-import axios from 'axios';
+import api from './Api/api';
 
-const getSplits = () => {
-  return axios
-    .get(`${API_URL}/api/auth/splits/current`, {
-      withCredentials: true,
-    })
-    .then((data) => {
-      console.log(data);
-      return data.data;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+const addExercise = (title, goal_sets, goal_reps, workout_id) => {
+  return api.post(`/api/auth/split/workout/exercise/new`, { title, goal_sets, goal_reps, workout_id });
 };
 
-export default { getSplits };
+const exererciseServices = { addExercise };
+
+export default exererciseServices;

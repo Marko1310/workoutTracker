@@ -1,38 +1,51 @@
 // React
-import React, { useContext, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+// services
+import exererciseServices from '../../services/exerciseServices';
+import trackServices from '../../services/trackServices';
 
 // Context
-import { GlobalContext } from "../../context/GlobalContext";
+import { GlobalContext } from '../../context/GlobalContext';
 
 // css
-import "./NewExerciseModal.css";
+import './NewExerciseModal.css';
 
 const NewExerciseModal = ({ successMsg }) => {
-  const { isModalOpen } = useContext(GlobalContext);
-  const { setIsModalOpen } = useContext(GlobalContext);
-  const { addExercise } = useContext(GlobalContext);
+  const { isModalOpen, setIsModalOpen } = useContext(GlobalContext);
+  const { setLoading } = useContext(GlobalContext);
   const { setLoadingTimeout } = useContext(GlobalContext);
-  const { error } = useContext(GlobalContext);
+  const { error, setError } = useContext(GlobalContext);
   const { id } = useParams();
+  const { setPrevTrackData } = useContext(GlobalContext);
 
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState('');
   const [goal_sets, setGoal_sets] = useState(0);
   const [goal_reps, setGoal_reps] = useState(0);
 
   const handleNewExercise = (e) => {
+    e.preventDefault();
     if (title && goal_sets && goal_reps) {
       setLoadingTimeout();
     }
-    addExercise(e, title, goal_sets, goal_reps, id);
+    exererciseServices
+      .addExercise(title, goal_sets, goal_reps, id)
+      .then(() => {
+        setIsModalOpen(false);
+        trackServices.getPrevTrackData(id).then((data) => {
+          setPrevTrackData(data);
+          setLoading(false);
+        });
+      })
+      .catch((error) => {
+        setError(error.response.data);
+        setLoading(false);
+      });
   };
 
   return (
-    <div
-      className={`newExercise-container ${
-        isModalOpen && !successMsg ? "show" : ""
-      }`}
-    >
+    <div className={`newExercise-container ${isModalOpen && !successMsg ? 'show' : ''}`}>
       <p className="newExercise-title">Add new exercise</p>
       <form onSubmit={(e) => handleNewExercise(e)}>
         <label htmlFor="title">Title of the exercise</label>
@@ -44,7 +57,7 @@ const NewExerciseModal = ({ successMsg }) => {
           name="title"
           placeholder="e.g. Bench Press"
         ></input>
-        {error.title ? <p className="error">{error.title}</p> : ""}
+        {error.title ? <p className="error">{error.title}</p> : ''}
 
         <label htmlFor="sets">Number of goal sets</label>
         <input
@@ -55,7 +68,7 @@ const NewExerciseModal = ({ successMsg }) => {
           name="sets"
           placeholder="e.g. 4"
         ></input>
-        {error.sets ? <p className="error">{error.sets}</p> : ""}
+        {error.sets ? <p className="error">{error.sets}</p> : ''}
 
         <label htmlFor="reps">Number of goal reps</label>
         <input
@@ -66,7 +79,7 @@ const NewExerciseModal = ({ successMsg }) => {
           name="reps"
           placeholder="e.g. 12"
         ></input>
-        {error.reps ? <p className="error">{error.reps}</p> : ""}
+        {error.reps ? <p className="error">{error.reps}</p> : ''}
 
         <div className="button-container">
           <button className="button">Add exercise</button>
