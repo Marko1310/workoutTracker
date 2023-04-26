@@ -69,7 +69,7 @@ const WorkoutSplit = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (currentTrackData.length === 0) {
-      navigate('/dashboard');
+      navigate('/splits');
     } else {
       trackServices
         .addTrackData(id, currentTrackData)
@@ -95,7 +95,7 @@ const WorkoutSplit = () => {
   const success = () => {
     setTimeout(() => {
       setIsModalOpen(false);
-      navigate('/dashboard');
+      navigate('/splits');
     }, 2000);
   };
 

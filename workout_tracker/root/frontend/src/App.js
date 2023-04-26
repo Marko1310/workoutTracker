@@ -24,7 +24,7 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) navigate('/dashboard');
+    if (user) navigate('/splits');
     setIsModalOpen(false);
     setIsMenuOpen(false);
   }, [user]);
@@ -36,7 +36,7 @@ function App() {
         <div className="app-main-container">
           <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="dashboard" element={<SplitGrid />} />
+            <Route path="splits" element={<SplitGrid />} />
             <Route path="workouts/:split_id" element={<WorkoutGrid />} />
             <Route path="workout/:id" element={<Workout />} />
             <Route path="*" element={<NotFound />} />

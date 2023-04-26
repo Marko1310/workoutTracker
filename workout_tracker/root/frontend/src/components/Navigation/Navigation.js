@@ -34,7 +34,7 @@ const Navigation = () => {
 
   // FIX LATER!!!!
   useEffect(() => {
-    if (currentRoute.includes('dashboard')) setNavigationTitle('Dashboard');
+    if (currentRoute.includes('splits')) setNavigationTitle('Workout Splits');
     else if (currentRoute.includes('workouts')) setNavigationTitle('Workouts');
     else if (currentRoute.includes('workout')) setNavigationTitle('Workout');
   }, [currentRoute]);
