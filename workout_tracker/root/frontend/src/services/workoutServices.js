@@ -45,6 +45,7 @@ const getCurrentTrackData = (workout_id) => {
   return api
     .get(`/api/auth/splits/workouts/exercises/currentData/${workout_id}`)
     .then((data) => {
+      console.log(data);
       return data.data;
     })
     .catch((error) => {

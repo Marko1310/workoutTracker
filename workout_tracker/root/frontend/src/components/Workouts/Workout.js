@@ -49,15 +49,9 @@ const WorkoutSplit = () => {
         setLoading(false);
       });
 
-      // FIX LATER  (make a query to autoomaticly recieve an array, avoid double mappiing)
       // get current track data
       workoutServices.getCurrentTrackData(id).then((data) => {
-        const newArray = [];
-        console.log(data);
-        data.map((el) => {
-          el.trackdata.map((data) => newArray.push(data));
-        });
-        setCurrentTrackData(newArray);
+        setCurrentTrackData(data);
         setLoading(false);
       });
 
@@ -66,8 +60,6 @@ const WorkoutSplit = () => {
         setPrevTrackData(data);
         setLoading(false);
       });
-
-      // get previous track data
     }
   }, [user, navigate]);
 
