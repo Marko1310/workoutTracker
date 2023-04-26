@@ -42,7 +42,7 @@
   padding: 1rem 1rem 0.2rem 1rem;
   display: grid;
   margin-bottom: 0rem;
-  grid-template-columns: 0.5fr 2.2fr 0.8fr 0.8fr 0.2fr;
+  grid-template-columns: 0.2fr 2.2fr 0.8fr 0.8fr 0.2fr;
   justify-items: center;
   align-items: center;
   gap: 0.5rem;
@@ -57,7 +57,7 @@
   padding: 0.5rem 1rem 0.5rem 1rem;
   display: grid;
   margin-bottom: 0rem;
-  grid-template-columns: 0.5fr 2.2fr 0.8fr 0.8fr 0.2fr;
+  grid-template-columns: 0.2fr 2.2fr 0.8fr 0.8fr 0.2fr;
   justify-items: center;
   align-items: center;
   gap: 0.5rem;
