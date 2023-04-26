@@ -121,21 +121,21 @@ export const GlobalProvider = ({ children }) => {
   //     });
   // };
 
-  const getPrevTrackData = (workout_id) => {
-    axios
-      .get(`${API_URL}/api/auth/splits/workouts/exercises/prevData/${workout_id}`, {
-        withCredentials: true,
-      })
-      .then((data) => {
-        setPrevTrackData(data.data);
-        clearTimeout(timeout);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  };
+  // const getPrevTrackData = (workout_id) => {
+  //   axios
+  //     .get(`${API_URL}/api/auth/splits/workouts/exercises/prevData/${workout_id}`, {
+  //       withCredentials: true,
+  //     })
+  //     .then((data) => {
+  //       setPrevTrackData(data.data);
+  //       clearTimeout(timeout);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setLoading(false);
+  //     });
+  // };
 
   // const getCurrentTrackData = (workout_id) => {
   //   axios
@@ -187,67 +187,67 @@ export const GlobalProvider = ({ children }) => {
   //     });
   // };
 
-  const addExercise = (e, title, goal_sets, goal_reps, workout_id) => {
-    e.preventDefault();
-    axios
-      .post(
-        `${API_URL}/api/auth/split/workout/exercise/new`,
-        { title, goal_sets, goal_reps, workout_id },
-        { withCredentials: true },
-      )
-      .then(() => {
-        setIsModalOpen(false);
-        getPrevTrackData(workout_id);
-      })
-      .catch((error) => {
-        setError(error.response.data);
-        setLoading(false);
-      });
-  };
+  // const addExercise = (e, title, goal_sets, goal_reps, workout_id) => {
+  //   e.preventDefault();
+  //   axios
+  //     .post(
+  //       `${API_URL}/api/auth/split/workout/exercise/new`,
+  //       { title, goal_sets, goal_reps, workout_id },
+  //       { withCredentials: true },
+  //     )
+  //     .then(() => {
+  //       setIsModalOpen(false);
+  //       getPrevTrackData(workout_id);
+  //     })
+  //     .catch((error) => {
+  //       setError(error.response.data);
+  //       setLoading(false);
+  //     });
+  // };
 
-  const addNewSet = (exercise_id, workout_id, day) => {
-    axios
-      .post(
-        `${API_URL}/api/auth/split/workout/exercise/set/new`,
-        { exercise_id, workout_id, day },
-        { withCredentials: true },
-      )
-      .then((data) => {
-        getPrevTrackData(workout_id);
-        setCurrentTrackData((prevData) => [...prevData, data.data[0]]);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  };
+  // const addNewSet = (exercise_id, workout_id, day) => {
+  //   axios
+  //     .post(
+  //       `${API_URL}/api/auth/split/workout/exercise/set/new`,
+  //       { exercise_id, workout_id, day },
+  //       { withCredentials: true },
+  //     )
+  //     .then((data) => {
+  //       getPrevTrackData(workout_id);
+  //       setCurrentTrackData((prevData) => [...prevData, data.data[0]]);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setLoading(false);
+  //     });
+  // };
 
-  const addTrackData = async (workout_id) => {
-    try {
-      const response = axios.post(
-        `${API_URL}/api/auth/split/workout/exercise/track`,
-        { workout_id, currentTrackData },
-        { withCredentials: true },
-      );
-      getPrevTrackData(workout_id);
+  // const addTrackData = async (workout_id) => {
+  //   try {
+  //     const response = axios.post(
+  //       `${API_URL}/api/auth/split/workout/exercise/track`,
+  //       { workout_id, currentTrackData },
+  //       { withCredentials: true },
+  //     );
+  //     getPrevTrackData(workout_id);
 
-      return response;
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  };
+  //     return response;
+  //   } catch (error) {
+  //     console.log(error);
+  //     throw error;
+  //   }
+  // };
 
-  const updateWorkoutDay = (workout_id) => {
-    axios
-      .post(`${API_URL}/api/auth/split/workout/editDay`, { workout_id }, { withCredentials: true })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  // const updateWorkoutDay = (workout_id) => {
+  //   axios
+  //     .post(`${API_URL}/api/auth/split/workout/editDay`, { workout_id }, { withCredentials: true })
+  //     .then((data) => {
+  //       console.log(data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   ///////////////////////////// DELETE DATA ////////////////////////////
   // const deleteSplit = (e, split_id) => {
@@ -290,58 +290,58 @@ export const GlobalProvider = ({ children }) => {
   //     });
   // };
 
-  const deleteExercise = (e, workout_id, exercise_id) => {
-    e.preventDefault();
+  // const deleteExercise = (e, workout_id, exercise_id) => {
+  //   e.preventDefault();
 
-    fetch(`${API_URL}/api/auth/split/workout/exercise/delete`, {
-      method: 'DELETE',
-      credentials: 'include', // include cookies in the request
-      body: JSON.stringify({
-        workout_id: workout_id,
-        exercise_id: exercise_id,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        getPrevTrackData(workout_id);
-        const newArray = currentTrackData.filter((el) => el.exercise_id !== data[0].exercise_id);
-        setCurrentTrackData(newArray);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  };
+  //   fetch(`${API_URL}/api/auth/split/workout/exercise/delete`, {
+  //     method: 'DELETE',
+  //     credentials: 'include', // include cookies in the request
+  //     body: JSON.stringify({
+  //       workout_id: workout_id,
+  //       exercise_id: exercise_id,
+  //     }),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       getPrevTrackData(workout_id);
+  //       const newArray = currentTrackData.filter((el) => el.exercise_id !== data[0].exercise_id);
+  //       setCurrentTrackData(newArray);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setLoading(false);
+  //     });
+  // };
 
-  const deleteSet = (e, workout_id, exercise_id, track_id) => {
-    e.preventDefault();
+  // const deleteSet = (e, workout_id, exercise_id, track_id) => {
+  //   e.preventDefault();
 
-    fetch(`${API_URL}/api/auth/split/workout/exercise/set/delete`, {
-      method: 'DELETE',
-      credentials: 'include', // include cookies in the request
-      body: JSON.stringify({
-        workout_id: workout_id,
-        exercise_id: exercise_id,
-        track_id: track_id,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        const newArray = currentTrackData.filter((el) => el.track_id !== data[0].track_id);
-        setCurrentTrackData(newArray);
-        getPrevTrackData(workout_id);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  };
+  //   fetch(`${API_URL}/api/auth/split/workout/exercise/set/delete`, {
+  //     method: 'DELETE',
+  //     credentials: 'include', // include cookies in the request
+  //     body: JSON.stringify({
+  //       workout_id: workout_id,
+  //       exercise_id: exercise_id,
+  //       track_id: track_id,
+  //     }),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       const newArray = currentTrackData.filter((el) => el.track_id !== data[0].track_id);
+  //       setCurrentTrackData(newArray);
+  //       getPrevTrackData(workout_id);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setLoading(false);
+  //     });
+  // };
 
   const globalState = {
     user,
