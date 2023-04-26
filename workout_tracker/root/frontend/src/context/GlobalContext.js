@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
 
 // services
@@ -6,8 +5,6 @@ import userServices from '../services/userServices';
 
 //create context
 export const GlobalContext = createContext();
-
-const API_URL = 'http://localhost:8000';
 
 //provider component
 export const GlobalProvider = ({ children }) => {
@@ -125,21 +122,21 @@ export const GlobalProvider = ({ children }) => {
   //     });
   // };
 
-  const getPrevTrackData = (workout_id) => {
-    axios
-      .get(`${API_URL}/api/auth/splits/workouts/exercises/prevData/${workout_id}`, {
-        withCredentials: true,
-      })
-      .then((data) => {
-        setPrevTrackData(data.data);
-        clearTimeout(timeout);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  };
+  // const getPrevTrackData = (workout_id) => {
+  //   axios
+  //     .get(`${API_URL}/api/auth/splits/workouts/exercises/prevData/${workout_id}`, {
+  //       withCredentials: true,
+  //     })
+  //     .then((data) => {
+  //       setPrevTrackData(data.data);
+  //       clearTimeout(timeout);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setLoading(false);
+  //     });
+  // };
 
   // const getCurrentTrackData = (workout_id) => {
   //   axios
@@ -362,7 +359,7 @@ export const GlobalProvider = ({ children }) => {
     // getWorkouts,
     // getCurrentWorkout,
     // getCurrentTrackData,
-    getPrevTrackData,
+    // getPrevTrackData,
     loading,
     // addSplit,
     // addWorkout,
