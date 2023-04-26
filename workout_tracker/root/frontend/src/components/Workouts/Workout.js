@@ -100,30 +100,32 @@ const WorkoutSplit = () => {
   };
 
   return (
-    <div className="workout-main-container">
-      <div className={`workout ${isModalOpen || isMenuOpen ? 'blurred' : ''}`}>
-        <div className="container">
-          <div className="description-container">
-            <p>{currentWorkout.workout_name}</p>
-            <p>{`Workout #${currentWorkout.day}`}</p>
-            <Timer />
-            {/* <div>Notes</div> */}
-          </div>
-          {prevTrackData.map((el) => {
-            return <Exercise key={el.exercise_id} exercise={el} />;
-          })}
-          <div className="button-container">
-            <button onClick={() => handleModal()} disabled={isModalOpen} className="workoutBtn add">
-              Add exercise
-            </button>
-            <button disabled={isModalOpen} onClick={(e) => handleSubmit(e)} className="workoutBtn">
-              Save workout
-            </button>
+    <div className="app-main-container">
+      <div className="workout-main-container">
+        <div className={`workout ${isModalOpen || isMenuOpen ? 'blurred' : ''}`}>
+          <div className="container">
+            <div className="description-container">
+              <p>{currentWorkout.workout_name}</p>
+              <p>{`Workout #${currentWorkout.day}`}</p>
+              <Timer />
+              {/* <div>Notes</div> */}
+            </div>
+            {prevTrackData.map((el) => {
+              return <Exercise key={el.exercise_id} exercise={el} />;
+            })}
+            <div className="button-container">
+              <button onClick={() => handleModal()} disabled={isModalOpen} className="workoutBtn add">
+                Add exercise
+              </button>
+              <button disabled={isModalOpen} onClick={(e) => handleSubmit(e)} className="workoutBtn">
+                Save workout
+              </button>
+            </div>
           </div>
         </div>
+        <Message successMsg={sucessMsg} />
+        <NewExerciseModal successMsg={sucessMsg} />
       </div>
-      <Message successMsg={sucessMsg} />
-      <NewExerciseModal successMsg={sucessMsg} />
     </div>
   );
 };

@@ -60,7 +60,7 @@ const Navigation = () => {
       <div className="user-links">
         <p className="navigation-user">{user.email}</p>
         <div className="links">
-          <NavLink to="/dashboard">Home</NavLink>
+          <NavLink to="/splits">Home</NavLink>
           <NavLink onClick={(e) => handleLogout(e)} to="/">
             Logout
           </NavLink>

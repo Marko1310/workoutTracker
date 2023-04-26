@@ -69,7 +69,7 @@ const WorkoutSplitGrid = () => {
   return loading ? (
     <Loading />
   ) : (
-    <>
+    <div className="app-main-container">
       <p className="choose-title">Choose your Workout Split:</p>
       {!loading && helpModalOpen && <HelpModal message={'splits'} />}
       <div className="main-container">
@@ -109,7 +109,7 @@ const WorkoutSplitGrid = () => {
         <NewSplit />
         <AddSplitBtn />
       </div>
-    </>
+    </div>
   );
 };
 

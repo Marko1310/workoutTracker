@@ -73,7 +73,7 @@ const WorkoutGrid = () => {
   return loading ? (
     <Loading />
   ) : (
-    <>
+    <div className="app-main-container">
       {helpModalOpen ? (
         <HelpModal message={'workouts'} />
       ) : (
@@ -115,7 +115,7 @@ const WorkoutGrid = () => {
         <NewWorkoutModal />
         <AddWorkoutBtn />
       </div>
-    </>
+    </div>
   );
 
   // return (
