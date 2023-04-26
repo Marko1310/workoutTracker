@@ -191,23 +191,23 @@ export const GlobalProvider = ({ children }) => {
   //     });
   // };
 
-  const addExercise = (e, title, goal_sets, goal_reps, workout_id) => {
-    e.preventDefault();
-    axios
-      .post(
-        `${API_URL}/api/auth/split/workout/exercise/new`,
-        { title, goal_sets, goal_reps, workout_id },
-        { withCredentials: true },
-      )
-      .then(() => {
-        setIsModalOpen(false);
-        getPrevTrackData(workout_id);
-      })
-      .catch((error) => {
-        setError(error.response.data);
-        setLoading(false);
-      });
-  };
+  // const addExercise = (e, title, goal_sets, goal_reps, workout_id) => {
+  //   e.preventDefault();
+  //   axios
+  //     .post(
+  //       `${API_URL}/api/auth/split/workout/exercise/new`,
+  //       { title, goal_sets, goal_reps, workout_id },
+  //       { withCredentials: true },
+  //     )
+  //     .then(() => {
+  //       setIsModalOpen(false);
+  //       getPrevTrackData(workout_id);
+  //     })
+  //     .catch((error) => {
+  //       setError(error.response.data);
+  //       setLoading(false);
+  //     });
+  // };
 
   const addNewSet = (exercise_id, workout_id, day) => {
     axios
@@ -294,31 +294,31 @@ export const GlobalProvider = ({ children }) => {
   //     });
   // };
 
-  const deleteExercise = (e, workout_id, exercise_id) => {
-    e.preventDefault();
+  // const deleteExercise = (e, workout_id, exercise_id) => {
+  //   e.preventDefault();
 
-    fetch(`${API_URL}/api/auth/split/workout/exercise/delete`, {
-      method: 'DELETE',
-      credentials: 'include', // include cookies in the request
-      body: JSON.stringify({
-        workout_id: workout_id,
-        exercise_id: exercise_id,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        getPrevTrackData(workout_id);
-        const newArray = currentTrackData.filter((el) => el.exercise_id !== data[0].exercise_id);
-        setCurrentTrackData(newArray);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  };
+  //   fetch(`${API_URL}/api/auth/split/workout/exercise/delete`, {
+  //     method: 'DELETE',
+  //     credentials: 'include', // include cookies in the request
+  //     body: JSON.stringify({
+  //       workout_id: workout_id,
+  //       exercise_id: exercise_id,
+  //     }),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       getPrevTrackData(workout_id);
+  //       const newArray = currentTrackData.filter((el) => el.exercise_id !== data[0].exercise_id);
+  //       setCurrentTrackData(newArray);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setLoading(false);
+  //     });
+  // };
 
   const deleteSet = (e, workout_id, exercise_id, track_id) => {
     e.preventDefault();
@@ -366,11 +366,11 @@ export const GlobalProvider = ({ children }) => {
     loading,
     // addSplit,
     // addWorkout,
-    addExercise,
+    // addExercise,
     addNewSet,
     // deleteSplit,
     // deleteWorkout,
-    deleteExercise,
+    // deleteExercise,
     deleteSet,
     isModalOpen,
     setIsModalOpen,

@@ -1,20 +1,23 @@
 // React
-import { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useContext } from 'react';
+import { useParams } from 'react-router-dom';
+
+import exererciseServices from '../../services/exerciseServices';
+import trackServices from '../../services/trackServices';
 
 // css
-import "./Exercise.css";
+import './Exercise.css';
 
 // Context
-import { GlobalContext } from "../../context/GlobalContext";
+import { GlobalContext } from '../../context/GlobalContext';
 
 const Exercise = ({ el }) => {
   const { addNewSet } = useContext(GlobalContext);
-  const { deleteExercise } = useContext(GlobalContext);
   const { deleteSet } = useContext(GlobalContext);
-  const { setLoadingTimeout } = useContext(GlobalContext);
+  const { setLoadingTimeout, setLoading } = useContext(GlobalContext);
   const { currentWorkout } = useContext(GlobalContext);
   const { currentTrackData, setCurrentTrackData } = useContext(GlobalContext);
+  const { setPrevTrackData } = useContext(GlobalContext);
 
   const { id } = useParams();
 
@@ -33,13 +36,22 @@ const Exercise = ({ el }) => {
 
   // delete exercise
   const handleDeleteExercise = (e, workout_id, exercise_id) => {
-    if (
-      window.confirm(
-        "By removing the exercise, you will also remove all previous data?"
-      )
-    ) {
-      deleteExercise(e, workout_id, exercise_id);
-      setLoadingTimeout();
+    e.preventDefault();
+
+    if (window.confirm('By removing the exercise, you will also remove all previous data?')) {
+      exererciseServices
+        .deleteExercise(workout_id, exercise_id)
+        .then((data) => {
+          trackServices.getPrevTrackData(id).then((data) => {
+            setPrevTrackData(data);
+          });
+          const newTrackData = currentTrackData.filter((el) => el.exercise_id !== data.data[0].exercise_id);
+          setCurrentTrackData(newTrackData);
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoading(false);
+        });
     }
     e.stopPropagation();
   };
@@ -81,10 +93,7 @@ const Exercise = ({ el }) => {
         <p className="exercise-title">
           {el.exercise_name} ({el.goal_sets} x {el.goal_reps})
         </p>
-        <p
-          onClick={(e) => handleDeleteExercise(e, id, el.exercise_id)}
-          className="delete-exercise"
-        >
+        <p onClick={(e) => handleDeleteExercise(e, id, el.exercise_id)} className="delete-exercise">
           Delete
         </p>
       </div>
@@ -97,11 +106,7 @@ const Exercise = ({ el }) => {
       {!isTrackEmpty &&
         el.trackdata.map((track) => {
           return (
-            <div
-              parent-id={track.exercise_id}
-              key={track.track_id}
-              className="exercise"
-            >
+            <div parent-id={track.exercise_id} key={track.track_id} className="exercise">
               <p className="set">{track.set}</p>
               <p className="previous">
                 {track.weight} kg x {track.reps}
