@@ -209,22 +209,22 @@ export const GlobalProvider = ({ children }) => {
   //     });
   // };
 
-  const addNewSet = (exercise_id, workout_id, day) => {
-    axios
-      .post(
-        `${API_URL}/api/auth/split/workout/exercise/set/new`,
-        { exercise_id, workout_id, day },
-        { withCredentials: true },
-      )
-      .then((data) => {
-        getPrevTrackData(workout_id);
-        setCurrentTrackData((prevData) => [...prevData, data.data[0]]);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
-  };
+  // const addNewSet = (exercise_id, workout_id, day) => {
+  //   axios
+  //     .post(
+  //       `${API_URL}/api/auth/split/workout/exercise/set/new`,
+  //       { exercise_id, workout_id, day },
+  //       { withCredentials: true },
+  //     )
+  //     .then((data) => {
+  //       getPrevTrackData(workout_id);
+  //       setCurrentTrackData((prevData) => [...prevData, data.data[0]]);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setLoading(false);
+  //     });
+  // };
 
   // const addTrackData = async (workout_id) => {
   //   try {
@@ -367,7 +367,7 @@ export const GlobalProvider = ({ children }) => {
     // addSplit,
     // addWorkout,
     // addExercise,
-    addNewSet,
+    // addNewSet,
     // deleteSplit,
     // deleteWorkout,
     // deleteExercise,

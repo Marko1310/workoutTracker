@@ -13,6 +13,10 @@ const deleteExercise = (workout_id, exercise_id) => {
   });
 };
 
-const exererciseServices = { addExercise, deleteExercise };
+const addNewSet = (exercise_id, workout_id, day) => {
+  return api.post(`/api/auth/split/workout/exercise/set/new`, { exercise_id, workout_id, day });
+};
+
+const exererciseServices = { addExercise, deleteExercise, addNewSet };
 
 export default exererciseServices;

@@ -12,7 +12,6 @@ import './Exercise.css';
 import { GlobalContext } from '../../context/GlobalContext';
 
 const Exercise = ({ el }) => {
-  const { addNewSet } = useContext(GlobalContext);
   const { deleteSet } = useContext(GlobalContext);
   const { setLoadingTimeout, setLoading } = useContext(GlobalContext);
   const { currentWorkout } = useContext(GlobalContext);
@@ -24,8 +23,19 @@ const Exercise = ({ el }) => {
   // add new set
   const handleNewSet = (e) => {
     e.preventDefault();
-    setLoadingTimeout();
-    addNewSet(el.exercise_id, id, currentWorkout.day);
+    setLoading(true);
+    exererciseServices
+      .addNewSet(el.exercise_id, id, currentWorkout.day)
+      .then((data) => {
+        trackServices.getPrevTrackData(id).then((data) => {
+          setPrevTrackData(data);
+        });
+        setCurrentTrackData((prevData) => [...prevData, data.data[0]]);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
   };
 
   // delete set
