@@ -40,7 +40,7 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // setLoading(false);
+    setLoading(false);
   }, [user, navigate]);
 
   useEffect(() => {
