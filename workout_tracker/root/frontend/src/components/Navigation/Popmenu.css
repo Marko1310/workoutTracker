@@ -35,6 +35,7 @@
   height: 40px;
   border-bottom-style: solid;
   border-color: rgb(198, 198, 198);
+  text-decoration: none;
 }
 
 .popmenu-tags:hover {
