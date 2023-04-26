@@ -145,41 +145,6 @@ const Exercise = ({ exercise }) => {
               lastSet={lastSet}
               id={id}
             />
-
-            // <div parent-id={track.exercise_id} key={track.track_id} className="exercise">
-            //   <p className="set">{track.set}</p>
-            //   <p className="previous">
-            //     {track.weight} kg x {track.reps}
-            //   </p>
-            //   <input
-            //     onChange={(e) => {
-            //       handleChangeWeight(e, track.track_id);
-            //     }}
-            //     className="exercise-forms"
-            //     type="number"
-            //     id="kg"
-            //     name="kg"
-            //     placeholder="kg"
-            //   ></input>
-            //   <input
-            //     onChange={(e) => handleChangeReps(e, track.track_id)}
-            //     className="exercise-forms"
-            //     type="number"
-            //     id="reps"
-            //     name="reps"
-            //     placeholder="reps"
-            //   ></input>
-            //   {lastSet === track.set && (
-            //     <p
-            //       onClick={(e) => {
-            //         handleDeleteSet(e, id, exercise.exercise_id, track.track_id);
-            //       }}
-            //       className="delete-set"
-            //     >
-            //       x
-            //     </p>
-            //   )}
-            // </div>
           );
         })}
       <button onClick={(e) => handleNewSet(e)} className="addSetBtn">

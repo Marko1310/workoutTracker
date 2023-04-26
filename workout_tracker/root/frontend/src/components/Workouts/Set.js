@@ -1,8 +1,5 @@
 // React
-import React, { useContext, useEffect, useState } from 'react';
-
-// Context
-// import { GlobalContext } from '../../context/GlobalContext.js';
+import React, { useEffect, useState } from 'react';
 
 // css
 import './Set.css';
@@ -17,8 +14,6 @@ const Set = ({
   lastSet,
   id,
 }) => {
-  // const { currentTrackData } = useContext(GlobalContext);
-
   // state
   const [prevNumbers, setPrevNumbers] = useState();
   const [currentNumbers, setCurrentNumbers] = useState();
