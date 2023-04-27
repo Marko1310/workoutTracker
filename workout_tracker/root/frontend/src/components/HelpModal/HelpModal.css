@@ -10,7 +10,9 @@
   justify-content: center;
   height: auto;
   transition: opacity 0.8s ease;
-  margin-bottom: 2rem;
+
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .helpModal-title {
@@ -20,4 +22,5 @@
 
 .helpModal-text {
   font-weight: 200;
+  text-align: start;
 }

@@ -25,13 +25,13 @@ const WorkoutSplitGrid = () => {
   const { user } = useContext(GlobalContext);
   const { isModalOpen, isMenuOpen } = useContext(GlobalContext);
   const { loading, setLoading } = useContext(GlobalContext);
+  const { splits, setSplits } = useContext(GlobalContext);
 
   // const { splits, setSplits } = useContext(GlobalContext);
 
   // component state
   const [loadingSplits, setLoadingSplits] = useState(true);
   const [helpModalOpen, setHelpModalOpen] = useState(false);
-  const [splits, setSplits] = useState([]);
 
   const navigate = useNavigate();
 
@@ -48,13 +48,14 @@ const WorkoutSplitGrid = () => {
   }, [user, navigate, setLoading, setSplits]);
 
   useEffect(() => {
+    console.log(splits.length);
     if (!loadingSplits && splits.length === 0) {
       setHelpModalOpen(true);
-    } else {
+    } else if (!loadingSplits && splits.length !== 0) {
       setHelpModalOpen(false);
     }
     setLoading(false);
-  }, [splits, loadingSplits]);
+  }, [splits, loadingSplits, setLoading]);
 
   const changeRoute = (id) => {
     setLoading(true);

@@ -22,17 +22,19 @@ const HelpModal = ({ message }) => {
 
   return (
     <div className="helpModal-container">
-      {message === 'splits' && <p className="helpModal-title">Hello {user.name}!</p>}
-      <br />
-      <p className="helpModal-text">
-        It looks like you still don't have any {text}.
+      <div className="helpModal">
+        {message === 'splits' && <p className="helpModal-title">Hello {user.name}!</p>}
         <br />
-        <br />
-        Start by creating one by pressing the button below.
-        <br />
-        <br />
-        Good luck with your training!
-      </p>
+        <p className="helpModal-text">
+          It looks like you still don't have any {text}.
+          <br />
+          <br />
+          Start by creating one by pressing the button below.
+          <br />
+          <br />
+          Good luck with your training!
+        </p>
+      </div>
     </div>
   );
 };

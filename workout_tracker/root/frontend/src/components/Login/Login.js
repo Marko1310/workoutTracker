@@ -65,7 +65,7 @@ function Login() {
       .catch((error) => {
         console.log(error);
         setErrors(error.response.data);
-        // setLoading(false);
+        setLoading(false);
       });
   };
 

@@ -37,11 +37,11 @@ const WorkoutGrid = () => {
   const { split_id } = useParams();
 
   useEffect(() => {
+    setLoading(true);
     if (!user) {
       navigate('/');
       return;
     }
-    setLoading(true);
     workoutServices.getWorkouts(split_id).then((data) => {
       setWorkouts(data);
       setLoadingWorkouts(false);
@@ -53,8 +53,8 @@ const WorkoutGrid = () => {
       setHelpModalOpen(true);
     } else if (!loadingWorkouts && workouts.length !== 0) {
       setHelpModalOpen(false);
-      setLoading(false);
     }
+    setLoading(false);
   }, [workouts, loadingWorkouts]);
 
   // When card clicked -> change route:
