@@ -35,6 +35,7 @@ const Exercise = ({ exercise }) => {
           setPrevTrackData(data);
         });
         setCurrentTrackData((prevData) => [...prevData, data.data[0]]);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -55,6 +56,7 @@ const Exercise = ({ exercise }) => {
         trackServices.getPrevTrackData(id).then((data) => {
           setPrevTrackData(data);
         });
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -65,6 +67,7 @@ const Exercise = ({ exercise }) => {
   // delete exercise
   const handleDeleteExercise = (e, workout_id, exercise_id) => {
     e.preventDefault();
+    setLoading(true);
 
     if (window.confirm('By removing the exercise, you will also remove all previous data?')) {
       exererciseServices
@@ -75,6 +78,7 @@ const Exercise = ({ exercise }) => {
           });
           const newTrackData = currentTrackData.filter((exercise) => exercise.exercise_id !== data.data[0].exercise_id);
           setCurrentTrackData(newTrackData);
+          setLoading(false);
         })
         .catch((error) => {
           console.log(error);

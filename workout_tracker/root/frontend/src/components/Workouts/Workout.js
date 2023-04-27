@@ -12,6 +12,7 @@ import Exercise from './Exercise';
 import NewExerciseModal from './NewExerciseModal';
 import Message from './Message';
 import Timer from '../Timer/Timer';
+import Loading from '../Loading/Loading';
 
 // css
 import './Workout.css';
@@ -27,7 +28,7 @@ const WorkoutSplit = () => {
   const { prevTrackData, setPrevTrackData } = useContext(GlobalContext);
   const { setError } = useContext(GlobalContext);
   const { currentWorkout, setCurrentWorkout } = useContext(GlobalContext);
-  const { setLoading } = useContext(GlobalContext);
+  const { loading, setLoading } = useContext(GlobalContext);
   const { currentTrackData, setCurrentTrackData } = useContext(GlobalContext);
 
   // state
@@ -99,7 +100,9 @@ const WorkoutSplit = () => {
     }, 2000);
   };
 
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <div className="app-main-container">
       <div className="workout-main-container">
         <div className={`workout ${isModalOpen || isMenuOpen ? 'blurred' : ''}`}>

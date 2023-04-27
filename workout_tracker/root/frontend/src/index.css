@@ -59,7 +59,7 @@ Global Styles
   font-family: 'Montserrat', sans-serif;
 }
 body {
-  color: var(--clr-grey-1);
+    color: var(--clr-grey-1);
   line-height: 1.5;
   font-size: 0.875rem;
   background-color: rgb(250, 250, 250);
