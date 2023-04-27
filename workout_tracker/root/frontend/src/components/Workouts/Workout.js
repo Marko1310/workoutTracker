@@ -50,13 +50,13 @@ const WorkoutSplit = () => {
       // get current workout
       workoutServices.getCurrentWorkout(id).then((data) => {
         setCurrentWorkout(data);
-        setLoading(false);
+        // setLoading(false);
       });
 
       // get current track data
       trackServices.getCurrentTrackData(id).then((data) => {
         setCurrentTrackData(data);
-        setLoading(false);
+        // setLoading(false);
       });
 
       // get previous track data

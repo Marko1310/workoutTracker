@@ -28,6 +28,7 @@ const WorkoutGrid = () => {
   const { loading, setLoading } = useContext(GlobalContext);
 
   // state
+  const [loadingWorkouts, setLoadingWorkouts] = useState(true);
   const [helpModalOpen, setHelpModalOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -38,18 +39,24 @@ const WorkoutGrid = () => {
   useEffect(() => {
     if (!user) {
       navigate('/');
+      return;
     }
+    setLoading(true);
     workoutServices.getWorkouts(split_id).then((data) => {
       setWorkouts(data);
-      setLoading(false);
+      setLoadingWorkouts(false);
     });
   }, [navigate, setLoading, setWorkouts, split_id, user]);
 
   useEffect(() => {
-    if (workouts.length === 0) {
+    if (!loadingWorkouts && workouts.length === 0) {
       setHelpModalOpen(true);
-    } else setHelpModalOpen(false);
-  }, [workouts]);
+    } else if (!loadingWorkouts) {
+      setHelpModalOpen(false);
+      setLoading(false);
+    }
+    // setLoading(false);
+  }, [workouts, loadingWorkouts]);
 
   // When card clicked -> change route:
   const changeRoute = function (workout_id) {
