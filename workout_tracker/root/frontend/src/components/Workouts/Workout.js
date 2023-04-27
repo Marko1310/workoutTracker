@@ -43,6 +43,7 @@ const WorkoutSplit = () => {
     if (!user) {
       navigate('/');
     } else {
+      setLoading(true);
       // 1. get current workout
       // 2. get new track data
       // 3. get previous track data
@@ -56,7 +57,6 @@ const WorkoutSplit = () => {
       // get current track data
       trackServices.getCurrentTrackData(id).then((data) => {
         setCurrentTrackData(data);
-        // setLoading(false);
       });
 
       // get previous track data

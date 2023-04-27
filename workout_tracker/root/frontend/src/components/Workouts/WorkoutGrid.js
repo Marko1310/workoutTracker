@@ -51,11 +51,10 @@ const WorkoutGrid = () => {
   useEffect(() => {
     if (!loadingWorkouts && workouts.length === 0) {
       setHelpModalOpen(true);
-    } else if (!loadingWorkouts) {
+    } else if (!loadingWorkouts && workouts.length !== 0) {
       setHelpModalOpen(false);
       setLoading(false);
     }
-    // setLoading(false);
   }, [workouts, loadingWorkouts]);
 
   // When card clicked -> change route:
