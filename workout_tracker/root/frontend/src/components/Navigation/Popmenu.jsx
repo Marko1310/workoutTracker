@@ -22,7 +22,7 @@ const Popmenu = ({ isMenuOpen, setIsMenuOpen, handleLogout }) => {
       </div>
 
       <div className="popmenu-tags-container">
-        <NavLink className="popmenu-tags" to="/splits">
+        <NavLink className="popmenu-tags" to="/splits" onClick={() => setIsMenuOpen(false)}>
           Home
         </NavLink>
         <NavLink className="popmenu-tags" onClick={(e) => handleLogout(e)} to="/">
