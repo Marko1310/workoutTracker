@@ -109,7 +109,7 @@ const WorkoutSplit = () => {
           <div className="container">
             <div className="description-container">
               <p>{currentWorkout.workout_name}</p>
-              <p>{`Workout #${currentWorkout.day}`}</p>
+              <p className="workout-day">{`Workout #${currentWorkout.day}`}</p>
               <Timer />
               {/* <div>Notes</div> */}
             </div>

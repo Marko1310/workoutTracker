@@ -38,10 +38,17 @@
   padding-right: 1rem;
   border-bottom: var(--clr-grey-8);
   border-bottom-style: solid;
+  position: relative;
 }
 
 .description-container-title {
   margin-bottom: 1rem;
+}
+
+.workout-day {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .button-container {
