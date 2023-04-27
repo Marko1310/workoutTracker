@@ -16,7 +16,6 @@ const NewExerciseModal = ({ successMsg }) => {
   // global context
   const { isModalOpen, setIsModalOpen } = useContext(GlobalContext);
   const { setLoading } = useContext(GlobalContext);
-  const { setLoadingTimeout } = useContext(GlobalContext);
   const { error, setError } = useContext(GlobalContext);
   const { setPrevTrackData } = useContext(GlobalContext);
 

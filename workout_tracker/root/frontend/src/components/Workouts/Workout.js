@@ -69,7 +69,7 @@ const WorkoutSplit = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (currentTrackData.length === 0) {
+    if (currentTrackData?.length === 0) {
       navigate('/splits');
     } else {
       trackServices

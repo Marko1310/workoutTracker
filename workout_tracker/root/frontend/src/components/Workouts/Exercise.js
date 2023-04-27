@@ -33,9 +33,9 @@ const Exercise = ({ exercise }) => {
       .then((data) => {
         trackServices.getPrevTrackData(id).then((data) => {
           setPrevTrackData(data);
+          setLoading(false);
         });
         setCurrentTrackData((prevData) => [...prevData, data.data[0]]);
-        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -55,8 +55,8 @@ const Exercise = ({ exercise }) => {
         setCurrentTrackData(newArray);
         trackServices.getPrevTrackData(id).then((data) => {
           setPrevTrackData(data);
+          setLoading(false);
         });
-        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -141,7 +141,7 @@ const Exercise = ({ exercise }) => {
             <Set
               key={trackdata.track_id}
               prevTrackdata={trackdata}
-              currentTrackData={currentTrackData.filter((data) => data.track_id === trackdata.track_id)}
+              currentTrackData={currentTrackData?.filter((data) => data.track_id === trackdata.track_id)}
               exercise={exercise}
               handleChangeReps={handleChangeReps}
               handleChangeWeight={handleChangeWeight}
