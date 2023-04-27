@@ -31,7 +31,7 @@ const NewExerciseModal = ({ successMsg }) => {
   const handleNewExercise = (e) => {
     e.preventDefault();
     if (title && goal_sets && goal_reps) {
-      setLoadingTimeout();
+      setLoading(true);
     }
     exererciseServices
       .addExercise(title, goal_sets, goal_reps, id)
