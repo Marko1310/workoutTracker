@@ -41,14 +41,23 @@ const History = ({ workout_id, exercise_id, exercise_name }) => {
           return (
             <div className="history-data-container">
               <div className="history-dayDate-container">
-                <p className="history-day">{el.workout_day}</p>
-                <p className="history-date">{el.trackdata_history[0].date.slice(0, 10)}</p>
+                <p className="history-day">Workout #{el.workout_day}</p>
+                <p className="history-date">Date: {el.trackdata_history[0].date.slice(0, 10)}</p>
               </div>
               <div className="history-setRepWeight-container">
-                <p className="history-set">{el.trackdata_history[0].set}</p>
-                <p className="history-rep">{el.trackdata_history[0].reps}</p>
-                <p className="history-weight">{el.trackdata_history[0].weight}</p>
+                <p className="history-set">Set</p>
+                <p className="history-rep">Reps</p>
+                <p className="history-weight">Weight</p>
               </div>
+              {el.trackdata_history.map((data) => {
+                return (
+                  <div className="history-setRepWeight-container">
+                    <p className="history-set-data">{data.set}</p>
+                    <p className="history-rep-data">{data.reps}</p>
+                    <p className="history-weight-data">{data.weight}</p>
+                  </div>
+                );
+              })}
             </div>
           );
         })}

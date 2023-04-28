@@ -1,17 +1,44 @@
-.exercise-container {
+.history-container {
   border-radius: 3px;
   background: white;
-  margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 25rem;
+  padding: 2rem;
 }
 
-.title-container {
+.history-exercise-title {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.history-data-container {
+  width: 100%;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(196, 197, 197);
+}
+
+.history-dayDate-container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding-right: 1rem;
+  margin-bottom: 0.2rem;
+  margin-top: 1rem;
+  color: rgb(16, 172, 224);
+}
+
+.history-setRepWeight-container {
+  display: grid;
+  grid-template-columns: 0.8fr 1fr 1fr;
+}
+
+.history-set,
+.history-rep,
+.history-weight {
+  font-weight: 500;
 }
 
 .exercise-title {
