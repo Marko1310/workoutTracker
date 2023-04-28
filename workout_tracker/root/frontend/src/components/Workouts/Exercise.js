@@ -74,6 +74,7 @@ const Exercise = ({ exercise, setIsHistoryWindowOpen, isHistoryWindowOpen, curre
 
   // delete exercise
   const handleDeleteExercise = (e, workout_id, exercise_id) => {
+    setIsEditMenuOpen(false);
     e.preventDefault();
     setLoading(true);
 
@@ -129,19 +130,27 @@ const Exercise = ({ exercise, setIsHistoryWindowOpen, isHistoryWindowOpen, curre
     if (exercise.set > lastSet) lastSet = exercise.set;
   });
 
+  const handleHistoryOpen = (exercise) => {
+    setIsEditMenuOpen(false);
+    setCurrentExercise(exercise);
+    setIsHistoryWindowOpen(true);
+  };
+
   return loading ? (
     <Loading />
   ) : (
     <div className="exercise-container">
-      <EditMenu isEditMenuOpen={isEditMenuOpen} setIsEditMenuOpen={setIsEditMenuOpen} />
+      <EditMenu
+        isEditMenuOpen={isEditMenuOpen}
+        setIsEditMenuOpen={setIsEditMenuOpen}
+        handleDeleteExercise={handleDeleteExercise}
+        id={id}
+        exercise_id={exercise.exercise_id}
+        exercise={exercise}
+        handleHistoryOpen={handleHistoryOpen}
+      />
       <div className="title-container">
-        <p
-          onClick={() => {
-            setCurrentExercise(exercise);
-            setIsHistoryWindowOpen(true);
-          }}
-          className="exercise-title"
-        >
+        <p className="exercise-title">
           {exercise.exercise_name} ({exercise.goal_sets} x {exercise.goal_reps})
         </p>
         <p onClick={(e) => setIsEditMenuOpen(true)} className="delete-exercise">

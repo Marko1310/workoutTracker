@@ -4,21 +4,26 @@ import './EditMenu.css';
 // images
 import x from '../../images/close-button.png';
 
-// Contex
-import { useContext } from 'react';
-import { GlobalContext } from '../../context/GlobalContext';
-
-const EditMenu = ({ isEditMenuOpen, setIsEditMenuOpen, handleDeleteExercise, id, exercise_id }) => {
-  const { user } = useContext(GlobalContext);
-
+const EditMenu = ({
+  isEditMenuOpen,
+  setIsEditMenuOpen,
+  handleDeleteExercise,
+  id,
+  exercise_id,
+  exercise,
+  handleHistoryOpen,
+}) => {
   return (
     isEditMenuOpen && (
       <div className="editMenu">
-        <div className="x-container">
+        <div className="x-edit-container">
           <img className="x-edit" alt="x" src={x} onClick={() => setIsEditMenuOpen(false)} />
         </div>
 
-        <div className="popmenu-tags-container">
+        <div className="edit-tags-container">
+          <p onClick={(e) => handleHistoryOpen(exercise)} className="history-exercise">
+            History
+          </p>
           <p onClick={(e) => handleDeleteExercise(e, id, exercise_id)} className="delete-exercise">
             Delete
           </p>

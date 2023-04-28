@@ -24,20 +24,6 @@
   font-size: 1rem;
 }
 
-.delete-exercise {
-  padding-top: 1rem;
-  margin-bottom: 0;
-  font-size: 0.9rem;
-  color: #d42c1d;
-  font-weight: 600;
-  transition: all 0.4s;
-}
-
-.delete-exercise:hover {
-  filter: brightness(0.8);
-  cursor: pointer;
-}
-
 .exercise-navbar {
   width: 100%;
   padding: 1rem 1rem 0.2rem 1rem;
