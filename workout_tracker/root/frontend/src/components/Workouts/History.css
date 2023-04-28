@@ -72,6 +72,14 @@
   font-weight: 500;
 }
 
+.history-weight {
+  margin-left: 5rem;
+}
+
+.history-weight-data {
+  margin-left: 5rem;
+}
+
 .delete-exercise {
   padding-top: 1rem;
   margin-bottom: 0;
