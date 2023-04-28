@@ -9,7 +9,6 @@ import trackServices from '../../services/trackServices';
 // components
 import Set from './Set';
 import Loading from '../Loading/Loading';
-import History from './History';
 
 // css
 import './Exercise.css';
@@ -17,7 +16,7 @@ import './Exercise.css';
 // Context
 import { GlobalContext } from '../../context/GlobalContext';
 
-const Exercise = ({ exercise }) => {
+const Exercise = ({ exercise, setIsHistoryWindowOpen, isHistoryWindowOpen, currentExercise, setCurrentExercise }) => {
   // global context
   const { currentWorkout } = useContext(GlobalContext);
   const { currentTrackData, setCurrentTrackData } = useContext(GlobalContext);
@@ -126,7 +125,13 @@ const Exercise = ({ exercise }) => {
   ) : (
     <div className="exercise-container">
       <div className="title-container">
-        <p className="exercise-title">
+        <p
+          onClick={() => {
+            setCurrentExercise(exercise);
+            setIsHistoryWindowOpen(true);
+          }}
+          className="exercise-title"
+        >
           {exercise.exercise_name} ({exercise.goal_sets} x {exercise.goal_reps})
         </p>
         <p onClick={(e) => handleDeleteExercise(e, id, exercise.exercise_id)} className="delete-exercise">
@@ -155,7 +160,6 @@ const Exercise = ({ exercise }) => {
             />
           );
         })}
-      <History workout_id={id} exercise_id={exercise.exercise_id} exercise_name={exercise.exercise_name} />
 
       <button onClick={(e) => handleNewSet(e)} className="addSetBtn">
         + Add Set

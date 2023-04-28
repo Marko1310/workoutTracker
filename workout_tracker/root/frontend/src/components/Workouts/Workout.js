@@ -13,6 +13,7 @@ import NewExerciseModal from './NewExerciseModal';
 import Message from './Message';
 import Timer from '../Timer/Timer';
 import Loading from '../Loading/Loading';
+import History from './History';
 
 // css
 import './Workout.css';
@@ -33,6 +34,8 @@ const WorkoutSplit = () => {
 
   // state
   const [sucessMsg, setSuccessMsg] = useState(null);
+  const [isHistoryWindowOpen, setIsHistoryWindowOpen] = useState(false);
+  const [currentExercise, setCurrentExercise] = useState('');
 
   // Extract workout_id
   const { id } = useParams();
@@ -105,16 +108,25 @@ const WorkoutSplit = () => {
   ) : (
     <div className="app-main-container">
       <div className="workout-main-container">
-        <div className={`workout ${isModalOpen || isMenuOpen ? 'blurred' : ''}`}>
+        <div className={`workout ${isModalOpen || isMenuOpen || isHistoryWindowOpen ? 'blurred' : ''}`}>
           <div className="container">
             <div className="description-container">
               <p>{currentWorkout.workout_name}</p>
-              <p className="workout-day">{`Workout #${currentWorkout.day}`}</p>
+              <p className="workout-day">{`Workout #${currentWorkout.day + 1}`}</p>
               <Timer />
               {/* <div>Notes</div> */}
             </div>
             {prevTrackData.map((el) => {
-              return <Exercise key={el.exercise_id} exercise={el} />;
+              return (
+                <Exercise
+                  key={el.exercise_id}
+                  exercise={el}
+                  isHistoryWindowOpen={isHistoryWindowOpen}
+                  setIsHistoryWindowOpen={setIsHistoryWindowOpen}
+                  currentExercise={currentExercise}
+                  setCurrentExercise={setCurrentExercise}
+                />
+              );
             })}
             <div className="button-container">
               <button onClick={() => handleModal()} disabled={isModalOpen} className="workoutBtn add">
@@ -128,6 +140,12 @@ const WorkoutSplit = () => {
         </div>
         <Message successMsg={sucessMsg} />
         <NewExerciseModal successMsg={sucessMsg} />
+        <History
+          workout_id={id}
+          exercise_id={currentExercise.exercise_id}
+          exercise_name={currentExercise.exercise_name}
+          isHistoryWindowOpen={isHistoryWindowOpen}
+        />
       </div>
     </div>
   );

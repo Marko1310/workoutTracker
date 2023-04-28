@@ -1,40 +1,24 @@
 // React
-import { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 // services
-import exererciseServices from '../../services/exerciseServices';
 import trackServices from '../../services/trackServices';
 
 // css
 import './History.css';
 
-// Context
-import { GlobalContext } from '../../context/GlobalContext';
-
-const History = ({ workout_id, exercise_id, exercise_name }) => {
-  // global context
-  const { currentWorkout } = useContext(GlobalContext);
-  const { currentTrackData, setCurrentTrackData } = useContext(GlobalContext);
-  const { setPrevTrackData } = useContext(GlobalContext);
-  const { loading, setLoading } = useContext(GlobalContext);
-
-  const { id } = useParams();
-
+const History = ({ workout_id, exercise_id, exercise_name, isHistoryWindowOpen }) => {
   const [historyData, setHistoryData] = useState([]);
 
   useEffect(() => {
     trackServices.getHistoryTrackData(workout_id, exercise_id).then((data) => {
-      setHistoryData(data.data);
+      setHistoryData(data.data.slice(0, -1));
     });
-  }, []);
-
-  // if (historyData) {
-  // console.log(historyData[0]);
-  // }
+  }, [exercise_id, workout_id]);
 
   return (
-    historyData.length > 0 && (
+    historyData.length > 0 &&
+    isHistoryWindowOpen && (
       <div className="history-container">
         <p className="history-exercise-title">{exercise_name}</p>
         {historyData.map((el) => {
@@ -46,15 +30,15 @@ const History = ({ workout_id, exercise_id, exercise_name }) => {
               </div>
               <div className="history-setRepWeight-container">
                 <p className="history-set">Set</p>
+                <p className="history-weight">kg</p>
                 <p className="history-rep">Reps</p>
-                <p className="history-weight">Weight</p>
               </div>
               {el.trackdata_history.map((data) => {
                 return (
-                  <div className="history-setRepWeight-container">
+                  <div key={data.track_id} className="history-setRepWeight-container">
                     <p className="history-set-data">{data.set}</p>
-                    <p className="history-rep-data">{data.reps}</p>
                     <p className="history-weight-data">{data.weight}</p>
+                    <p className="history-rep-data">{data.reps}</p>
                   </div>
                 );
               })}
