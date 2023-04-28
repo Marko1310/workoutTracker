@@ -55,6 +55,7 @@ const Set = ({
         id="kg"
         name="kg"
         placeholder="kg"
+        value={currentTrackData[0].weight !== 0 ? currentTrackData[0].weight : ''}
       ></input>
       <input
         onChange={(e) => handleChangeReps(e, prevTrackdata.track_id)}
@@ -63,6 +64,7 @@ const Set = ({
         id="reps"
         name="reps"
         placeholder="reps"
+        value={currentTrackData[0].reps !== 0 ? currentTrackData[0].reps : ''}
       ></input>
       {lastSet === prevTrackdata.set && (
         <p

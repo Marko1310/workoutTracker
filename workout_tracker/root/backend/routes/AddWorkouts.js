@@ -145,6 +145,9 @@ router.post('/split/workout/exercise/set/new', requiresAuth, async (req, res) =>
   }
 });
 
+// @route   POST /api/split/workout/exercise/track
+// @desc    Update new track data
+// @access  Private
 router.post('/split/workout/exercise/track', requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;

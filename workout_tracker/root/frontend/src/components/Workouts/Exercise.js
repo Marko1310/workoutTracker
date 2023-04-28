@@ -8,6 +8,7 @@ import trackServices from '../../services/trackServices';
 
 // components
 import Set from './Set';
+import Loading from '../Loading/Loading';
 
 // css
 import './Exercise.css';
@@ -17,10 +18,10 @@ import { GlobalContext } from '../../context/GlobalContext';
 
 const Exercise = ({ exercise }) => {
   // global context
-  const { setLoading } = useContext(GlobalContext);
   const { currentWorkout } = useContext(GlobalContext);
   const { currentTrackData, setCurrentTrackData } = useContext(GlobalContext);
   const { setPrevTrackData } = useContext(GlobalContext);
+  const { loading, setLoading } = useContext(GlobalContext);
 
   const { id } = useParams();
 
@@ -119,7 +120,9 @@ const Exercise = ({ exercise }) => {
     if (exercise.set > lastSet) lastSet = exercise.set;
   });
 
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <div className="exercise-container">
       <div className="title-container">
         <p className="exercise-title">
