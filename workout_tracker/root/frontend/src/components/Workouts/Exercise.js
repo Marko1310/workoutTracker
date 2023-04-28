@@ -9,6 +9,7 @@ import trackServices from '../../services/trackServices';
 // components
 import Set from './Set';
 import Loading from '../Loading/Loading';
+import History from './History';
 
 // css
 import './Exercise.css';
@@ -154,6 +155,8 @@ const Exercise = ({ exercise }) => {
             />
           );
         })}
+      <History workout_id={id} exercise_id={exercise.exercise_id} exercise_name={exercise.exercise_name} />
+
       <button onClick={(e) => handleNewSet(e)} className="addSetBtn">
         + Add Set
       </button>

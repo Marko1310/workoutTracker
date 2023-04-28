@@ -4,7 +4,6 @@ const getCurrentTrackData = (workout_id) => {
   return api
     .get(`/api/auth/splits/workouts/exercises/currentData/${workout_id}`)
     .then((data) => {
-      console.log(data);
       return data.data;
     })
     .catch((error) => {
@@ -34,10 +33,22 @@ const addTrackData = async (workout_id, currentTrackData) => {
     });
 };
 
+const getHistoryTrackData = async (workout_id, exercise_id) => {
+  return api
+    .post(`/api/auth/splits/workouts/history/${workout_id}`, { exercise_id })
+    .then((data) => {
+      return data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
 const trackServices = {
   getCurrentTrackData,
   getPrevTrackData,
   addTrackData,
+  getHistoryTrackData,
 };
 
 export default trackServices;
