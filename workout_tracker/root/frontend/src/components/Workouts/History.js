@@ -7,7 +7,7 @@ import trackServices from '../../services/trackServices';
 // css
 import './History.css';
 
-const History = ({ workout_id, exercise_id, exercise_name, isHistoryWindowOpen }) => {
+const History = ({ workout_id, exercise_id, exercise_name, isHistoryWindowOpen, setIsHistoryWindowOpen }) => {
   const [historyData, setHistoryData] = useState([]);
 
   useEffect(() => {
@@ -17,10 +17,15 @@ const History = ({ workout_id, exercise_id, exercise_name, isHistoryWindowOpen }
   }, [exercise_id, workout_id]);
 
   return (
-    historyData.length > 0 &&
+    // historyData.length > 0 &&
     isHistoryWindowOpen && (
       <div className="history-container">
-        <p className="history-exercise-title">{exercise_name}</p>
+        <div className="history-title-container">
+          <p className="history-exercise-title">{exercise_name}</p>
+          <p className="history-close" onClick={() => setIsHistoryWindowOpen(false)}>
+            x
+          </p>
+        </div>
         {historyData.map((el) => {
           return (
             <div className="history-data-container">

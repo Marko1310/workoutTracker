@@ -145,6 +145,7 @@ const WorkoutSplit = () => {
           exercise_id={currentExercise.exercise_id}
           exercise_name={currentExercise.exercise_name}
           isHistoryWindowOpen={isHistoryWindowOpen}
+          setIsHistoryWindowOpen={setIsHistoryWindowOpen}
         />
       </div>
     </div>

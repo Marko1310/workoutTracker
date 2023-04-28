@@ -1,5 +1,5 @@
 // React
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 // services
@@ -9,9 +9,14 @@ import trackServices from '../../services/trackServices';
 // components
 import Set from './Set';
 import Loading from '../Loading/Loading';
+import EditMenu from './EditMenu';
 
 // css
 import './Exercise.css';
+
+// icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 
 // Context
 import { GlobalContext } from '../../context/GlobalContext';
@@ -22,6 +27,8 @@ const Exercise = ({ exercise, setIsHistoryWindowOpen, isHistoryWindowOpen, curre
   const { currentTrackData, setCurrentTrackData } = useContext(GlobalContext);
   const { setPrevTrackData } = useContext(GlobalContext);
   const { loading, setLoading } = useContext(GlobalContext);
+
+  const [isEditMenuOpen, setIsEditMenuOpen] = useState(false);
 
   const { id } = useParams();
 
@@ -85,6 +92,8 @@ const Exercise = ({ exercise, setIsHistoryWindowOpen, isHistoryWindowOpen, curre
           console.log(error);
           setLoading(false);
         });
+    } else {
+      setLoading(false);
     }
     e.stopPropagation();
   };
@@ -124,6 +133,7 @@ const Exercise = ({ exercise, setIsHistoryWindowOpen, isHistoryWindowOpen, curre
     <Loading />
   ) : (
     <div className="exercise-container">
+      <EditMenu isEditMenuOpen={isEditMenuOpen} setIsEditMenuOpen={setIsEditMenuOpen} />
       <div className="title-container">
         <p
           onClick={() => {
@@ -134,8 +144,8 @@ const Exercise = ({ exercise, setIsHistoryWindowOpen, isHistoryWindowOpen, curre
         >
           {exercise.exercise_name} ({exercise.goal_sets} x {exercise.goal_reps})
         </p>
-        <p onClick={(e) => handleDeleteExercise(e, id, exercise.exercise_id)} className="delete-exercise">
-          Delete
+        <p onClick={(e) => setIsEditMenuOpen(true)} className="delete-exercise">
+          <FontAwesomeIcon icon={faEllipsis} style={{ color: '#000000', fontSize: '1.2rem' }} className="menu-bar" />
         </p>
       </div>
       <div className="exercise-navbar">

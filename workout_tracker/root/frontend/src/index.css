@@ -121,6 +121,7 @@ main {
   filter: blur(5px);
   display: block;
   pointer-events: none;
+  overflow-y: hidden;
 }
 
 .loading {

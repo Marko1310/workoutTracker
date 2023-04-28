@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   width: 20rem;
-  padding: 2rem;
+  padding: 1rem;
   max-height: 80vh;
   overflow-y: auto;
 
@@ -13,6 +13,26 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.history-title-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.history-close {
+  font-size: 1.2rem;
+  font-weight: 600;
+  transition: all 0.4s;
+  color: #d42c1d;
+  cursor: pointer;
+}
+
+.history-close:hover {
+  filter: brightness(0.95);
+  transition: all 0.2s;
 }
 
 .notblurred {

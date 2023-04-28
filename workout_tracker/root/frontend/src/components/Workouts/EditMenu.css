@@ -1,29 +1,30 @@
-.popmenu {
-  position: fixed;
+.editMenu {
+  position: absolute;
   top: 0;
   right: 0;
   background-color: white;
-  min-width: 250px;
+  min-width: 200px;
   z-index: 10;
-  padding: 25px;
-  transition: transform 0.2s;
+  padding: 15px;
+  /* transition: transform 0.2s; */
+  border-style: solid;
 }
 
 .open {
-  transform: translateX(0%);
+  visibility: visible;
 }
 
 .close {
-  transform: translateX(100%);
+  visibility: hidden;
 }
 
-.popmenu-tags-container {
+/* .popmenu-tags-container {
   margin-top: 50px;
   display: flex;
   flex-direction: column;
-}
+} */
 
-.popmenu-tags {
+/* .popmenu-tags {
   display: flex;
   margin-bottom: 10px;
   align-items: center;
@@ -41,16 +42,16 @@
   background-color: rgba(214, 214, 214, 0.3);
   border-radius: 4px;
   transition: 0.3s ease-in-out;
-}
+} */
 
 .x-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin-bottom: 20px;
   align-items: center;
 }
 
-.x {
-  height: 15px;
+.x-edit {
+  height: 10px;
   cursor: pointer;
 }
