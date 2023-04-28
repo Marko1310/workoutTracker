@@ -72,15 +72,6 @@
   font-weight: 500;
 }
 
-.exercise-title {
-  padding-left: 1rem;
-  padding-top: 1rem;
-  color: rgb(16, 172, 224);
-  font-weight: 600;
-  margin-bottom: 0;
-  font-size: 1rem;
-}
-
 .delete-exercise {
   padding-top: 1rem;
   margin-bottom: 0;

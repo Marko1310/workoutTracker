@@ -5,7 +5,8 @@
   background-color: white;
   min-width: 100px;
   z-index: 10;
-  padding: 15px;
+  padding: 15px 10px 20px 10px;
+
   transition: opacity 0.8s ease;
   border-style: solid;
 }
@@ -13,6 +14,9 @@
 .edit-tags-container {
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .delete-exercise {
@@ -20,8 +24,10 @@
   margin-bottom: 0;
   font-size: 0.9rem;
   color: #d42c1d;
-  font-weight: 600;
+  font-weight: 400;
   transition: all 0.4s;
+  border-bottom-style: solid;
+  border-color: rgb(198, 198, 198);
 }
 
 .delete-exercise:hover {
@@ -34,8 +40,10 @@
   margin-bottom: 0;
   font-size: 0.9rem;
   color: #000000;
-  font-weight: 600;
+  font-weight: 400;
   transition: all 0.4s;
+  border-bottom-style: solid;
+  border-color: rgb(198, 198, 198);
 }
 .history-exercise:hover {
   filter: brightness(0.8);
