@@ -48,13 +48,13 @@ const WorkoutSplitGrid = () => {
   }, [user, navigate, setLoading, setSplits]);
 
   useEffect(() => {
-    console.log(splits.length);
     if (!loadingSplits && splits.length === 0) {
       setHelpModalOpen(true);
+      setLoading(false);
     } else if (!loadingSplits && splits.length !== 0) {
       setHelpModalOpen(false);
+      setLoading(false);
     }
-    setLoading(false);
   }, [splits, loadingSplits, setLoading]);
 
   const changeRoute = (id) => {

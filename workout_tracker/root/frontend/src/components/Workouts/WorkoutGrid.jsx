@@ -37,25 +37,26 @@ const WorkoutGrid = () => {
   const { split_id } = useParams();
 
   useEffect(() => {
-    setLoading(true);
     if (!user) {
       navigate('/');
       return;
     }
+    setLoading(true);
     workoutServices.getWorkouts(split_id).then((data) => {
       setWorkouts(data);
       setLoadingWorkouts(false);
     });
-  }, [navigate, setLoading, setWorkouts, split_id, user]);
+  }, [navigate, setLoading, setWorkouts, user]);
 
   useEffect(() => {
     if (!loadingWorkouts && workouts.length === 0) {
       setHelpModalOpen(true);
+      setLoading(false);
     } else if (!loadingWorkouts && workouts.length !== 0) {
       setHelpModalOpen(false);
+      setLoading(false);
     }
-    setLoading(false);
-  }, [workouts, loadingWorkouts]);
+  }, [workouts, loadingWorkouts, setLoading]);
 
   // When card clicked -> change route:
   const changeRoute = function (workout_id) {
