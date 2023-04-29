@@ -4,20 +4,27 @@ import { useEffect, useState } from 'react';
 // services
 import trackServices from '../../services/trackServices';
 
+// components
+import Loading from '../Loading/Loading';
+
 // css
 import './History.css';
 
 const History = ({ workout_id, exercise_id, exercise_name, isHistoryWindowOpen, setIsHistoryWindowOpen }) => {
   const [historyData, setHistoryData] = useState([]);
+  const [historyLoading, setHistoryLoading] = useState(false);
 
   useEffect(() => {
+    setHistoryLoading(true);
     trackServices.getHistoryTrackData(workout_id, exercise_id).then((data) => {
       setHistoryData(data.data.slice(0, -1));
+      setHistoryLoading(false);
     });
   }, [exercise_id, workout_id]);
 
   return (
-    isHistoryWindowOpen && (
+    isHistoryWindowOpen &&
+    !historyLoading && (
       <div className="history-container">
         <div className="history-title-container">
           <p className="history-exercise-title">{exercise_name}</p>
