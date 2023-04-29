@@ -35,9 +35,9 @@ const History = ({ workout_id, exercise_id, exercise_name, isHistoryWindowOpen, 
         {historyData.length === 0 ? (
           <p>No previous data</p>
         ) : (
-          historyData.map((el) => {
+          historyData.map((el, index) => {
             return (
-              <div className="history-data-container">
+              <div key={index} className="history-data-container">
                 <div className="history-dayDate-container">
                   <p className="history-day">Workout #{el.workout_day}</p>
                   <p className="history-date">Date: {el.trackdata_history[0].date.slice(0, 10)}</p>
