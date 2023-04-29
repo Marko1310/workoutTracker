@@ -7,13 +7,13 @@ import { useParams } from 'react-router-dom';
 import workoutServices from '../../services/workoutServices.js';
 
 // Components
-import NewWorkoutModal from './NewWorkoutModal.js';
-import AddWorkoutBtn from './AddWorkoutBtn.js';
-import HelpModal from '../HelpModal/HelpModal';
-import Loading from '../Loading/Loading';
+import NewWorkoutModal from './NewWorkoutModal.jsx';
+import AddWorkoutBtn from './AddWorkoutBtn.jsx';
+import HelpModal from '../HelpModal/HelpModal.jsx';
+import Loading from '../Loading/Loading.jsx';
 
 // Context
-import { GlobalContext } from '../../context/GlobalContext.js';
+import { GlobalContext } from '../../context/GlobalContext.jsx';
 
 // css
 import './WorkoutGrid.css';

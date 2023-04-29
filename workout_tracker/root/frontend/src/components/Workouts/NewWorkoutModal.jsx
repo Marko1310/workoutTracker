@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import workoutServices from '../../services/workoutServices.js';
 
 // Context
-import { GlobalContext } from '../../context/GlobalContext';
+import { GlobalContext } from '../../context/GlobalContext.jsx';
 
 // css
 import './NewWorkoutModal.css';

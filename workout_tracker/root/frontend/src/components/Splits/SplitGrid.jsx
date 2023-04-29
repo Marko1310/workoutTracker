@@ -7,12 +7,12 @@ import splitServices from '../../services/splitServices';
 
 // Components
 import AddSplitBtn from './AddSplitBtn';
-import NewSplit from './NewSplitModal.js';
+import NewSplit from './NewSplitModal.jsx';
 import HelpModal from '../HelpModal/HelpModal';
 import Loading from '../Loading/Loading';
 
 // Context
-import { GlobalContext } from '../../context/GlobalContext.js';
+import { GlobalContext } from '../../context/GlobalContext.jsx';
 
 // css
 import './SplitGrid.css';
