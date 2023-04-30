@@ -172,6 +172,7 @@ function Login() {
             </p>
           </div>
         )}
+        <p className="credits">© 2023 Marko Čabo. All rights reserved.</p>
       </form>
     </div>
   );

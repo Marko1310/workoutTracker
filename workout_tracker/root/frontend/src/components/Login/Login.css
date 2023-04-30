@@ -136,9 +136,14 @@
 
 .error {
   color: #d63012;
-  /* height: 1rem; */
   margin-bottom: 0.5;
   margin-top: 0;
+}
+
+.credits {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 1rem;
 }
 
 @media all and (max-width: 768px) {
