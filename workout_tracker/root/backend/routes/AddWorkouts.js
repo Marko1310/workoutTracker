@@ -164,7 +164,6 @@ router.post('/split/workout/exercise/track', requiresAuth, async (req, res) => {
       queryValues,
     );
     await pool.query(query);
-    console.log(query);
 
     res.json({ success: true, updatedRows: currentTrackData });
   } catch (err) {

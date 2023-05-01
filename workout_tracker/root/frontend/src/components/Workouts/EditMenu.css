@@ -1,16 +1,3 @@
-/* .editMenu {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: white;
-  min-width: 100px;
-  z-index: 10;
-  padding: 15px 10px 20px 10px;
-
-  transition: opacity 0.8s ease;
-  border-style: solid;
-} */
-
 .editMenu {
   position: absolute;
   top: 10px;
@@ -47,7 +34,6 @@
   transition: all 0.4s;
   border-bottom-style: solid;
   border-color: rgb(198, 198, 198);
-  /* height: 20px; */
 }
 
 .history-exercise:hover {
