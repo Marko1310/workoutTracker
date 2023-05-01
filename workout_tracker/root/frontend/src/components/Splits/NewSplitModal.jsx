@@ -43,7 +43,9 @@ const NewWorkoutSplit = () => {
     <div className={`newSplit-container + ${isModalOpen ? 'show' : ''}`}>
       <p className="newSplit-title">Create new workout split</p>
       <form onSubmit={(e) => handleNewSplit(e)}>
-        <label htmlFor="title">Title of the split</label>
+        <label className="label-title" htmlFor="title">
+          Title of the split
+        </label>
         <input
           onChange={(e) => setTitle(e.target.value)}
           className="newSplit-forms"
@@ -54,7 +56,9 @@ const NewWorkoutSplit = () => {
         ></input>
         {error.title ? <p className="error">{error.title}</p> : ''}
 
-        <label htmlFor="days">Number of days in a week</label>
+        <label className="label-title" htmlFor="days">
+          Number of days in a week
+        </label>
 
         <select onChange={(e) => setDays(e.target.value)} className="newSplit-forms">
           <option name=""></option>

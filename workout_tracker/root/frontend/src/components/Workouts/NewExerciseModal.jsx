@@ -51,7 +51,9 @@ const NewExerciseModal = ({ successMsg }) => {
     <div className={`newExercise-container ${isModalOpen && !successMsg ? 'show' : ''}`}>
       <p className="newExercise-title">Add new exercise</p>
       <form onSubmit={(e) => handleNewExercise(e)}>
-        <label htmlFor="title">Title of the exercise</label>
+        <label className="label-title" htmlFor="title">
+          Title of the exercise
+        </label>
         <input
           onChange={(e) => setTitle(e.target.value)}
           className="forms"
@@ -62,7 +64,9 @@ const NewExerciseModal = ({ successMsg }) => {
         ></input>
         {error.title ? <p className="error">{error.title}</p> : ''}
 
-        <label htmlFor="sets">Number of goal sets</label>
+        <label className="label-title" htmlFor="sets">
+          Number of goal sets
+        </label>
         <input
           onChange={(e) => setGoal_sets(e.target.value)}
           className="forms"
@@ -73,7 +77,9 @@ const NewExerciseModal = ({ successMsg }) => {
         ></input>
         {error.sets ? <p className="error">{error.sets}</p> : ''}
 
-        <label htmlFor="reps">Number of goal reps</label>
+        <label className="label-title" htmlFor="reps">
+          Number of goal reps
+        </label>
         <input
           onChange={(e) => setGoal_reps(e.target.value)}
           className="forms"

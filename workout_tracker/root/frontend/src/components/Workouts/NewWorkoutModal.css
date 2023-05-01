@@ -80,3 +80,8 @@
 select {
   padding-right: 1rem;
 }
+
+.label-title {
+  float: left;
+  text-align: right;
+}

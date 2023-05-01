@@ -153,8 +153,8 @@ const Exercise = ({ exercise, setIsHistoryWindowOpen, isHistoryWindowOpen, curre
         <p className="exercise-title">
           {exercise.exercise_name} ({exercise.goal_sets} x {exercise.goal_reps})
         </p>
-        <div onClick={(e) => setIsEditMenuOpen(true)} className="three-dots">
-          <FontAwesomeIcon icon={faEllipsis} style={{ color: '#000000', fontSize: '1.2rem' }} className="menu-bar" />
+        <div onClick={() => setIsEditMenuOpen(true)}>
+          <FontAwesomeIcon icon={faEllipsis} style={{ color: '#000000', fontSize: '1.2rem' }} className="three-dots" />
         </div>
       </div>
       <div className="exercise-navbar">

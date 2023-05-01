@@ -45,7 +45,9 @@ const NewWorkoutModal = () => {
     <div className={`newWorkout-container ${isModalOpen ? 'show' : ''}`}>
       <p className="newWorkout-title">Add new workout</p>
       <form onSubmit={(e) => handleNewWorkout(e)}>
-        <label htmlFor="newWorkout-title">Title of the workout</label>
+        <label className="label-title" htmlFor="newWorkout-title">
+          Title of the workout
+        </label>
         <input
           onChange={(e) => setTitle(e.target.value)}
           className="forms"
