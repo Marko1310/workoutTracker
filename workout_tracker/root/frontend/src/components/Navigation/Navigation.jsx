@@ -32,7 +32,6 @@ const Navigation = () => {
   // component state
   const [navigationTitle, setNavigationTitle] = useState('');
 
-  // FIX LATER!!!!
   useEffect(() => {
     if (currentRoute.includes('splits')) setNavigationTitle('Workout Splits');
     else if (currentRoute.includes('workouts')) setNavigationTitle('Workouts');
