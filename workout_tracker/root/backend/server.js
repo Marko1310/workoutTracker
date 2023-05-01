@@ -24,7 +24,7 @@ const addWorkoutRoute = require('./routes/AddWorkouts');
 const retrieveWorkoutRoute = require('./routes/RetrieveWorkouts');
 const editWorkoutRoute = require('./routes/EditWorkouts');
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded());
