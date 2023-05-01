@@ -75,23 +75,6 @@ const Navigation = () => {
       <Popmenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} handleLogout={handleLogout} />
     </div>
   );
-
-  // return (
-  //   <div className="navigation-container">
-  //     <div className="user">
-  //       <img className="navigation-logo" src={logo} alt="Logo" />
-  //       {user && <div className="navigation-user">Hello {user.name}</div>}
-  //     </div>
-  //     {user && (
-  //       <div className="links">
-  //         <NavLink to="/dashboard">Home</NavLink>
-  //         <NavLink onClick={(e) => handleLogout(e)} to="/">
-  //           Logout
-  //         </NavLink>
-  //       </div>
-  //     )}
-  //   </div>
-  // );
 };
 
 export default Navigation;
