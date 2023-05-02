@@ -27,8 +27,6 @@ const WorkoutSplitGrid = () => {
   const { loading, setLoading } = useContext(GlobalContext);
   const { splits, setSplits } = useContext(GlobalContext);
 
-  // const { splits, setSplits } = useContext(GlobalContext);
-
   // component state
   const [loadingSplits, setLoadingSplits] = useState(true);
   const [helpModalOpen, setHelpModalOpen] = useState(false);
@@ -59,7 +57,8 @@ const WorkoutSplitGrid = () => {
 
   const changeRoute = (id) => {
     setLoading(true);
-    navigate(`/workouts/${id}`);
+    // navigate(`/workouts/${id}`);
+    navigate(`/splits/${id}/workouts`);
   };
 
   const handleDelete = (e, split_id) => {

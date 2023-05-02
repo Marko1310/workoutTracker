@@ -4,7 +4,7 @@
 }
 
 .text-container {
-  color: white;
+  color: #000000;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -15,6 +15,6 @@
 }
 
 .backTo {
-  color: #fff;
+  color: #000000;
   margin-top: 2rem;
 }
