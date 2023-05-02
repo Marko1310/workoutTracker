@@ -10,7 +10,7 @@ app.use(cookieParser());
 app.use(
   cors({
     credentials: true,
-    origin: ['https://workout-tracker-marko.netlify.app', 'http://localhost:3000'],
+    origin: ['https://workout-tracker-marko.netlify.app', 'http://localhost:3000', 'https://www.uptimerobot.com'],
   }),
 );
 
