@@ -79,9 +79,7 @@ function Login() {
     setForm(form);
   };
 
-  return loading ? (
-    <Loading />
-  ) : (
+  return (
     <div className="login-container">
       <div className="image-container">
         <img
@@ -156,7 +154,19 @@ function Login() {
           {errors && form === 'signup' && <p className="error">{errors.existing}</p>}
         </div>
 
-        <button className="login-button">{form === 'login' ? 'Login' : 'Register'}</button>
+        <button
+          className="login-button"
+          style={{
+            backgroundColor: loading ? '#bbbcbc' : '',
+            cursor: loading ? 'not-allowed' : 'pointer',
+            ':hover': {
+              backgroundColor: '#2c2d2d',
+              cursor: loading ? 'not-allowed' : 'pointer',
+            },
+          }}
+        >
+          {loading ? 'Loading...' : form === 'login' ? 'Login' : 'Register'}
+        </button>
         {form === 'login' ? (
           <div className="login-footer">
             <p>Not a member? </p>
