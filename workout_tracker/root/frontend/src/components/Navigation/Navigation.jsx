@@ -8,6 +8,7 @@ import { GlobalContext } from '../../context/GlobalContext';
 
 // services
 import userServices from '../../services/userServices';
+import navigationServices from '../../services/navigationServices';
 
 // components
 import Popmenu from './Popmenu';
@@ -27,16 +28,27 @@ const Navigation = () => {
 
   // current location
   const location = useLocation();
-  const currentRoute = location.pathname;
 
   // component state
   const [navigationTitle, setNavigationTitle] = useState('');
 
   useEffect(() => {
-    if (currentRoute.includes('splits')) setNavigationTitle('Workout Splits');
-    else if (currentRoute.includes('workouts')) setNavigationTitle('Workouts');
-    else if (currentRoute.includes('workout')) setNavigationTitle('Workout');
-  }, [currentRoute]);
+    const path = location.pathname.split('/');
+    if (path.length === 2 && path[1] === 'splits') {
+      setNavigationTitle('Workout Splits');
+    } else if (path.length === 4 && path[1] === 'splits') {
+      const splitId = path[2];
+      navigationServices.getSplitName(splitId).then((data) => {
+        setNavigationTitle(data.split_name);
+      });
+    } else if (path.length === 5 && path[1] === 'splits' && path[3] === 'workouts') {
+      const splitId = path[2];
+      const workoutId = path[4];
+      navigationServices.getWorkoutName(splitId, workoutId).then((data) => {
+        setNavigationTitle(data.workout_name);
+      });
+    }
+  }, [location]);
 
   const handleLogout = (e) => {
     e.preventDefault();

@@ -57,8 +57,7 @@ const WorkoutSplitGrid = () => {
 
   const changeRoute = (id) => {
     setLoading(true);
-    // navigate(`/workouts/${id}`);
-    navigate(`/splits/${id}/workouts`);
+    navigate(`/splits/${id}/`);
   };
 
   const handleDelete = (e, split_id) => {

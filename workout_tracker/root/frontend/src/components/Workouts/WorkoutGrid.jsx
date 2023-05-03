@@ -60,7 +60,7 @@ const WorkoutGrid = () => {
 
   // When card clicked -> change route:
   const changeRoute = function (workout_id) {
-    navigate(`/workout/${workout_id}`);
+    navigate(`/splits/${split_id}/workouts/${workout_id}`);
   };
 
   // Delete workout
