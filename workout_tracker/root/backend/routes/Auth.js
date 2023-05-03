@@ -49,12 +49,9 @@ router.post('/signup', async (req, res) => {
 
     res.cookie('access-token', token, {
       expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-      // httpOnly: true,
-      // secure: false,
-      // sameSite: 'none',
-      // httpOnly: true,
-      // secure: false,
-      // sameSite: 'none',
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
     });
 
     const userCredentials = {
@@ -95,13 +92,9 @@ router.post('/login', async (req, res) => {
 
     res.cookie('access-token', token, {
       expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-
-      // httpOnly: true,
-      // secure: true,
-      // sameSite: 'none',
-      // httpOnly: true,
-      // secure: false,
-      // sameSite: 'none',
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
     });
 
     // return everything except the password
