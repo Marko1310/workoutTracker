@@ -3,7 +3,7 @@ const pool = require('../databse/db');
 // @route   POST /api/splits/new
 // @desc    Create new split
 // @access  Private
-const newSplit = function (user_id, title, days) {
+const newSplit = async function (user_id, title, days) {
   const date = new Date();
 
   if (!title) {
@@ -14,79 +14,64 @@ const newSplit = function (user_id, title, days) {
     return res.status(400).json({ days: 'Days field should be between 1 and 7' });
   }
 
-  const split = pool.query('INSERT INTO splits (split_name, user_id, days, date) VALUES ($1, $2, $3, $4) RETURNING *', [
-    title,
-    user_id,
-    days,
-    date,
-  ]);
+  const split = await pool.query(
+    'INSERT INTO splits (split_name, user_id, days, date) VALUES ($1, $2, $3, $4) RETURNING *',
+    [title, user_id, days, date],
+  );
   return split.rows;
 };
 
 // @route   POST /api/split/workout/new
 // @desc    Create new workout in the workout split
 // @access  Private
-router.post('/split/workout/new', requiresAuth, async (req, res) => {
-  try {
-    user_id = req.user.id;
-    const date = new Date();
-    const { title, split_id } = req.body;
 
-    if (!title) {
-      return res.status(400).json({ title: 'Title field can not be empty' });
-    }
+const newWorkout = async function (user_id, title, split_id) {
+  const date = new Date();
 
-    const isValidSplitId = await databaseCheck.checkSplitId(split_id, user_id);
-    if (isValidSplitId === 0) {
-      return res.status(400).send('Unathorized');
-    }
-
-    const workout = await pool.query(
-      'INSERT INTO workouts (workout_name, date, split_id, user_id) VALUES ($1, $2, $3, $4) RETURNING *',
-      [title, date, split_id, user_id],
-    );
-    res.json(workout.rows);
-  } catch (err) {
-    return res.status(500).send(err.message);
+  if (!title) {
+    return res.status(400).json({ title: 'Title field can not be empty' });
   }
-});
+
+  const isValidSplitId = await databaseCheck.checkSplitId(split_id, user_id);
+  if (isValidSplitId === 0) {
+    return res.status(400).send('Unathorized');
+  }
+
+  const workout = await pool.query(
+    'INSERT INTO workouts (workout_name, date, split_id, user_id) VALUES ($1, $2, $3, $4) RETURNING *',
+    [title, date, split_id, user_id],
+  );
+  return workout.rows;
+};
 
 // @route   POST /api/split/workout/exercise/new
 // @desc    Create new exercise in the workout split
 // @access  Private
-router.post('/split/workout/exercise/new', requiresAuth, async (req, res) => {
-  try {
-    user_id = req.user.id;
-    const date = new Date();
-    const { title, goal_sets, goal_reps, workout_id } = req.body;
-
-    if (!title) {
-      return res.status(400).json({ title: 'Title field can not be empty' });
-    }
-
-    if (goal_sets < 1) {
-      return res.status(400).json({ sets: 'Number of sets must be greater then 0' });
-    }
-
-    if (goal_reps < 1) {
-      return res.status(400).json({ reps: 'Number of reps must be greater then 0' });
-    }
-
-    const isValidWorkoutId = await databaseCheck.checkWorkoutId(workout_id, user_id);
-    if (isValidWorkoutId === 0) {
-      return res.status(400).send('Unathorized');
-    }
-
-    const exercise = await pool.query(
-      'INSERT INTO exercises (exercise_name, goal_sets, goal_reps, date, workout_id, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-      [title, goal_sets, goal_reps, date, workout_id, user_id],
-    );
-
-    res.json(exercise.rows);
-  } catch (err) {
-    return res.status(500).send(err.message);
+const newExercise = async function (user_id, title, goal_sets, goal_reps, workout_id) {
+  if (!title) {
+    return res.status(400).json({ title: 'Title field can not be empty' });
   }
-});
+
+  if (goal_sets < 1) {
+    return res.status(400).json({ sets: 'Number of sets must be greater then 0' });
+  }
+
+  if (goal_reps < 1) {
+    return res.status(400).json({ reps: 'Number of reps must be greater then 0' });
+  }
+
+  const isValidWorkoutId = await databaseCheck.checkWorkoutId(workout_id, user_id);
+  if (isValidWorkoutId === 0) {
+    return res.status(400).send('Unathorized');
+  }
+
+  const exercise = await pool.query(
+    'INSERT INTO exercises (exercise_name, goal_sets, goal_reps, date, workout_id, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+    [title, goal_sets, goal_reps, date, workout_id, user_id],
+  );
+
+  return exercise.rows;
+};
 
 // @route   POST /api/split/workout/exercise/set
 // @desc    Add new set to a given exercises of a certain workout
