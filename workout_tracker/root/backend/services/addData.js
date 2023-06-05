@@ -77,69 +77,55 @@ const newExercise = async function (user_id, title, goal_sets, goal_reps, workou
 // @desc    Add new set to a given exercises of a certain workout
 // @access  Private
 
-router.post('/split/workout/exercise/set/new', requiresAuth, async (req, res) => {
-  try {
-    user_id = req.user.id;
-    const date = new Date();
-    const { exercise_id, workout_id, day } = req.body;
+// const addSet = function (user_id, exercise_id, workout_id, day) {
+//     const date = new Date();
 
-    const checkExerciseId = await pool.query('SELECT * FROM exercises WHERE exercise_id = $1 AND user_id = $2', [
-      exercise_id,
-      user_id,
-    ]);
+//     const checkExerciseId = await pool.query('SELECT * FROM exercises WHERE exercise_id = $1 AND user_id = $2', [
+//       exercise_id,
+//       user_id,
+//     ]);
 
-    if (checkExerciseId.rows.length === 0) {
-      return res.status(400).send('Unathorized');
-    }
+//     if (checkExerciseId.rows.length === 0) {
+//       return res.status(400).send('Unathorized');
+//     }
 
-    const currentWorkoutDay = await pool.query('SELECT day FROM workouts WHERE workout_id = $1', [workout_id]);
+//     const currentWorkoutDay = await pool.query('SELECT day FROM workouts WHERE workout_id = $1', [workout_id]);
 
-    const lastSet = await pool.query(
-      'SELECT MAX(set) FROM track WHERE exercise_id = $1 AND user_id = $2 AND workout_day = $3;',
-      [exercise_id, user_id, day],
-    );
+//     const lastSet = await pool.query(
+//       'SELECT MAX(set) FROM track WHERE exercise_id = $1 AND user_id = $2 AND workout_day = $3;',
+//       [exercise_id, user_id, day],
+//     );
 
-    if (lastSet.rows[0].max) {
-      let nextSet = lastSet.rows[0].max + 1;
-      const insertSet = await pool.query(
-        'INSERT INTO track (set, weight, reps, date, exercise_id, user_id, workout_id, workout_day) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
-        [nextSet, 0, 0, date, exercise_id, user_id, workout_id, currentWorkoutDay.rows[0].day],
-      );
-      res.json(insertSet.rows);
-    } else {
-      const insertSet = await pool.query(
-        'INSERT INTO track (set, weight, reps, date, exercise_id, user_id, workout_id, workout_day) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
-        [1, 0, 0, date, exercise_id, user_id, workout_id, currentWorkoutDay.rows[0].day],
-      );
-      res.json(insertSet.rows);
-    }
-  } catch (err) {
-    return res.status(500).send(err.message);
-  }
-});
+//     if (lastSet.rows[0].max) {
+//       let nextSet = lastSet.rows[0].max + 1;
+//       const insertSet = await pool.query(
+//         'INSERT INTO track (set, weight, reps, date, exercise_id, user_id, workout_id, workout_day) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
+//         [nextSet, 0, 0, date, exercise_id, user_id, workout_id, currentWorkoutDay.rows[0].day],
+//       );
+//       res.json(insertSet.rows);
+//     } else {
+//       const insertSet = await pool.query(
+//         'INSERT INTO track (set, weight, reps, date, exercise_id, user_id, workout_id, workout_day) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
+//         [1, 0, 0, date, exercise_id, user_id, workout_id, currentWorkoutDay.rows[0].day],
+//       );
+//       return insertSet.rows;
+//     }}
 
 // @route   POST /api/split/workout/exercise/track
 // @desc    Update new track data
 // @access  Private
-router.post('/split/workout/exercise/track', requiresAuth, async (req, res) => {
-  try {
-    user_id = req.user.id;
-    const { currentTrackData } = req.body;
-    const date = new Date();
+const addTrackData = function (currentTrackData) {
+  const date = new Date();
+  const queryValues = currentTrackData.map((data) => {
+    const nextDay = data.workout_day + 1;
+    return [data.set, data.reps, data.weight, req.user.id, date, data.exercise_id, nextDay, data.workout_id];
+  });
 
-    const queryValues = currentTrackData.map((data) => {
-      const nextDay = data.workout_day + 1;
-      return [data.set, data.reps, data.weight, req.user.id, date, data.exercise_id, nextDay, data.workout_id];
-    });
+  const query = format(
+    'INSERT INTO track (set, reps, weight, user_id, date, exercise_id, workout_day, workout_id) VALUES %L',
+    queryValues,
+  );
+  const updatedRows = pool.query(query);
 
-    const query = format(
-      'INSERT INTO track (set, reps, weight, user_id, date, exercise_id, workout_day, workout_id) VALUES %L',
-      queryValues,
-    );
-    await pool.query(query);
-
-    res.json({ success: true, updatedRows: currentTrackData });
-  } catch (err) {
-    return res.status(500).send(err.message);
-  }
-});
+  return updatedRows;
+};
