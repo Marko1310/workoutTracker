@@ -3,31 +3,20 @@ const pool = require('../databse/db');
 // @route   POST /api/splits/new
 // @desc    Create new split
 // @access  Private
-const newSplit = async function (user_id, title, days) {
-  const date = new Date();
-
-  if (!title) {
-    return res.status(400).json({ title: 'Title field can not be empty' });
-  }
-
-  if (days === 0 || days < 1 || days > 7) {
-    return res.status(400).json({ days: 'Days field should be between 1 and 7' });
-  }
-
-  const split = await pool.query(
-    'INSERT INTO splits (split_name, user_id, days, date) VALUES ($1, $2, $3, $4) RETURNING *',
-    [title, user_id, days, date],
-  );
-  return split.rows;
+const newSplit = async function (user_id, title, days, date) {
+  return await pool.query('INSERT INTO splits (split_name, user_id, days, date) VALUES ($1, $2, $3, $4) RETURNING *', [
+    title,
+    user_id,
+    days,
+    date,
+  ]);
 };
 
 // @route   POST /api/split/workout/new
 // @desc    Create new workout in the workout split
 // @access  Private
 
-const newWorkout = async function (user_id, title, split_id) {
-  const date = new Date();
-
+const newWorkout = async function (user_id, title, split_id, date) {
   if (!title) {
     return res.status(400).json({ title: 'Title field can not be empty' });
   }
@@ -47,7 +36,7 @@ const newWorkout = async function (user_id, title, split_id) {
 // @route   POST /api/split/workout/exercise/new
 // @desc    Create new exercise in the workout split
 // @access  Private
-const newExercise = async function (user_id, title, goal_sets, goal_reps, workout_id) {
+const newExercise = async function (user_id, title, goal_sets, goal_reps, workout_id, date) {
   if (!title) {
     return res.status(400).json({ title: 'Title field can not be empty' });
   }
@@ -77,45 +66,43 @@ const newExercise = async function (user_id, title, goal_sets, goal_reps, workou
 // @desc    Add new set to a given exercises of a certain workout
 // @access  Private
 
-// const addSet = function (user_id, exercise_id, workout_id, day) {
-//     const date = new Date();
+const addSet = async function (user_id, exercise_id, workout_id, day, date) {
+  const checkExerciseId = await pool.query('SELECT * FROM exercises WHERE exercise_id = $1 AND user_id = $2', [
+    exercise_id,
+    user_id,
+  ]);
 
-//     const checkExerciseId = await pool.query('SELECT * FROM exercises WHERE exercise_id = $1 AND user_id = $2', [
-//       exercise_id,
-//       user_id,
-//     ]);
+  if (checkExerciseId.rows.length === 0) {
+    return res.status(400).send('Unathorized');
+  }
 
-//     if (checkExerciseId.rows.length === 0) {
-//       return res.status(400).send('Unathorized');
-//     }
+  const currentWorkoutDay = await pool.query('SELECT day FROM workouts WHERE workout_id = $1', [workout_id]);
 
-//     const currentWorkoutDay = await pool.query('SELECT day FROM workouts WHERE workout_id = $1', [workout_id]);
+  const lastSet = await pool.query(
+    'SELECT MAX(set) FROM track WHERE exercise_id = $1 AND user_id = $2 AND workout_day = $3;',
+    [exercise_id, user_id, day],
+  );
 
-//     const lastSet = await pool.query(
-//       'SELECT MAX(set) FROM track WHERE exercise_id = $1 AND user_id = $2 AND workout_day = $3;',
-//       [exercise_id, user_id, day],
-//     );
-
-//     if (lastSet.rows[0].max) {
-//       let nextSet = lastSet.rows[0].max + 1;
-//       const insertSet = await pool.query(
-//         'INSERT INTO track (set, weight, reps, date, exercise_id, user_id, workout_id, workout_day) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
-//         [nextSet, 0, 0, date, exercise_id, user_id, workout_id, currentWorkoutDay.rows[0].day],
-//       );
-//       res.json(insertSet.rows);
-//     } else {
-//       const insertSet = await pool.query(
-//         'INSERT INTO track (set, weight, reps, date, exercise_id, user_id, workout_id, workout_day) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
-//         [1, 0, 0, date, exercise_id, user_id, workout_id, currentWorkoutDay.rows[0].day],
-//       );
-//       return insertSet.rows;
-//     }}
+  if (lastSet.rows[0].max) {
+    let nextSet = lastSet.rows[0].max + 1;
+    const insertSet = await pool.query(
+      'INSERT INTO track (set, weight, reps, date, exercise_id, user_id, workout_id, workout_day) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
+      [nextSet, 0, 0, date, exercise_id, user_id, workout_id, currentWorkoutDay.rows[0].day],
+    );
+    res.json(insertSet.rows);
+  } else {
+    const insertSet = await pool.query(
+      'INSERT INTO track (set, weight, reps, date, exercise_id, user_id, workout_id, workout_day) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
+      [1, 0, 0, date, exercise_id, user_id, workout_id, currentWorkoutDay.rows[0].day],
+    );
+    return insertSet.rows;
+  }
+};
 
 // @route   POST /api/split/workout/exercise/track
 // @desc    Update new track data
 // @access  Private
-const addTrackData = function (currentTrackData) {
-  const date = new Date();
+const addTrackData = async function (currentTrackData, date) {
   const queryValues = currentTrackData.map((data) => {
     const nextDay = data.workout_day + 1;
     return [data.set, data.reps, data.weight, req.user.id, date, data.exercise_id, nextDay, data.workout_id];
@@ -129,3 +116,5 @@ const addTrackData = function (currentTrackData) {
 
   return updatedRows;
 };
+
+module.exports = { newSplit, newWorkout, newExercise, addSet, addTrackData };

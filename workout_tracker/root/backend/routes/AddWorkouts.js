@@ -6,6 +6,9 @@ const databaseCheck = require('../middleware/databaseChecks');
 const pool = require('../databse/db');
 const format = require('pg-format');
 
+// services
+const addDataService = require('../services/addData');
+
 //      ADDING DATA     //
 ///////////////////////////////
 // @route   POST /api/splits/new
@@ -25,11 +28,14 @@ router.post('/split/new', requiresAuth, async (req, res) => {
       return res.status(400).json({ days: 'Days field should be between 1 and 7' });
     }
 
-    const split = await pool.query(
-      'INSERT INTO splits (split_name, user_id, days, date) VALUES ($1, $2, $3, $4) RETURNING *',
-      [title, user_id, days, date],
-    );
-    res.json(split.rows);
+    // const split = await pool.query(
+    //   'INSERT INTO splits (split_name, user_id, days, date) VALUES ($1, $2, $3, $4) RETURNING *',
+    //   [title, user_id, days, date],
+    // );
+
+    const split = await addDataService.addSet(user_id, title, days, date);
+
+    res.json(split);
   } catch (err) {
     return res.status(500).send(err.message);
   }
