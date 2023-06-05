@@ -6,6 +6,8 @@ const databaseCheck = require('../middleware/databaseChecks');
 const pool = require('../databse/db');
 const format = require('pg-format');
 
+const date = new Date();
+
 // services
 const addDataService = require('../services/addData');
 
@@ -17,24 +19,16 @@ const addDataService = require('../services/addData');
 router.post('/split/new', requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
-    const date = new Date();
     const { title, days } = req.body;
 
     if (!title) {
       return res.status(400).json({ title: 'Title field can not be empty' });
     }
-
     if (days === 0 || days < 1 || days > 7) {
       return res.status(400).json({ days: 'Days field should be between 1 and 7' });
     }
 
-    // const split = await pool.query(
-    //   'INSERT INTO splits (split_name, user_id, days, date) VALUES ($1, $2, $3, $4) RETURNING *',
-    //   [title, user_id, days, date],
-    // );
-
     const split = await addDataService.addSet(user_id, title, days, date);
-
     res.json(split);
   } catch (err) {
     return res.status(500).send(err.message);
@@ -47,7 +41,6 @@ router.post('/split/new', requiresAuth, async (req, res) => {
 router.post('/split/workout/new', requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
-    const date = new Date();
     const { title, split_id } = req.body;
 
     if (!title) {
@@ -59,10 +52,7 @@ router.post('/split/workout/new', requiresAuth, async (req, res) => {
       return res.status(400).send('Unathorized');
     }
 
-    const workout = await pool.query(
-      'INSERT INTO workouts (workout_name, date, split_id, user_id) VALUES ($1, $2, $3, $4) RETURNING *',
-      [title, date, split_id, user_id],
-    );
+    const workout = await addDataService.newWorkout(user_id, title, split_id, date);
     res.json(workout.rows);
   } catch (err) {
     return res.status(500).send(err.message);
@@ -75,7 +65,6 @@ router.post('/split/workout/new', requiresAuth, async (req, res) => {
 router.post('/split/workout/exercise/new', requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
-    const date = new Date();
     const { title, goal_sets, goal_reps, workout_id } = req.body;
 
     if (!title) {
@@ -95,10 +84,7 @@ router.post('/split/workout/exercise/new', requiresAuth, async (req, res) => {
       return res.status(400).send('Unathorized');
     }
 
-    const exercise = await pool.query(
-      'INSERT INTO exercises (exercise_name, goal_sets, goal_reps, date, workout_id, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-      [title, goal_sets, goal_reps, date, workout_id, user_id],
-    );
+    const exercise = await addDataService.newExercise(user_id, title, goal_sets, goal_reps, workout_id, date);
 
     res.json(exercise.rows);
   } catch (err) {
@@ -113,7 +99,6 @@ router.post('/split/workout/exercise/new', requiresAuth, async (req, res) => {
 router.post('/split/workout/exercise/set/new', requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
-    const date = new Date();
     const { exercise_id, workout_id, day } = req.body;
 
     const checkExerciseId = await pool.query('SELECT * FROM exercises WHERE exercise_id = $1 AND user_id = $2', [
@@ -158,20 +143,15 @@ router.post('/split/workout/exercise/track', requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
     const { currentTrackData } = req.body;
-    const date = new Date();
 
     const queryValues = currentTrackData.map((data) => {
       const nextDay = data.workout_day + 1;
       return [data.set, data.reps, data.weight, req.user.id, date, data.exercise_id, nextDay, data.workout_id];
     });
 
-    const query = format(
-      'INSERT INTO track (set, reps, weight, user_id, date, exercise_id, workout_day, workout_id) VALUES %L',
-      queryValues,
-    );
-    await pool.query(query);
+    const updatedRows = await addDataService.addTrackData(queryValues);
 
-    res.json({ success: true, updatedRows: currentTrackData });
+    res.json({ success: true, updatedRows: updatedRows });
   } catch (err) {
     return res.status(500).send(err.message);
   }
