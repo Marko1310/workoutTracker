@@ -98,46 +98,22 @@ router.post('/split/workout/exercise/new', requiresAuth, async (req, res) => {
 router.post('/split/workout/exercise/set/new', requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
-    console.log(user_id);
-    const { exercise_id, workout_id, day } = req.body;
-    console.log(exercise_id, workout_id, day);
+    const { exercise_id, workout_id } = req.body;
 
     const checkExerciseId = await checkDatabaseService.checkExerciseId(exercise_id, user_id);
-
     if (checkExerciseId.rows.length === 0) {
       return res.status(400).send('Unathorized');
     }
 
-    // const checkExerciseId = await pool.query('SELECT * FROM exercises WHERE exercise_id = $1 AND user_id = $2', [
-    //   exercise_id,
-    //   user_id,
-    // ]);
-
-    // const currentWorkoutDay = await pool.query('SELECT day FROM workouts WHERE workout_id = $1', [workout_id]);
-
     const currentWorkoutDay = await checkDatabaseService.currentWorkoutDay(workout_id);
 
-    // const lastSet = await pool.query(
-    //   'SELECT MAX(set) FROM track WHERE exercise_id = $1 AND user_id = $2 AND workout_day = $3;',
-    //   [exercise_id, user_id, day],
-    // );
-
-    const lastSet = await checkDatabaseService.lastSet(exercise_id, user_id, day);
-
+    const lastSet = await checkDatabaseService.lastSet(exercise_id, user_id);
     if (lastSet.rows[0].max) {
       let nextSet = lastSet.rows[0].max + 1;
-      const insertSet = await pool.query(
-        'INSERT INTO track (set, weight, reps, date, exercise_id, user_id, workout_id, workout_day) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
-        [nextSet, 0, 0, date, exercise_id, user_id, workout_id, currentWorkoutDay.rows[0].day],
-      );
+      const insertSet = await addDataService.addSet(user_id, exercise_id, workout_id, date, currentWorkoutDay, nextSet);
       res.json(insertSet.rows);
     } else {
-      console.log('jeeee');
-
-      const insertSet = await pool.query(
-        'INSERT INTO track (set, weight, reps, date, exercise_id, user_id, workout_id, workout_day) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
-        [1, 0, 0, date, exercise_id, user_id, workout_id, currentWorkoutDay.rows[0].day],
-      );
+      const insertSet = await addDataService.addSet(user_id, exercise_id, workout_id, date, currentWorkoutDay);
       res.json(insertSet.rows);
     }
   } catch (err) {
