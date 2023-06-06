@@ -1,12 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const requiresAuth = require('../middleware/permission');
-const databaseCheck = require('../middleware/databaseChecks');
-const pool = require('../databse/db');
 
 // services
-const editDataService = require('../services/editData');
-const checkDatabaseService = require('../services/checkDatabase');
+const editDataService = require('../services/editDataService');
+const checkDatabaseService = require('../services/checkDatabaseService');
 
 //      EDITING DATA     //
 ///////////////////////////////
@@ -102,14 +100,12 @@ router.post('/split/workout/editDay', requiresAuth, async (req, res) => {
     user_id = req.user.id;
     const { workout_id } = req.body;
 
-    const isValidWorkoutId = await databaseCheck.checkWorkoutId(workout_id, user_id);
+    const isValidWorkoutId = await checkDatabaseService.checkWorkoutId(workout_id, user_id);
     if (isValidWorkoutId === 0) {
       return res.status(400).send('Unathorized');
     }
 
-    const updateWorkoutDay = await pool.query('UPDATE workouts SET day = day + 1 WHERE workout_id = $1 RETURNING *', [
-      workout_id,
-    ]);
+    const updateWorkoutDay = await editDataService.updateWorkoutDay(workout_id);
     res.json(updateWorkoutDay.rows);
   } catch (err) {
     return res.status(500).send(err.message);

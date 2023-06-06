@@ -3,6 +3,9 @@ const router = express.Router();
 const requiresAuth = require('../middleware/permission');
 const pool = require('../databse/db');
 
+// services
+const getDataService = require('../services/getDataService');
+
 //      RETRIEVING DATA     //
 ///////////////////////////////
 // @route   GET /api/splits/current
@@ -12,11 +15,7 @@ router.get('/splits/current', requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
 
-    const splits = await pool.query(
-      'SELECT s.split_id, s.split_name, s.days, s.date, array_agg(w.workout_name) FROM splits s LEFT JOIN workouts w ON w.split_id = s.split_id WHERE s.user_id = $1 GROUP BY s.split_id ORDER BY s.date',
-      [user_id],
-    );
-
+    const splits = await getDataService.getSplits(user_id);
     res.json(splits.rows);
   } catch (err) {
     return res.status(500).send(err.message);

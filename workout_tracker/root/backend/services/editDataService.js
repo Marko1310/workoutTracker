@@ -23,14 +23,8 @@ const deleteTrack = async function (exercise_id, track_id, user_id) {
   ]);
 };
 
-const addTrackData = async function (queryValues) {
-  const query = format(
-    'INSERT INTO track (set, reps, weight, user_id, date, exercise_id, workout_day, workout_id) VALUES %L',
-    queryValues,
-  );
-  const updatedRows = pool.query(query);
-
-  return updatedRows;
+const updateWorkoutDay = async function (workout_id) {
+  return await pool.query('UPDATE workouts SET day = day + 1 WHERE workout_id = $1 RETURNING *', [workout_id]);
 };
 
-module.exports = { deleteSplit, deleteWorkout, deleteExercise, deleteTrack };
+module.exports = { deleteSplit, deleteWorkout, deleteExercise, deleteTrack, updateWorkoutDay };

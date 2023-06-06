@@ -5,8 +5,8 @@ const requiresAuth = require('../middleware/permission');
 const date = new Date();
 
 // services
-const addDataService = require('../services/addData');
-const checkDatabaseService = require('../services/checkDatabase');
+const addDataService = require('../services/addDataService');
+const checkDatabaseService = require('../services/checkDatabaseService');
 
 //      ADDING DATA     //
 ///////////////////////////////
