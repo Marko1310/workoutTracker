@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const requiresAuth = require('../middleware/permission');
-const databaseCheck = require('../middleware/databaseChecks');
-const pool = require('../databse/db');
 
 const date = new Date();
 
@@ -46,7 +44,7 @@ router.post('/split/workout/new', requiresAuth, async (req, res) => {
       return res.status(400).json({ title: 'Title field can not be empty' });
     }
 
-    const isValidSplitId = await databaseCheck.checkSplitId(split_id, user_id);
+    const isValidSplitId = await checkDatabaseService.checkSplitId(split_id, user_id);
     if (isValidSplitId === 0) {
       return res.status(400).send('Unathorized');
     }
@@ -78,7 +76,7 @@ router.post('/split/workout/exercise/new', requiresAuth, async (req, res) => {
       return res.status(400).json({ reps: 'Number of reps must be greater then 0' });
     }
 
-    const isValidWorkoutId = await databaseCheck.checkWorkoutId(workout_id, user_id);
+    const isValidWorkoutId = await checkDatabaseService.checkWorkoutId(workout_id, user_id);
     if (isValidWorkoutId === 0) {
       return res.status(400).send('Unathorized');
     }
@@ -94,7 +92,6 @@ router.post('/split/workout/exercise/new', requiresAuth, async (req, res) => {
 // @route   POST /api/split/workout/exercise/set
 // @desc    Add new set to a given exercises of a certain workout
 // @access  Private
-
 router.post('/split/workout/exercise/set/new', requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
