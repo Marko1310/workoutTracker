@@ -16,9 +16,6 @@ const newWorkout = async function (user_id, title, split_id, date) {
   return workout;
 };
 
-// @route   POST /api/split/workout/exercise/new
-// @desc    Create new exercise in the workout split
-// @access  Private
 const newExercise = async function (user_id, title, goal_sets, goal_reps, workout_id, date) {
   const exercise = await pool.query(
     'INSERT INTO exercises (exercise_name, goal_sets, goal_reps, date, workout_id, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
@@ -26,10 +23,6 @@ const newExercise = async function (user_id, title, goal_sets, goal_reps, workou
   );
   return exercise;
 };
-
-// @route   POST /api/split/workout/exercise/set
-// @desc    Add new set to a given exercises of a certain workout
-// @access  Private
 
 const addSet = async function (user_id, exercise_id, workout_id, day, date) {
   const checkExerciseId = await pool.query('SELECT * FROM exercises WHERE exercise_id = $1 AND user_id = $2', [
