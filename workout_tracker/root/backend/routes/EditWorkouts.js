@@ -4,6 +4,10 @@ const requiresAuth = require('../middleware/permission');
 const databaseCheck = require('../middleware/databaseChecks');
 const pool = require('../databse/db');
 
+// services
+const editDataService = require('../services/editData');
+const checkDatabaseService = require('../services/checkDatabase');
+
 //      EDITING DATA     //
 ///////////////////////////////
 // @route   DELETE /api/split/delete
@@ -14,16 +18,13 @@ router.delete('/split/delete', requiresAuth, async (req, res) => {
     user_id = req.user.id;
     const { split_id } = req.body;
 
-    const isValidSplitId = await databaseCheck.checkSplitId(split_id, user_id);
+    const isValidSplitId = await checkDatabaseService.checkSplitId(split_id, user_id);
     if (isValidSplitId === 0) {
       return res.status(400).send('Unathorized');
     }
 
-    const deletedSplit = await pool.query('DELETE FROM splits WHERE split_id = $1 AND user_id = $2 RETURNING *', [
-      split_id,
-      user_id,
-    ]);
-    res.json(deletedSplit.rows);
+    const deleteSplit = await editDataService.deleteSplit(split_id, user_id);
+    res.json(deleteSplit.rows);
   } catch (err) {
     return res.status(500).send(err.message);
   }
