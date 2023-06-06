@@ -4,28 +4,23 @@ const deleteSplit = async function (split_id, user_id) {
   return await pool.query('DELETE FROM splits WHERE split_id = $1 AND user_id = $2 RETURNING *', [split_id, user_id]);
 };
 
-const newWorkout = async function (user_id, title, split_id, date) {
-  const workout = await pool.query(
-    'INSERT INTO workouts (workout_name, date, split_id, user_id) VALUES ($1, $2, $3, $4) RETURNING *',
-    [title, date, split_id, user_id],
-  );
-  return workout;
+const deleteWorkout = async function (workout_id, user_id) {
+  return pool.query('DELETE FROM workouts WHERE workout_id = $1 AND user_id = $2 RETURNING *', [workout_id, user_id]);
 };
 
-const newExercise = async function (user_id, title, goal_sets, goal_reps, workout_id, date) {
-  const exercise = await pool.query(
-    'INSERT INTO exercises (exercise_name, goal_sets, goal_reps, date, workout_id, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-    [title, goal_sets, goal_reps, date, workout_id, user_id],
-  );
-  return exercise;
+const deleteExercise = async function (user_id, exercise_id) {
+  return await pool.query('DELETE FROM exercises WHERE exercise_id = $1 AND user_id = $2 RETURNING *', [
+    exercise_id,
+    user_id,
+  ]);
 };
 
-const addSet = async function (user_id, exercise_id, workout_id, date, currentWorkoutDay, nextSet = 1) {
-  const insertSet = await pool.query(
-    'INSERT INTO track (set, weight, reps, date, exercise_id, user_id, workout_id, workout_day) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
-    [nextSet, 0, 0, date, exercise_id, user_id, workout_id, currentWorkoutDay.rows[0].day],
-  );
-  return insertSet;
+const deleteTrack = async function (exercise_id, track_id, user_id) {
+  return await pool.query('DELETE FROM track WHERE exercise_id = $1 AND track_id = $2 AND user_id = $3 RETURNING *', [
+    exercise_id,
+    track_id,
+    user_id,
+  ]);
 };
 
 const addTrackData = async function (queryValues) {
@@ -38,4 +33,4 @@ const addTrackData = async function (queryValues) {
   return updatedRows;
 };
 
-module.exports = { deleteSplit };
+module.exports = { deleteSplit, deleteWorkout, deleteExercise, deleteTrack };
