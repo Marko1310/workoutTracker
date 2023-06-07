@@ -1,12 +1,8 @@
 const express = require('express');
 const router = express.Router();
+
+//middleware
 const requiresAuth = require('../middleware/permission');
-
-const date = new Date();
-
-// services
-const addDataService = require('../services/addDataService');
-const checkDatabaseService = require('../services/checkDatabaseService');
 
 //controllers
 const addDataController = require('../controllers/addDataController');
