@@ -15,7 +15,7 @@ router.get('/splits/:splitId/name', requiresAuth, async (req, res) => {
     user_id = req.user.id;
     const split_id = req.params.splitId;
 
-    const splitName = await retrieveNamesService(user_id, split_id);
+    const splitName = await retrieveNamesService.splitName(user_id, split_id);
 
     res.json(splitName.rows[0]);
   } catch (err) {
