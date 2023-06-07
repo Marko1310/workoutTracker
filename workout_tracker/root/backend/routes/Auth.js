@@ -3,7 +3,9 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const requiresAuth = require('../middleware/permission');
-const pool = require('../databse/db');
+
+//services
+const authService = require('../services/authService');
 
 // @route   POST /api/auth/signup
 // @desc    Create a new user
@@ -15,8 +17,8 @@ router.post('/signup', async (req, res) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     // check for an existing user
-    const existingEmail = await pool.query('SELECT * FROM users WHERE email=$1', [email]);
-    if (existingEmail.rows.length !== 0) {
+    const existingUser = await authService.existingUser(email);
+    if (existingUser.rows.length !== 0) {
       return res.status(400).json({ existing: 'There is already a user with this email' });
     }
     // check the proper name
@@ -35,14 +37,10 @@ router.post('/signup', async (req, res) => {
     }
 
     // if no errors -> create a new user
-    const user = await pool.query('INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *', [
-      name,
-      email,
-      hashedPassword,
-    ]);
+    const newUser = await authService.newUser(name, email, hashedPassword);
 
     // Set a token if registered
-    const payload = { userId: user.rows[0].id };
+    const payload = { userId: newUser.rows[0].id };
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: '7d',
     });
@@ -55,9 +53,9 @@ router.post('/signup', async (req, res) => {
     });
 
     const userCredentials = {
-      id: user.rows[0].id,
-      name: user.rows[0].name,
-      email: user.rows[0].email,
+      id: newUser.rows[0].id,
+      name: newUser.rows[0].name,
+      email: newUser.rows[0].email,
     };
     res.json(userCredentials);
   } catch (err) {
@@ -72,20 +70,20 @@ router.post('/signup', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    const existingUser = await authService.existingUser(email);
     //CHECKS
     // if user does not exist
-    if (user.rows.length === 0) {
+    if (existingUser.rows.length === 0) {
       return res.status(400).json({ error: 'Something is wrong with your credentials' });
     }
     // is password is invalid
-    const isValid = await bcrypt.compareSync(password, user.rows[0].password);
+    const isValid = await bcrypt.compareSync(password, existingUser.rows[0].password);
     if (!isValid) {
       return res.status(400).json({ error: 'Something is wrong with your credentials' });
     }
 
     //IF NO ERRORS
-    const payload = { userId: user.rows[0].id };
+    const payload = { userId: existingUser.rows[0].id };
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: '7d',
     });
@@ -99,9 +97,9 @@ router.post('/login', async (req, res) => {
 
     // return everything except the password
     const userCredentials = {
-      id: user.rows[0].id,
-      name: user.rows[0].name,
-      email: user.rows[0].email,
+      id: existingUser.rows[0].id,
+      name: existingUser.rows[0].name,
+      email: existingUser.rows[0].email,
     };
     res.json({ user: userCredentials, token: token });
   } catch (err) {
