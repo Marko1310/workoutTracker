@@ -5,6 +5,7 @@ const pool = require('../databse/db');
 
 // services
 const getDataService = require('../services/getDataService');
+const checkDatabaseService = require('../services/checkDatabaseService');
 
 //      RETRIEVING DATA     //
 ///////////////////////////////
@@ -15,8 +16,8 @@ router.get('/splits/current', requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
 
-    const splits = await getDataService.getSplits(user_id);
-    res.json(splits.rows);
+    const getSplits = await getDataService.getSplits(user_id);
+    res.json(getSplits.rows);
   } catch (err) {
     return res.status(500).send(err.message);
   }
@@ -31,12 +32,8 @@ router.get('/splits/workouts/:splitId', requiresAuth, async (req, res) => {
     const split_id = req.params.splitId;
 
     // Get user workouts
-    const workouts = await pool.query(
-      'SELECT w.workout_id, w.workout_name, w.date, w.day, array_agg(e.exercise_name) FROM workouts w LEFT JOIN exercises e ON e.workout_id = w.workout_id WHERE w.user_id = $1 AND w.split_id = $2 GROUP BY w.workout_id',
-      [user_id, split_id],
-      // "SELECT * FROM workouts WHERE user_id=$1 AND split_id = $2 ORDER BY date DESC",
-    );
-    res.json(workouts.rows);
+    const getWorkouts = await getDataService.getWorkouts(user_id, split_id);
+    res.json(getWorkouts.rows);
   } catch (err) {
     return res.status(500).send(err.message);
   }
@@ -51,11 +48,8 @@ router.get('/splits/workout/:workoutId', requiresAuth, async (req, res) => {
     const workout_id = req.params.workoutId;
 
     // Get user workouts
-    const workout = await pool.query(
-      'SELECT w.workout_id, w.workout_name, w.day FROM workouts w WHERE user_id = $1 AND workout_id = $2',
-      [user_id, workout_id],
-    );
-    res.json(workout.rows);
+    const getCurrentWorkout = await getDataService.getCurrentWorkout(user_id, workout_id);
+    res.json(getCurrentWorkout.rows);
   } catch (err) {
     return res.status(500).send(err.message);
   }
@@ -70,11 +64,8 @@ router.get('/splits/workout/trackData/:workoutId', requiresAuth, async (req, res
     const workout_id = req.params.workoutId;
 
     // Get user workouts
-    const trackData = await pool.query('SELECT * FROM track WHERE user_id = $1 AND workout_id = $2', [
-      user_id,
-      workout_id,
-    ]);
-    res.json(trackData.rows);
+    const getCurrentTrackData = await getDataService.getCurrentTrackData(user_id, workout_id);
+    res.json(getCurrentTrackData.rows);
   } catch (err) {
     return res.status(500).send(err.message);
   }
@@ -87,71 +78,24 @@ router.get('/splits/workouts/exercises/prevData/:workoutId', requiresAuth, async
   try {
     user_id = req.user.id;
     const workout_id = req.params.workoutId;
+    const currentWorkoutDay = await checkDatabaseService.currentWorkoutDay(workout_id);
 
-    const currentWorkoutDay = await pool.query('SELECT day FROM workouts WHERE workout_id = $1', [workout_id]);
-
-    // Get user exercises with tracking data from a given workout
-    // importing track data into object to attach to every exercise
-    // filter track data by workout day
-    const track_data = await pool.query(
-      "SELECT e.exercise_id, e.exercise_name, e.goal_sets, e.goal_reps, json_agg( json_build_object('track_id', t.track_id, 'set', t.set, 'reps', t.reps, 'user_id', t.user_id, 'exercise_id', t.exercise_id, 'weight', t.weight, 'workout_day', t.workout_day, 'workout_id', t.workout_id) ORDER BY t.set) AS trackData FROM exercises e LEFT JOIN track t ON e.exercise_id = t.exercise_id AND t.workout_day = $1 WHERE e.workout_id = $2 GROUP BY e.exercise_id, e.exercise_name, e.goal_sets, e.goal_reps ORDER BY e.exercise_id;",
-      [currentWorkoutDay.rows[0].day, workout_id],
-    );
-
-    res.json(track_data.rows);
+    const getPrevTrackData = await getDataService.getPrevTrackData(currentWorkoutDay, workout_id);
+    res.json(getPrevTrackData.rows);
   } catch (err) {
     return res.status(500).send(err.message);
   }
 });
 
-// @route   GET /api/splits/workouts/exercises/currentData/:workoutId
-// @desc    get user current workout
-// @access  Private
-
-// router.get(
-//   "/splits/workouts/exercises/currentData/:workoutId",
-//   requiresAuth,
-//   async (req, res) => {
-//     try {
-//       user_id = req.user.id;
-//       const workout_id = req.params.workoutId;
-
-//       const currentWorkoutDay = await pool.query(
-//         "SELECT day FROM workouts WHERE workout_id = $1",
-//         [workout_id]
-//       );
-
-//       // Get user exercises with tracking data from a given workout
-//       // importing track data into object to attach to every exercise
-//       // filter track data by workout day
-//       const track_data = await pool.query(
-//         "SELECT e.exercise_id, json_agg( json_build_object('track_id', t.track_id, 'set', t.set, 'reps', 0, 'user_id', t.user_id, 'exercise_id', t.exercise_id, 'weight', 0, 'workout_day', t.workout_day, 'workout_id', t.workout_id) ORDER BY t.set) AS trackData FROM exercises e LEFT JOIN track t ON e.exercise_id = t.exercise_id AND t.workout_day = $1 WHERE e.workout_id = $2 GROUP BY e.exercise_id ORDER BY e.exercise_id;",
-//         [currentWorkoutDay.rows[0].day, workout_id]
-//       );
-
-//       res.json(track_data.rows);
-//     } catch (err) {
-//       return res.status(500).send(err.message);
-//     }
-//   }
-// );
-
 router.get('/splits/workouts/exercises/currentData/:workoutId', requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
     const workout_id = req.params.workoutId;
+    const currentWorkoutDay = await checkDatabaseService.currentWorkoutDay(workout_id);
 
-    const currentWorkoutDay = await pool.query('SELECT day FROM workouts WHERE workout_id = $1', [workout_id]);
+    const getCurrentTrackData = await getDataService.getCurrentTrackData(workout_id, currentWorkoutDay);
 
-    // Get user exercises with tracking data from a given workout
-    // importing track data into object to attach to every exercise
-    // filter track data by workout day
-    const track_data = await pool.query(
-      'SELECT t.track_id, t.set, CAST(0 AS INTEGER) AS reps, t.user_id, t.exercise_id, CAST(0 AS INTEGER) AS weight, t.workout_day, t.workout_id FROM track t LEFT JOIN exercises e ON t.exercise_id = e.exercise_id AND e.workout_id = $1 WHERE t.workout_day = $2 ORDER BY t.track_id;',
-      [workout_id, currentWorkoutDay.rows[0].day],
-    );
-
-    res.json(track_data.rows);
+    res.json(getCurrentTrackData.rows);
   } catch (err) {
     return res.status(500).send(err.message);
   }
