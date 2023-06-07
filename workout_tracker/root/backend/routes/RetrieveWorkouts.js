@@ -58,18 +58,18 @@ router.get('/splits/workout/:workoutId', requiresAuth, async (req, res) => {
 // @route   GET /api/splits/workout/trackData/:workoutId
 // @desc    get current track data for the workout
 // @access  Private
-router.get('/splits/workout/trackData/:workoutId', requiresAuth, async (req, res) => {
-  try {
-    user_id = req.user.id;
-    const workout_id = req.params.workoutId;
+// router.get('/splits/workout/trackData/:workoutId', requiresAuth, async (req, res) => {
+//   try {
+//     user_id = req.user.id;
+//     const workout_id = req.params.workoutId;
 
-    // Get user workouts
-    const getCurrentTrackData = await getDataService.getCurrentTrackData(user_id, workout_id);
-    res.json(getCurrentTrackData.rows);
-  } catch (err) {
-    return res.status(500).send(err.message);
-  }
-});
+//     // Get user workouts
+//     const getCurrentTrackData = await getDataService.getCurrentTrackData(user_id, workout_id);
+//     res.json(getCurrentTrackData.rows);
+//   } catch (err) {
+//     return res.status(500).send(err.message);
+//   }
+// });
 
 // @route   GET /api/splits/workouts/exercises/prevData/:workoutId
 // @desc    get user previous workout
@@ -87,6 +87,9 @@ router.get('/splits/workouts/exercises/prevData/:workoutId', requiresAuth, async
   }
 });
 
+// @route   GET /api/splits/workout/trackData/:workoutId
+// @desc    get current track data for the workout
+// @access  Private
 router.get('/splits/workouts/exercises/currentData/:workoutId', requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
