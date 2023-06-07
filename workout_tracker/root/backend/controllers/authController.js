@@ -99,7 +99,26 @@ const login = async (req, res) => {
   }
 };
 
+const currentUser = async (req, res) => {
+  if (!req.user) {
+    return res.status(401).send('Unathorized');
+  }
+  return res.json(req.user);
+};
+
+const logout = async (req, res) => {
+  try {
+    res.clearCookie('access-token');
+    return res.json({ success: true });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send(err.message);
+  }
+};
+
 module.exports = {
   signup,
   login,
+  currentUser,
+  logout,
 };
