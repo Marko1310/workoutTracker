@@ -21,10 +21,6 @@ const getCurrentWorkout = async function (user_id, workout_id) {
   );
 };
 
-// const getCurrentTrackData = async function (user_id, workout_id) {
-//   return await pool.query('SELECT * FROM track WHERE user_id = $1 AND workout_id = $2', [user_id, workout_id]);
-// };
-
 const getCurrentTrackData = async function (workout_id, currentWorkoutDay) {
   // Get user exercises with tracking data from a given workout
   // importing track data into object to attach to every exercise

@@ -2,8 +2,6 @@
 const getDataService = require('../services/getDataService');
 const checkDatabaseService = require('../services/checkDatabaseService');
 
-const date = new Date();
-
 const getUserSplits = async (req, res) => {
   try {
     user_id = req.user.id;

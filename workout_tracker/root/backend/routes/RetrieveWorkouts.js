@@ -2,10 +2,6 @@ const express = require('express');
 const router = express.Router();
 const requiresAuth = require('../middleware/permission');
 
-// services
-const getDataService = require('../services/getDataService');
-const checkDatabaseService = require('../services/checkDatabaseService');
-
 //controllers
 const retrieveWorkoutsController = require('../controllers/retrieveWorkoutsController');
 
