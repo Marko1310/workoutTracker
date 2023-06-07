@@ -104,22 +104,14 @@ router.get('/splits/workouts/exercises/currentData/:workoutId', requiresAuth, as
 // @route   POST /api/splits/workouts/exercises/history/:exerciseId
 // @desc    get history data for exercise
 // @access  Private
-
 router.post('/splits/workouts/history/:workoutId', requiresAuth, async (req, res) => {
   try {
     user_id = req.user.id;
     const workout_id = req.params.workoutId;
     const { exercise_id } = req.body;
 
-    // Get history of track data for given exercise
-    // Group by workout_day
-
-    const track_data = await pool.query(
-      "SELECT workout_day, json_agg( json_build_object('track_id', track_id, 'set', set, 'reps', reps, 'date', date, 'user_id', user_id, 'exercise_id', exercise_id, 'weight', weight, 'workout_day', workout_day, 'workout_id', workout_id) ORDER BY set) AS trackdata_history FROM track WHERE exercise_id = $1 AND workout_id = $2 GROUP BY workout_day ORDER BY workout_day DESC;",
-      [exercise_id, workout_id],
-    );
-
-    res.json(track_data.rows);
+    const getHistoryData = await getDataService.getHistoryData(exercise_id, workout_id);
+    res.json(getHistoryData.rows);
   } catch (err) {
     return res.status(500).send(err.message);
   }

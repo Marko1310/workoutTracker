@@ -45,4 +45,13 @@ const getPrevTrackData = async function (currentWorkoutDay, workout_id) {
   );
 };
 
-module.exports = { getSplits, getWorkouts, getCurrentWorkout, getCurrentTrackData, getPrevTrackData };
+const getHistoryData = async function (exercise_id, workout_id) {
+  // Get history of track data for given exercise
+  // Group by workout_day
+  return await pool.query(
+    "SELECT workout_day, json_agg( json_build_object('track_id', track_id, 'set', set, 'reps', reps, 'date', date, 'user_id', user_id, 'exercise_id', exercise_id, 'weight', weight, 'workout_day', workout_day, 'workout_id', workout_id) ORDER BY set) AS trackdata_history FROM track WHERE exercise_id = $1 AND workout_id = $2 GROUP BY workout_day ORDER BY workout_day DESC;",
+    [exercise_id, workout_id],
+  );
+};
+
+module.exports = { getSplits, getWorkouts, getCurrentWorkout, getCurrentTrackData, getPrevTrackData, getHistoryData };
