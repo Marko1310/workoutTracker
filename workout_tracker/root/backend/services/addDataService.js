@@ -1,4 +1,5 @@
 const pool = require('../databse/db');
+const format = require('pg-format');
 
 const newSplit = async function (user_id, title, days, date) {
   const split = await pool.query(
@@ -25,9 +26,11 @@ const newExercise = async function (user_id, title, goal_sets, goal_reps, workou
 };
 
 const addSet = async function (user_id, exercise_id, workout_id, date, currentWorkoutDay, nextSet = 1) {
+  const setToInsert = nextSet;
+
   const insertSet = await pool.query(
     'INSERT INTO track (set, weight, reps, date, exercise_id, user_id, workout_id, workout_day) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
-    [nextSet, 0, 0, date, exercise_id, user_id, workout_id, currentWorkoutDay.rows[0].day],
+    [setToInsert, 0, 0, date, exercise_id, user_id, workout_id, currentWorkoutDay.rows[0].day],
   );
   return insertSet;
 };

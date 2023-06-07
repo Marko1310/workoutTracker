@@ -101,18 +101,13 @@ router.post('/split/workout/exercise/set/new', requiresAuth, async (req, res) =>
     if (checkExerciseId.rows.length === 0) {
       return res.status(400).send('Unathorized');
     }
-
     const currentWorkoutDay = await checkDatabaseService.currentWorkoutDay(workout_id);
 
-    const lastSet = await checkDatabaseService.lastSet(exercise_id, user_id);
-    if (lastSet.rows[0].max) {
-      let nextSet = lastSet.rows[0].max + 1;
-      const insertSet = await addDataService.addSet(user_id, exercise_id, workout_id, date, currentWorkoutDay, nextSet);
-      res.json(insertSet.rows);
-    } else {
-      const insertSet = await addDataService.addSet(user_id, exercise_id, workout_id, date, currentWorkoutDay);
-      res.json(insertSet.rows);
-    }
+    const lastSet = await checkDatabaseService.lastSet(exercise_id, user_id, currentWorkoutDay.rows[0].day);
+
+    const nextSet = lastSet.rows[0].max !== null ? lastSet.rows[0].max + 1 : undefined;
+    const insertSet = await addDataService.addSet(user_id, exercise_id, workout_id, date, currentWorkoutDay, nextSet);
+    res.json(insertSet.rows);
   } catch (err) {
     return res.status(500).send(err.message);
   }
