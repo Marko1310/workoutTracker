@@ -2,9 +2,6 @@ const express = require('express');
 const router = express.Router();
 const requiresAuth = require('../middleware/permission');
 
-//services
-const retrieveNamesService = require('../services/retrieveNamesService');
-
 // controllers
 const retrieveNamesController = require('../controllers/retrieveNamesController');
 
