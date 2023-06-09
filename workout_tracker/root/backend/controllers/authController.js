@@ -14,7 +14,9 @@ const signup = async (req, res) => {
     // check for an existing user
     const existingUser = await authService.existingUser(email);
     if (existingUser.rows.length !== 0) {
-      return res.status(400).json({ existing: 'There is already a user with this email' });
+      return res
+        .status(400)
+        .json({ existing: 'There is already a user with this email' });
     }
     // check the proper name
     if (name === '') {
@@ -28,7 +30,9 @@ const signup = async (req, res) => {
 
     // check the proper password
     if (password.length < 6) {
-      return res.status(400).json({ password: 'password has to be at least 6 characters long' });
+      return res
+        .status(400)
+        .json({ password: 'password has to be at least 6 characters long' });
     }
 
     // if no errors -> create a new user
@@ -54,7 +58,6 @@ const signup = async (req, res) => {
     };
     res.json(userCredentials);
   } catch (err) {
-    console.log(err);
     res.status(500).send(err.message);
   }
 };
@@ -66,12 +69,19 @@ const login = async (req, res) => {
     //CHECKS
     // if user does not exist
     if (existingUser.rows.length === 0) {
-      return res.status(400).json({ error: 'Something is wrong with your credentials' });
+      return res
+        .status(400)
+        .json({ error: 'Something is wrong with your credentials' });
     }
     // is password is invalid
-    const isValid = await bcrypt.compareSync(password, existingUser.rows[0].password);
+    const isValid = await bcrypt.compareSync(
+      password,
+      existingUser.rows[0].password
+    );
     if (!isValid) {
-      return res.status(400).json({ error: 'Something is wrong with your credentials' });
+      return res
+        .status(400)
+        .json({ error: 'Something is wrong with your credentials' });
     }
 
     //IF NO ERRORS
@@ -111,7 +121,6 @@ const logout = async (req, res) => {
     res.clearCookie('access-token');
     return res.json({ success: true });
   } catch (err) {
-    console.log(err);
     return res.status(500).send(err.message);
   }
 };

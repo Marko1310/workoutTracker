@@ -4,7 +4,7 @@ const checkDatabaseService = require('../services/checkDatabaseService');
 
 const getUserSplits = async (req, res) => {
   try {
-    user_id = req.user.id;
+    const user_id = req.user.id;
 
     const getSplits = await getDataService.getSplits(user_id);
     res.json(getSplits.rows);
@@ -15,7 +15,7 @@ const getUserSplits = async (req, res) => {
 
 const getUserWorkouts = async (req, res) => {
   try {
-    user_id = req.user.id;
+    const user_id = req.user.id;
     const split_id = req.params.splitId;
 
     // Get user workouts
@@ -28,12 +28,15 @@ const getUserWorkouts = async (req, res) => {
 
 const getCurrentWorkout = async (req, res) => {
   try {
-    user_id = req.user.id;
+    const user_id = req.user.id;
     const workout_id = req.params.workoutId;
 
     // Get user workouts
-    const getCurrentWorkout = await getDataService.getCurrentWorkout(user_id, workout_id);
-    res.json(getCurrentWorkout.rows);
+    const currentWorkout = await getDataService.getCurrentWorkout(
+      user_id,
+      workout_id
+    );
+    res.json(currentWorkout.rows);
   } catch (err) {
     return res.status(500).send(err.message);
   }
@@ -41,11 +44,15 @@ const getCurrentWorkout = async (req, res) => {
 
 const getPreviousWorkout = async (req, res) => {
   try {
-    user_id = req.user.id;
     const workout_id = req.params.workoutId;
-    const currentWorkoutDay = await checkDatabaseService.currentWorkoutDay(workout_id);
+    const currentWorkoutDay = await checkDatabaseService.currentWorkoutDay(
+      workout_id
+    );
 
-    const getPrevTrackData = await getDataService.getPrevTrackData(currentWorkoutDay, workout_id);
+    const getPrevTrackData = await getDataService.getPrevTrackData(
+      currentWorkoutDay,
+      workout_id
+    );
     res.json(getPrevTrackData.rows);
   } catch (err) {
     return res.status(500).send(err.message);
@@ -54,13 +61,17 @@ const getPreviousWorkout = async (req, res) => {
 
 const getCurrentTrackData = async (req, res) => {
   try {
-    user_id = req.user.id;
     const workout_id = req.params.workoutId;
-    const currentWorkoutDay = await checkDatabaseService.currentWorkoutDay(workout_id);
+    const currentWorkoutDay = await checkDatabaseService.currentWorkoutDay(
+      workout_id
+    );
 
-    const getCurrentTrackData = await getDataService.getCurrentTrackData(workout_id, currentWorkoutDay);
+    const currentTrackData = await getDataService.getCurrentTrackData(
+      workout_id,
+      currentWorkoutDay
+    );
 
-    res.json(getCurrentTrackData.rows);
+    res.json(currentTrackData.rows);
   } catch (err) {
     return res.status(500).send(err.message);
   }
@@ -68,11 +79,13 @@ const getCurrentTrackData = async (req, res) => {
 
 const getHistoryTrackData = async (req, res) => {
   try {
-    user_id = req.user.id;
     const workout_id = req.params.workoutId;
     const { exercise_id } = req.body;
 
-    const getHistoryData = await getDataService.getHistoryData(exercise_id, workout_id);
+    const getHistoryData = await getDataService.getHistoryData(
+      exercise_id,
+      workout_id
+    );
     res.json(getHistoryData.rows);
   } catch (err) {
     return res.status(500).send(err.message);
