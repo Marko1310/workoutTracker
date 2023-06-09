@@ -10,7 +10,9 @@ const requiresAuth = async (req, res, next) => {
     try {
       const { userId } = jwt.verify(token, process.env.JWT_SECRET);
       try {
-        const user = await pool.query('SELECT * FROM users WHERE id = $1', [userId]);
+        const user = await pool.query('SELECT * FROM users WHERE id = $1', [
+          userId,
+        ]);
 
         if (user.rows.length !== 0) {
           const userCredentials = {

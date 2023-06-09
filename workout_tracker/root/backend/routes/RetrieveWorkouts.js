@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 const requiresAuth = require('../middleware/permission');
 
@@ -10,17 +11,29 @@ const retrieveWorkoutsController = require('../controllers/retrieveWorkoutsContr
 // @route   GET /api/splits/current
 // @desc    get user splits with list of workouts
 // @access  Private
-router.get('/splits/current', requiresAuth, retrieveWorkoutsController.getUserSplits);
+router.get(
+  '/splits/current',
+  requiresAuth,
+  retrieveWorkoutsController.getUserSplits
+);
 
 // @route   GET /api/splits/workouts/:splitId
 // @desc    get user workouts with list of exercises from the split
 // @access  Private
-router.get('/splits/workouts/:splitId', requiresAuth, retrieveWorkoutsController.getUserWorkouts);
+router.get(
+  '/splits/workouts/:splitId',
+  requiresAuth,
+  retrieveWorkoutsController.getUserWorkouts
+);
 
 // @route   GET /api/splits/workout/:workoutId
 // @desc    get current workout
 // @access  Private
-router.get('/splits/workout/:workoutId', requiresAuth, retrieveWorkoutsController.getCurrentWorkout);
+router.get(
+  '/splits/workout/:workoutId',
+  requiresAuth,
+  retrieveWorkoutsController.getCurrentWorkout
+);
 
 // @route   GET /api/splits/workouts/exercises/prevData/:workoutId
 // @desc    get user previous workout
@@ -28,7 +41,7 @@ router.get('/splits/workout/:workoutId', requiresAuth, retrieveWorkoutsControlle
 router.get(
   '/splits/workouts/exercises/prevData/:workoutId',
   requiresAuth,
-  retrieveWorkoutsController.getPreviousWorkout,
+  retrieveWorkoutsController.getPreviousWorkout
 );
 
 // @route   GET /api/splits/workout/trackData/:workoutId
@@ -37,12 +50,16 @@ router.get(
 router.get(
   '/splits/workouts/exercises/currentData/:workoutId',
   requiresAuth,
-  retrieveWorkoutsController.getCurrentTrackData,
+  retrieveWorkoutsController.getCurrentTrackData
 );
 
 // @route   POST /api/splits/workouts/exercises/history/:exerciseId
 // @desc    get history data for exercise
 // @access  Private
-router.post('/splits/workouts/history/:workoutId', requiresAuth, retrieveWorkoutsController.getHistoryTrackData);
+router.post(
+  '/splits/workouts/history/:workoutId',
+  requiresAuth,
+  retrieveWorkoutsController.getHistoryTrackData
+);
 
 module.exports = router;
