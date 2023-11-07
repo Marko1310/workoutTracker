@@ -5,5 +5,5 @@ const API_URL = 'https://workouttracker-api-gjbo.onrender.com';
 
 export default axios.create({
   baseURL: API_URL,
-  withCredentials: true,
+  withCredentials: true
 });
