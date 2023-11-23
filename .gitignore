@@ -2,6 +2,7 @@
 /backend/text
 /backend/node_modules
 /frontend/node_modules
+/frontend_ts/node_modules
 /node_modules
 /frontend/build
 .DS_Store
