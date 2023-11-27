@@ -13,7 +13,7 @@ function Login() {
       <div className="p-0">
         <img
           alt=""
-          className="w-full h-full bg-cover bg-center "
+          className="w-full h-full bg-cover bg-center"
           style={{
             backgroundImage: `url(${backgroundImage})`
           }}
