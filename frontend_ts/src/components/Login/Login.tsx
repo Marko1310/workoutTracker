@@ -19,6 +19,23 @@ function Login() {
           }}
         />
       </div>
+      <div className="p-2">
+        <div className="flex flex-col">
+          <label htmlFor="name"></label>
+          <input type="text" name="name" id="name" placeholder="Name" />
+
+          <label htmlFor="email"></label>
+          <input type="text" name="email" id="email" placeholder="Email" />
+
+          <label htmlFor="password"></label>
+          <input
+            type="text"
+            name="password"
+            id="password"
+            placeholder="password"
+          />
+        </div>
+      </div>
     </div>
   );
 }
