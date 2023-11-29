@@ -22,7 +22,13 @@ function Login() {
       <div className="p-2">
         <div className="flex flex-col">
           <label htmlFor="name"></label>
-          <input type="text" name="name" id="name" placeholder="Name" />
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Name"
+            className="border-[1px] rounded-md border-neutral-400 pl-2 w-full h-10 font-montserrat"
+          />
 
           <label htmlFor="email"></label>
           <input type="text" name="email" id="email" placeholder="Email" />
