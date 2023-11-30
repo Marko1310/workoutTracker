@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { images } from './images';
+import logo from '../../../public/images/login/workout-icon.jpg';
 
 function Login() {
   const [backgroundImage, setBackgroundImage] = useState('');
@@ -9,36 +10,42 @@ function Login() {
   }, []);
 
   return (
-    <div className="h-screen w-screen grid grid-cols-[1.5fr,1fr] overflow-y-hidden bg-white">
-      <div className="p-0">
+    <div className='h-screen w-screen grid grid-cols-[1.5fr,1fr] overflow-y-hidden bg-white'>
+      <div className='p-0'>
         <img
-          alt=""
-          className="w-full h-full bg-cover bg-center"
+          alt=''
+          className='w-full h-full bg-cover bg-center'
           style={{
-            backgroundImage: `url(${backgroundImage})`
+            backgroundImage: `url(${backgroundImage})`,
           }}
         />
       </div>
-      <div className="p-2">
-        <div className="flex flex-col">
-          <label htmlFor="name"></label>
+      <div className='p-2'>
+        <div className='flex flex-col'>
+          <div className='flex flex-row justify-center'>
+            <img src={logo} alt='logo' className='h-16 w-16' />
+            <h1 className='text-2xl font-semibold text-gray-700'>
+              Workout Tracker
+            </h1>
+          </div>
+          <label htmlFor='name'></label>
           <input
-            type="text"
-            name="name"
-            id="name"
-            placeholder="Name"
-            className="border-[1px] rounded-md border-neutral-400 pl-2 w-full h-10 font-montserrat"
+            type='text'
+            name='name'
+            id='name'
+            placeholder='Name'
+            className='border-[1px] rounded-md border-neutral-400 pl-2 w-full h-10 font-montserrat'
           />
 
-          <label htmlFor="email"></label>
-          <input type="text" name="email" id="email" placeholder="Email" />
+          <label htmlFor='email'></label>
+          <input type='text' name='email' id='email' placeholder='Email' />
 
-          <label htmlFor="password"></label>
+          <label htmlFor='password'></label>
           <input
-            type="text"
-            name="password"
-            id="password"
-            placeholder="password"
+            type='text'
+            name='password'
+            id='password'
+            placeholder='password'
           />
         </div>
       </div>
