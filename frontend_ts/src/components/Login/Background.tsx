@@ -9,15 +9,13 @@ function Background() {
   }, []);
 
   return (
-    <div className='p-0'>
-      <img
-        alt=''
-        className='h-full w-full bg-cover bg-center'
-        style={{
-          backgroundImage: `url(${backgroundImage})`,
-        }}
-      />
-    </div>
+    <img
+      alt=''
+      className='h-full w-full bg-cover bg-center'
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+      }}
+    />
   );
 }
 
