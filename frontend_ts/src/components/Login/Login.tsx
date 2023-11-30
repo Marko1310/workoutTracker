@@ -1,5 +1,6 @@
 import Background from './Background';
-import LoginForm from './LoginForm';
+import Footer from './Footer';
+import Form from './Form';
 
 function Login() {
   return (
@@ -7,7 +8,12 @@ function Login() {
       <div className='hidden md:block'>
         <Background />
       </div>
-      <LoginForm />
+      <div className='flex h-full flex-col p-6'>
+        <Form />
+        <div className='mt-auto'>
+          <Footer />
+        </div>
+      </div>
     </div>
   );
 }
