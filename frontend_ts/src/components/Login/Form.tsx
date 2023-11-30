@@ -25,7 +25,9 @@ function Form() {
             Workout Tracker
           </h1>
         </div>
-        <h3 className='mb-14 flex justify-center text-4xl font-thin'>Login</h3>
+        <h3 className='mb-14 flex justify-center text-4xl font-thin'>
+          {formType === 'login' ? 'Login' : 'Signup'}
+        </h3>
         <div className='flex flex-col gap-2'>
           {formType === 'signup' && <InputField field={'Name'} />}
           <InputField field={'Email'} />
