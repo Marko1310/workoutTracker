@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { images } from './images';
 import logo from '../../../public/images/login/workout-icon.jpg';
+import InputField from './InputField';
 
 function Login() {
   const [backgroundImage, setBackgroundImage] = useState('');
@@ -10,43 +11,32 @@ function Login() {
   }, []);
 
   return (
-    <div className='h-screen w-screen grid grid-cols-[1.5fr,1fr] overflow-y-hidden bg-white'>
+    <div className='grid h-screen w-screen grid-cols-[1.5fr,1fr] overflow-y-hidden bg-white'>
       <div className='p-0'>
         <img
           alt=''
-          className='w-full h-full bg-cover bg-center'
+          className='h-full w-full bg-cover bg-center'
           style={{
             backgroundImage: `url(${backgroundImage})`,
           }}
         />
       </div>
-      <div className='p-2'>
+      <div className='p-6'>
         <div className='flex flex-col'>
-          <div className='flex flex-row justify-center'>
+          <div className='mb-6 mt-12 flex flex-row items-center justify-center gap-2'>
             <img src={logo} alt='logo' className='h-16 w-16' />
             <h1 className='text-2xl font-semibold text-gray-700'>
               Workout Tracker
             </h1>
           </div>
-          <label htmlFor='name'></label>
-          <input
-            type='text'
-            name='name'
-            id='name'
-            placeholder='Name'
-            className='border-[1px] rounded-md border-neutral-400 pl-2 w-full h-10 font-montserrat'
-          />
-
-          <label htmlFor='email'></label>
-          <input type='text' name='email' id='email' placeholder='Email' />
-
-          <label htmlFor='password'></label>
-          <input
-            type='text'
-            name='password'
-            id='password'
-            placeholder='password'
-          />
+          <h3 className='mb-14 flex justify-center text-4xl font-thin'>
+            Login
+          </h3>
+          <div className='flex flex-col gap-2'>
+            <InputField field={'Name'} />
+            <InputField field={'Email'} />
+            <InputField field={'Password'} />
+          </div>
         </div>
       </div>
     </div>
