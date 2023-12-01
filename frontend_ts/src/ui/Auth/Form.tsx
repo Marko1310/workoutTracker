@@ -1,13 +1,16 @@
-import FormRow from '../components/Auth/FormRow';
+import FormRow from '../../components/Auth/FormRow';
 import LoginButton from './LoginButton';
 import FormRows from './FormRows';
-
-const handleSubmit = function (e: Event) {
-  e.preventDefault();
-  // login('email', 'password');
-};
+import { useAuth } from '../../context/AuthContext';
 
 function Form({ formType }: { formType: string }) {
+  const { login } = useAuth();
+
+  const handleSubmit = function (e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    login('email', 'password');
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <FormRows>

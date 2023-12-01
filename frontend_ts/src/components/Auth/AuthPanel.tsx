@@ -1,5 +1,5 @@
-import AuthHeader from '../../ui/AuthHeader';
-import AuthForm from '../../ui/AuthForm';
+import AuthHeader from '../../ui/Auth/AuthHeader';
+import AuthForm from '../../ui/Auth/AuthForm';
 import Footer from './Footer';
 
 function AuthPanel() {
