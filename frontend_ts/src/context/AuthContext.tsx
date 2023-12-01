@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer } from 'react';
 
-const AuthContext = createContext();
+const AuthContext = createContext(null);
 
 const initalState = {
   user: null,
@@ -21,7 +21,7 @@ function reducer(state, action) {
 }
 
 function AuthProvider({ children }) {
-  const [{ user, isAuthenticated, dispatch }] = useReducer(
+  const [{ user, isAuthenticated }, dispatch] = useReducer(
     reducer,
     initalState,
   );
@@ -46,6 +46,7 @@ function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined)
     throw new Error('AuthContext was used outside of AuthPriovider');
+  return context;
 }
 
 export { AuthProvider, useAuth };
