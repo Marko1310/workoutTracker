@@ -1,4 +1,4 @@
-function InputField({ field }: { field: string }) {
+function FormRow({ field }: { field: string }) {
   return (
     <>
       <label htmlFor={field}></label>
@@ -13,4 +13,4 @@ function InputField({ field }: { field: string }) {
   );
 }
 
-export default InputField;
+export default FormRow;
