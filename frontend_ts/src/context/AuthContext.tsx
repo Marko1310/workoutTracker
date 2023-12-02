@@ -7,6 +7,7 @@ const initalState = {
   isAuthenticated: false,
 };
 
+//TODO: add types
 function reducer(state, action) {
   switch (action.type) {
     case 'login':
@@ -14,7 +15,6 @@ function reducer(state, action) {
 
     case 'logout':
       return { ...state, user: null, isAuthenticated: false };
-
     default:
       throw new Error('Unknown action');
   }
