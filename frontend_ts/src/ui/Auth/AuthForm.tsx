@@ -17,9 +17,9 @@ function AuthForm() {
     setFormType(formType === 'login' ? 'signup' : 'login');
   };
 
-  const handleSubmit = function (e: Event) {
+  const handleSubmit = async (e: Event) => {
     e.preventDefault();
-    // login('email', 'password');
+    //TODO:
   };
 
   return (

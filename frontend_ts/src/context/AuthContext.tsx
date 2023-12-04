@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer } from 'react';
+import userServices from '../services/userServices';
 
 const AuthContext = createContext(null);
 
@@ -7,9 +8,18 @@ const initalState = {
   isAuthenticated: false,
 };
 
+type signupDto = {
+  name: string;
+  email: string;
+  password: string;
+};
+
 //TODO: add types
 function reducer(state, action) {
   switch (action.type) {
+    case 'signup':
+      return { ...state, user: action.payload, isAuthenticated: true };
+
     case 'login':
       return { ...state, user: action.payload, isAuthenticated: true };
 
@@ -26,6 +36,12 @@ function AuthProvider({ children }) {
     initalState,
   );
 
+  async function signup(data: signupDto) {
+    const user = await userServices.signup(data);
+    console.log(user.data);
+    dispatch({ type: 'signup', payload: 'user' });
+  }
+
   function login(email, password) {
     //TODO: add logon logic
     dispatch({ type: 'login', payload: 'user' });
@@ -36,7 +52,9 @@ function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, login, logout }}>
+    <AuthContext.Provider
+      value={{ user, isAuthenticated, signup, login, logout }}
+    >
       {children}
     </AuthContext.Provider>
   );
