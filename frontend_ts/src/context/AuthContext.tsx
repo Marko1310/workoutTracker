@@ -38,13 +38,12 @@ function AuthProvider({ children }) {
 
   async function signup(data: signupDto) {
     const user = await userServices.signup(data);
-    console.log(user.data);
-    dispatch({ type: 'signup', payload: 'user' });
+    dispatch({ type: 'signup', payload: user.data.user });
   }
 
   function login(email, password) {
-    //TODO: add logon logic
-    dispatch({ type: 'login', payload: 'user' });
+    //TODO: add login logic
+    dispatch({ type: 'login', payload: user.data.user });
   }
 
   function logout() {
