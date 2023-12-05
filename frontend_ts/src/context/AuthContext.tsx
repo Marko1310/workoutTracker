@@ -6,6 +6,8 @@ const AuthContext = createContext(null);
 const initalState = {
   user: null,
   isAuthenticated: false,
+  isLoading: false,
+  error: null,
 };
 
 type signupDto = {
@@ -14,31 +16,48 @@ type signupDto = {
   password: string;
 };
 
+const ACTION = {
+  LOADING: 'loading',
+  SUCCESS: 'success',
+  ERROR: 'error',
+};
+
 //TODO: add types
 function reducer(state, action) {
   switch (action.type) {
-    case 'signup':
-      return { ...state, user: action.payload, isAuthenticated: true };
+    case ACTION.SUCCESS:
+      return {
+        ...state,
+        user: action.payload,
+        isAuthenticated: true,
+        isLoading: false,
+        error: null,
+      };
 
-    case 'login':
-      return { ...state, user: action.payload, isAuthenticated: true };
+    case ACTION.ERROR:
+      return { ...state, isLoading: false, error: action.payload };
 
-    case 'logout':
-      return { ...state, user: null, isAuthenticated: false };
+    case ACTION.LOADING:
+      return { ...state, isLoading: true, error: false };
     default:
-      throw new Error('Unknown action');
+      break;
   }
 }
 
 function AuthProvider({ children }) {
-  const [{ user, isAuthenticated }, dispatch] = useReducer(
+  const [{ user, isAuthenticated, isLoading, error }, dispatch] = useReducer(
     reducer,
     initalState,
   );
 
   async function signup(data: signupDto) {
-    const user = await userServices.signup(data);
-    dispatch({ type: 'signup', payload: user.data.user });
+    dispatch({ type: ACTION.LOADING });
+    try {
+      const response = await userServices.signup(data);
+      dispatch({ type: ACTION.SUCCESS, payload: response.data.user });
+    } catch (error: any) {
+      dispatch({ type: ACTION.ERROR, payload: error.response.data });
+    }
   }
 
   function login(email, password) {
@@ -52,7 +71,7 @@ function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated, signup, login, logout }}
+      value={{ user, isAuthenticated, isLoading, error, signup, login, logout }}
     >
       {children}
     </AuthContext.Provider>
