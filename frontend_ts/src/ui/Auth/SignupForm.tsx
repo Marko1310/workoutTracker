@@ -1,22 +1,13 @@
 import { useEffect } from 'react';
 import LoginButton from './LoginButton';
 import { useAuth } from '../../context/AuthContext';
-import { FieldValues, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import InputField from './InputField';
-
-//TODO: export types
-const SignupDtoSchema = z.object({
-  name: z.string().min(1, 'Name must be at least 1 character long'),
-  email: z.string().email('Please provide a valid email'),
-  password: z.string().min(6, 'Password must be at least 6 characters long'),
-});
-
-type SignupDto = z.infer<typeof SignupDtoSchema>;
+import { SignupDto, SignupDtoSchema } from '../../types/auth';
 
 function SignupForm() {
-  const { signup, error } = useAuth();
+  const { signup, error } = useAuth()!;
 
   const {
     register,
@@ -27,7 +18,7 @@ function SignupForm() {
     resolver: zodResolver(SignupDtoSchema),
   });
 
-  const onSubmit = async (data: FieldValues) => {
+  const onSubmit = async (data: SignupDto) => {
     await signup(data);
   };
 

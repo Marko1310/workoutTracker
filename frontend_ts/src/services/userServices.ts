@@ -1,21 +1,11 @@
+import { LoginDto, SignupDto } from '../types/auth';
 import { workout_api } from './api_config';
 
-type signupDto = {
-  name: string;
-  email: string;
-  password: string;
-};
-
-type loginDto = {
-  email: string;
-  password: string;
-};
-
-const signup = async (data: signupDto) => {
+const signup = async (data: SignupDto) => {
   return await workout_api.post('/identity/signup', data);
 };
 
-const login = async (data: loginDto) => {
+const login = async (data: LoginDto) => {
   return await workout_api.post('/identity/login', data);
 };
 
