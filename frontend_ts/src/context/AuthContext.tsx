@@ -1,13 +1,24 @@
-import { createContext, useContext, useReducer } from 'react';
+import { ReactNode, createContext, useContext, useReducer } from 'react';
 import userServices from '../services/userServices';
 
-const AuthContext = createContext(null);
+const ACTION = {
+  LOADING: 'loading',
+  SUCCESS: 'success',
+  ERROR: 'error',
+  CLEAR_ERROR: 'clear_error',
+} as const;
 
-const initalState = {
-  user: null,
-  isAuthenticated: false,
-  isLoading: false,
-  error: null,
+type ActionType =
+  | { type: 'loading' }
+  | { type: 'clear_error' }
+  | { type: 'success'; payload: any }
+  | { type: 'error'; payload: any };
+
+type AuthStateType = {
+  user: null | string;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  error: any;
 };
 
 type signupDto = {
@@ -16,15 +27,29 @@ type signupDto = {
   password: string;
 };
 
-const ACTION = {
-  LOADING: 'loading',
-  SUCCESS: 'success',
-  ERROR: 'error',
-  CLEAR_ERROR: 'clear_error',
+type loginDto = {
+  email: string;
+  password: string;
 };
 
+const initalState: AuthStateType = {
+  user: null,
+  isAuthenticated: false,
+  isLoading: false,
+  error: null,
+};
+
+type AuthContextValue = AuthStateType & {
+  signup: (data: signupDto) => Promise<void>;
+  login: (data: loginDto) => Promise<void>;
+  clearError: () => void;
+  logout: () => void;
+};
+
+const AuthContext = createContext<AuthContextValue | null>(null);
+
 //TODO: add types
-function reducer(state, action) {
+const reducer = (state: AuthStateType, action: ActionType) => {
   switch (action.type) {
     case ACTION.SUCCESS:
       return {
@@ -43,12 +68,10 @@ function reducer(state, action) {
 
     case ACTION.LOADING:
       return { ...state, isLoading: true, error: false };
-    default:
-      break;
   }
-}
+};
 
-function AuthProvider({ children }) {
+function AuthProvider({ children }: { children: ReactNode }) {
   const [{ user, isAuthenticated, isLoading, error }, dispatch] = useReducer(
     reducer,
     initalState,
@@ -64,7 +87,7 @@ function AuthProvider({ children }) {
     }
   }
 
-  async function login(data: signupDto) {
+  async function login(data: loginDto) {
     dispatch({ type: ACTION.LOADING });
     try {
       const response = await userServices.login(data);
@@ -79,7 +102,7 @@ function AuthProvider({ children }) {
   }
 
   function logout() {
-    dispatch({ type: 'logout' });
+    // dispatch({ type: 'logout' });
   }
 
   return (

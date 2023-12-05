@@ -13,7 +13,7 @@ const Forms = {
 export type Formkeys = (typeof Forms)[keyof typeof Forms];
 
 function AuthForm() {
-  const { clearError } = useAuth();
+  const { clearError } = useAuth()!;
   const [formType, setFormType] = useState<Formkeys>(Forms.Login);
 
   const changeForm = function () {
