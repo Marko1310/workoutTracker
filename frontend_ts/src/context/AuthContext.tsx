@@ -1,5 +1,6 @@
 import { ReactNode, createContext, useContext, useReducer } from 'react';
 import userServices from '../services/userServices';
+import { LoginDto, SignupDto } from '../types/auth';
 
 const ACTION = {
   LOADING: 'loading',
@@ -21,17 +22,6 @@ type AuthStateType = {
   error: any;
 };
 
-type signupDto = {
-  name: string;
-  email: string;
-  password: string;
-};
-
-type loginDto = {
-  email: string;
-  password: string;
-};
-
 const initalState: AuthStateType = {
   user: null,
   isAuthenticated: false,
@@ -39,16 +29,15 @@ const initalState: AuthStateType = {
   error: null,
 };
 
-type AuthContextValue = AuthStateType & {
-  signup: (data: signupDto) => Promise<void>;
-  login: (data: loginDto) => Promise<void>;
+type AuthContextType = AuthStateType & {
+  signup: (data: SignupDto) => Promise<void>;
+  login: (data: LoginDto) => Promise<void>;
   clearError: () => void;
   logout: () => void;
 };
 
-const AuthContext = createContext<AuthContextValue | null>(null);
+const AuthContext = createContext<AuthContextType | null>(null);
 
-//TODO: add types
 const reducer = (state: AuthStateType, action: ActionType) => {
   switch (action.type) {
     case ACTION.SUCCESS:
@@ -77,7 +66,7 @@ function AuthProvider({ children }: { children: ReactNode }) {
     initalState,
   );
 
-  async function signup(data: signupDto) {
+  async function signup(data: SignupDto) {
     dispatch({ type: ACTION.LOADING });
     try {
       const response = await userServices.signup(data);
@@ -87,7 +76,7 @@ function AuthProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  async function login(data: loginDto) {
+  async function login(data: LoginDto) {
     dispatch({ type: ACTION.LOADING });
     try {
       const response = await userServices.login(data);
@@ -102,7 +91,7 @@ function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   function logout() {
-    // dispatch({ type: 'logout' });
+    //TODO: clear cookies, set user to null
   }
 
   return (
@@ -126,7 +115,7 @@ function AuthProvider({ children }: { children: ReactNode }) {
 function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined)
-    throw new Error('AuthContext was used outside of AuthPriovider');
+    throw new Error('AuthContext was used outside of AuthProvider');
   return context;
 }
 

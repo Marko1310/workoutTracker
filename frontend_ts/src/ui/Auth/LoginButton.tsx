@@ -8,9 +8,10 @@ function LoginButton({
   return (
     <button
       disabled={isSubmitting}
-      className={`mt-12 h-14 w-full rounded-md bg-slate-400 uppercase text-white transition-all hover:${
-        isSubmitting ? 'bg-slate-200' : 'bg-slate-800'
-      } ${isSubmitting ? 'bg-slate-200' : ''}`}
+      className={`mt-12 h-14 w-full rounded-md uppercase text-white transition-all ${
+        isSubmitting ? 'hover:bg-slate-200' : 'hover:bg-slate-800'
+      }
+       ${isSubmitting ? 'bg-slate-200' : 'bg-slate-500 '}`}
     >
       {title}
     </button>
