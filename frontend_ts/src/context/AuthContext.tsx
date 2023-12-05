@@ -20,6 +20,7 @@ const ACTION = {
   LOADING: 'loading',
   SUCCESS: 'success',
   ERROR: 'error',
+  CLEAR_ERROR: 'clear_error',
 };
 
 //TODO: add types
@@ -36,6 +37,9 @@ function reducer(state, action) {
 
     case ACTION.ERROR:
       return { ...state, isLoading: false, error: action.payload };
+
+    case ACTION.CLEAR_ERROR:
+      return { ...state, error: null };
 
     case ACTION.LOADING:
       return { ...state, isLoading: true, error: false };
@@ -60,9 +64,18 @@ function AuthProvider({ children }) {
     }
   }
 
-  function login(email, password) {
-    //TODO: add login logic
-    dispatch({ type: 'login', payload: user.data.user });
+  async function login(data: signupDto) {
+    dispatch({ type: ACTION.LOADING });
+    try {
+      const response = await userServices.login(data);
+      dispatch({ type: ACTION.SUCCESS, payload: response.data.user });
+    } catch (error: any) {
+      dispatch({ type: ACTION.ERROR, payload: error.response.data });
+    }
+  }
+
+  function clearError() {
+    dispatch({ type: ACTION.CLEAR_ERROR });
   }
 
   function logout() {
@@ -71,7 +84,16 @@ function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated, isLoading, error, signup, login, logout }}
+      value={{
+        user,
+        isAuthenticated,
+        isLoading,
+        error,
+        signup,
+        login,
+        clearError,
+        logout,
+      }}
     >
       {children}
     </AuthContext.Provider>

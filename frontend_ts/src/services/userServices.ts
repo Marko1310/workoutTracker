@@ -6,8 +6,18 @@ type signupDto = {
   password: string;
 };
 
+type loginDto = {
+  name: string;
+  email: string;
+  password: string;
+};
+
 const signup = async (data: signupDto) => {
   return await workout_api.post('/identity/signup', data);
 };
 
-export default { signup };
+const login = async (data: loginDto) => {
+  return await workout_api.post('/identity/login', data);
+};
+
+export default { signup, login };

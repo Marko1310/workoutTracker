@@ -1,8 +1,8 @@
 function LoginButton({
-  formType,
+  title,
   isSubmitting,
 }: {
-  formType: string;
+  title: string;
   isSubmitting: boolean;
 }) {
   return (
@@ -12,7 +12,7 @@ function LoginButton({
         isSubmitting ? 'bg-slate-200' : 'bg-slate-800'
       } ${isSubmitting ? 'bg-slate-200' : ''}`}
     >
-      {formType === 'login' ? 'Login' : 'Signup'}
+      {title}
     </button>
   );
 }
