@@ -1,5 +1,14 @@
+import { useAuth } from '../context/AuthContext';
+
 function Dashboard() {
-  return <div>Dashboard test</div>;
+  const { logout } = useAuth()!;
+
+  const handleLogout = (e: Event) => {
+    e.preventDefault();
+    logout();
+  };
+
+  return <button onClick={handleLogout}>Logout</button>;
 }
 
 export default Dashboard;

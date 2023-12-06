@@ -7,13 +7,15 @@ const ACTION = {
   SUCCESS: 'success',
   ERROR: 'error',
   CLEAR_ERROR: 'clear_error',
+  RESET: 'reset',
 } as const;
 
 type ActionType =
   | { type: 'loading' }
   | { type: 'clear_error' }
   | { type: 'success'; payload: any }
-  | { type: 'error'; payload: any };
+  | { type: 'error'; payload: any }
+  | { type: 'reset' };
 
 type AuthStateType = {
   user: null | string;
@@ -57,6 +59,15 @@ const reducer = (state: AuthStateType, action: ActionType) => {
 
     case ACTION.LOADING:
       return { ...state, isLoading: true, error: false };
+
+    case ACTION.RESET:
+      return {
+        ...state,
+        isLoading: false,
+        error: false,
+        user: null,
+        isAuthenticated: false,
+      };
   }
 };
 
@@ -90,8 +101,9 @@ function AuthProvider({ children }: { children: ReactNode }) {
     dispatch({ type: ACTION.CLEAR_ERROR });
   }
 
-  function logout() {
-    //TODO: clear cookies, set user to null
+  async function logout() {
+    await userServices.logout();
+    dispatch({ type: ACTION.RESET });
   }
 
   return (

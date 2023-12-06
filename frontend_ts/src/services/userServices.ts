@@ -9,4 +9,8 @@ const login = async (data: LoginDto) => {
   return await workout_api.post('/identity/login', data);
 };
 
-export default { signup, login };
+const logout = async () => {
+  return await workout_api.get('/identity/logout');
+};
+
+export default { signup, login, logout };
