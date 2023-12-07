@@ -11,7 +11,7 @@ function Auth() {
 
   useEffect(() => {
     if (isAuthenticated) navigate('/dashboard');
-  }, [isAuthenticated]);
+  }, [isAuthenticated, navigate]);
 
   return (
     <div className='grid h-screen w-screen overflow-y-hidden bg-white md:grid-cols-[1fr,1fr] lg:grid-cols-[1.5fr,1fr]'>

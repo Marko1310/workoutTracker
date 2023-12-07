@@ -36,6 +36,7 @@ type AuthContextType = AuthStateType & {
   login: (data: LoginDto) => Promise<void>;
   clearError: () => void;
   logout: () => void;
+  verifyUser: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -102,8 +103,17 @@ function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   async function logout() {
-    await userServices.logout();
     dispatch({ type: ACTION.RESET });
+  }
+
+  async function verifyUser() {
+    dispatch({ type: ACTION.LOADING });
+    try {
+      const response = await userServices.getCurrentUser();
+      dispatch({ type: ACTION.SUCCESS, payload: response.data.user });
+    } catch (error: any) {
+      dispatch({ type: ACTION.ERROR, payload: error.response.data });
+    }
   }
 
   return (
@@ -117,6 +127,7 @@ function AuthProvider({ children }: { children: ReactNode }) {
         login,
         clearError,
         logout,
+        verifyUser,
       }}
     >
       {children}

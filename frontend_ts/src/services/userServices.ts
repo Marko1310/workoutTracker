@@ -13,4 +13,8 @@ const logout = async () => {
   return await workout_api.get('/identity/logout');
 };
 
-export default { signup, login, logout };
+const getCurrentUser = async () => {
+  return await workout_api.get('identity/me');
+};
+
+export default { signup, login, logout, getCurrentUser };
