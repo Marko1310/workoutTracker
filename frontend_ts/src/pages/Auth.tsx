@@ -4,7 +4,6 @@ import Image from '../components/Auth/Image';
 import AuthPanel from '../components/Auth/AuthPanel';
 import { useAuth } from '../context/AuthContext';
 
-//TODO: mvoe auth logic
 function Auth() {
   const { isAuthenticated } = useAuth()!;
   const navigate = useNavigate();

@@ -1,4 +1,10 @@
-import { ReactNode, createContext, useContext, useReducer } from 'react';
+import {
+  ReactNode,
+  createContext,
+  useCallback,
+  useContext,
+  useReducer,
+} from 'react';
 import userServices from '../services/userServices';
 import { LoginDto, SignupDto } from '../types/auth';
 
@@ -13,7 +19,7 @@ const ACTION = {
 type ActionType =
   | { type: 'loading' }
   | { type: 'clear_error' }
-  | { type: 'success'; payload: any }
+  | { type: 'success'; payload: string }
   | { type: 'error'; payload: any }
   | { type: 'reset' };
 
@@ -26,7 +32,7 @@ type AuthStateType = {
 
 const initalState: AuthStateType = {
   user: null,
-  isAuthenticated: false,
+  isAuthenticated: localStorage.getItem('user') !== null,
   isLoading: false,
   error: null,
 };
@@ -82,6 +88,7 @@ function AuthProvider({ children }: { children: ReactNode }) {
     dispatch({ type: ACTION.LOADING });
     try {
       const response = await userServices.signup(data);
+      userServices.addUserToLocalStorage(response.data.user);
       dispatch({ type: ACTION.SUCCESS, payload: response.data.user });
     } catch (error: any) {
       dispatch({ type: ACTION.ERROR, payload: error.response.data });
@@ -92,6 +99,7 @@ function AuthProvider({ children }: { children: ReactNode }) {
     dispatch({ type: ACTION.LOADING });
     try {
       const response = await userServices.login(data);
+      userServices.addUserToLocalStorage(response.data.user);
       dispatch({ type: ACTION.SUCCESS, payload: response.data.user });
     } catch (error: any) {
       dispatch({ type: ACTION.ERROR, payload: error.response.data });
@@ -103,18 +111,21 @@ function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   async function logout() {
+    await userServices.logout();
+    userServices.removeUserFromLocalStorage();
     dispatch({ type: ACTION.RESET });
   }
 
-  async function verifyUser() {
+  const verifyUser = useCallback(async () => {
     dispatch({ type: ACTION.LOADING });
     try {
       const response = await userServices.getCurrentUser();
+      userServices.addUserToLocalStorage(response.data.user);
       dispatch({ type: ACTION.SUCCESS, payload: response.data.user });
     } catch (error: any) {
       dispatch({ type: ACTION.ERROR, payload: error.response.data });
     }
-  }
+  }, [dispatch]);
 
   return (
     <AuthContext.Provider

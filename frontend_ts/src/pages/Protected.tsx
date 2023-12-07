@@ -3,14 +3,17 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 function Protected({ children }: { children: ReactNode }) {
-  const { isAuthenticated, isLoading } = useAuth()!;
+  const { isAuthenticated, isLoading, verifyUser } = useAuth()!;
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) navigate('/');
-  }, [isLoading, isAuthenticated]);
-
-  console.log(isAuthenticated);
+    (async function () {
+      await verifyUser();
+      if (!isAuthenticated) {
+        navigate('/');
+      }
+    })();
+  }, [isAuthenticated, navigate, verifyUser]);
 
   if (isLoading) {
     return <div>Loading</div>;

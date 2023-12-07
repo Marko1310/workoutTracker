@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 function Dashboard() {
   const { logout } = useAuth()!;
 
-  const handleLogout = (e: Event) => {
+  const handleLogout = (e: React.SyntheticEvent) => {
     e.preventDefault();
     logout();
   };

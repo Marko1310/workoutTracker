@@ -17,4 +17,19 @@ const getCurrentUser = async () => {
   return await workout_api.get('identity/me');
 };
 
-export default { signup, login, logout, getCurrentUser };
+const addUserToLocalStorage = (response: string) => {
+  localStorage.setItem('user', response);
+};
+
+const removeUserFromLocalStorage = () => {
+  localStorage.clear();
+};
+
+export default {
+  signup,
+  login,
+  logout,
+  getCurrentUser,
+  addUserToLocalStorage,
+  removeUserFromLocalStorage,
+};
