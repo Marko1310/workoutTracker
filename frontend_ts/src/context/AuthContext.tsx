@@ -123,6 +123,7 @@ function AuthProvider({ children }: { children: ReactNode }) {
       userServices.addUserToLocalStorage(response.data.user);
       dispatch({ type: ACTION.SUCCESS, payload: response.data.user });
     } catch (error: any) {
+      userServices.removeUserFromLocalStorage();
       dispatch({ type: ACTION.ERROR, payload: error.response.data });
     }
   }, [dispatch]);
