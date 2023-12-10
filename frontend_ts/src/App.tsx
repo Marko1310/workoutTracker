@@ -12,6 +12,7 @@ function App() {
           <Route path='' element={<Auth />} />
           <Route
             path='home'
+            index
             element={
               <Protected>
                 <Application />

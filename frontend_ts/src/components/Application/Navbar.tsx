@@ -1,5 +1,6 @@
 import { SyntheticEvent, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import NavButton from '../../ui/Auth/NavButton';
 
 function Navbar() {
   const { logout } = useAuth()!;
@@ -9,7 +10,7 @@ function Navbar() {
     logout();
   };
 
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleToggleNavbar = () => {
     setIsOpen(!isOpen);
@@ -34,17 +35,11 @@ function Navbar() {
       <div
         className={`${
           isOpen ? 'max-h-40' : 'max-h-0'
-        } justify-betweentransition-all flex h-fit flex-col items-center duration-300`}
+        } flex h-fit flex-col items-center justify-between transition-all duration-300`}
       >
-        <button className='h-14 w-full transition-all duration-300 hover:bg-slate-500'>
-          Home
-        </button>
-        <button className='h-14 w-full transition-all duration-300 hover:bg-slate-500'>
-          Dashboard
-        </button>
-        <button className='h-14 w-full transition-all duration-300 hover:bg-slate-500'>
-          Routines
-        </button>
+        <NavButton title='Home' route='home' />
+        <NavButton title='Dashboard' route='dashboard' />
+        <NavButton title='Routines' route='routines' />
       </div>
     </div>
   );
