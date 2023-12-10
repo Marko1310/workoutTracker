@@ -11,7 +11,7 @@ function App() {
         <Routes>
           <Route path='' element={<Auth />} />
           <Route
-            path='dashboard'
+            path='home'
             element={
               <Protected>
                 <Application />
