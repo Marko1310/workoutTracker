@@ -1,4 +1,4 @@
-import NavButton from './NavButton';
+import NavButton from '../Auth/NavButton';
 
 type SidebarButtonProps = {
   title: string;

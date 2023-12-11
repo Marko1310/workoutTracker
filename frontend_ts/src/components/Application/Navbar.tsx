@@ -1,8 +1,12 @@
 import { SyntheticEvent, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import NavButton from '../../ui/Auth/NavButton';
+import { UserDto } from '../../types/applications';
+import Avatar from '../../ui/Application/Avatar';
 
-function Navbar() {
+type NavbarProps = UserDto;
+
+function Navbar({ user }: { user: NavbarProps | null }) {
   const { logout } = useAuth()!;
 
   const handleLogout = (e: SyntheticEvent) => {
@@ -29,7 +33,7 @@ function Navbar() {
           >
             Logout
           </button>
-          <div>User</div>
+          <Avatar user={user} />
         </div>
       </div>
       <div

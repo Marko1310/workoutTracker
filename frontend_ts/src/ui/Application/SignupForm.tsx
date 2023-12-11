@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import LoginButton from './LoginButton';
+import LoginButton from '../Auth/LoginButton';
 import { useAuth } from '../../context/AuthContext';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import InputField from './InputField';
+import InputField from '../Auth/InputField';
 import { SignupDto, SignupDtoSchema } from '../../types/auth';
 
 function SignupForm() {

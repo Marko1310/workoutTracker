@@ -17,6 +17,10 @@ const getCurrentUser = async () => {
   return await workout_api.get('identity/me');
 };
 
+const getUser = async () => {
+  return await workout_api.get('identity/user');
+};
+
 const addUserToLocalStorage = (response: string) => {
   localStorage.setItem('user', response);
 };
@@ -32,4 +36,5 @@ export default {
   getCurrentUser,
   addUserToLocalStorage,
   removeUserFromLocalStorage,
+  getUser,
 };
