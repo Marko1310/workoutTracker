@@ -9,7 +9,7 @@ function Auth() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isAuthenticated) navigate('/home');
+    if (isAuthenticated) navigate('/app');
   }, [isAuthenticated, navigate]);
 
   return (

@@ -11,14 +11,17 @@ function App() {
         <Routes>
           <Route path='' element={<Auth />} />
           <Route
-            path='home'
-            index
+            path='app'
             element={
               <Protected>
                 <Application />
               </Protected>
             }
-          />
+          >
+            <Route index path='home' element={<p>Home</p>} />
+            <Route path='dashboard' element={<p>Dashboard</p>} />
+            <Route path='routines' element={<p>Routines</p>} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </AuthProvider>

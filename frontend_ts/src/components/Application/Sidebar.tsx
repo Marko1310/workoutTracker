@@ -22,7 +22,7 @@ function Sidebar({ user }: { user: SidebarProps | null }) {
         <div className='flex flex-col items-start align-baseline'>
           <SidebarButton title='Home' route='home' />
           <SidebarButton title='Dashboard' route='dashboard' />
-          <SidebarButton title='Routines' route='routine' />
+          <SidebarButton title='Routines' route='routines' />
         </div>
         <button
           className='h-14 w-full pl-2 text-left transition-all hover:bg-slate-500'

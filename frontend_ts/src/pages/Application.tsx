@@ -1,20 +1,10 @@
-import { useEffect, useState } from 'react';
 import Main from '../components/Application/Main';
 import Navbar from '../components/Application/Navbar';
 import Sidebar from '../components/Application/Sidebar';
-import userServices from '../services/userServices';
-import { AxiosResponse } from 'axios';
-import { UserDto } from '../types/applications';
+import { useAuth } from '../context/AuthContext';
 
 function Application() {
-  const [user, setUser] = useState<UserDto | null>(null);
-  useEffect(() => {
-    const getUser = async () => {
-      const res: AxiosResponse = await userServices.getUser();
-      setUser(res.data);
-    };
-    getUser();
-  }, []);
+  const { user } = useAuth()!;
 
   return (
     <div className='flex flex-col'>

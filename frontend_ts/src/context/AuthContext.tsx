@@ -7,6 +7,7 @@ import {
 } from 'react';
 import userServices from '../services/userServices';
 import { LoginDto, SignupDto } from '../types/auth';
+import { UserDto } from '../types/applications';
 
 const ACTION = {
   LOADING: 'loading',
@@ -19,12 +20,12 @@ const ACTION = {
 type ActionType =
   | { type: 'loading' }
   | { type: 'clear_error' }
-  | { type: 'success'; payload: string }
+  | { type: 'success'; payload: UserDto }
   | { type: 'error'; payload: any }
   | { type: 'reset' };
 
 type AuthStateType = {
-  user: null | string;
+  user: UserDto | null;
   isAuthenticated: boolean;
   isLoading: boolean;
   error: any;
@@ -88,8 +89,8 @@ function AuthProvider({ children }: { children: ReactNode }) {
     dispatch({ type: ACTION.LOADING });
     try {
       const response = await userServices.signup(data);
-      userServices.addUserToLocalStorage(response.data.user);
-      dispatch({ type: ACTION.SUCCESS, payload: response.data.user });
+      userServices.addUserToLocalStorage(response.data);
+      dispatch({ type: ACTION.SUCCESS, payload: response.data });
     } catch (error: any) {
       dispatch({ type: ACTION.ERROR, payload: error.response.data });
     }
@@ -99,8 +100,10 @@ function AuthProvider({ children }: { children: ReactNode }) {
     dispatch({ type: ACTION.LOADING });
     try {
       const response = await userServices.login(data);
-      userServices.addUserToLocalStorage(response.data.user);
-      dispatch({ type: ACTION.SUCCESS, payload: response.data.user });
+      console.log(response);
+
+      userServices.addUserToLocalStorage(response.data);
+      dispatch({ type: ACTION.SUCCESS, payload: response.data });
     } catch (error: any) {
       dispatch({ type: ACTION.ERROR, payload: error.response.data });
     }
@@ -119,9 +122,9 @@ function AuthProvider({ children }: { children: ReactNode }) {
   const verifyUser = useCallback(async () => {
     dispatch({ type: ACTION.LOADING });
     try {
-      const response = await userServices.getCurrentUser();
-      userServices.addUserToLocalStorage(response.data.user);
-      dispatch({ type: ACTION.SUCCESS, payload: response.data.user });
+      const response = await userServices.getUser();
+      userServices.addUserToLocalStorage(response.data);
+      dispatch({ type: ACTION.SUCCESS, payload: response.data });
     } catch (error: any) {
       userServices.removeUserFromLocalStorage();
       dispatch({ type: ACTION.ERROR, payload: error.response.data });

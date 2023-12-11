@@ -1,3 +1,4 @@
+import { UserDto } from '../types/applications';
 import { LoginDto, SignupDto } from '../types/auth';
 import { workout_api } from './api_config';
 
@@ -13,16 +14,14 @@ const logout = async () => {
   return await workout_api.get('/identity/logout');
 };
 
-const getCurrentUser = async () => {
-  return await workout_api.get('identity/me');
-};
-
 const getUser = async () => {
   return await workout_api.get('identity/user');
 };
 
-const addUserToLocalStorage = (response: string) => {
-  localStorage.setItem('user', response);
+const addUserToLocalStorage = (response: UserDto) => {
+  const user = JSON.stringify(response);
+
+  localStorage.setItem('user', user);
 };
 
 const removeUserFromLocalStorage = () => {
@@ -33,8 +32,7 @@ export default {
   signup,
   login,
   logout,
-  getCurrentUser,
+  getUser,
   addUserToLocalStorage,
   removeUserFromLocalStorage,
-  getUser,
 };
