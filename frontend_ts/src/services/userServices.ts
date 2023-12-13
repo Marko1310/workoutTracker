@@ -18,13 +18,13 @@ const getUser = async () => {
   return await workout_api.get('identity/user');
 };
 
-const addUserToLocalStorage = (response: UserDto) => {
+const addUserLocalStorage = (response: UserDto) => {
   const user = JSON.stringify(response);
 
   localStorage.setItem('user', user);
 };
 
-const removeUserFromLocalStorage = () => {
+const removeUserLocalStorage = () => {
   localStorage.clear();
 };
 
@@ -33,6 +33,6 @@ export default {
   login,
   logout,
   getUser,
-  addUserToLocalStorage,
-  removeUserFromLocalStorage,
+  addUserLocalStorage,
+  removeUserLocalStorage,
 };

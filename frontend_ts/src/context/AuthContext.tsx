@@ -89,7 +89,7 @@ function AuthProvider({ children }: { children: ReactNode }) {
     dispatch({ type: ACTION.LOADING });
     try {
       const response = await userServices.signup(data);
-      userServices.addUserToLocalStorage(response.data);
+      userServices.addUserLocalStorage(response.data);
       dispatch({ type: ACTION.SUCCESS, payload: response.data });
     } catch (error: any) {
       dispatch({ type: ACTION.ERROR, payload: error.response.data });
@@ -102,7 +102,7 @@ function AuthProvider({ children }: { children: ReactNode }) {
       const response = await userServices.login(data);
       console.log(response);
 
-      userServices.addUserToLocalStorage(response.data);
+      userServices.addUserLocalStorage(response.data);
       dispatch({ type: ACTION.SUCCESS, payload: response.data });
     } catch (error: any) {
       dispatch({ type: ACTION.ERROR, payload: error.response.data });
@@ -115,7 +115,7 @@ function AuthProvider({ children }: { children: ReactNode }) {
 
   async function logout() {
     await userServices.logout();
-    userServices.removeUserFromLocalStorage();
+    userServices.removeUserLocalStorage();
     dispatch({ type: ACTION.RESET });
   }
 
@@ -123,10 +123,10 @@ function AuthProvider({ children }: { children: ReactNode }) {
     dispatch({ type: ACTION.LOADING });
     try {
       const response = await userServices.getUser();
-      userServices.addUserToLocalStorage(response.data);
+      userServices.addUserLocalStorage(response.data);
       dispatch({ type: ACTION.SUCCESS, payload: response.data });
     } catch (error: any) {
-      userServices.removeUserFromLocalStorage();
+      userServices.removeUserLocalStorage();
       dispatch({ type: ACTION.ERROR, payload: error.response.data });
     }
   }, [dispatch]);
