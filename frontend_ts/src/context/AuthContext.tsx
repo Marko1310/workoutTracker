@@ -100,7 +100,6 @@ function AuthProvider({ children }: { children: ReactNode }) {
     dispatch({ type: ACTION.LOADING });
     try {
       const response = await userServices.login(data);
-      console.log(response);
 
       userServices.addUserLocalStorage(response.data);
       dispatch({ type: ACTION.SUCCESS, payload: response.data });

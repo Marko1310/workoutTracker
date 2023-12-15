@@ -5,6 +5,7 @@ import { AuthProvider } from './context/AuthContext';
 import Protected from './pages/Protected';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Home from './components/Home/Home';
 
 const queryCLient = new QueryClient();
 
@@ -23,7 +24,7 @@ function App() {
                 </Protected>
               }
             >
-              <Route index path='home' element={<p>Home</p>} />
+              <Route index path='home' element={<Home />} />
               <Route path='dashboard' element={<p>Dashboard</p>} />
               <Route path='routines' element={<p>Routines</p>} />
             </Route>

@@ -18,6 +18,7 @@ function Protected({ children }: { children: ReactNode }) {
   if (isLoading) {
     return <div>Loading</div>;
   }
+
   if (isAuthenticated && !isLoading) {
     return <>{children}</>;
   }
