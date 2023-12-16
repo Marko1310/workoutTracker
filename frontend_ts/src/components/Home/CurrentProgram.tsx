@@ -7,7 +7,7 @@ function CurrentProgram() {
 
   const {
     data: currentProgram,
-    laoding,
+    isLoading,
     error,
   } = useQuery({
     queryKey: ['programs', user?.id],
@@ -19,7 +19,9 @@ function CurrentProgram() {
     <div className='h-32 w-full rounded-xl border-2 border-sky-500 p-2'>
       <div className='flex gap-2'>
         <h1> Your current Program:</h1>
-        <h1>{currentProgram?.data.workout_split_name} </h1>
+        <h1>
+          {isLoading ? 'loading' : currentProgram?.data.workout_split_name}
+        </h1>
       </div>
     </div>
   );
