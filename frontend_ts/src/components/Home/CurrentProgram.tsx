@@ -20,7 +20,7 @@ function CurrentProgram() {
           {isLoading
             ? 'loading'
             : workoutsForProgram?.data.map((el: WorkoutDto) => {
-                return <h1>{el.workout_name}</h1>;
+                return <h1 key={el.id}>{el.workout_name}</h1>;
               })}
         </div>
       </div>
