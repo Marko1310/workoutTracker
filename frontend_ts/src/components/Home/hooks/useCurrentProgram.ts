@@ -1,3 +1,4 @@
+import { ProgramDto, WorkoutDto } from '../../../types/workoutData';
 import { useCurrentProgram } from '../queries/currentProgramQuerie';
 import { useWorkoutsForProgram } from '../queries/workoutsForProgramQuerie';
 
@@ -7,13 +8,17 @@ export const useCurrentProgramData = (userId: number | undefined) => {
     isLoading: loadingProgram,
     error: errorProgram,
   } = useCurrentProgram(userId);
-  // const currentProgramData = currentProgram?.data;
+  const currentProgramData: ProgramDto = currentProgram?.data;
 
-  const { workoutsForProgram, laodingWorkouts, errorWorkouts } =
-    useWorkoutsForProgram(userId, currentProgram?.data.workout_split_id);
+  const {
+    data,
+    isLoading: laodingWorkouts,
+    error: errorWorkouts,
+  } = useWorkoutsForProgram(userId, currentProgramData?.programs_id);
+  const workoutsForProgramData: WorkoutDto[] = data?.data;
 
   const isLoading = loadingProgram || laodingWorkouts;
   const error = errorProgram || errorWorkouts;
 
-  return { currentProgram, workoutsForProgram, isLoading, error };
+  return { currentProgramData, workoutsForProgramData, isLoading, error };
 };

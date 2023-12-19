@@ -2,8 +2,8 @@ import { z } from 'zod';
 
 const ProgramSchema = z.object({
   days: z.number(),
-  id: z.number(),
-  workout_split_name: z.string(),
+  programs_id: z.number(),
+  programs_name: z.string(),
 });
 export type ProgramDto = z.infer<typeof ProgramSchema>;
 

@@ -17,14 +17,14 @@ function PreviousWorkout() {
 
         {isLoading
           ? 'loading'
-          : workoutExercisesArray?.map((el) => {
+          : workoutExercisesArray?.map((exercise) => {
               return (
-                <div key={el.exercises_id} className='flex'>
-                  <h1 className='items-stretch'>{el.exercise_name}:</h1>
+                <div key={exercise.exercises_id} className='flex'>
+                  <h1 className='items-stretch'>{exercise.exercise_name}:</h1>
                   <div className='flex gap-2'>
-                    {el.sessionsData.map((session) => {
+                    {exercise.sessionsData.map((session) => {
                       return (
-                        <h1>
+                        <h1 key={session.sessions_id}>
                           {session.reps}x{session.weight},
                         </h1>
                       );

@@ -5,16 +5,12 @@ export const useWorkoutsForProgram = (
   userId: number | undefined,
   programId: number,
 ) => {
-  const {
-    data: workoutsForProgram,
-    isLoading: laodingWorkouts,
-    error: errorWorkouts,
-  } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ['workoutsForProgram', programId],
     queryFn: () =>
       workoutServices.getWorkoutsFromCurrentProgram(userId, programId),
     enabled: !!programId,
   });
 
-  return { workoutsForProgram, laodingWorkouts, errorWorkouts };
+  return { data, isLoading, error };
 };

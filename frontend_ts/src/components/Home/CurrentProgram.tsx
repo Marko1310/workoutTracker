@@ -1,11 +1,10 @@
 import { useAuth } from '../../context/AuthContext';
-import { WorkoutDto } from '../../types/workoutData';
 import { useCurrentProgramData } from './hooks/useCurrentProgram';
 
 function CurrentProgram() {
   const { user } = useAuth()!;
 
-  const { currentProgram, workoutsForProgram, isLoading, error } =
+  const { currentProgramData, workoutsForProgramData, isLoading, error } =
     useCurrentProgramData(user?.id);
 
   return (
@@ -14,13 +13,15 @@ function CurrentProgram() {
         <div className='flex flex-col'>
           <h1>
             Your current Program:
-            {isLoading ? 'loading' : currentProgram?.data.workout_split_name}
+            {isLoading ? 'loading' : currentProgramData?.programs_name}
           </h1>
 
           {isLoading
             ? 'loading'
-            : workoutsForProgram?.data.map((el: WorkoutDto) => {
-                return <h1 key={el.id}>{el.workout_name}</h1>;
+            : workoutsForProgramData?.map((workout) => {
+                return (
+                  <h1 key={workout.workouts_id}>{workout.workout_name}</h1>
+                );
               })}
         </div>
       </div>
