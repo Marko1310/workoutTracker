@@ -7,13 +7,15 @@ function PreviousWorkout() {
     usePreviousWorkoutData(user?.id);
 
   return (
-    <div className='h-40 w-full rounded-xl border-2 border-sky-500 p-2'>
-      <div className='flex h-full flex-col overflow-hidden'>
-        <h1>
-          Previous workout:
-          {isLoading ? 'loading' : previousWorkout?.result.workout_name}
-        </h1>
-        <h1> Week {previousWorkout?.week}</h1>
+    <div className='h-32 w-full rounded-xl border-2 border-sky-500 p-2'>
+      <div className='flex max-h-full flex-col overflow-hidden border-2 border-red-500'>
+        <div className='mb-2 flex justify-between'>
+          <h1>
+            Previous workout:
+            {isLoading ? 'loading' : previousWorkout?.result.workout_name}
+          </h1>
+          <h1> Week {previousWorkout?.week}</h1>
+        </div>
 
         {isLoading
           ? 'loading'
@@ -25,7 +27,7 @@ function PreviousWorkout() {
                     {exercise.sessionsData.map((session) => {
                       return (
                         <h1 key={session.sessions_id}>
-                          {session.reps}x{session.weight},
+                          {session.weight}x{session.reps},
                         </h1>
                       );
                     })}

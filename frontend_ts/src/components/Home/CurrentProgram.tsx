@@ -1,5 +1,5 @@
 import { useAuth } from '../../context/AuthContext';
-import { useCurrentProgramData } from './hooks/useCurrentProgram';
+import { useCurrentProgramData } from '../../hooks/useCurrentProgram';
 
 function CurrentProgram() {
   const { user } = useAuth()!;
