@@ -8,22 +8,24 @@ function CurrentProgram() {
     useCurrentProgramData(user?.id);
 
   return (
-    <div className='h-32 w-full rounded-xl border-2 border-sky-500 p-2'>
-      <div className='flex gap-2'>
-        <div className='flex flex-col'>
-          <h1>
-            Your current Program:
-            {isLoading ? 'loading' : currentProgramData?.programs_name}
-          </h1>
-
-          {isLoading
-            ? 'loading'
-            : workoutsForProgramData?.map((workout) => {
-                return (
-                  <h1 key={workout.workouts_id}>{workout.workout_name}</h1>
-                );
-              })}
+    <div className='h-full w-full rounded-xl border-2 border-sky-500 p-2'>
+      <div className='flex max-h-full flex-col overflow-hidden'>
+        <div className='mb-2 flex gap-2'>
+          <h1>Your current Program:</h1>
+          {isLoading ? 'loading' : <h1>{currentProgramData?.programs_name}</h1>}
         </div>
+
+        <h1>Workouts: </h1>
+        {isLoading
+          ? 'loading'
+          : workoutsForProgramData?.map((workout, index) => {
+              return (
+                <div key={workout.workouts_id} className='flex gap-2 pl-4'>
+                  <h1>{`Day ${index + 1}:`}</h1>
+                  <h1>{workout.workout_name}</h1>
+                </div>
+              );
+            })}
       </div>
     </div>
   );

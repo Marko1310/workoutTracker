@@ -7,34 +7,39 @@ function PreviousWorkout() {
     usePreviousWorkoutData(user?.id);
 
   return (
-    <div className='h-32 w-full rounded-xl border-2 border-sky-500 p-2'>
-      <div className='flex max-h-full flex-col overflow-hidden border-2 border-red-500'>
+    <div className='h-full w-full rounded-xl border-2 border-sky-500 p-2'>
+      <div className='flex max-h-full flex-col overflow-hidden'>
         <div className='mb-2 flex justify-between'>
-          <h1>
-            Previous workout:
-            {isLoading ? 'loading' : previousWorkout?.result.workout_name}
-          </h1>
+          <div className='flex gap-2'>
+            <h1>Your previous workout:</h1>
+            <h2>
+              {isLoading ? 'loading' : previousWorkout?.result.workout_name}
+            </h2>
+          </div>
           <h1> Week {previousWorkout?.week}</h1>
         </div>
 
-        {isLoading
-          ? 'loading'
-          : workoutExercisesArray?.map((exercise) => {
-              return (
-                <div key={exercise.exercises_id} className='flex'>
-                  <h1 className='items-stretch'>{exercise.exercise_name}:</h1>
-                  <div className='flex gap-2'>
-                    {exercise.sessionsData.map((session) => {
-                      return (
-                        <h1 key={session.sessions_id}>
-                          {session.weight}x{session.reps},
-                        </h1>
-                      );
-                    })}
+        <div>
+          <h1>Exercises: </h1>
+          {isLoading
+            ? 'loading'
+            : workoutExercisesArray?.map((exercise) => {
+                return (
+                  <div key={exercise.exercises_id} className='flex gap-2 pl-4 '>
+                    <h2 className='items-stretch'>{exercise.exercise_name}:</h2>
+                    <div className='flex gap-2'>
+                      {exercise.sessionsData.map((session) => {
+                        return (
+                          <h2 key={session.sessions_id}>
+                            {session.weight}x{session.reps},
+                          </h2>
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+        </div>
       </div>
     </div>
   );
