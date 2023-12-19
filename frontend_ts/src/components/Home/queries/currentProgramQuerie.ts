@@ -2,15 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import workoutServices from '../../../services/workoutServices';
 
 export const useCurrentProgram = (userId: number | undefined) => {
-  const {
-    data: currentProgram,
-    isLoading: loadingProgram,
-    error: errorProgram,
-  } = useQuery({
-    queryKey: ['programs', userId],
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['currentProgram', userId],
     queryFn: () => workoutServices.getCurrentProgram(userId),
     enabled: !!userId,
   });
 
-  return { currentProgram, loadingProgram, errorProgram };
+  return { data, isLoading, error };
 };

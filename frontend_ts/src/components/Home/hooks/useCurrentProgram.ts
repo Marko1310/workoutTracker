@@ -2,11 +2,15 @@ import { useCurrentProgram } from '../queries/currentProgramQuerie';
 import { useWorkoutsForProgram } from '../queries/workoutsForProgramQuerie';
 
 export const useCurrentProgramData = (userId: number | undefined) => {
-  const { currentProgram, loadingProgram, errorProgram } =
-    useCurrentProgram(userId);
+  const {
+    data: currentProgram,
+    isLoading: loadingProgram,
+    error: errorProgram,
+  } = useCurrentProgram(userId);
+  // const currentProgramData = currentProgram?.data;
 
   const { workoutsForProgram, laodingWorkouts, errorWorkouts } =
-    useWorkoutsForProgram(userId, currentProgram?.data.id);
+    useWorkoutsForProgram(userId, currentProgram?.data.workout_split_id);
 
   const isLoading = loadingProgram || laodingWorkouts;
   const error = errorProgram || errorWorkouts;

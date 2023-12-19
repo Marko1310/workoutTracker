@@ -5,12 +5,34 @@ const ProgramSchema = z.object({
   id: z.number(),
   workout_split_name: z.string(),
 });
-
 export type ProgramDto = z.infer<typeof ProgramSchema>;
 
 const WorkoutSchema = z.object({
-  id: z.number(),
+  workouts_id: z.number(),
   workout_name: z.string(),
 });
-
 export type WorkoutDto = z.infer<typeof WorkoutSchema>;
+
+const sessionSchema = z.object({
+  sessions_id: z.number(),
+  set: z.number(),
+  weight: z.number(),
+  reps: z.number(),
+  week: z.number(),
+});
+const sessionsDataSchema = z.array(sessionSchema);
+const exerciseDetailsSchema = z.object({
+  exercises_id: z.number(),
+  exercise_name: z.string(),
+  goal_sets: z.number(),
+  goal_reps: z.number(),
+  sessionsData: sessionsDataSchema,
+});
+const exercisesArraySchema = z.array(exerciseDetailsSchema);
+export type exercisesArrayDto = z.infer<typeof exercisesArraySchema>;
+
+const previousWorkoutSchema = z.object({
+  result: WorkoutSchema,
+  week: z.number(),
+});
+export type previousWorkoutDto = z.infer<typeof previousWorkoutSchema>;
