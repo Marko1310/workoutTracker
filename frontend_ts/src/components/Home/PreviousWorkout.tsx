@@ -13,7 +13,7 @@ function PreviousWorkout() {
           <div className='flex gap-2'>
             <h1>Your previous workout:</h1>
             <h2>
-              {isLoading ? 'loading' : previousWorkout?.result.workout_name}
+              {isLoading ? 'loading' : previousWorkout?.workouts.workout_name}
             </h2>
           </div>
           <h1> Week {previousWorkout?.week}</h1>
@@ -28,7 +28,7 @@ function PreviousWorkout() {
                   <div key={exercise.exercises_id} className='flex gap-2 pl-4 '>
                     <h2 className='items-stretch'>{exercise.exercise_name}:</h2>
                     <div className='flex gap-2'>
-                      {exercise.sessionsData.map((session) => {
+                      {exercise.sessions.map((session) => {
                         return (
                           <h2 key={session.sessions_id}>
                             {session.weight}x{session.reps},

@@ -26,13 +26,13 @@ const exerciseDetailsSchema = z.object({
   exercise_name: z.string(),
   goal_sets: z.number(),
   goal_reps: z.number(),
-  sessionsData: sessionsDataSchema,
+  sessions: sessionsDataSchema,
 });
 const exercisesArraySchema = z.array(exerciseDetailsSchema);
 export type exercisesArrayDto = z.infer<typeof exercisesArraySchema>;
 
 const previousWorkoutSchema = z.object({
-  result: WorkoutSchema,
+  workouts: WorkoutSchema,
   week: z.number(),
 });
 export type previousWorkoutDto = z.infer<typeof previousWorkoutSchema>;

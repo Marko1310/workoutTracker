@@ -9,7 +9,8 @@ export const useDetailsForWorkout = (workoutId: number, week: number) => {
     enabled: !!workoutId,
   });
 
-  const workoutExercisesArray: exercisesArrayDto = data?.data;
+  //TODO: preetier
+  const workoutExercisesArray: exercisesArrayDto = data?.data[0].exercises;
 
   return { workoutExercisesArray, isLoading, error };
 };
