@@ -16,7 +16,6 @@ export const usePreviousWorkoutData = (userId: number | undefined) => {
     previousWorkout?.workouts.workouts_id,
     previousWorkout?.week,
   );
-  console.log(workoutExercisesArray);
 
   const isLoading = loadingWorkout || loadingExercises;
   const error = errorWorkout || errorExercises;
