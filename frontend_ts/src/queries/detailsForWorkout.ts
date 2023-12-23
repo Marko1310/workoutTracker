@@ -10,7 +10,7 @@ export const useDetailsForWorkout = (workoutId: number, week: number) => {
   });
 
   //TODO: preetier
-  const workoutExercisesArray: exercisesArrayDto = data?.data[0].exercises;
+  const workoutExercisesArray: exercisesArrayDto = data?.data[0]?.exercises;
 
   return { workoutExercisesArray, isLoading, error };
 };

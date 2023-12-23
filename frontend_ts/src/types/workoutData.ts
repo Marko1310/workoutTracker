@@ -36,3 +36,12 @@ const previousWorkoutSchema = z.object({
   week: z.number(),
 });
 export type previousWorkoutDto = z.infer<typeof previousWorkoutSchema>;
+
+const workoutLogSchema = z.object({
+  createDateTime: z.string(),
+  lastChangedDateTime: z.string(),
+  week: z.number(),
+  workouts_log_id: z.number(),
+});
+const workoutLogArraySchema = z.array(workoutLogSchema);
+export type workoutLogDto = z.infer<typeof workoutLogArraySchema>;
