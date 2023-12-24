@@ -15,13 +15,21 @@ function Heatmap() {
   );
 
   const { heatMapData } = useHeatmapData(year, workoutLogsByYear);
-
+  const handleYearChange = (e: React.FormEvent<HTMLSelectElement>) => {
+    setYear(e.target.value);
+  };
   return (
     <div className='w-full border-2 border-blue-400'>
       <div className='flex flex-col items-center'>
         <div className='mb-4 flex w-full justify-between'>
-          <h2>Your workout calendar by year</h2>
-          <button>Year</button>
+          <h2>Your workout calendar by year:</h2>
+
+          <select id='year-select' onChange={handleYearChange}>
+            <option value='2023'>2023</option>
+            <option value='2022'>2022</option>
+            <option value='2021'>2021</option>
+            <option value='2020'>2020</option>
+          </select>
         </div>
 
         <ActivityCalendar
