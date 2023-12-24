@@ -7,7 +7,7 @@ type SidebarButtonProps = {
 
 function SidebarButton({ title, route }: SidebarButtonProps) {
   return (
-    <div className='flex w-full flex-row items-center justify-start gap-4 pl-8 transition-all duration-300 hover:bg-slate-500'>
+    <div className='flex w-full flex-row items-center justify-start gap-4 px-8 transition-all duration-300 hover:bg-slate-500'>
       <div>icon</div>
       <NavButton title={title} route={route} />
     </div>

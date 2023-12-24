@@ -17,23 +17,32 @@ function Heatmap() {
   const { heatMapData } = useHeatmapData(year, workoutLogsByYear);
 
   return (
-    <ActivityCalendar
-      data={heatMapData}
-      blockSize={14}
-      blockMargin={5}
-      theme={{
-        light: ['#C3C0BF', '#F25B3B'],
-        dark: ['#C3C0BF', '#F25B3B'],
-      }}
-      renderBlock={(block, activity) => (
-        <MuiTooltip title={`${activity.count} workout on ${activity.date}`}>
-          {block}
-        </MuiTooltip>
-      )}
-      hideTotalCount
-      hideColorLegend
-      showWeekdayLabels
-    />
+    <div className='w-full border-2 border-blue-400'>
+      <div className='flex flex-col items-center'>
+        <div className='mb-4 flex w-full justify-between'>
+          <h2>Your workout calendar by year</h2>
+          <button>Year</button>
+        </div>
+
+        <ActivityCalendar
+          data={heatMapData}
+          blockSize={14}
+          blockMargin={5}
+          theme={{
+            light: ['#C3C0BF', '#F25B3B'],
+            dark: ['#C3C0BF', '#F25B3B'],
+          }}
+          renderBlock={(block, activity) => (
+            <MuiTooltip title={`${activity.count} workout on ${activity.date}`}>
+              {block}
+            </MuiTooltip>
+          )}
+          hideTotalCount
+          hideColorLegend
+          showWeekdayLabels
+        />
+      </div>
+    </div>
   );
 }
 
