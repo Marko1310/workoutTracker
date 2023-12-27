@@ -25,7 +25,7 @@ function Sidebar({ user }: { user: SidebarProps | null }) {
           <SidebarButton title='Programs' route='programs' />
         </div>
         <button
-          className='h-14 w-full pl-2 text-left transition-all hover:bg-slate-500'
+          className='transition-al h-14 w-full pl-2 text-left'
           onClick={handleLogout}
         >
           Logout

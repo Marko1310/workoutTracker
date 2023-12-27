@@ -27,12 +27,7 @@ function Navbar({ user }: { user: NavbarProps | null }) {
       <div className='flex h-16 w-full flex-row items-center justify-between gap-4 px-4'>
         <button onClick={handleToggleNavbar}>Icon</button>
         <div className='flex gap-6'>
-          <button
-            className='transition-all hover:bg-slate-500'
-            onClick={handleLogout}
-          >
-            Logout
-          </button>
+          <button onClick={handleLogout}>Logout</button>
           <Avatar user={user} />
         </div>
       </div>

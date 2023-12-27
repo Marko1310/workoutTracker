@@ -8,7 +8,10 @@ function NavButton({ title, route }: NavButtonProps) {
   const navigate = useNavigate();
 
   return (
-    <button onClick={() => navigate(`./${route}`)} className='h-14'>
+    <button
+      onClick={() => navigate(`./${route}`)}
+      className='h-14 w-full text-start'
+    >
       {title}
     </button>
   );
