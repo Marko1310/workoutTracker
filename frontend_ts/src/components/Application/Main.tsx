@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 
 function Main() {
   return (
-    <div className='h-screen w-full border border-blue-700 pt-16 md:pt-0'>
+    <div className='h-screen w-full overflow-y-auto border border-blue-700 pt-24 md:p-10'>
       <Outlet />
     </div>
   );

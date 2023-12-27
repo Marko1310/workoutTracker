@@ -43,7 +43,7 @@ function Navbar({ user }: { user: NavbarProps | null }) {
       >
         <NavButton title='Home' route='home' />
         <NavButton title='Dashboard' route='dashboard' />
-        <NavButton title='Routines' route='routines' />
+        <NavButton title='Programs' route='programs' />
       </div>
     </div>
   );

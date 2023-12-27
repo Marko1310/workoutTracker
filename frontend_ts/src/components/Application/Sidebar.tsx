@@ -15,14 +15,14 @@ function Sidebar({ user }: { user: SidebarProps | null }) {
   };
 
   return (
-    <aside className='hidden border-r border-red-700 bg-white transition-all duration-300 md:flex md:h-screen md:w-64 md:flex-col'>
+    <aside className='hidden border-r border-red-700 bg-white transition-all duration-300 md:flex md:h-screen md:w-80 md:flex-col'>
       <Avatar user={user} />
 
       <div className='flex h-full w-full flex-col justify-between text-left'>
         <div className='flex w-full flex-col items-start align-baseline'>
           <SidebarButton title='Home' route='home' />
           <SidebarButton title='Dashboard' route='dashboard' />
-          <SidebarButton title='Routines' route='routines' />
+          <SidebarButton title='Programs' route='programs' />
         </div>
         <button
           className='h-14 w-full pl-2 text-left transition-all hover:bg-slate-500'
