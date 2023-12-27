@@ -1,17 +1,21 @@
 import { z } from 'zod';
 
-const ProgramSchema = z.object({
-  days: z.number(),
-  programs_id: z.number(),
-  programs_name: z.string(),
-});
-export type ProgramDto = z.infer<typeof ProgramSchema>;
-
 const WorkoutSchema = z.object({
   workouts_id: z.number(),
   workout_name: z.string(),
 });
 export type WorkoutDto = z.infer<typeof WorkoutSchema>;
+
+const ProgramSchema = z.object({
+  days: z.number(),
+  programs_id: z.number(),
+  programs_name: z.string(),
+  workouts: z.array(WorkoutSchema),
+});
+export type ProgramDto = z.infer<typeof ProgramSchema>;
+
+const AllProgramSchema = z.array(ProgramSchema);
+export type AllProgramsDto = z.infer<typeof AllProgramSchema>;
 
 const sessionSchema = z.object({
   sessions_id: z.number(),

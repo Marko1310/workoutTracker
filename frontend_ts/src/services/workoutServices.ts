@@ -1,5 +1,9 @@
 import { workout_api } from './api_config';
 
+const getAllPrograms = async (userId: number | undefined) => {
+  return await workout_api.get(`programs/${userId}`);
+};
+
 const getAllWorkouts = async (userId: number) => {
   return await workout_api.get(`workouts/${userId}`);
 };
@@ -33,6 +37,7 @@ const getAllWokoutLogsByYear = async (
 };
 
 export default {
+  getAllPrograms,
   getAllWorkouts,
   getCurrentProgram,
   getWorkoutsFromCurrentProgram,
