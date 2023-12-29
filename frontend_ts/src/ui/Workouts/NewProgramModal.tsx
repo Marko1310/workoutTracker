@@ -1,7 +1,9 @@
-import { ReactNode } from 'react';
+import InputField from '../Forms/InputField';
+import FormTitle from '../Forms/FormTitle';
+import Select from '../Forms/Select';
 import { useForm } from 'react-hook-form';
-import { AddNewProgramDto, AddNewProgramSchema } from '../../types/forms';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { AddNewProgramDto, AddNewProgramSchema } from '../../types/forms';
 
 function NewProgramModal() {
   const {
@@ -11,47 +13,34 @@ function NewProgramModal() {
   } = useForm<AddNewProgramDto>({
     resolver: zodResolver(AddNewProgramSchema),
   });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data: AddNewProgramDto) => console.log(data);
 
+  const days = [1, 2, 3, 4, 5, 6, 7];
   return (
     <form
       className='flex w-96 flex-col gap-4 p-4'
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h1 className='text-center text-xl font-bold uppercase'>
-        Add new Program
-      </h1>
+      <FormTitle title='Add new program' />
       <div className='flex flex-col gap-1'>
         <label>Program Title</label>
-        <input
+        <InputField
+          name='title'
+          register={register}
           placeholder='e.g. Push / Pull / Legs'
-          className='h-14 w-full rounded-md border-[1px] border-neutral-400 pl-2 font-montserrat text-lg font-light transition-all focus-within:border-2 hover:border-2 hover:border-neutral-400 focus:border-neutral-600 focus:outline-none'
-          {...register('title', { required: true })}
+          errors={errors}
         />
-        {errors.title && (
-          <p className='text-red-500'>{errors?.title?.message as ReactNode}</p>
-        )}
       </div>
 
       <div className='flex flex-col gap-1'>
         <label>Days per week</label>
-        <select
+        <Select
+          name='days'
           defaultValue=''
-          className='h-14 w-full rounded-md border-[1px] border-neutral-400 pl-2 focus-within:border-2 hover:border-2 hover:border-neutral-400 focus:border-neutral-600 focus:outline-none'
-          {...register('days', { setValueAs: (value) => Number(value) })}
-        >
-          <option value='' disabled></option>
-          <option value='1'>1</option>
-          <option value='2'>2</option>
-          <option value='3'>3</option>
-          <option value='4'>4</option>
-          <option value='5'>5</option>
-          <option value='6'>6</option>
-          <option value='7'>7</option>
-        </select>
-        {errors.days && (
-          <p className='text-red-500'>{errors?.days?.message as ReactNode}</p>
-        )}
+          options={days}
+          register={register}
+          errors={errors}
+        />
       </div>
 
       <button

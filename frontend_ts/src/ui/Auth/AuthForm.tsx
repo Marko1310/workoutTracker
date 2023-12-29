@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import FormTitle from './FormTitle';
+import AuthFormTitle from './AuthFormTitle';
 import SwitchForm from './SwitchForm';
 import LoginForm from './LoginForm';
 import SignupForm from '../Application/SignupForm';
@@ -23,7 +23,7 @@ function AuthForm() {
 
   return (
     <>
-      <FormTitle formType={formType} />
+      <AuthFormTitle formType={formType} />
       {formType === 'signup' ? <SignupForm /> : <LoginForm />}
       <SwitchForm formType={formType} changeForm={changeForm} />
     </>
