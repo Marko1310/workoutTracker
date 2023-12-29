@@ -1,5 +1,7 @@
-import { useDetailsForWorkout } from '../queries/detailsForWorkout';
-import { usePreviousWorkout } from '../queries/previousWorkoutQuerie';
+import {
+  useDetailsForWorkout,
+  usePreviousWorkout,
+} from '../queries/workoutQueries';
 
 export const usePreviousWorkoutData = (userId: number | undefined) => {
   const {

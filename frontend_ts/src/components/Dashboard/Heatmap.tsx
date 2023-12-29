@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { useWorkoutLogsByYear } from '../../queries/workoutLogsByYearQuerie';
 import { Tooltip as MuiTooltip } from '@mui/material';
 import ActivityCalendar from 'react-activity-calendar';
 import { useHeatmapData } from '../../hooks/useHeatmapData';
+import { useWorkoutLogsByYear } from '../../queries/workoutQueries';
 
 function Heatmap() {
   const { user } = useAuth()!;

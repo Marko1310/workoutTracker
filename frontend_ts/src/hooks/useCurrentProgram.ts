@@ -1,5 +1,5 @@
-import { useCurrentProgram } from '../queries/currentProgramQuerie';
-import { useWorkoutsForProgram } from '../queries/workoutsForProgramQuerie';
+import { useCurrentProgram } from '../queries/programQueries';
+import { useWorkoutsForProgram } from '../queries/workoutQueries';
 
 export const useCurrentProgramData = (userId: number | undefined) => {
   const {

@@ -4,6 +4,7 @@ import Select from '../Forms/Select';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AddNewProgramDto, AddNewProgramSchema } from '../../types/forms';
+import { useAddNewProgram } from '../../queries/programQueries';
 
 function NewProgramModal() {
   const {
@@ -13,9 +14,10 @@ function NewProgramModal() {
   } = useForm<AddNewProgramDto>({
     resolver: zodResolver(AddNewProgramSchema),
   });
-  const onSubmit = (data: AddNewProgramDto) => console.log(data);
-
+  const { mutate } = useAddNewProgram();
+  const onSubmit = (data: AddNewProgramDto) => mutate(data);
   const days = [1, 2, 3, 4, 5, 6, 7];
+
   return (
     <form
       className='flex w-96 flex-col gap-4 p-4'

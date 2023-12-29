@@ -1,10 +1,10 @@
 import { useRef } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { useAllPrograms } from '../../queries/allPrograms';
 import ProgramList from './ProgramList';
 import Modal from './Modal';
 import NewProgramModal from '../../ui/Workouts/NewProgramModal';
 import useModal from '../../hooks/useModal';
+import { useAllPrograms } from '../../queries/programQueries';
 
 function Programs() {
   const { user } = useAuth()!;
@@ -31,7 +31,7 @@ function Programs() {
       </div>
 
       <Modal ref={addNewWProgramModalRef}>
-        <NewProgramModal />
+        <NewProgramModal userId={user?.id} />
       </Modal>
     </div>
   );
