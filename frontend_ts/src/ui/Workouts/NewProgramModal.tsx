@@ -1,11 +1,16 @@
+import { ReactNode } from 'react';
 import { useForm } from 'react-hook-form';
+import { AddNewProgramDto, AddNewProgramSchema } from '../../types/forms';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 function NewProgramModal() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<AddNewProgramDto>({
+    resolver: zodResolver(AddNewProgramSchema),
+  });
   const onSubmit = (data) => console.log(data);
 
   return (
@@ -21,10 +26,10 @@ function NewProgramModal() {
         <input
           placeholder='e.g. Push / Pull / Legs'
           className='h-14 w-full rounded-md border-[1px] border-neutral-400 pl-2 font-montserrat text-lg font-light transition-all focus-within:border-2 hover:border-2 hover:border-neutral-400 focus:border-neutral-600 focus:outline-none'
-          {...register('program_title', { required: true })}
+          {...register('title', { required: true })}
         />
-        {errors.program_title && (
-          <p className='text-red-500'>Title is required</p>
+        {errors.title && (
+          <p className='text-red-500'>{errors?.title?.message as ReactNode}</p>
         )}
       </div>
 
@@ -33,7 +38,7 @@ function NewProgramModal() {
         <select
           defaultValue=''
           className='h-14 w-full rounded-md border-[1px] border-neutral-400 pl-2 focus-within:border-2 hover:border-2 hover:border-neutral-400 focus:border-neutral-600 focus:outline-none'
-          {...(register('days'), { required: true })}
+          {...register('days', { setValueAs: (value) => Number(value) })}
         >
           <option value='' disabled></option>
           <option value='1'>1</option>
@@ -44,11 +49,13 @@ function NewProgramModal() {
           <option value='6'>6</option>
           <option value='7'>7</option>
         </select>
-        {errors.days && <p className='text-red-500'>Title is required</p>}
+        {errors.days && (
+          <p className='text-red-500'>{errors?.days?.message as ReactNode}</p>
+        )}
       </div>
 
       <button
-        className='w-full rounded-md bg-orange-300 p-3 transition-all hover:bg-orange-400'
+        className='mt-6 w-full rounded-md bg-orange-300 p-3 transition-all hover:bg-orange-400'
         type='submit'
       >
         Add Program
