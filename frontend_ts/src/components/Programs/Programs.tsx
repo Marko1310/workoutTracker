@@ -31,7 +31,7 @@ function Programs() {
       </div>
 
       <Modal ref={addNewWProgramModalRef}>
-        <NewProgramModal userId={user?.id} />
+        <NewProgramModal />
       </Modal>
     </div>
   );

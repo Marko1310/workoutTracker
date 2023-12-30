@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import workoutServices from '../services/workoutServices';
+import programServices from '../services/programServices';
 import { AllProgramsDto } from '../types/workoutData';
 import { ProgramDto } from '../types/workoutData';
 
@@ -11,7 +12,7 @@ type AddNewProgramDto = {
 const useAllPrograms = (userId: number | undefined) => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['all-programs', userId],
-    queryFn: () => workoutServices.getAllPrograms(userId),
+    queryFn: () => programServices.getAllPrograms(userId),
     enabled: !!userId,
   });
 
@@ -33,7 +34,7 @@ const useCurrentProgram = (userId: number | undefined) => {
 const useAddNewProgram = () => {
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
-    mutationFn: (data: AddNewProgramDto) => workoutServices.addNewProgram(data),
+    mutationFn: (data: AddNewProgramDto) => programServices.addNewProgram(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['all-programs'] });
     },
