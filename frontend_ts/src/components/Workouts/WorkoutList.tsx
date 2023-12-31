@@ -1,6 +1,13 @@
+import { useRef } from 'react';
 import { WorkoutDto } from '../../types/workoutData';
+import useModal from '../../hooks/useModal';
+import Modal from '../Shared/Modal';
+import NewWorkoutModal from '../../ui/Workouts/NewWorkoutModal';
 
 function WorkoutList({ workouts }: { workouts: WorkoutDto[] }) {
+  const addNewWorkoutModalRef = useRef<HTMLDialogElement>(null);
+  const { openModal } = useModal(addNewWorkoutModalRef);
+
   return (
     <div className='w-full'>
       <ul>
@@ -25,11 +32,17 @@ function WorkoutList({ workouts }: { workouts: WorkoutDto[] }) {
       </ul>
       <div>
         <div className='flex w-full justify-end p-4'>
-          <button className='flex rounded-lg bg-blue-300 p-2 transition-all hover:bg-blue-400'>
+          <button
+            onClick={openModal}
+            className='flex rounded-lg bg-blue-300 p-2 transition-all hover:bg-blue-400'
+          >
             + Add new workout
           </button>
         </div>
       </div>
+      <Modal ref={addNewWorkoutModalRef}>
+        <NewWorkoutModal />
+      </Modal>
     </div>
   );
 }

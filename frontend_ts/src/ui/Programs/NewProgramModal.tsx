@@ -1,10 +1,10 @@
 import InputField from '../Forms/InputField';
 import FormTitle from '../Forms/FormTitle';
 import Select from '../Forms/Select';
+import { useAddNewProgram } from '../../queries/programQueries';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AddNewProgramDto, AddNewProgramSchema } from '../../types/forms';
-import { useAddNewProgram } from '../../queries/programQueries';
 
 function NewProgramModal() {
   const {
@@ -15,8 +15,8 @@ function NewProgramModal() {
     resolver: zodResolver(AddNewProgramSchema),
   });
   const { mutate } = useAddNewProgram();
-  const onSubmit = (data: AddNewProgramDto) => mutate(data);
-  const days = [1, 2, 3, 4, 5, 6, 7];
+  const onSubmit = (newProgram: AddNewProgramDto) => mutate(newProgram);
+  const daysOfWeek = [1, 2, 3, 4, 5, 6, 7];
 
   return (
     <form
@@ -39,7 +39,7 @@ function NewProgramModal() {
         <Select
           name='days'
           defaultValue=''
-          options={days}
+          options={daysOfWeek}
           register={register}
           errors={errors}
         />

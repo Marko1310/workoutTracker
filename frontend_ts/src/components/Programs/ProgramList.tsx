@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import WorkoutList from './WorkoutList';
+import WorkoutList from '../Workouts/WorkoutList';
 import { AllProgramsDto } from '../../types/workoutData';
 
 export default function ProgramList({

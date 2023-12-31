@@ -1,8 +1,8 @@
 import { useRef } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import ProgramList from './ProgramList';
-import Modal from './Modal';
-import NewProgramModal from '../../ui/Workouts/NewProgramModal';
+import Modal from '../Shared/Modal';
+import NewProgramModal from '../../ui/Programs/NewProgramModal';
 import useModal from '../../hooks/useModal';
 import { useAllPrograms } from '../../queries/programQueries';
 

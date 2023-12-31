@@ -9,8 +9,8 @@ const getAllPrograms = async (userId: number | undefined) => {
   return await workout_api.get(`programs/${userId}`);
 };
 
-const addNewProgram = async (data: AddNewProgramDto) => {
-  const { title, days } = data;
+const addNewProgram = async (newProgram: AddNewProgramDto) => {
+  const { title, days } = newProgram;
   return await workout_api.post(`programs/program`, { title, days });
 };
 
