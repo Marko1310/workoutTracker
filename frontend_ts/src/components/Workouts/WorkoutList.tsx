@@ -4,7 +4,13 @@ import useModal from '../../hooks/useModal';
 import Modal from '../Shared/Modal';
 import NewWorkoutModal from '../../ui/Workouts/NewWorkoutModal';
 
-function WorkoutList({ workouts }: { workouts: WorkoutDto[] }) {
+function WorkoutList({
+  workouts,
+  programId,
+}: {
+  workouts: WorkoutDto[];
+  programId: number;
+}) {
   const addNewWorkoutModalRef = useRef<HTMLDialogElement>(null);
   const { openModal } = useModal(addNewWorkoutModalRef);
 
@@ -41,7 +47,7 @@ function WorkoutList({ workouts }: { workouts: WorkoutDto[] }) {
         </div>
       </div>
       <Modal ref={addNewWorkoutModalRef}>
-        <NewWorkoutModal />
+        <NewWorkoutModal programId={programId} />
       </Modal>
     </div>
   );

@@ -36,7 +36,10 @@ export default function ProgramList({
                 expandedIndex === program.programs_id ? 'max-h-96' : 'max-h-0'
               } flex h-fit overflow-hidden overflow-y-auto transition-all duration-300`}
             >
-              <WorkoutList workouts={program.workouts} />
+              <WorkoutList
+                workouts={program.workouts}
+                programId={program.programs_id}
+              />
             </div>
           </li>
         );

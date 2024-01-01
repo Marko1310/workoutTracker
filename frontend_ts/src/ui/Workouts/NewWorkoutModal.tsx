@@ -3,7 +3,7 @@ import { AddNewWorkoutDto, AddNewWorkoutSchema } from '../../types/forms';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-function NewProgramModal() {
+function NewProgramModal({ programId }: { programId: number }) {
   const {
     register,
     handleSubmit,
@@ -11,6 +11,7 @@ function NewProgramModal() {
     formState: { errors, isValid },
   } = useForm<AddNewWorkoutDto>({
     defaultValues: {
+      programId,
       title: '',
       exercises: [{ title: '', goalSets: 1, goalReps: 0 }],
     },
