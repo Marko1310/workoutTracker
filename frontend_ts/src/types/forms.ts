@@ -13,7 +13,6 @@ const ExerciseSchema = z.object({
 });
 const ExerciseArraySchema = z.array(ExerciseSchema);
 export const AddNewWorkoutSchema = z.object({
-  programId: z.number(),
   title: z.string().min(1, 'Please provide a valid Workout title'),
   exercises: ExerciseArraySchema,
 });

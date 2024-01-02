@@ -1,9 +1,10 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import workoutServices from '../services/workoutServices';
 import { exercisesArrayDto } from '../types/workoutData';
 import { previousWorkoutDto } from '../types/workoutData';
 import { workoutLogDto } from '../types/workoutData';
 import { WorkoutDto } from '../types/workoutData';
+import { AddNewWorkoutDto } from '../types/forms';
 
 const useWorkoutsForProgram = (
   userId: number | undefined,
@@ -54,8 +55,24 @@ const useDetailsForWorkout = (workoutId: number, week: number) => {
 
   //TODO: preetier
   const workoutExercisesArray: exercisesArrayDto = data?.data[0]?.exercises;
-
   return { workoutExercisesArray, isLoading, error };
+};
+
+const useAddNewWorkout = () => {
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationFn: (data: { programId: number; workoutData: AddNewWorkoutDto }) =>
+      workoutServices.addNewWorkout(data.programId, data.workoutData),
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['all-programs'],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['workoutsForProgram'],
+      });
+    },
+  });
+  return { mutate };
 };
 
 export {
@@ -63,4 +80,5 @@ export {
   useWorkoutLogsByYear,
   usePreviousWorkout,
   useDetailsForWorkout,
+  useAddNewWorkout,
 };

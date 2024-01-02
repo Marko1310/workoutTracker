@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { AddNewWorkoutDto, AddNewWorkoutSchema } from '../../types/forms';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useAddNewWorkout } from '../../queries/workoutQueries';
 
 function NewProgramModal({ programId }: { programId: number }) {
   const {
@@ -11,7 +12,6 @@ function NewProgramModal({ programId }: { programId: number }) {
     formState: { errors, isValid },
   } = useForm<AddNewWorkoutDto>({
     defaultValues: {
-      programId,
       title: '',
       exercises: [{ title: '', goalSets: 1, goalReps: 0 }],
     },
@@ -21,10 +21,9 @@ function NewProgramModal({ programId }: { programId: number }) {
     control,
     name: 'exercises',
   });
-
-  const onSubmit = (data: AddNewWorkoutDto) => {
-    console.log(data);
-  };
+  const { mutate } = useAddNewWorkout();
+  const onSubmit = (data: AddNewWorkoutDto) =>
+    mutate({ programId, workoutData: data });
 
   return (
     <form

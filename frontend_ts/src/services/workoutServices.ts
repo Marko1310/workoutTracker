@@ -1,3 +1,4 @@
+import { AddNewWorkoutDto } from '../types/forms';
 import { workout_api } from './api_config';
 
 const getAllWorkouts = async (userId: number) => {
@@ -32,6 +33,14 @@ const getAllWokoutLogsByYear = async (
   return await workout_api.get(`workout-logs/${userId}/${year}`);
 };
 
+const addNewWorkout = async (
+  programId: number,
+  workoutData: AddNewWorkoutDto,
+) => {
+  const { title, exercises } = workoutData;
+  return await workout_api.post(`workouts/${programId}`, { title, exercises });
+};
+
 export default {
   getAllWorkouts,
   getCurrentProgram,
@@ -39,4 +48,5 @@ export default {
   getPreviousWorkout,
   getDetailsForWorkoutByWeek,
   getAllWokoutLogsByYear,
+  addNewWorkout,
 };
