@@ -75,10 +75,27 @@ const useAddNewWorkout = () => {
   return { mutate };
 };
 
+const useDeleteWorkout = () => {
+  const queryClient = useQueryClient();
+  const { mutate, isPending } = useMutation({
+    mutationFn: (data: number) => workoutServices.deleteWorkout(data),
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['all-programs'],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['workoutsForProgram'],
+      });
+    },
+  });
+  return { mutate, isPending };
+};
+
 export {
   useWorkoutsForProgram,
   useWorkoutLogsByYear,
   usePreviousWorkout,
   useDetailsForWorkout,
   useAddNewWorkout,
+  useDeleteWorkout,
 };

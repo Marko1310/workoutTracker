@@ -41,6 +41,10 @@ const addNewWorkout = async (
   return await workout_api.post(`workouts/${programId}`, { title, exercises });
 };
 
+const deleteWorkout = async (workoutId: number) => {
+  return await workout_api.delete(`workouts/${workoutId}`);
+};
+
 export default {
   getAllWorkouts,
   getCurrentProgram,
@@ -49,4 +53,5 @@ export default {
   getDetailsForWorkoutByWeek,
   getAllWokoutLogsByYear,
   addNewWorkout,
+  deleteWorkout,
 };

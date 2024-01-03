@@ -42,4 +42,20 @@ const useAddNewProgram = () => {
   return { mutate };
 };
 
-export { useAllPrograms, useCurrentProgram, useAddNewProgram };
+const useDeleteProgram = () => {
+  const queryClient = useQueryClient();
+  const { mutate, isPending } = useMutation({
+    mutationFn: (data: number) => programServices.deleteProgram(data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['all-programs'] });
+    },
+  });
+  return { mutate, isPending };
+};
+
+export {
+  useAllPrograms,
+  useCurrentProgram,
+  useAddNewProgram,
+  useDeleteProgram,
+};

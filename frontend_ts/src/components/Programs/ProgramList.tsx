@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import WorkoutList from '../Workouts/WorkoutList';
 import { AllProgramsDto } from '../../types/workoutData';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import ProgramMenu from './ProgramMenu';
 
 export default function ProgramList({
   allProgramsData,
@@ -21,15 +24,20 @@ export default function ProgramList({
             key={program.programs_id}
             className='my-4 w-full flex-col rounded-md border-2 border-neutral-500 pb-0'
           >
-            <h1 className='px-4 pt-4'>{program.programs_name}</h1>
-            <div className='flex w-full flex-col items-center justify-center pb-0 pt-0'>
-              <h1 className='text-xs'>List of workouts</h1>
-              <div
-                className='hover:cursor-pointer'
-                onClick={() => handleChange(program.programs_id)}
-              >
-                icon
-              </div>
+            <div className='flex justify-between py-2'>
+              <h1 className='px-4'>{program.programs_name}</h1>
+              <ProgramMenu programId={program.programs_id} />
+            </div>
+            <div
+              onClick={() => handleChange(program.programs_id)}
+              className='flex w-full flex-col items-center justify-center pb-0 pt-0 hover:cursor-pointer'
+            >
+              <p className='text-xs'>List of workouts</p>
+              {expandedIndex === program.programs_id ? (
+                <KeyboardArrowUpIcon fontSize='medium' />
+              ) : (
+                <KeyboardArrowDownIcon fontSize='medium' />
+              )}
             </div>
             <div
               className={`${
