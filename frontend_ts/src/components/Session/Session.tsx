@@ -6,7 +6,7 @@ function Session() {
         <p># Week 2</p>
         <button className='rounded-lg bg-blue-300 px-3 py-1'>Finish</button>
       </div>
-      <div className='flex flex-col'>
+      <div className='mb-6 flex flex-col'>
         <p className='pt-6 text-xl font-bold'>Bench Press</p>
         <div className='flex flex-col'>
           <div className='overflow-x-auto sm:-mx-6 lg:-mx-8'>
@@ -42,7 +42,7 @@ function Session() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr className='border-b bg-neutral-100'>
+                    <tr className='border-b'>
                       <td className='whitespace-nowrap px-2 py-4 text-center font-medium'>
                         1
                       </td>
@@ -51,14 +51,14 @@ function Session() {
                       </td>
                       <td className='whitespace-nowrap py-2 text-center font-medium'>
                         <input
-                          className='w-16 bg-neutral-100 py-2 text-center outline-none'
+                          className='w-16 py-2 text-center outline-none'
                           type='number'
                           placeholder='kg'
                         />
                       </td>
                       <td className='whitespace-nowrap py-2 text-center font-medium'>
                         <input
-                          className='w-16 bg-neutral-100 py-2 text-center outline-none'
+                          className='w-16 py-2 text-center outline-none'
                           type='number'
                           placeholder='reps'
                         />
@@ -86,7 +86,7 @@ function Session() {
                         />
                       </td>
                     </tr>
-                    <tr className='border-b bg-neutral-100'>
+                    <tr className='border-b'>
                       <td className='whitespace-nowrap px-2 py-4 text-center font-medium'>
                         3
                       </td>
@@ -95,14 +95,14 @@ function Session() {
                       </td>
                       <td className='whitespace-nowrap py-2 text-center font-medium'>
                         <input
-                          className='w-16 bg-neutral-100 py-2 text-center outline-none'
+                          className='w-16 py-2 text-center outline-none'
                           type='number'
                           placeholder='kg'
                         />
                       </td>
                       <td className='whitespace-nowrap py-2 text-center font-medium'>
                         <input
-                          className='w-16 bg-neutral-100 py-2 text-center outline-none'
+                          className='w-16 py-2 text-center outline-none'
                           type='number'
                           placeholder='reps'
                         />
@@ -116,9 +116,9 @@ function Session() {
         </div>
       </div>
 
-      <div className='flex flex-col'>
+      <div className='mb-6 flex flex-col'>
         <p className='pt-6 text-xl font-bold'>Bench Press</p>
-        <div className='flex flex-col'>
+        <div className=' flex flex-col'>
           <div className='overflow-x-auto sm:-mx-6 lg:-mx-8'>
             <div className='inline-block min-w-full py-2 sm:px-6 lg:px-8'>
               <div className='overflow-hidden'>
@@ -152,7 +152,7 @@ function Session() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr className='border-b bg-neutral-100'>
+                    <tr className='border-b '>
                       <td className='whitespace-nowrap px-2 py-4 text-center font-medium'>
                         1
                       </td>
@@ -161,14 +161,14 @@ function Session() {
                       </td>
                       <td className='whitespace-nowrap py-2 text-center font-medium'>
                         <input
-                          className='w-16 bg-neutral-100 py-2 text-center outline-none'
+                          className='w-16 py-2 text-center outline-none'
                           type='number'
                           placeholder='kg'
                         />
                       </td>
                       <td className='whitespace-nowrap py-2 text-center font-medium'>
                         <input
-                          className='w-16 bg-neutral-100 py-2 text-center outline-none'
+                          className='w-16 py-2 text-center outline-none'
                           type='number'
                           placeholder='reps'
                         />
@@ -196,7 +196,7 @@ function Session() {
                         />
                       </td>
                     </tr>
-                    <tr className='border-b bg-neutral-100'>
+                    <tr className='border-b'>
                       <td className='whitespace-nowrap px-2 py-4 text-center font-medium'>
                         3
                       </td>
@@ -205,14 +205,14 @@ function Session() {
                       </td>
                       <td className='whitespace-nowrap py-2 text-center font-medium'>
                         <input
-                          className='w-16 bg-neutral-100 py-2 text-center outline-none'
+                          className='w-16 py-2 text-center outline-none'
                           type='number'
                           placeholder='kg'
                         />
                       </td>
                       <td className='whitespace-nowrap py-2 text-center font-medium'>
                         <input
-                          className='w-16 bg-neutral-100 py-2 text-center outline-none'
+                          className='w-16 py-2 text-center outline-none'
                           type='number'
                           placeholder='reps'
                         />
