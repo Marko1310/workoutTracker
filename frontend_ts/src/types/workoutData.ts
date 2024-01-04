@@ -24,32 +24,32 @@ const sessionSchema = z.object({
   reps: z.number(),
   week: z.number(),
 });
-const SessionsDataSchema = z.array(sessionSchema);
-export type sessionDataDto = z.infer<typeof SessionsDataSchema>;
+type sessionDto = z.infer<typeof sessionSchema>;
+const SessionsArraySchema = z.array(sessionSchema);
+export type sessionArrayDto = z.infer<typeof SessionsArraySchema>;
 
 const exerciseDetailsSchema = z.object({
   exercises_id: z.number(),
   exercise_name: z.string(),
   goal_sets: z.number(),
   goal_reps: z.number(),
-  sessions: SessionsDataSchema.optional(),
+  sessions: SessionsArraySchema.optional(),
 });
 export type exerciseDetailDto = z.infer<typeof exerciseDetailsSchema>;
 const exercisesArraySchema = z.array(exerciseDetailsSchema);
 export type exercisesArrayDto = z.infer<typeof exercisesArraySchema>;
 
-const NewSetSchema = z.array(
-  z.object({
-    reps: z.number(),
-    set: z.number(),
-    weight: z.number(),
-  }),
-);
-export type newSetSDto = z.infer<typeof NewSetSchema>;
+const NewSetSchema = z.object({
+  reps: z.number(),
+  set: z.number(),
+  weight: z.number(),
+});
+type newSetDto = z.infer<typeof NewSetSchema>;
+const newSetArraySchema = z.array(NewSetSchema);
+export type newSetArryDto = z.infer<typeof newSetArraySchema>;
 
-export type ExerciseSets = z.infer<
-  typeof SessionsDataSchema | typeof NewSetSchema
->;
+export type ExerciseSetsDto = sessionDto | newSetDto;
+export type ExerciseSetsArrayDto = sessionArrayDto | newSetArryDto;
 
 const previousWorkoutSchema = z.object({
   workouts: WorkoutSchema,

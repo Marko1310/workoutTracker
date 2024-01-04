@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import Set from './Set';
 import ExerciseTitle from './ExerciseTitle';
-import { exerciseDetailDto, ExerciseSets } from '../../types/workoutData';
+import {
+  exerciseDetailDto,
+  ExerciseSetsArrayDto,
+} from '../../types/workoutData';
 
 const initialSet = {
   reps: 0,
@@ -10,7 +13,7 @@ const initialSet = {
 };
 
 function Exercise({ exercise }: { exercise: exerciseDetailDto }) {
-  const [exerciseSets, setExerciseSets] = useState<ExerciseSets>(
+  const [exerciseSets, setExerciseSets] = useState<ExerciseSetsArrayDto>(
     exercise?.sessions ? exercise?.sessions : [initialSet],
   );
 
@@ -42,10 +45,11 @@ function Exercise({ exercise }: { exercise: exerciseDetailDto }) {
                   {exerciseSets?.map((set, index) => {
                     return (
                       <Set
+                        key={index}
                         set={set}
                         index={index}
                         handleDeleteSet={handleDeleteSet}
-                        setsCount={exerciseSets}
+                        exerciseSets={exerciseSets}
                       />
                     );
                   })}
