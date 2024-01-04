@@ -52,6 +52,16 @@ const usePreviousWorkoutWithDetails = (workoutId: number) => {
   return { previousWorkoutWithDetails, isLoading, error };
 };
 
+const useWorkoutWithExercises = (workoutId: number) => {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['workoutWithExercises', workoutId],
+    queryFn: () => workoutServices.getWorkoutWithExericses(workoutId),
+    enabled: !!workoutId,
+  });
+  const workoutWithExercises = data?.data;
+  return { workoutWithExercises, isLoading, error };
+};
+
 const useWorkoutsForProgram = (
   userId: number | undefined,
   programId: number,
@@ -109,6 +119,7 @@ export {
   useWorkoutLogsByYear,
   usePreviousWorkout,
   usePreviousWorkoutWithDetails,
+  useWorkoutWithExercises,
   useDetailsForWorkout,
   useAddNewWorkout,
   useDeleteWorkout,

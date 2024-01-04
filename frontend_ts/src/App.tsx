@@ -7,7 +7,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Home from './components/Home/Home';
 import Programs from './components/Programs/Programs';
-import Session from './components/Session/Session';
+import WorkoutSession from './components/Session/WorkoutSession';
 
 const queryCLient = new QueryClient();
 
@@ -29,7 +29,7 @@ function App() {
               <Route index path='home' element={<Home />} />
               <Route path='dashboard' element={<p>Dashboard</p>} />
               <Route path='programs' element={<Programs />} />
-              <Route path='session/:workoutId' element={<Session />} />
+              <Route path='session/:workoutId' element={<WorkoutSession />} />
             </Route>
           </Routes>
         </BrowserRouter>
