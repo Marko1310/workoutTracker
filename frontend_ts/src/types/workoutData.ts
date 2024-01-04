@@ -49,3 +49,13 @@ const workoutLogSchema = z.object({
 });
 const workoutLogArraySchema = z.array(workoutLogSchema);
 export type workoutLogDto = z.infer<typeof workoutLogArraySchema>;
+
+const previousWorkoutDetailsSchema = z.object({
+  workout_name: z.string(),
+  workouts_id: z.number(),
+  week: z.number(),
+  exercises: exercisesArraySchema,
+});
+export type previousWorkoutDetailsDto = z.infer<
+  typeof previousWorkoutDetailsSchema
+>;

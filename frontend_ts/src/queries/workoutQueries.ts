@@ -1,10 +1,56 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import workoutServices from '../services/workoutServices';
-import { exercisesArrayDto } from '../types/workoutData';
+import {
+  exercisesArrayDto,
+  previousWorkoutDetailsDto,
+} from '../types/workoutData';
 import { previousWorkoutDto } from '../types/workoutData';
 import { workoutLogDto } from '../types/workoutData';
 import { WorkoutDto } from '../types/workoutData';
 import { AddNewWorkoutDto } from '../types/forms';
+
+const useAddNewWorkout = () => {
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationFn: (data: { programId: number; workoutData: AddNewWorkoutDto }) =>
+      workoutServices.addNewWorkout(data.programId, data.workoutData),
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['all-programs'],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['workoutsForProgram'],
+      });
+    },
+  });
+  return { mutate };
+};
+
+const useDeleteWorkout = () => {
+  const queryClient = useQueryClient();
+  const { mutate, isPending } = useMutation({
+    mutationFn: (data: number) => workoutServices.deleteWorkout(data),
+    onSettled: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['all-programs'],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['workoutsForProgram'],
+      });
+    },
+  });
+  return { mutate, isPending };
+};
+
+const usePreviousWorkoutWithDetails = (workoutId: number) => {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['previousWorkoutWithDetails', workoutId],
+    queryFn: () => workoutServices.getPreviousWorkoutWithDetails(workoutId),
+    enabled: !!workoutId,
+  });
+  const previousWorkoutWithDetails: previousWorkoutDetailsDto = data?.data;
+  return { previousWorkoutWithDetails, isLoading, error };
+};
 
 const useWorkoutsForProgram = (
   userId: number | undefined,
@@ -58,43 +104,11 @@ const useDetailsForWorkout = (workoutId: number, week: number) => {
   return { workoutExercisesArray, isLoading, error };
 };
 
-const useAddNewWorkout = () => {
-  const queryClient = useQueryClient();
-  const { mutate } = useMutation({
-    mutationFn: (data: { programId: number; workoutData: AddNewWorkoutDto }) =>
-      workoutServices.addNewWorkout(data.programId, data.workoutData),
-    onSettled: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['all-programs'],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ['workoutsForProgram'],
-      });
-    },
-  });
-  return { mutate };
-};
-
-const useDeleteWorkout = () => {
-  const queryClient = useQueryClient();
-  const { mutate, isPending } = useMutation({
-    mutationFn: (data: number) => workoutServices.deleteWorkout(data),
-    onSettled: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['all-programs'],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ['workoutsForProgram'],
-      });
-    },
-  });
-  return { mutate, isPending };
-};
-
 export {
   useWorkoutsForProgram,
   useWorkoutLogsByYear,
   usePreviousWorkout,
+  usePreviousWorkoutWithDetails,
   useDetailsForWorkout,
   useAddNewWorkout,
   useDeleteWorkout,

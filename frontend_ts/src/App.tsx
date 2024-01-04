@@ -29,7 +29,7 @@ function App() {
               <Route index path='home' element={<Home />} />
               <Route path='dashboard' element={<p>Dashboard</p>} />
               <Route path='programs' element={<Programs />} />
-              <Route path='session' element={<Session />} />
+              <Route path='session/:workoutId' element={<Session />} />
             </Route>
           </Routes>
         </BrowserRouter>

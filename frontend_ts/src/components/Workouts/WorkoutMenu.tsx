@@ -4,9 +4,12 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useDeleteWorkout } from '../../queries/workoutQueries';
+import { useNavigate } from 'react-router-dom';
 
 export default function WorkoutMenu({ workoutId }: { workoutId: number }) {
   const { mutate: deleteWorkout, isPending } = useDeleteWorkout();
+  const navigate = useNavigate();
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -45,7 +48,10 @@ export default function WorkoutMenu({ workoutId }: { workoutId: number }) {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem sx={{ width: 200 }} onClick={handleClose}>
+        <MenuItem
+          sx={{ width: 200 }}
+          onClick={() => navigate(`/app/session/${workoutId}`)}
+        >
           Start Workout
         </MenuItem>
         <MenuItem onClick={handleClose}>Details</MenuItem>
