@@ -1,19 +1,24 @@
-import { ExerciseSetsArrayDto, ExerciseSetsDto } from '../../types/workoutData';
+import {
+  newSessionSetArrayDto,
+  newSessionSetDto,
+} from '../../types/workoutData';
 
 function Set({
   set,
   index,
   handleDeleteSet,
-  exerciseSets,
+  exerciseSets, // register,
 }: {
-  set: ExerciseSetsDto;
+  set: newSessionSetDto;
   index: number;
+  // register: UseFormRegister<addNewSessionArrayDto>;
   handleDeleteSet: (index: number) => void;
-  exerciseSets: ExerciseSetsArrayDto;
+  exerciseSets: newSessionSetArrayDto;
 }) {
   const deleteButtonRender = (index: number) => {
     return exerciseSets.length - 1 === index;
   };
+
   return (
     <tr className='border-b'>
       <td className='whitespace-nowrap px-2 py-4 text-center font-medium'>
