@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { addNewSessionArrayDto } from '../components/Session/types';
 import sessionServices from '../services/sessionServices';
 

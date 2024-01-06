@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import NavButton from '../Auth/NavButton';
 
 type SidebarButtonProps = {
@@ -6,11 +7,19 @@ type SidebarButtonProps = {
 };
 
 function SidebarButton({ title, route }: SidebarButtonProps) {
+  const location = useLocation();
+  console.log(location.pathname);
+  console.log(route);
+
   return (
-    <div className='flex w-full flex-row items-center justify-start gap-8 pl-8 transition-all duration-300 hover:bg-slate-500'>
+    <nav
+      className={`${
+        location.pathname === route && 'bg-slate-500'
+      } flex w-full items-center justify-start gap-8 pl-8 transition-all duration-300 hover:bg-slate-300`}
+    >
       <div>icon</div>
       <NavButton title={title} route={route} />
-    </div>
+    </nav>
   );
 }
 

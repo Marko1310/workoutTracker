@@ -1,19 +1,15 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 type NavButtonProps = {
   title: string;
   route: string;
 };
 
 function NavButton({ title, route }: NavButtonProps) {
-  const navigate = useNavigate();
-
   return (
-    <button
-      onClick={() => navigate(`./${route}`)}
-      className='h-14 w-full text-start'
-    >
+    <Link to={`${route}`} className='flex h-14 w-full items-center'>
       {title}
-    </button>
+    </Link>
   );
 }
 

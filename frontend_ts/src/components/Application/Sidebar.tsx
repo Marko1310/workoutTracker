@@ -20,9 +20,9 @@ function Sidebar({ user }: { user: SidebarProps | null }) {
 
       <div className='flex h-full w-full flex-col justify-between text-left'>
         <div className='flex w-full flex-col items-start align-baseline'>
-          <SidebarButton title='Home' route='home' />
-          <SidebarButton title='Dashboard' route='dashboard' />
-          <SidebarButton title='Programs' route='programs' />
+          <SidebarButton title='Home' route='/app/home' />
+          <SidebarButton title='Dashboard' route='/app/dashboard' />
+          <SidebarButton title='Programs' route='/app/programs' />
         </div>
         <button
           className='transition-al h-14 w-full pl-2 text-left'
