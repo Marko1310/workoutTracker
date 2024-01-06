@@ -13,7 +13,7 @@ function WorkoutSession() {
     control,
     handleSubmit,
     register,
-    formState: { errors, isValid },
+    formState: { isValid },
   } = useForm<addNewSessionArrayDto>({
     defaultValues: {
       exerciseData: workout?.exercises?.map((exercise) => ({

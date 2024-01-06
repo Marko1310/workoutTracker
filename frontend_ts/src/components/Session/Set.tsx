@@ -32,7 +32,7 @@ function Set({
         <input
           {...register(
             `exerciseData.${exerciseIndex}.sets.${setIndex}.weight`,
-            { required: true },
+            { required: true, maxLength: 4 },
           )}
           className='w-16 py-2 text-center outline-none'
           type='number'
@@ -41,7 +41,10 @@ function Set({
       </td>
       <td className='whitespace-nowrap py-2 text-center font-medium'>
         <input
-          {...register(`exerciseData.${exerciseIndex}.sets.${setIndex}.reps`)}
+          {...register(`exerciseData.${exerciseIndex}.sets.${setIndex}.reps`, {
+            required: true,
+            maxLength: 3,
+          })}
           className='w-16 py-2 text-center outline-none'
           type='number'
           placeholder='reps'
