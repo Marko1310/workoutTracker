@@ -8,8 +8,6 @@ type SidebarButtonProps = {
 
 function SidebarButton({ title, route }: SidebarButtonProps) {
   const location = useLocation();
-  console.log(location.pathname);
-  console.log(route);
 
   return (
     <nav
