@@ -1,5 +1,6 @@
 import { UseFormRegister } from 'react-hook-form';
 import { addNewSessionArrayDto, setArrayDto, setDto } from './types';
+import { useEffect, useState } from 'react';
 
 function Set({
   set,
@@ -16,12 +17,29 @@ function Set({
   deleteSet: (index: number) => void;
   controlledSets: setArrayDto;
 }) {
+  const [weight, setWeight] = useState(set.weight);
+  const [reps, setReps] = useState(set.reps);
+  const [isPR, setIsPR] = useState(false);
+
   const deleteButtonRender = (index: number) => {
     return controlledSets.length - 1 === index;
   };
 
+  useEffect(() => {
+    const isCurrentSetHigher =
+      reps &&
+      weight &&
+      set.previousReps &&
+      set.previousWeight &&
+      reps * weight > set.previousWeight * set.previousReps;
+    setIsPR(!!isCurrentSetHigher);
+  }, [weight, reps, set]);
+
   return (
-    <tr className='border-b'>
+    <tr className={`${isPR && ' bg-green-200'} border-b`}>
+      <td className='whitespace-nowrap px-2 py-4 text-center font-bold'>
+        {isPR && <p> PR!</p>}
+      </td>
       <td className='whitespace-nowrap px-2 py-4 text-center font-medium'>
         {setIndex + 1}
       </td>
@@ -41,6 +59,8 @@ function Set({
           className='w-16 py-2 text-center outline-none'
           type='number'
           placeholder='kg'
+          onChange={(e) => setWeight(Number(e.target.value))}
+          value={weight !== null ? weight : ''}
         />
       </td>
       <td className='whitespace-nowrap py-2 text-center font-medium'>
@@ -53,16 +73,21 @@ function Set({
           className='w-16 py-2 text-center outline-none'
           type='number'
           placeholder='reps'
+          onChange={(e) => setReps(Number(e.target.value))}
+          value={reps !== null ? reps : ''}
         />
       </td>
-      {deleteButtonRender(setIndex) && (
-        <td
-          onClick={() => deleteSet(setIndex)}
-          className='whitespace-nowrap py-2 text-center font-bold text-red-500 transition-all hover:cursor-pointer hover:text-red-600'
-        >
-          X
-        </td>
-      )}
+
+      <td className='whitespace-nowrap py-2 text-center'>
+        {deleteButtonRender(setIndex) && (
+          <button
+            onClick={() => deleteSet(setIndex)}
+            className='font-bold text-red-500 transition-all hover:cursor-pointer hover:text-red-600'
+          >
+            X
+          </button>
+        )}
+      </td>
     </tr>
   );
 }

@@ -72,7 +72,7 @@ function Exercise({
               <button
                 type='button'
                 onClick={addNewSet}
-                className='w-full rounded-lg bg-slate-300 px-3 py-1 text-white transition-all hover:bg-slate-400'
+                className='mt-2 w-full rounded-md bg-slate-300 px-3 py-1 text-white transition-all hover:bg-slate-400'
               >
                 + Add Set
               </button>
