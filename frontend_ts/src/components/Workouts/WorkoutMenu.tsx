@@ -48,14 +48,10 @@ export default function WorkoutMenu({ workoutId }: { workoutId: number }) {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem
-          sx={{ width: 200 }}
-          onClick={() => navigate(`/app/session/${workoutId}`)}
-        >
-          Start Workout
-        </MenuItem>
         <MenuItem onClick={handleClose}>Details</MenuItem>
-        <MenuItem onClick={() => deleteWorkout(workoutId)}>Delete</MenuItem>
+        <MenuItem onClick={() => deleteWorkout(workoutId)}>
+          Delete Workout
+        </MenuItem>
       </Menu>
     </div>
   );

@@ -50,7 +50,7 @@ function WorkoutSession() {
           <button
             disabled={!isValid}
             type='submit'
-            className='rounded-lg bg-blue-300 px-3 py-1 hover:bg-blue-400 disabled:bg-slate-400'
+            className='rounded-lg bg-blue-300 px-4 py-2 hover:bg-blue-400 disabled:bg-slate-400'
           >
             Finish
           </button>

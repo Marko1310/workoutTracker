@@ -51,8 +51,8 @@ export default function ProgramMenu({ programId }: { programId: number }) {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem sx={{ width: 120 }} onClick={() => handleDelete(programId)}>
-          Delete
+        <MenuItem onClick={() => handleDelete(programId)}>
+          Delete Program
         </MenuItem>
       </Menu>
     </div>
