@@ -2,21 +2,28 @@ import { useParams } from 'react-router-dom';
 import { useWorkoutData } from '../../hooks/useWorkoutData';
 import Exercise from './Exercise';
 import { useFieldArray, useForm } from 'react-hook-form';
-import { addNewSessionArrayDto } from '../../types/workoutData';
+import { addNewSessionArrayDto } from './types';
 
 function WorkoutSession() {
   const { workoutId } = useParams();
   const numericWorkoutId = parseInt(workoutId!, 10);
   const { workout } = useWorkoutData(numericWorkoutId);
 
-  const { control, handleSubmit, register } = useForm<addNewSessionArrayDto>({
+  const {
+    control,
+    handleSubmit,
+    register,
+    formState: { errors, isValid },
+  } = useForm<addNewSessionArrayDto>({
     defaultValues: {
       exerciseData: workout?.exercises?.map((exercise) => ({
         exerciseId: exercise?.exercises_id,
         exercise_name: exercise?.exercise_name,
         sets: exercise?.sessions?.map((session) => ({
-          weight: session?.weight,
-          reps: session?.reps,
+          previousWeight: session?.weight,
+          previousReps: session?.reps,
+          weight: null,
+          reps: null,
         })) || [{ weight: 0, reps: 0 }],
       })),
     },
@@ -37,7 +44,11 @@ function WorkoutSession() {
         <div className='flex w-full items-center justify-between border-b border-black pb-2'>
           <p className='text-xl font-bold'>{workout?.workout_name}</p>
           <p>{workout?.week ? `# Week ${workout?.week + 1}` : `# Week 1`}</p>
-          <button type='submit' className='rounded-lg bg-blue-300 px-3 py-1'>
+          <button
+            disabled={!isValid}
+            type='submit'
+            className='rounded-lg bg-blue-300 px-3 py-1 hover:bg-blue-400 disabled:bg-slate-400'
+          >
             Finish
           </button>
         </div>
