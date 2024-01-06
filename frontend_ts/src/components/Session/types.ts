@@ -19,6 +19,6 @@ const AddNewSessionSchema = z.object({
 export type addNewSessionDto = z.infer<typeof AddNewSessionSchema>;
 
 const AddNewSessionArraySchema = z.object({
-  exerciseData: z.array(AddNewSessionSchema),
+  exercisesData: z.array(AddNewSessionSchema),
 });
 export type addNewSessionArrayDto = z.infer<typeof AddNewSessionArraySchema>;

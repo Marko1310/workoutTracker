@@ -12,7 +12,7 @@ const newSet = {
 
 function Exercise({
   index,
-  exercise: initialExerciseData,
+  exercise: initialExercisesData,
   control,
   register,
 }: {
@@ -27,14 +27,14 @@ function Exercise({
     remove,
   } = useFieldArray({
     control,
-    name: `exerciseData.${index}.sets`,
+    name: `exercisesData.${index}.sets`,
   });
 
   const addNewSet = () => {
     const newSetIndex = controlledSets.length;
     const existingSet =
-      initialExerciseData?.sets[newSetIndex] &&
-      initialExerciseData?.sets[newSetIndex];
+      initialExercisesData?.sets[newSetIndex] &&
+      initialExercisesData?.sets[newSetIndex];
     append(existingSet ? existingSet : newSet);
   };
 
@@ -45,7 +45,7 @@ function Exercise({
   return (
     <div className='mb-6 flex flex-col'>
       <p className='pt-6 text-lg font-bold'>
-        {initialExerciseData.exercise_name}
+        {initialExercisesData.exercise_name}
       </p>
       <div className='flex flex-col'>
         <div className='overflow-x-auto sm:-mx-6 lg:-mx-8'>

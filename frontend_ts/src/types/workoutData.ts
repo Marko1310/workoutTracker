@@ -75,23 +75,3 @@ const previousWorkoutDetailsSchema = z.object({
 export type previousWorkoutDetailsDto = z.infer<
   typeof previousWorkoutDetailsSchema
 >;
-
-const NewSessionSetSchema = z.object({
-  weight: z.number(),
-  reps: z.number(),
-});
-
-export type newSessionSetDto = z.infer<typeof NewSessionSetSchema>;
-const NewSessionSetArraySchema = z.array(NewSessionSetSchema);
-export type newSessionSetArrayDto = z.infer<typeof NewSessionSetArraySchema>;
-const AddNewSessionSchema = z.object({
-  exerciseId: z.number(),
-  exercise_name: z.string(),
-  sets: NewSessionSetArraySchema,
-});
-export type addNewSessionDto = z.infer<typeof AddNewSessionSchema>;
-
-const AddNewSessionArraySchema = z.object({
-  exerciseData: z.array(AddNewSessionSchema),
-});
-export type addNewSessionArrayDto = z.infer<typeof AddNewSessionArraySchema>;

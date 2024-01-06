@@ -3,11 +3,12 @@ import { useWorkoutData } from '../../hooks/useWorkoutData';
 import Exercise from './Exercise';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { addNewSessionArrayDto } from './types';
+import { useAddNewSession } from '../../queries/sessionQueries';
 
 function WorkoutSession() {
   const { workoutId } = useParams();
-  const numericWorkoutId = parseInt(workoutId!, 10);
-  const { workout } = useWorkoutData(numericWorkoutId);
+  const workout_id = parseInt(workoutId!, 10);
+  const { workout } = useWorkoutData(workout_id);
 
   const {
     control,
@@ -16,7 +17,7 @@ function WorkoutSession() {
     formState: { isValid },
   } = useForm<addNewSessionArrayDto>({
     defaultValues: {
-      exerciseData: workout?.exercises?.map((exercise) => ({
+      exercisesData: workout?.exercises?.map((exercise) => ({
         exerciseId: exercise?.exercises_id,
         exercise_name: exercise?.exercise_name,
         sets: exercise?.sessions?.map((session) => ({
@@ -24,19 +25,21 @@ function WorkoutSession() {
           previousReps: session?.reps,
           weight: null,
           reps: null,
-        })) || [{ weight: 0, reps: 0 }],
+        })) || [
+          { previousWeight: 0, previousReps: 0, weight: null, reps: null },
+        ],
       })),
     },
   });
 
   const { fields } = useFieldArray({
     control,
-    name: 'exerciseData',
+    name: 'exercisesData',
   });
 
-  const onSubmit = (data: addNewSessionArrayDto) => {
-    console.log(data);
-  };
+  const { mutate } = useAddNewSession();
+  const onSubmit = (data: addNewSessionArrayDto) =>
+    mutate({ workout_id, workoutData: data });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
