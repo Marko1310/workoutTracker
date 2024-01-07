@@ -1,22 +1,16 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 function Protected({ children }: { children: ReactNode }) {
-  const { isAuthenticated, isLoading, verifyUser } = useAuth()!;
-  const navigate = useNavigate();
+  const { isAuthenticated, isLoading } = useAuth()!;
 
-  useEffect(() => {
-    (async function () {
-      await verifyUser();
-      if (!isAuthenticated) {
-        navigate('/');
-      }
-    })();
-  }, [isAuthenticated, navigate, verifyUser]);
+  if (!isAuthenticated) {
+    return <Navigate to={'/'} />;
+  }
 
   if (isLoading) {
-    return <div>Loading</div>;
+    return <div>Loading User</div>;
   }
 
   if (isAuthenticated && !isLoading) {

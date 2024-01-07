@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const useAddNewSession = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (data: {
       workout_id: number;
       workoutData: addNewSessionArrayDto;
@@ -20,7 +20,7 @@ const useAddNewSession = () => {
       navigate('/app/home');
     },
   });
-  return { mutate };
+  return { mutate, isPending };
 };
 
 export { useAddNewSession };

@@ -1,8 +1,8 @@
 import {
   ReactNode,
   createContext,
-  useCallback,
   useContext,
+  useEffect,
   useReducer,
 } from 'react';
 import userServices from '../services/userServices';
@@ -43,7 +43,6 @@ type AuthContextType = AuthStateType & {
   login: (data: LoginDto) => Promise<void>;
   clearError: () => void;
   logout: () => void;
-  verifyUser: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -85,6 +84,22 @@ function AuthProvider({ children }: { children: ReactNode }) {
     initalState,
   );
 
+  useEffect(() => {
+    const verifyUser = async () => {
+      dispatch({ type: ACTION.LOADING });
+      try {
+        const response = await userServices.getUser();
+        userServices.addUserLocalStorage(response.data);
+        dispatch({ type: ACTION.SUCCESS, payload: response.data });
+      } catch (error: any) {
+        userServices.removeUserLocalStorage();
+        dispatch({ type: ACTION.ERROR, payload: error.response.data });
+      }
+    };
+
+    verifyUser();
+  }, []);
+
   async function signup(data: SignupDto) {
     dispatch({ type: ACTION.LOADING });
     try {
@@ -118,18 +133,6 @@ function AuthProvider({ children }: { children: ReactNode }) {
     dispatch({ type: ACTION.RESET });
   }
 
-  const verifyUser = useCallback(async () => {
-    dispatch({ type: ACTION.LOADING });
-    try {
-      const response = await userServices.getUser();
-      userServices.addUserLocalStorage(response.data);
-      dispatch({ type: ACTION.SUCCESS, payload: response.data });
-    } catch (error: any) {
-      userServices.removeUserLocalStorage();
-      dispatch({ type: ACTION.ERROR, payload: error.response.data });
-    }
-  }, [dispatch]);
-
   return (
     <AuthContext.Provider
       value={{
@@ -141,7 +144,6 @@ function AuthProvider({ children }: { children: ReactNode }) {
         login,
         clearError,
         logout,
-        verifyUser,
       }}
     >
       {children}

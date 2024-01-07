@@ -23,12 +23,12 @@ function LoginForm() {
   };
 
   useEffect(() => {
-    if (error) {
+    if (error && error.message !== 'Unauthorized') {
       setError('password', {
         message: error.message,
       });
     }
-  }, [error]);
+  }, [error, setError]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

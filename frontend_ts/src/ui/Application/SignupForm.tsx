@@ -28,7 +28,7 @@ function SignupForm() {
         message: error.message,
       });
     }
-  }, [error]);
+  }, [error, setError]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

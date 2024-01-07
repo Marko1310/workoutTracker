@@ -51,13 +51,13 @@ function WorkoutSession() {
     name: 'exercisesData',
   });
 
-  const { mutate } = useAddNewSession();
+  const { mutate, isPending } = useAddNewSession();
   const onSubmit = (data: addNewSessionArrayDto) =>
     mutate({ workout_id, workoutData: data });
 
   return (
     <>
-      {isLoading ? (
+      {isLoading || isPending ? (
         <p>Loading</p>
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
