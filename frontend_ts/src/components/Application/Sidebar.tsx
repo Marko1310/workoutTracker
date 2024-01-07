@@ -3,6 +3,10 @@ import { useAuth } from '../../context/AuthContext';
 import SidebarButton from '../../ui/Application/SidebarButton';
 import Avatar from '../../ui/Application/Avatar';
 import { UserDto } from '../../types/applications';
+import SpaceDashboardRoundedIcon from '@mui/icons-material/SpaceDashboard';
+import HomeRounded from '@mui/icons-material/Home';
+import FitnessCenterRoundedIcon from '@mui/icons-material/FitnessCenter';
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 
 type SidebarProps = UserDto;
 
@@ -20,16 +24,24 @@ function Sidebar({ user }: { user: SidebarProps | null }) {
 
       <div className='flex h-full w-full flex-col justify-between text-left'>
         <div className='flex w-full flex-col items-start align-baseline'>
-          <SidebarButton title='Home' route='/app/home' />
-          <SidebarButton title='Dashboard' route='/app/dashboard' />
-          <SidebarButton title='Programs' route='/app/programs' />
+          <SidebarButton title='Home' route='/app/home' icon={HomeRounded} />
+          <SidebarButton
+            title='Dashboard'
+            route='/app/dashboard'
+            icon={SpaceDashboardRoundedIcon}
+          />
+          <SidebarButton
+            title='Programs'
+            route='/app/programs'
+            icon={FitnessCenterRoundedIcon}
+          />
         </div>
-        <button
-          className='transition-al h-14 w-full pl-2 text-left'
-          onClick={handleLogout}
-        >
-          Logout
-        </button>
+        <div className='flex items-center justify-start pl-2'>
+          <LogoutRoundedIcon />
+          <button className='h-14 pl-2 text-left' onClick={handleLogout}>
+            Logout
+          </button>
+        </div>
       </div>
     </aside>
   );
