@@ -28,10 +28,10 @@ function PreviousWorkout() {
                   <div key={exercise.exercises_id} className='flex gap-2 pl-4 '>
                     <h2 className='items-stretch'>{exercise.exercise_name}:</h2>
                     <div className='flex gap-2'>
-                      {exercise.sessions.map((session) => {
+                      {exercise?.sessions?.map((session) => {
                         return (
                           <h2 key={session.sessions_id}>
-                            {session.weight}x{session.reps},
+                            {session.weight}x{session.reps} |
                           </h2>
                         );
                       })}

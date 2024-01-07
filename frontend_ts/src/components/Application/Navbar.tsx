@@ -1,18 +1,14 @@
-import { SyntheticEvent, useState } from 'react';
+import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import NavButton from '../../ui/Auth/NavButton';
 import { UserDto } from '../../types/applications';
-import Avatar from '../../ui/Application/Avatar';
+import AvatarNavbar from '../../ui/Application/AvatarNavbar';
+import MenuIcon from '@mui/icons-material/Menu';
 
 type NavbarProps = UserDto;
 
 function Navbar({ user }: { user: NavbarProps | null }) {
   const { logout } = useAuth()!;
-
-  const handleLogout = (e: SyntheticEvent) => {
-    e.preventDefault();
-    logout();
-  };
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -25,16 +21,15 @@ function Navbar({ user }: { user: NavbarProps | null }) {
       className={`absolute top-0 z-40 flex h-fit w-screen flex-col overflow-hidden border-2 bg-white transition-all duration-300 md:hidden`}
     >
       <div className='flex h-16 w-full flex-row items-center justify-between gap-4 px-4'>
-        <button onClick={handleToggleNavbar}>Icon</button>
+        <MenuIcon onClick={handleToggleNavbar} />
         <div className='flex gap-6'>
-          <button onClick={handleLogout}>Logout</button>
-          <Avatar user={user} />
+          <AvatarNavbar user={user} logout={logout} />
         </div>
       </div>
       <div
         className={`${
-          isOpen ? 'max-h-40' : 'max-h-0'
-        } flex h-fit flex-col items-center justify-between transition-all duration-300`}
+          isOpen ? 'max-h-40 border-t-2' : 'max-h-0'
+        } flex h-fit flex-col items-center justify-between pl-4 transition-all duration-300`}
       >
         <NavButton title='Home' route='home' />
         <NavButton title='Dashboard' route='dashboard' />
