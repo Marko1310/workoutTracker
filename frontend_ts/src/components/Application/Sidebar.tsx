@@ -36,11 +36,12 @@ function Sidebar({ user }: { user: SidebarProps | null }) {
             icon={FitnessCenterRoundedIcon}
           />
         </div>
-        <div className='flex items-center justify-start pl-2'>
+        <div
+          onClick={handleLogout}
+          className='flex items-center justify-start pl-2'
+        >
           <LogoutRoundedIcon />
-          <button className='h-14 pl-2 text-left' onClick={handleLogout}>
-            Logout
-          </button>
+          <button className='h-14 pl-2 text-left'>Logout</button>
         </div>
       </div>
     </aside>

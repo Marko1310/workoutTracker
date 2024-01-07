@@ -2,6 +2,7 @@ import Protected from './pages/Protected';
 import Auth from './pages/Auth';
 import Application from './pages/Application';
 import Home from './components/Home/Home';
+import Dashboard from './components/Dashboard/Dashboard';
 import Programs from './components/Programs/Programs';
 import WorkoutSession from './components/Session/WorkoutSession';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -27,7 +28,7 @@ function App() {
               }
             >
               <Route index path='home' element={<Home />} />
-              <Route path='dashboard' element={<p>Dashboard</p>} />
+              <Route path='dashboard' element={<Dashboard />} />
               <Route path='programs' element={<Programs />} />
               <Route path='session/:workoutId' element={<WorkoutSession />} />
             </Route>
