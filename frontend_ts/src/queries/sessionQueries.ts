@@ -1,8 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addNewSessionArrayDto } from '../components/Session/types';
 import sessionServices from '../services/sessionServices';
+import { useNavigate } from 'react-router-dom';
 
 const useAddNewSession = () => {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationFn: (data: {
@@ -15,7 +17,7 @@ const useAddNewSession = () => {
       });
     },
     onSuccess: () => {
-      console.log('success');
+      navigate('/app/home');
     },
   });
   return { mutate };

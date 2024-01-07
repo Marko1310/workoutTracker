@@ -22,7 +22,7 @@ function Set({
   const [isPR, setIsPR] = useState(false);
 
   const deleteButtonRender = (index: number) => {
-    return controlledSets.length - 1 === index;
+    return controlledSets.length - 1 === index && index !== 0;
   };
 
   useEffect(() => {
@@ -31,7 +31,7 @@ function Set({
       weight &&
       set.previousReps &&
       set.previousWeight &&
-      reps * weight > set.previousWeight * set.previousReps;
+      Number(reps) * Number(weight) > set.previousWeight * set.previousReps;
     setIsPR(!!isCurrentSetHigher);
   }, [weight, reps, set]);
 
@@ -61,7 +61,7 @@ function Set({
           } w-16 py-2 text-center outline-none`}
           type='number'
           placeholder='kg'
-          onChange={(e) => setWeight(Number(e.target.value))}
+          onChange={(e) => setWeight(e.target.value)}
           value={weight !== null ? weight : ''}
         />
       </td>
@@ -77,7 +77,7 @@ function Set({
           } w-16 py-2 text-center outline-none`}
           type='number'
           placeholder='reps'
-          onChange={(e) => setReps(Number(e.target.value))}
+          onChange={(e) => setReps(e.target.value)}
           value={reps !== null ? reps : ''}
         />
       </td>

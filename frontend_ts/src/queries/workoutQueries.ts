@@ -74,7 +74,6 @@ const useWorkoutsForProgram = (
   });
 
   const workoutsForProgramData: WorkoutDto[] = data?.data;
-
   return { workoutsForProgramData, isLoading, error };
 };
 

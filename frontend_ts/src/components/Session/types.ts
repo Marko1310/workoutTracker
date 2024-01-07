@@ -3,8 +3,8 @@ import { z } from 'zod';
 const SetSchema = z.object({
   previousWeight: z.number().nullable(),
   previousReps: z.number().nullable(),
-  weight: z.number().nullable(),
-  reps: z.number().nullable(),
+  weight: z.string(),
+  reps: z.string(),
 });
 export type setDto = z.infer<typeof SetSchema>;
 

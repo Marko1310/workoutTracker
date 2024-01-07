@@ -20,11 +20,11 @@ export const useWorkoutData = (workoutId: number) => {
   const isLoading = loadingWorkoutWithDetails || loadingWorkoutWithExercises;
   const error = errorWorkout || errorExercises;
 
-  const objectEmpty = (object: previousWorkoutDetailsDto) => {
+  const objectNotEmpty = (object: previousWorkoutDetailsDto) => {
     return object && Object.keys(object).length !== 0;
   };
 
-  const workout: previousWorkoutDetailsDto = objectEmpty(
+  const workout: previousWorkoutDetailsDto = objectNotEmpty(
     previousWorkoutWithDetails,
   )
     ? previousWorkoutWithDetails
