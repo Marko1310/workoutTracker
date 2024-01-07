@@ -80,7 +80,7 @@ const useWorkoutsForProgram = (
 const useWorkoutLogsByYear = (userId: number | undefined, year: number) => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['workoutLogsByYear', userId],
-    queryFn: () => workoutServices.getAllWokoutLogsByYear(userId, year),
+    queryFn: () => workoutServices.getAllWokoutLogsByYear(year),
     enabled: !!userId,
   });
 

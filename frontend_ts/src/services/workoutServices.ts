@@ -34,11 +34,8 @@ const getDetailsForWorkoutByWeek = async (workoutId: number, week: number) => {
   return await workout_api.get(`workouts/details/${workoutId}/${week}`);
 };
 
-const getAllWokoutLogsByYear = async (
-  userId: number | undefined,
-  year: number,
-) => {
-  return await workout_api.get(`workout-logs/${userId}/${year}`);
+const getAllWokoutLogsByYear = async (year: number) => {
+  return await workout_api.get(`workout-logs/year/${year}`);
 };
 
 const addNewWorkout = async (

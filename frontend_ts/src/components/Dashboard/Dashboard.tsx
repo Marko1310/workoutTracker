@@ -1,7 +1,9 @@
+import getDatesForOngoingWeek from '../../helpers/currentWeekDates';
 import Heatmap from './Heatmap';
 import Stats from './Stats';
 
 function Dashboard() {
+  const { startDate, endDate } = getDatesForOngoingWeek();
   return (
     <>
       <div className='w-full md:max-w-max'>
