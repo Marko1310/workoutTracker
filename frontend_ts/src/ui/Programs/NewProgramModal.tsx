@@ -5,7 +5,6 @@ import { useAddNewProgram } from '../../queries/programQueries';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AddNewProgramDto, AddNewProgramSchema } from '../../types/forms';
-import CircularProgress from '@mui/material/CircularProgress';
 
 function NewProgramModal() {
   const {
@@ -51,7 +50,7 @@ function NewProgramModal() {
         className='mt-6 flex h-14 w-full items-center justify-center rounded-md bg-orange-300 p-3 transition-all hover:bg-orange-400 disabled:bg-slate-300'
         type='submit'
       >
-        {isPending ? <CircularProgress /> : 'Add Program'}
+        {isPending ? 'Saving' : 'Add Program'}
       </button>
     </form>
   );

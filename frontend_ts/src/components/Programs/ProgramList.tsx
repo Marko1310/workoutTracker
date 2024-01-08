@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import WorkoutList from '../Workouts/WorkoutList';
 import { AllProgramsDto } from '../../types/workoutData';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import ProgramMenu from './ProgramMenu';
+import Modal from '../Shared/Modal';
+import DeleteProgramModal from '../../ui/Programs/DeleteProgramModal';
+import useModal from '../../hooks/useModal';
 
 export default function ProgramList({
   allProgramsData,
@@ -15,6 +18,8 @@ export default function ProgramList({
   const handleChange = (id: number) => {
     setExpandedIndex((prevIndex) => (prevIndex === id ? null : id));
   };
+  const deleteProgramModalRef = useRef<HTMLDialogElement>(null);
+  const { openModal, closeModal } = useModal(deleteProgramModalRef);
 
   return (
     <ul>
@@ -26,7 +31,10 @@ export default function ProgramList({
           >
             <div className='flex justify-between py-2'>
               <h1 className='px-4'>{program.programs_name}</h1>
-              <ProgramMenu programId={program.programs_id} />
+              <ProgramMenu
+                programId={program.programs_id}
+                openModal={openModal}
+              />
             </div>
             <div
               onClick={() => handleChange(program.programs_id)}
@@ -49,6 +57,13 @@ export default function ProgramList({
                 programId={program.programs_id}
               />
             </div>
+            <Modal ref={deleteProgramModalRef}>
+              <DeleteProgramModal
+                name={program.programs_name}
+                programId={program.programs_id}
+                closeModal={closeModal}
+              />
+            </Modal>
           </li>
         );
       })}

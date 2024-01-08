@@ -4,6 +4,7 @@ import Modal from '../Shared/Modal';
 import NewProgramModal from '../../ui/Programs/NewProgramModal';
 import useModal from '../../hooks/useModal';
 import { useAllPrograms } from '../../queries/programQueries';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function Programs() {
   const { allProgramsData, isLoading, isFetching } = useAllPrograms();
@@ -13,7 +14,9 @@ function Programs() {
   return (
     <>
       {isLoading || isFetching ? (
-        <p>Loading</p>
+        <div className='flex h-full w-full items-center justify-center'>
+          <CircularProgress size={80} />
+        </div>
       ) : (
         <div className='flex flex-col gap-2'>
           <div className='flex w-full justify-end'>

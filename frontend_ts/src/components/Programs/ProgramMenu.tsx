@@ -3,23 +3,20 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useDeleteProgram } from '../../queries/programQueries';
 
-export default function ProgramMenu({ programId }: { programId: number }) {
+export default function ProgramMenu({
+  openModal,
+}: {
+  programId: number;
+  openModal: () => void;
+}) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const { mutate: deleteProgram, isPending } = useDeleteProgram();
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
-  };
-
-  const handleDelete = (programId: number) => {
-    console.log(isPending);
-
-    deleteProgram(programId);
   };
 
   return (
@@ -51,9 +48,7 @@ export default function ProgramMenu({ programId }: { programId: number }) {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={() => handleDelete(programId)}>
-          Delete Program
-        </MenuItem>
+        <MenuItem onClick={openModal}>Delete Program</MenuItem>
       </Menu>
     </div>
   );
