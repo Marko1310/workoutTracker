@@ -3,12 +3,13 @@ import { Tooltip as MuiTooltip } from '@mui/material';
 import ActivityCalendar from 'react-activity-calendar';
 import { useHeatmapData } from '../../hooks/useHeatmapData';
 import { useWorkoutLogsByYear } from '../../queries/workoutQueries';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function Heatmap() {
   const currentYear = new Date().getFullYear();
   const [year, setYear] = useState(currentYear);
 
-  const { workoutLogsByYear, isLoading, error } = useWorkoutLogsByYear(year);
+  const { workoutLogsByYear, isLoading } = useWorkoutLogsByYear(year);
 
   const { heatMapData } = useHeatmapData(year, workoutLogsByYear);
 
@@ -17,7 +18,7 @@ function Heatmap() {
   };
 
   return (
-    <div className='w-full border-2 border-blue-400'>
+    <div className='w-full border-2 border-blue-400 p-2'>
       <div className='flex flex-col items-center'>
         <div className='mb-4 flex w-full justify-between'>
           <h2>Your workout calendar:</h2>
@@ -29,7 +30,7 @@ function Heatmap() {
           </select>
         </div>
         {isLoading ? (
-          'loading'
+          <CircularProgress size={80} />
         ) : (
           <ActivityCalendar
             data={heatMapData}

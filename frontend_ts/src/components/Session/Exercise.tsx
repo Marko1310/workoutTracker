@@ -6,8 +6,8 @@ import { addNewSessionArrayDto, addNewSessionDto } from './types';
 const newSet = {
   previousWeight: 0,
   previousReps: 0,
-  weight: null,
-  reps: null,
+  weight: '',
+  reps: '',
 };
 
 function Exercise({

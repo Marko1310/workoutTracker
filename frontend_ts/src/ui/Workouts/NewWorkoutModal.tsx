@@ -21,7 +21,7 @@ function NewProgramModal({ programId }: { programId: number }) {
     control,
     name: 'exercises',
   });
-  const { mutate } = useAddNewWorkout();
+  const { mutate, isPending } = useAddNewWorkout();
   const onSubmit = (data: AddNewWorkoutDto) =>
     mutate({ programId, workoutData: data });
 
@@ -33,11 +33,11 @@ function NewProgramModal({ programId }: { programId: number }) {
       <div className='flex justify-between gap-2'>
         <h1 className='text-2xl font-semibold uppercase'>Create Workout</h1>
         <button
-          className='w-fit rounded-md bg-orange-300 px-4 py-2 transition-all hover:bg-orange-400 disabled:bg-slate-200'
+          className='w-fit rounded-md bg-orange-300 px-4 py-2 transition-all hover:bg-orange-400 disabled:bg-slate-300'
           type='submit'
-          disabled={!isValid}
+          disabled={!isValid || isPending}
         >
-          Save
+          {isPending ? 'Saving' : 'Save'}
         </button>
       </div>
       <div className='mt-8 flex flex-col gap-1'>

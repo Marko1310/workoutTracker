@@ -8,11 +8,9 @@ import Modal from '../Shared/Modal';
 import DeleteProgramModal from '../../ui/Programs/DeleteProgramModal';
 import useModal from '../../hooks/useModal';
 
-export default function ProgramList({
-  allProgramsData,
-}: {
-  allProgramsData: AllProgramsDto;
-}) {
+type programListProps = { allProgramsData: AllProgramsDto };
+
+export default function ProgramList({ allProgramsData }: programListProps) {
   const [expandedIndex, setExpandedIndex] = useState<null | number>(null);
 
   const handleChange = (id: number) => {
@@ -30,7 +28,9 @@ export default function ProgramList({
             className='my-4 w-full flex-col rounded-md border-2 border-neutral-500 pb-0'
           >
             <div className='flex justify-between py-2'>
-              <h1 className='px-4'>{program.programs_name}</h1>
+              <h1 className='px-4 text-lg font-semibold uppercase'>
+                {program.programs_name}
+              </h1>
               <ProgramMenu
                 programId={program.programs_id}
                 openModal={openModal}
@@ -38,7 +38,7 @@ export default function ProgramList({
             </div>
             <div
               onClick={() => handleChange(program.programs_id)}
-              className='flex w-full flex-col items-center justify-center pb-0 pt-0 hover:cursor-pointer'
+              className='flex w-full flex-col items-center justify-center pb-0 pt-4 hover:cursor-pointer'
             >
               <p className='text-xs'>List of workouts</p>
               {expandedIndex === program.programs_id ? (
