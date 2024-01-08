@@ -38,6 +38,12 @@ const getAllWokoutLogsByYear = async (year: number) => {
   return await workout_api.get(`workout-logs/year/${year}`);
 };
 
+const getWorkoutLogsByWeek = async (startDate: string, endDate: string) => {
+  return await workout_api.get(
+    `workout-logs/week?startDate=${startDate}&endDate=${endDate}`,
+  );
+};
+
 const addNewWorkout = async (
   programId: number,
   workoutData: AddNewWorkoutDto,
@@ -59,6 +65,7 @@ export default {
   getWorkoutWithExericses,
   getDetailsForWorkoutByWeek,
   getAllWokoutLogsByYear,
+  getWorkoutLogsByWeek,
   addNewWorkout,
   deleteWorkout,
 };

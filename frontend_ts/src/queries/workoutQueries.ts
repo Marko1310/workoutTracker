@@ -3,6 +3,7 @@ import workoutServices from '../services/workoutServices';
 import {
   exercisesArrayDto,
   previousWorkoutDetailsDto,
+  workoutLogsByWeekDto,
 } from '../types/workoutData';
 import { previousWorkoutDto } from '../types/workoutData';
 import { workoutLogDto } from '../types/workoutData';
@@ -77,16 +78,22 @@ const useWorkoutsForProgram = (
   return { workoutsForProgramData, isLoading, error };
 };
 
-const useWorkoutLogsByYear = (userId: number | undefined, year: number) => {
+const useWorkoutLogsByYear = (year: number) => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['workoutLogsByYear', userId],
+    queryKey: ['workoutLogsByYear', year],
     queryFn: () => workoutServices.getAllWokoutLogsByYear(year),
-    enabled: !!userId,
   });
-
   const workoutLogsByYear: workoutLogDto = data?.data;
-
   return { workoutLogsByYear, isLoading, error };
+};
+
+const useWorkoutLogsByWeek = (startDate: string, endDate: string) => {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['workoutLogsByWeek'],
+    queryFn: () => workoutServices.getWorkoutLogsByWeek(startDate, endDate),
+  });
+  const workoutLogsByWeek: workoutLogsByWeekDto = data?.data;
+  return { workoutLogsByWeek, isLoading, error };
 };
 
 const usePreviousWorkout = (userId: number | undefined) => {
@@ -97,7 +104,6 @@ const usePreviousWorkout = (userId: number | undefined) => {
   });
 
   const previousWorkout: previousWorkoutDto = data?.data;
-
   return { previousWorkout, isLoading, error };
 };
 
@@ -116,6 +122,7 @@ const useDetailsForWorkout = (workoutId: number, week: number) => {
 export {
   useWorkoutsForProgram,
   useWorkoutLogsByYear,
+  useWorkoutLogsByWeek,
   usePreviousWorkout,
   usePreviousWorkoutWithDetails,
   useWorkoutWithExercises,

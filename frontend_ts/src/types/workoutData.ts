@@ -66,6 +66,13 @@ const workoutLogSchema = z.object({
 const workoutLogArraySchema = z.array(workoutLogSchema);
 export type workoutLogDto = z.infer<typeof workoutLogArraySchema>;
 
+const WorkoutLogsByWeekSchema = z.object({
+  date: z.string(),
+  count: z.number(),
+});
+const workoutLogByWeekArraySchema = z.array(WorkoutLogsByWeekSchema);
+export type workoutLogsByWeekDto = z.infer<typeof workoutLogByWeekArraySchema>;
+
 const previousWorkoutDetailsSchema = z.object({
   workout_name: z.string(),
   workouts_id: z.number(),
