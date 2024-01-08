@@ -109,12 +109,14 @@ function NewProgramModal({ programId }: { programId: number }) {
                   />
                 </td>
                 <td className='flex py-4 md:w-full'>
-                  <div
-                    className='flex h-10 w-4 items-center justify-end font-bold text-red-500 hover:cursor-pointer'
-                    onClick={() => remove(index)}
-                  >
-                    X
-                  </div>
+                  {index !== 0 && (
+                    <div
+                      className='flex h-10 w-4 items-center justify-end font-bold text-red-500 hover:cursor-pointer'
+                      onClick={() => remove(index)}
+                    >
+                      X
+                    </div>
+                  )}
                 </td>
               </tr>
             ))}

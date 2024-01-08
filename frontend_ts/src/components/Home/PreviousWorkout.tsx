@@ -1,10 +1,8 @@
-import { useAuth } from '../../context/AuthContext';
 import { usePreviousWorkoutData } from '../../hooks/usePreviousWorkout';
 
 function PreviousWorkout() {
-  const { user } = useAuth()!;
-  const { previousWorkout, workoutExercisesArray, isLoading, error } =
-    usePreviousWorkoutData(user?.id);
+  const { previousWorkout, workoutExercisesArray, isLoading } =
+    usePreviousWorkoutData();
 
   return (
     <div className='h-full w-full rounded-xl border-2 border-sky-500 p-2'>

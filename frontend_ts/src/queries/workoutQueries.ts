@@ -12,7 +12,7 @@ import { AddNewWorkoutDto } from '../types/forms';
 
 const useAddNewWorkout = () => {
   const queryClient = useQueryClient();
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (data: { programId: number; workoutData: AddNewWorkoutDto }) =>
       workoutServices.addNewWorkout(data.programId, data.workoutData),
     onSettled: () => {
@@ -24,7 +24,7 @@ const useAddNewWorkout = () => {
       });
     },
   });
-  return { mutate };
+  return { mutate, isPending };
 };
 
 const useDeleteWorkout = () => {
