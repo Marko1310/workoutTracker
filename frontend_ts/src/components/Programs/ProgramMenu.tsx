@@ -4,12 +4,11 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-export default function ProgramMenu({
-  openModal,
-}: {
-  programId: number;
+type programMenuProps = {
   openModal: () => void;
-}) {
+};
+
+export default function ProgramMenu({ openModal }: programMenuProps) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {

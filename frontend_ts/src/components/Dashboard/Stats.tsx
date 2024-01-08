@@ -1,6 +1,7 @@
 import { SvgIconTypeMap } from '@mui/material';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import CountUp from 'react-countup';
+
 type statsProps = {
   data: number;
   title: string;

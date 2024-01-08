@@ -1,12 +1,12 @@
 import { SyntheticEvent } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import SidebarButton from '../../ui/Application/SidebarButton';
 import Avatar from '../../ui/Application/Avatar';
-import { UserDto } from '../../types/applications';
+import SidebarButton from '../../ui/Application/SidebarButton';
 import SpaceDashboardRoundedIcon from '@mui/icons-material/SpaceDashboard';
 import HomeRounded from '@mui/icons-material/Home';
 import FitnessCenterRoundedIcon from '@mui/icons-material/FitnessCenter';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
+import { UserDto } from '../../types/applications';
 
 type SidebarProps = UserDto;
 

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import NavButton from '../../ui/Auth/NavButton';
-import { UserDto } from '../../types/applications';
 import AvatarNavbar from '../../ui/Application/AvatarNavbar';
+import NavButton from '../../ui/Auth/NavButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import { UserDto } from '../../types/applications';
 
 type NavbarProps = UserDto;
 

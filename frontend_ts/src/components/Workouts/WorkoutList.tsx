@@ -1,20 +1,26 @@
 import { useRef } from 'react';
-import { WorkoutDto } from '../../types/workoutData';
-import useModal from '../../hooks/useModal';
-import Modal from '../Shared/Modal';
-import NewWorkoutModal from '../../ui/Workouts/NewWorkoutModal';
-import WorkoutMenu from './WorkoutMenu';
 import { useNavigate } from 'react-router-dom';
+import Modal from '../Shared/Modal';
+import useModal from '../../hooks/useModal';
+import NewWorkoutModal from '../../ui/Workouts/NewWorkoutModal';
+import DeleteWorkoutModal from '../../ui/Workouts/DeleteWorkoutModal';
+import WorkoutMenu from './WorkoutMenu';
+import { WorkoutDto } from '../../types/workoutData';
 
-function WorkoutList({
-  workouts,
-  programId,
-}: {
+type workoutListProps = {
   workouts: WorkoutDto[];
   programId: number;
-}) {
+};
+
+function WorkoutList({ workouts, programId }: workoutListProps) {
   const addNewWorkoutModalRef = useRef<HTMLDialogElement>(null);
-  const { openModal } = useModal(addNewWorkoutModalRef);
+  const deleteWorkoutModalRef = useRef<HTMLDialogElement>(null);
+  const { openModal: openNewWorkoutModal } = useModal(addNewWorkoutModalRef);
+  const {
+    openModal: openDeleteWorkoutModal,
+    closeModal: closeDeleteWorkoutModal,
+  } = useModal(deleteWorkoutModalRef);
+
   const navigate = useNavigate();
 
   return (
@@ -38,9 +44,16 @@ function WorkoutList({
                   </button>
                   <h1>Workout {index + 1}:</h1>
                   <h1>{workout.workout_name}</h1>
+                  <Modal ref={deleteWorkoutModalRef}>
+                    <DeleteWorkoutModal
+                      name={workout.workout_name}
+                      workoutId={workout.workouts_id}
+                      closeModal={closeDeleteWorkoutModal}
+                    />
+                  </Modal>
                 </li>
                 <div className='flex'>
-                  <WorkoutMenu workoutId={workout?.workouts_id} />
+                  <WorkoutMenu openModal={openDeleteWorkoutModal} />
                 </div>
               </div>
             </div>
@@ -50,7 +63,7 @@ function WorkoutList({
       <div>
         <div className='flex w-full justify-center p-4'>
           <button
-            onClick={openModal}
+            onClick={openNewWorkoutModal}
             className='flex rounded-lg bg-blue-300 px-4 py-2 transition-all hover:bg-blue-400'
           >
             + Add new workout

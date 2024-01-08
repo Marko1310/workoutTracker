@@ -1,6 +1,6 @@
+import { useEffect, useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import { addNewSessionArrayDto, setArrayDto, setDto } from './types';
-import { useEffect, useState } from 'react';
 
 function Set({
   set,

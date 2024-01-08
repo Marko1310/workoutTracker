@@ -1,10 +1,10 @@
+import { useWorkoutLogsByWeek } from '../../queries/workoutQueries';
 import 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
 import {
   getDatesForOngoingWeek,
   formatDatesToTZ,
 } from '../../helpers/dateHelper';
-import { useWorkoutLogsByWeek } from '../../queries/workoutQueries';
 
 type workoutData = {
   date: string;

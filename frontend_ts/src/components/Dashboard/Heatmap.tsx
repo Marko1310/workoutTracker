@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Tooltip as MuiTooltip } from '@mui/material';
-import ActivityCalendar from 'react-activity-calendar';
 import { useHeatmapData } from '../../hooks/useHeatmapData';
 import { useWorkoutLogsByYear } from '../../queries/workoutQueries';
+import ActivityCalendar from 'react-activity-calendar';
+import { Tooltip as MuiTooltip } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 
 function Heatmap() {

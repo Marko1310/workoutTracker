@@ -1,12 +1,12 @@
 import { useRef, useState } from 'react';
 import WorkoutList from '../Workouts/WorkoutList';
-import { AllProgramsDto } from '../../types/workoutData';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import useModal from '../../hooks/useModal';
+import DeleteProgramModal from '../../ui/Programs/DeleteProgramModal';
 import ProgramMenu from './ProgramMenu';
 import Modal from '../Shared/Modal';
-import DeleteProgramModal from '../../ui/Programs/DeleteProgramModal';
-import useModal from '../../hooks/useModal';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { AllProgramsDto } from '../../types/workoutData';
 
 type programListProps = { allProgramsData: AllProgramsDto };
 
@@ -31,10 +31,7 @@ export default function ProgramList({ allProgramsData }: programListProps) {
               <h1 className='px-4 text-lg font-semibold uppercase'>
                 {program.programs_name}
               </h1>
-              <ProgramMenu
-                programId={program.programs_id}
-                openModal={openModal}
-              />
+              <ProgramMenu openModal={openModal} />
             </div>
             <div
               onClick={() => handleChange(program.programs_id)}

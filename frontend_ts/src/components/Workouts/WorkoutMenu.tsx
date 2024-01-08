@@ -3,13 +3,12 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useDeleteWorkout } from '../../queries/workoutQueries';
-import { useNavigate } from 'react-router-dom';
 
-export default function WorkoutMenu({ workoutId }: { workoutId: number }) {
-  const { mutate: deleteWorkout, isPending } = useDeleteWorkout();
-  const navigate = useNavigate();
+type workoutMenuProps = {
+  openModal: () => void;
+};
 
+export default function WorkoutMenu({ openModal }: workoutMenuProps) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -49,9 +48,7 @@ export default function WorkoutMenu({ workoutId }: { workoutId: number }) {
         }}
       >
         <MenuItem onClick={handleClose}>Details</MenuItem>
-        <MenuItem onClick={() => deleteWorkout(workoutId)}>
-          Delete Workout
-        </MenuItem>
+        <MenuItem onClick={openModal}>Delete Workout</MenuItem>
       </Menu>
     </div>
   );
