@@ -5,21 +5,12 @@ const getAllWorkouts = async (userId: number) => {
   return await workout_api.get(`workouts/${userId}`);
 };
 
-const getCurrentProgram = async (userId: number | undefined) => {
-  return await workout_api.get(`programs/currentProgram/${userId}`);
+const getWorkoutsFromCurrentProgram = async (programId: number) => {
+  return await workout_api.get(`workouts/workoutsForProgram/${programId}`);
 };
 
-const getWorkoutsFromCurrentProgram = async (
-  userId: number | undefined,
-  programId: number,
-) => {
-  return await workout_api.get(
-    `workouts/workoutsForProgram/${userId}/${programId}`,
-  );
-};
-
-const getPreviousWorkout = async (userId: number | undefined) => {
-  return await workout_api.get(`workouts/previous/${userId}`);
+const getPreviousWorkout = async () => {
+  return await workout_api.get(`workouts/previous`);
 };
 
 const getPreviousWorkoutWithDetails = async (workoutId: number) => {
@@ -27,7 +18,7 @@ const getPreviousWorkoutWithDetails = async (workoutId: number) => {
 };
 
 const getWorkoutWithExericses = async (workoutId: number) => {
-  return await workout_api.get(`workouts/${workoutId}`);
+  return await workout_api.get(`workouts/withexercises/${workoutId}`);
 };
 
 const getDetailsForWorkoutByWeek = async (workoutId: number, week: number) => {
@@ -62,7 +53,6 @@ const getWorkoutLogCount = async () => {
 
 export default {
   getAllWorkouts,
-  getCurrentProgram,
   getWorkoutsFromCurrentProgram,
   getPreviousWorkout,
   getPreviousWorkoutWithDetails,

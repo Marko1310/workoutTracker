@@ -63,14 +63,10 @@ const useWorkoutWithExercises = (workoutId: number) => {
   return { workoutWithExercises, isLoading, error };
 };
 
-const useWorkoutsForProgram = (
-  userId: number | undefined,
-  programId: number,
-) => {
+const useWorkoutsForProgram = (programId: number) => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['workoutsForProgram', programId],
-    queryFn: () =>
-      workoutServices.getWorkoutsFromCurrentProgram(userId, programId),
+    queryFn: () => workoutServices.getWorkoutsFromCurrentProgram(programId),
     enabled: !!programId,
   });
 
@@ -96,11 +92,10 @@ const useWorkoutLogsByWeek = (startDate: string, endDate: string) => {
   return { workoutLogsByWeek, isLoading, error };
 };
 
-const usePreviousWorkout = (userId: number | undefined) => {
+const usePreviousWorkout = () => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['previousWorkout', userId],
-    queryFn: () => workoutServices.getPreviousWorkout(userId),
-    enabled: !!userId,
+    queryKey: ['previousWorkout'],
+    queryFn: () => workoutServices.getPreviousWorkout(),
   });
 
   const previousWorkout: previousWorkoutDto = data?.data;

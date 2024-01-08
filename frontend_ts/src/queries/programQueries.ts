@@ -9,24 +9,21 @@ type AddNewProgramDto = {
   days: number;
 };
 
-const useAllPrograms = (userId: number | undefined) => {
+const useAllPrograms = () => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['all-programs', userId],
-    queryFn: () => programServices.getAllPrograms(userId),
-    enabled: !!userId,
+    queryKey: ['all-programs'],
+    queryFn: () => programServices.getAllPrograms(),
   });
 
   const allProgramsData: AllProgramsDto = data?.data;
   return { allProgramsData, isLoading, error };
 };
 
-const useCurrentProgram = (userId: number | undefined) => {
+const useCurrentProgram = () => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['programs', userId],
-    queryFn: () => workoutServices.getCurrentProgram(userId),
-    enabled: !!userId,
+    queryKey: ['programs'],
+    queryFn: () => programServices.getCurrentProgram(),
   });
-
   const currentProgramData: ProgramDto = data?.data;
   return { currentProgramData, isLoading, error };
 };

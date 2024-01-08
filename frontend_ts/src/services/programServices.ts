@@ -5,8 +5,12 @@ type AddNewProgramDto = {
   days: number;
 };
 
-const getAllPrograms = async (userId: number | undefined) => {
-  return await workout_api.get(`programs/${userId}`);
+const getAllPrograms = async () => {
+  return await workout_api.get(`programs/all`);
+};
+
+const getCurrentProgram = async () => {
+  return await workout_api.get(`programs/current`);
 };
 
 const addNewProgram = async (newProgram: AddNewProgramDto) => {
@@ -20,6 +24,7 @@ const deleteProgram = async (programId: number) => {
 
 export default {
   getAllPrograms,
+  getCurrentProgram,
   addNewProgram,
   deleteProgram,
 };

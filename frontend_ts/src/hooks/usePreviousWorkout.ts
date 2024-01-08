@@ -3,12 +3,12 @@ import {
   usePreviousWorkout,
 } from '../queries/workoutQueries';
 
-export const usePreviousWorkoutData = (userId: number | undefined) => {
+export const usePreviousWorkoutData = () => {
   const {
     previousWorkout,
     isLoading: loadingWorkout,
     error: errorWorkout,
-  } = usePreviousWorkout(userId);
+  } = usePreviousWorkout();
 
   const {
     workoutExercisesArray,
