@@ -119,6 +119,15 @@ const useDetailsForWorkout = (workoutId: number, week: number) => {
   return { workoutExercisesArray, isLoading, error };
 };
 
+const useGetWorkoutLogCount = () => {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['workoutlog-count'],
+    queryFn: () => workoutServices.getWorkoutLogCount(),
+  });
+  const workoutLogCount = data?.data?.workoutLogCount;
+  return { workoutLogCount, isLoading, error };
+};
+
 export {
   useWorkoutsForProgram,
   useWorkoutLogsByYear,
@@ -129,4 +138,5 @@ export {
   useDetailsForWorkout,
   useAddNewWorkout,
   useDeleteWorkout,
+  useGetWorkoutLogCount,
 };

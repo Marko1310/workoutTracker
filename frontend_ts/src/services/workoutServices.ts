@@ -56,6 +56,10 @@ const deleteWorkout = async (workoutId: number) => {
   return await workout_api.delete(`workouts/${workoutId}`);
 };
 
+const getWorkoutLogCount = async () => {
+  return await workout_api.get(`workout-logs/count`);
+};
+
 export default {
   getAllWorkouts,
   getCurrentProgram,
@@ -68,4 +72,5 @@ export default {
   getWorkoutLogsByWeek,
   addNewWorkout,
   deleteWorkout,
+  getWorkoutLogCount,
 };

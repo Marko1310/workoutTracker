@@ -8,6 +8,21 @@ const addNewSession = async (
   return await workout_api.post(`sessions/${workoutId}`, sessionData);
 };
 
+const getSetCount = async () => {
+  return await workout_api.get(`sessions/count/sets`);
+};
+
+const getTotalReps = async () => {
+  return await workout_api.get(`sessions/count/reps`);
+};
+
+const getTotalWeight = async () => {
+  return await workout_api.get(`sessions/count/weight`);
+};
+
 export default {
   addNewSession,
+  getSetCount,
+  getTotalReps,
+  getTotalWeight,
 };
