@@ -26,27 +26,27 @@ function Dashboard() {
           <div className='grid h-fit w-full grid-cols-1 gap-4 lg:grid-cols-2'>
             <Stats
               data={workoutLogCount}
-              title='Number of workouts done'
+              title='Total number of workouts done'
               icon={ChecklistIcon}
-              color='color'
+              color='bg-orange-100'
             />
             <Stats
               data={setCount}
               title='Total number of sets'
               icon={EventAvailableIcon}
-              color='color'
+              color='bg-violet-100'
             />
             <Stats
               data={totalReps}
               title='Total number of reps'
               icon={ImportExportIcon}
-              color='color'
+              color='bg-pink-100'
             />
             <Stats
               data={totalWeight}
-              title='Total number of kilograms'
+              title='Total weight lifted (kg)'
               icon={ScaleIcon}
-              color='color'
+              color='bg-green-50'
             />
           </div>
           <div className='flex h-full items-end lg:items-center'>
