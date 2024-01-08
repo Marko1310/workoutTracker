@@ -18,8 +18,7 @@ function Dashboard() {
   const { totalWeight } = useGetTotalWeight();
   const { workoutLogCount } = useGetWorkoutLogCount();
 
-  console.log(setCount, totalReps, totalWeight, workoutLogCount);
-
+  //TODO: colors
   return (
     <div className='flex flex-col gap-8'>
       <div className='flex h-fit w-full items-center gap-10'>

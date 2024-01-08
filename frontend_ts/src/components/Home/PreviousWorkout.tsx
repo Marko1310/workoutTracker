@@ -13,7 +13,7 @@ function PreviousWorkout() {
           <div className='flex gap-2'>
             <h1>Your previous workout:</h1>
             <h2>
-              {isLoading ? 'loading' : previousWorkout?.workouts.workout_name}
+              {isLoading ? 'loading' : previousWorkout?.workouts?.workout_name}
             </h2>
           </div>
           <h1> Week {previousWorkout?.week}</h1>
