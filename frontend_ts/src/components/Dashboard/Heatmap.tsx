@@ -18,7 +18,7 @@ function Heatmap() {
   };
 
   return (
-    <div className='w-full rounded-xl border border-border p-6 shadow-lg'>
+    <div className='w-full rounded-xl border border-border p-6 shadow-md'>
       <div className='flex flex-col items-center'>
         <div className='mb-4 flex w-full justify-between'>
           <h2 className='text-primary-foreground text-base font-semibold '>

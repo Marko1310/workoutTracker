@@ -25,10 +25,10 @@ export default function ProgramList({ allProgramsData }: programListProps) {
         return (
           <li
             key={program.programs_id}
-            className='my-4 w-full flex-col rounded-md border border-neutral-500 pb-0'
+            className='my-4 w-full flex-col rounded-md border border-border pb-0 shadow-sm'
           >
             <div className='flex justify-between py-2'>
-              <h1 className='px-4 text-lg font-semibold uppercase'>
+              <h1 className='text-primary-foreground px-4 text-lg font-semibold uppercase'>
                 {program.programs_name}
               </h1>
               <ProgramMenu openModal={openModal} />
@@ -39,9 +39,9 @@ export default function ProgramList({ allProgramsData }: programListProps) {
             >
               <p className='text-xs'>List of workouts</p>
               {expandedIndex === program.programs_id ? (
-                <KeyboardArrowUpIcon fontSize='medium' />
+                <KeyboardArrowUpIcon color='warning' fontSize='medium' />
               ) : (
-                <KeyboardArrowDownIcon fontSize='medium' />
+                <KeyboardArrowDownIcon color='warning' fontSize='medium' />
               )}
             </div>
             <div

@@ -33,7 +33,7 @@ function NewProgramModal({ programId }: { programId: number }) {
       <div className='flex justify-between gap-2'>
         <h1 className='text-2xl font-semibold uppercase'>Create Workout</h1>
         <button
-          className='w-fit rounded-md bg-orange-300 px-4 py-2 transition-all hover:bg-orange-400 disabled:bg-slate-300'
+          className='hover:bg-primary-foreground w-fit rounded-md bg-primary px-4 py-2 transition-all disabled:bg-slate-300'
           type='submit'
           disabled={!isValid || isPending}
         >
@@ -83,7 +83,7 @@ function NewProgramModal({ programId }: { programId: number }) {
                       required: true,
                     })}
                     placeholder='e.g. Bench press'
-                    className='h-10 w-32 rounded-md border-2 text-center md:w-full'
+                    className='h-10 w-32 rounded-md border border-border text-center focus:border-neutral-600 focus:outline-none md:w-full'
                   />
                 </td>
                 <td className='py-4'>
@@ -94,7 +94,7 @@ function NewProgramModal({ programId }: { programId: number }) {
                     })}
                     type='number'
                     placeholder='3'
-                    className='h-10 w-16 rounded-md border-2 text-center'
+                    className='h-10 w-16 rounded-md border border-border text-center  focus:border-neutral-600 focus:outline-none'
                   />
                 </td>
                 <td className='py-4'>
@@ -105,7 +105,7 @@ function NewProgramModal({ programId }: { programId: number }) {
                     })}
                     type='number'
                     placeholder='12'
-                    className='h-10 w-16 rounded-md border-2 text-center'
+                    className='h-10 w-16 rounded-md border border-border  text-center focus:border-neutral-600 focus:outline-none'
                   />
                 </td>
                 <td className='flex py-4 md:w-full'>
@@ -125,7 +125,7 @@ function NewProgramModal({ programId }: { programId: number }) {
       </div>
       <button
         onClick={() => append({ title: '', goalSets: 1, goalReps: 0 })}
-        className='w-full rounded-md bg-blue-300 p-2 transition-all hover:bg-blue-400'
+        className='hover:bg-accent-foreground w-full rounded-md bg-accent p-2 transition-all'
       >
         + Add Exercise
       </button>

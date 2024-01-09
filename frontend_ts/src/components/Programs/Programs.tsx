@@ -22,7 +22,7 @@ function Programs() {
           <div className='flex w-full justify-end'>
             <button
               onClick={openModal}
-              className='rounded-lg border-0 bg-orange-300 p-4 text-black transition-all hover:bg-orange-400'
+              className='hover:bg-primary-foreground rounded-lg border border-border bg-primary p-4 transition-all'
             >
               + Add new Program
             </button>

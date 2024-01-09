@@ -30,7 +30,7 @@ function WorkoutList({ workouts, programId }: workoutListProps) {
           return (
             <div
               key={workout?.workouts_id}
-              className='border-bg-400 w-full border-2 py-3 pl-2 pr-0'
+              className='border-bg-400 w-full rounded-lg border border-border py-3 pl-2 pr-0'
             >
               <div className='flex items-center justify-between'>
                 <li className='flex items-center gap-2 py-2'>
@@ -38,12 +38,12 @@ function WorkoutList({ workouts, programId }: workoutListProps) {
                     onClick={() =>
                       navigate(`/app/session/${workout?.workouts_id}`)
                     }
-                    className='rounded-lg bg-orange-300 px-4 py-2'
+                    className='hover:bg-primary-foreground rounded-lg bg-primary px-6 py-2 transition-all'
                   >
                     Start
                   </button>
                   <h1>Workout {index + 1}:</h1>
-                  <h1>{workout.workout_name}</h1>
+                  <h1 className='font-semibold'>{workout.workout_name}</h1>
                   <Modal ref={deleteWorkoutModalRef}>
                     <DeleteWorkoutModal
                       name={workout.workout_name}
@@ -64,7 +64,7 @@ function WorkoutList({ workouts, programId }: workoutListProps) {
         <div className='flex w-full justify-center p-4'>
           <button
             onClick={openNewWorkoutModal}
-            className='flex rounded-lg bg-blue-300 px-4 py-2 transition-all hover:bg-blue-400'
+            className='hover:bg-accent-foreground flex rounded-lg bg-accent px-4 py-2 transition-all'
           >
             + Add new workout
           </button>
