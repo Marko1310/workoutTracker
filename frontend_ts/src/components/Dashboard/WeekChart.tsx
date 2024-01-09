@@ -26,8 +26,8 @@ function WeekChart() {
     const dataset = {
       label: 'Current Week Workouts',
       data: Array(datesOfCurrentWeek.length).fill(0),
-      backgroundColor: 'rgba(75, 192, 192, 0.7)',
-      borderColor: 'rgba(75, 192, 192, 1)',
+      backgroundColor: 'rgba(251, 146, 60, 0.9)',
+      borderColor: 'rgba(251, 146, 60, 1)',
       borderWidth: 1,
     };
 

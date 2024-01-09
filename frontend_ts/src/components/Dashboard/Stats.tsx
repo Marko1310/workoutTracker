@@ -16,7 +16,7 @@ type statsProps = {
 function Stats({ data, isLoading, title, icon: Icon, color }: statsProps) {
   return (
     <div
-      className={`flex w-full flex-col items-center justify-center gap-1 rounded-3xl border-0 ${color} px-20 py-8`}
+      className={`flex w-full flex-col items-center justify-center gap-1 rounded-3xl border border-border shadow-sm ${color} px-20 py-8`}
     >
       {isLoading ? (
         <DashboardSkeleteon />

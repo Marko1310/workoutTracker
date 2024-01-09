@@ -22,7 +22,7 @@ function Dashboard() {
   return (
     <div className='flex flex-col gap-8'>
       <div className='flex h-fit w-full items-center gap-10'>
-        <div className='grid h-full w-full grid-cols-1 gap-2 lg:grid-cols-2'>
+        <div className='grid h-full w-full grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-6'>
           <div className='grid h-fit w-full grid-cols-1 gap-4 lg:grid-cols-2'>
             <Stats
               data={workoutLogCount}
@@ -54,7 +54,7 @@ function Dashboard() {
             />
           </div>
           <div className='flex h-full items-end lg:items-center'>
-            <div className='flex h-80 w-full justify-center lg:h-full lg:items-center'>
+            <div className='flex h-80 w-full justify-center rounded-2xl border border-border shadow-md lg:h-full lg:items-center'>
               <WeekChart />
             </div>
           </div>

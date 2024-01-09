@@ -18,16 +18,24 @@ function Heatmap() {
   };
 
   return (
-    <div className='w-full border-2 border-blue-400 p-2'>
+    <div className='w-full rounded-xl border border-border p-6 shadow-lg'>
       <div className='flex flex-col items-center'>
         <div className='mb-4 flex w-full justify-between'>
-          <h2>Your workout calendar:</h2>
-
-          <select id='year-select' onChange={handleYearChange}>
-            <option value={currentYear}>{currentYear}</option>
-            <option value={currentYear - 1}>{currentYear - 1}</option>
-            <option value={currentYear - 2}>{currentYear - 2}</option>
-          </select>
+          <h2 className='text-primary-foreground text-base font-semibold '>
+            Workout calendar
+          </h2>
+          <div className='flex items-center gap-2'>
+            <p>Select a year: </p>
+            <select
+              className='border border-border p-1'
+              id='year-select'
+              onChange={handleYearChange}
+            >
+              <option value={currentYear}>{currentYear}</option>
+              <option value={currentYear - 1}>{currentYear - 1}</option>
+              <option value={currentYear - 2}>{currentYear - 2}</option>
+            </select>
+          </div>
         </div>
         {isLoading ? (
           <CircularProgress size={80} />
@@ -37,8 +45,8 @@ function Heatmap() {
             blockSize={14}
             blockMargin={5}
             theme={{
-              light: ['#C3C0BF', '#F25B3B'],
-              dark: ['#C3C0BF', '#F25B3B'],
+              light: ['#C3C0BF', '#fb923c'],
+              dark: ['#C3C0BF', '#fb923c'],
             }}
             renderBlock={(block, activity) => (
               <MuiTooltip title={` Workout completed on ${activity.date}`}>
