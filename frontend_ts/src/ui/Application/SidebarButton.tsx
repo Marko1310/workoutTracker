@@ -17,10 +17,10 @@ function SidebarButton({ title, route, icon: Icon }: SidebarButtonProps) {
   return (
     <nav
       className={`${
-        location.pathname === route && 'bg-slate-500 hover:bg-slate-500'
-      } flex w-full items-center justify-start gap-8 pl-8 transition-all duration-200 hover:bg-slate-300`}
+        location.pathname === route && 'bg-slate-100 hover:bg-slate-100'
+      } flex w-full items-center justify-start gap-8 pl-8 transition-all duration-300 hover:bg-slate-200`}
     >
-      <Icon />
+      <Icon color='warning' />
       <NavButton title={title} route={route} />
     </nav>
   );

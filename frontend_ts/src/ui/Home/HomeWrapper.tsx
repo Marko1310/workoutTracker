@@ -6,7 +6,7 @@ type homeWrapperProps = {
 
 function HomeWrapper({ children }: homeWrapperProps) {
   return (
-    <div className='flex h-full w-full justify-between rounded-xl border-2 border-sky-500 px-2 py-4'>
+    <div className='flex h-full w-full justify-between rounded-xl border border-border bg-foreground px-4 py-4 shadow-sm'>
       {children}
     </div>
   );
