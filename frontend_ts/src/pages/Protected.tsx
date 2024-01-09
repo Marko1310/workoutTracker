@@ -12,7 +12,7 @@ function Protected({ children }: { children: ReactNode }) {
   if (isLoading) {
     return (
       <div className='flex h-screen w-full items-center justify-center'>
-        <CircularProgress size={80} />
+        <CircularProgress color='warning' size={80} />
       </div>
     );
   }

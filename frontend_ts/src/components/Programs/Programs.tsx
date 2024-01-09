@@ -15,7 +15,7 @@ function Programs() {
     <>
       {isLoading || isFetching ? (
         <div className='flex h-full w-full items-center justify-center'>
-          <CircularProgress size={80} />
+          <CircularProgress color='warning' size={80} />
         </div>
       ) : (
         <div className='flex flex-col gap-6'>

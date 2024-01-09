@@ -38,9 +38,9 @@ function Sidebar({ user }: { user: SidebarProps | null }) {
         </div>
         <div
           onClick={handleLogout}
-          className='flex items-center justify-start pl-2'
+          className='flex w-fit cursor-pointer items-center justify-start pl-2 '
         >
-          <LogoutRoundedIcon />
+          <LogoutRoundedIcon color='warning' />
           <button className='h-14 pl-2 text-left'>Logout</button>
         </div>
       </div>

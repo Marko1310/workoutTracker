@@ -8,9 +8,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 function Heatmap() {
   const currentYear = new Date().getFullYear();
   const [year, setYear] = useState(currentYear);
-
   const { workoutLogsByYear, isLoading } = useWorkoutLogsByYear(year);
-
   const { heatMapData } = useHeatmapData(year, workoutLogsByYear);
 
   const handleYearChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -38,7 +36,7 @@ function Heatmap() {
           </div>
         </div>
         {isLoading ? (
-          <CircularProgress size={80} />
+          <CircularProgress color='warning' size={80} />
         ) : (
           <ActivityCalendar
             data={heatMapData}

@@ -61,12 +61,14 @@ function WorkoutSession() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className=' h-fit flex-col lg:px-16'>
           <div className='flex w-full items-center justify-between border-b border-black pb-2'>
-            <p className='text-xl font-bold'>{workout?.workout_name}</p>
+            <p className='text-primary-foreground text-xl font-bold'>
+              {workout?.workout_name}
+            </p>
             <p>{workout?.week ? `# Week ${workout?.week + 1}` : `# Week 1`}</p>
             <button
               disabled={!isValid || isPending}
               type='submit'
-              className='rounded-lg bg-blue-300 px-4 py-3 transition-all hover:bg-blue-400 disabled:bg-slate-400'
+              className='hover:bg-accent-foreground rounded-lg bg-accent px-4 py-3 transition-all disabled:bg-slate-400'
             >
               {isPending ? 'Saving...' : 'Finish Workout'}
             </button>
@@ -74,7 +76,7 @@ function WorkoutSession() {
 
           {isLoading || isPending ? (
             <div className='w-ful mt-8 flex h-full items-center justify-center'>
-              <CircularProgress size={80} />
+              <CircularProgress color='warning' size={80} />
             </div>
           ) : (
             fields?.map((exercise, index) => {

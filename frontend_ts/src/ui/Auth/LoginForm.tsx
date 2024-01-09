@@ -38,6 +38,7 @@ function LoginForm() {
           register={register}
           placeholder='Email'
           errors={errors}
+          type='email'
         />
 
         <InputField
@@ -45,6 +46,7 @@ function LoginForm() {
           register={register}
           placeholder='Password'
           errors={errors}
+          type='password'
         />
       </div>
       <LoginButton title={'Login'} isSubmitting={isSubmitting} />

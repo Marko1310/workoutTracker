@@ -44,7 +44,7 @@ function Exercise({
 
   return (
     <div className='mb-6 flex flex-col'>
-      <p className='pt-6 text-lg font-bold'>
+      <p className='pt-6 text-lg font-semibold'>
         {initialExercisesData.exercise_name}
       </p>
       <div className='flex flex-col'>

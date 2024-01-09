@@ -25,7 +25,7 @@ function DeleteWorkoutModal({
         <button
           onClick={() => deleteWorkout(workoutId)}
           disabled={isPending}
-          className='mt-6 flex h-14 w-full items-center justify-center rounded-md bg-red-300 p-3 transition-all hover:bg-red-400 disabled:bg-slate-300'
+          className='hover:bg-destructive-foreground mt-6 flex h-14 w-full items-center justify-center rounded-md bg-destructive p-3 transition-all disabled:bg-slate-300'
           type='submit'
         >
           {isPending ? 'Deleting' : 'Delete'}
