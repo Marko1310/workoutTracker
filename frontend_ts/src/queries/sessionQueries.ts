@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { addNewSessionArrayDto } from '../components/Session/types';
 import sessionServices from '../services/sessionServices';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 const useAddNewSession = () => {
   const navigate = useNavigate();
@@ -11,13 +12,15 @@ const useAddNewSession = () => {
       workout_id: number;
       workoutData: addNewSessionArrayDto;
     }) => sessionServices.addNewSession(data.workout_id, data.workoutData),
-    onSettled: () => {
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['previousWorkoutWithDetails'],
       });
-    },
-    onSuccess: () => {
+      toast.success('Workout saved');
       navigate('/app/home');
+    },
+    onError: () => {
+      toast.error('Workout could not be saved');
     },
   });
   return { mutate, isPending };

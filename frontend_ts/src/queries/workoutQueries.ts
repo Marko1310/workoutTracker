@@ -9,19 +9,21 @@ import { previousWorkoutDto } from '../types/workoutData';
 import { workoutLogDto } from '../types/workoutData';
 import { WorkoutDto } from '../types/workoutData';
 import { AddNewWorkoutDto } from '../types/forms';
+import { toast } from 'react-hot-toast';
 
 const useAddNewWorkout = () => {
   const queryClient = useQueryClient();
   const { mutate, isPending } = useMutation({
     mutationFn: (data: { programId: number; workoutData: AddNewWorkoutDto }) =>
       workoutServices.addNewWorkout(data.programId, data.workoutData),
-    onSettled: () => {
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['all-programs'],
       });
       queryClient.invalidateQueries({
         queryKey: ['workoutsForProgram'],
       });
+      toast.success('Workout successfully added');
     },
   });
   return { mutate, isPending };
@@ -31,13 +33,17 @@ const useDeleteWorkout = () => {
   const queryClient = useQueryClient();
   const { mutate, isPending } = useMutation({
     mutationFn: (data: number) => workoutServices.deleteWorkout(data),
-    onSettled: () => {
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['all-programs'],
       });
       queryClient.invalidateQueries({
         queryKey: ['workoutsForProgram'],
       });
+      toast.success('Workout successfully deleted');
+    },
+    onError: () => {
+      toast.error('Workout could not be deleted');
     },
   });
   return { mutate, isPending };

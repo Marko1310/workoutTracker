@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useDeleteWorkout } from '../../queries/workoutQueries';
 
 function DeleteWorkoutModal({
@@ -10,6 +11,12 @@ function DeleteWorkoutModal({
   closeModal: () => void;
 }) {
   const { mutate: deleteWorkout, isPending } = useDeleteWorkout();
+
+  useEffect(() => {
+    if (!isPending) {
+      closeModal();
+    }
+  }, [isPending, closeModal]);
 
   return (
     <div className='flex flex-col p-8'>
