@@ -68,7 +68,7 @@ function WorkoutSession() {
               type='submit'
               className='rounded-lg bg-blue-300 px-4 py-3 transition-all hover:bg-blue-400 disabled:bg-slate-400'
             >
-              {isPending ? 'Savng' : 'Finish Workout'}
+              {isPending ? 'Saving...' : 'Finish Workout'}
             </button>
           </div>
 

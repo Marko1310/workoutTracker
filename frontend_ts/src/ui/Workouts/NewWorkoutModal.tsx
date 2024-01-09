@@ -37,7 +37,7 @@ function NewProgramModal({ programId }: { programId: number }) {
           type='submit'
           disabled={!isValid || isPending}
         >
-          {isPending ? 'Saving' : 'Save'}
+          {isPending ? 'Saving...' : 'Save'}
         </button>
       </div>
       <div className='mt-8 flex flex-col gap-1'>
