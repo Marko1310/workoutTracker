@@ -3,6 +3,7 @@ import { addNewSessionArrayDto } from '../components/Session/types';
 import sessionServices from '../services/sessionServices';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import { sessionQueryKeys, workoutQueryKeys } from '../types/queryKeys';
 
 const useAddNewSession = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const useAddNewSession = () => {
     }) => sessionServices.addNewSession(data.workout_id, data.workoutData),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['previousWorkoutWithDetails'],
+        queryKey: [workoutQueryKeys.PREVIOUS_WORKOUT_DETAILS],
       });
       toast.success('Workout saved');
       navigate('/app/home');
@@ -28,7 +29,7 @@ const useAddNewSession = () => {
 
 const useGetSetCount = () => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['set-count'],
+    queryKey: [sessionQueryKeys.SET_COUNT],
     queryFn: () => sessionServices.getSetCount(),
   });
 
@@ -38,7 +39,7 @@ const useGetSetCount = () => {
 
 const useGetTotalReps = () => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['total-reps'],
+    queryKey: [sessionQueryKeys.TOTAL_REPS],
     queryFn: () => sessionServices.getTotalReps(),
   });
   const totalReps = data?.data.totalReps;
@@ -47,7 +48,7 @@ const useGetTotalReps = () => {
 
 const useGetTotalWeight = () => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['total-weight'],
+    queryKey: [sessionQueryKeys.TOTAL_WEIGHT],
     queryFn: () => sessionServices.getTotalWeight(),
   });
   const totalWeight = data?.data.totalWeight;

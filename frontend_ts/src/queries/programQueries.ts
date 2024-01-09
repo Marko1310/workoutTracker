@@ -3,6 +3,7 @@ import programServices from '../services/programServices';
 import { AllProgramsDto } from '../types/workoutData';
 import { ProgramDto } from '../types/workoutData';
 import { toast } from 'react-hot-toast';
+import { programQueryKeys } from '../types/queryKeys';
 
 type AddNewProgramDto = {
   title: string;
@@ -11,7 +12,7 @@ type AddNewProgramDto = {
 
 const useAllPrograms = () => {
   const { data, isLoading, isFetching, error } = useQuery({
-    queryKey: ['all-programs'],
+    queryKey: [programQueryKeys.ALL_PROGRAMS],
     queryFn: () => programServices.getAllPrograms(),
   });
 
@@ -21,7 +22,7 @@ const useAllPrograms = () => {
 
 const useCurrentProgram = () => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['programs'],
+    queryKey: [programQueryKeys.CURRENT_PROGRAM],
     queryFn: () => programServices.getCurrentProgram(),
   });
   const currentProgramData: ProgramDto = data?.data;
@@ -33,7 +34,9 @@ const useAddNewProgram = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: (data: AddNewProgramDto) => programServices.addNewProgram(data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['all-programs'] });
+      queryClient.invalidateQueries({
+        queryKey: [programQueryKeys.ALL_PROGRAMS],
+      });
       toast.success('Program successfully added');
     },
     onError: () => {
@@ -48,7 +51,9 @@ const useDeleteProgram = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: (data: number) => programServices.deleteProgram(data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['all-programs'] });
+      queryClient.invalidateQueries({
+        queryKey: [programQueryKeys.ALL_PROGRAMS],
+      });
       toast.success('Program successfully deleted');
     },
     onError: () => {

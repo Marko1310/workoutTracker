@@ -10,6 +10,7 @@ import { workoutLogDto } from '../types/workoutData';
 import { WorkoutDto } from '../types/workoutData';
 import { AddNewWorkoutDto } from '../types/forms';
 import { toast } from 'react-hot-toast';
+import { programQueryKeys, workoutQueryKeys } from '../types/queryKeys';
 
 const useAddNewWorkout = () => {
   const queryClient = useQueryClient();
@@ -18,10 +19,10 @@ const useAddNewWorkout = () => {
       workoutServices.addNewWorkout(data.programId, data.workoutData),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['all-programs'],
+        queryKey: [programQueryKeys.ALL_PROGRAMS],
       });
       queryClient.invalidateQueries({
-        queryKey: ['workoutsForProgram'],
+        queryKey: [workoutQueryKeys.WORKOUTS_FOR_PROGRAM],
       });
       toast.success('Workout successfully added');
     },
@@ -35,10 +36,10 @@ const useDeleteWorkout = () => {
     mutationFn: (data: number) => workoutServices.deleteWorkout(data),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['all-programs'],
+        queryKey: [programQueryKeys.ALL_PROGRAMS],
       });
       queryClient.invalidateQueries({
-        queryKey: ['workoutsForProgram'],
+        queryKey: [workoutQueryKeys.WORKOUTS_FOR_PROGRAM],
       });
       toast.success('Workout successfully deleted');
     },
@@ -51,7 +52,7 @@ const useDeleteWorkout = () => {
 
 const usePreviousWorkoutWithDetails = (workoutId: number) => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['previousWorkoutWithDetails', workoutId],
+    queryKey: [workoutQueryKeys.PREVIOUS_WORKOUT_DETAILS, workoutId],
     queryFn: () => workoutServices.getPreviousWorkoutWithDetails(workoutId),
     enabled: !!workoutId,
   });
@@ -61,7 +62,7 @@ const usePreviousWorkoutWithDetails = (workoutId: number) => {
 
 const useWorkoutWithExercises = (workoutId: number) => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['workoutWithExercises', workoutId],
+    queryKey: [workoutQueryKeys.WORKOUTS_WITH_EXERCISES, workoutId],
     queryFn: () => workoutServices.getWorkoutWithExericses(workoutId),
     enabled: !!workoutId,
   });
@@ -71,7 +72,7 @@ const useWorkoutWithExercises = (workoutId: number) => {
 
 const useWorkoutsForProgram = (programId: number) => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['workoutsForProgram', programId],
+    queryKey: [workoutQueryKeys.WORKOUTS_FOR_PROGRAM, programId],
     queryFn: () => workoutServices.getWorkoutsFromCurrentProgram(programId),
     enabled: !!programId,
   });
@@ -82,7 +83,7 @@ const useWorkoutsForProgram = (programId: number) => {
 
 const useWorkoutLogsByYear = (year: number) => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['workoutLogsByYear', year],
+    queryKey: [workoutQueryKeys.WORKOUT_LOGS_BY_YEAR, year],
     queryFn: () => workoutServices.getAllWokoutLogsByYear(year),
   });
   const workoutLogsByYear: workoutLogDto = data?.data;
@@ -91,7 +92,7 @@ const useWorkoutLogsByYear = (year: number) => {
 
 const useWorkoutLogsByWeek = (startDate: string, endDate: string) => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['workoutLogsByWeek'],
+    queryKey: [workoutQueryKeys.WORKOUT_LOGS_BY_WEEK],
     queryFn: () => workoutServices.getWorkoutLogsByWeek(startDate, endDate),
   });
   const workoutLogsByWeek: workoutLogsByWeekDto = data?.data;
@@ -100,7 +101,7 @@ const useWorkoutLogsByWeek = (startDate: string, endDate: string) => {
 
 const usePreviousWorkout = () => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['previousWorkout'],
+    queryKey: [workoutQueryKeys.PREVIOUS_WORKOUT],
     queryFn: () => workoutServices.getPreviousWorkout(),
   });
 
@@ -110,7 +111,7 @@ const usePreviousWorkout = () => {
 
 const useDetailsForWorkout = (workoutId: number, week: number) => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['detailsForWorkout', workoutId],
+    queryKey: [workoutQueryKeys.DETAILS_FOR_WORKOUT, workoutId],
     queryFn: () => workoutServices.getDetailsForWorkoutByWeek(workoutId, week),
     enabled: !!workoutId,
   });
@@ -122,7 +123,7 @@ const useDetailsForWorkout = (workoutId: number, week: number) => {
 
 const useGetWorkoutLogCount = () => {
   const { data, isLoading, error } = useQuery({
-    queryKey: ['workoutlog-count'],
+    queryKey: [workoutQueryKeys.WORKOUT_LOGS_COUNT],
     queryFn: () => workoutServices.getWorkoutLogCount(),
   });
   const workoutLogCount = data?.data?.workoutLogCount;
