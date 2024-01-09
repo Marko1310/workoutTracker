@@ -9,7 +9,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 function Programs() {
   const { allProgramsData, isLoading, isFetching } = useAllPrograms();
   const addNewWProgramModalRef = useRef<HTMLDialogElement>(null);
-  const { openModal } = useModal(addNewWProgramModalRef);
+  const { openModal, closeModal } = useModal(addNewWProgramModalRef);
 
   return (
     <>
@@ -36,7 +36,7 @@ function Programs() {
           </div>
 
           <Modal ref={addNewWProgramModalRef}>
-            <NewProgramModal />
+            <NewProgramModal closeModal={closeModal} />
           </Modal>
         </div>
       )}

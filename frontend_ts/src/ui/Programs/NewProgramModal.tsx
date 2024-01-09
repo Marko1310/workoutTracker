@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import InputField from '../Forms/InputField';
 import FormTitle from '../Forms/FormTitle';
 import Select from '../Forms/Select';
@@ -6,7 +7,11 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AddNewProgramDto, AddNewProgramSchema } from '../../types/forms';
 
-function NewProgramModal() {
+type newProgramModalProps = {
+  closeModal: () => void;
+};
+
+function NewProgramModal({ closeModal }: newProgramModalProps) {
   const {
     register,
     handleSubmit,
@@ -17,6 +22,12 @@ function NewProgramModal() {
   const { mutate, isPending } = useAddNewProgram();
   const onSubmit = (newProgram: AddNewProgramDto) => mutate(newProgram);
   const daysOfWeek = [1, 2, 3, 4, 5, 6, 7];
+
+  useEffect(() => {
+    if (!isPending) {
+      closeModal();
+    }
+  }, [isPending, closeModal]);
 
   return (
     <form

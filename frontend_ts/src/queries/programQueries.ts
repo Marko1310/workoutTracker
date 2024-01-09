@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import programServices from '../services/programServices';
 import { AllProgramsDto } from '../types/workoutData';
 import { ProgramDto } from '../types/workoutData';
+import { toast } from 'react-hot-toast';
 
 type AddNewProgramDto = {
   title: string;
@@ -33,6 +34,10 @@ const useAddNewProgram = () => {
     mutationFn: (data: AddNewProgramDto) => programServices.addNewProgram(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['all-programs'] });
+      toast.success('Program successfully added');
+    },
+    onError: () => {
+      toast.error('Program could not be added');
     },
   });
   return { mutate, isPending };
@@ -44,6 +49,10 @@ const useDeleteProgram = () => {
     mutationFn: (data: number) => programServices.deleteProgram(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['all-programs'] });
+      toast.success('Program successfully deleted');
+    },
+    onError: () => {
+      toast.error('Program could not be deleted');
     },
   });
   return { mutate, isPending };

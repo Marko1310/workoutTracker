@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useDeleteProgram } from '../../queries/programQueries';
 
 function DeleteProgramModal({
@@ -10,6 +11,12 @@ function DeleteProgramModal({
   closeModal: () => void;
 }) {
   const { mutate: deleteProgram, isPending } = useDeleteProgram();
+
+  useEffect(() => {
+    if (!isPending) {
+      closeModal();
+    }
+  }, [isPending, closeModal]);
 
   return (
     <div className='flex flex-col p-8'>

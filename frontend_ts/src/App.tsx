@@ -5,10 +5,11 @@ import Home from './components/Home/Home';
 import Dashboard from './components/Dashboard/Dashboard';
 import Programs from './components/Programs/Programs';
 import WorkoutSession from './components/Session/WorkoutSession';
+import { AuthProvider } from './context/AuthContext';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
+import Notifications from './components/Shared/Notifications';
 
 const queryCLient = new QueryClient();
 
@@ -36,6 +37,7 @@ function App() {
         </BrowserRouter>
       </AuthProvider>
       <ReactQueryDevtools initialIsOpen={false} />
+      <Notifications />
     </QueryClientProvider>
   );
 }
