@@ -13,12 +13,12 @@ import ChecklistIcon from '@mui/icons-material/Checklist';
 import ScaleIcon from '@mui/icons-material/Scale';
 
 function Dashboard() {
-  const { setCount } = useGetSetCount();
-  const { totalReps } = useGetTotalReps();
-  const { totalWeight } = useGetTotalWeight();
-  const { workoutLogCount } = useGetWorkoutLogCount();
+  const { setCount, isLoading: isLoadingSets } = useGetSetCount();
+  const { totalReps, isLoading: isLoadingReps } = useGetTotalReps();
+  const { totalWeight, isLoading: isLoadingWeight } = useGetTotalWeight();
+  const { workoutLogCount, isLoading: isLoadingLogCount } =
+    useGetWorkoutLogCount();
 
-  //TODO: colors
   return (
     <div className='flex flex-col gap-8'>
       <div className='flex h-fit w-full items-center gap-10'>
@@ -26,24 +26,28 @@ function Dashboard() {
           <div className='grid h-fit w-full grid-cols-1 gap-4 lg:grid-cols-2'>
             <Stats
               data={workoutLogCount}
+              isLoading={isLoadingLogCount}
               title='Total number of workouts done'
               icon={ChecklistIcon}
               color='bg-orange-100'
             />
             <Stats
               data={setCount}
+              isLoading={isLoadingSets}
               title='Total number of sets'
               icon={EventAvailableIcon}
               color='bg-violet-100'
             />
             <Stats
               data={totalReps}
+              isLoading={isLoadingReps}
               title='Total number of reps'
               icon={ImportExportIcon}
               color='bg-pink-100'
             />
             <Stats
               data={totalWeight}
+              isLoading={isLoadingWeight}
               title='Total weight lifted (kg)'
               icon={ScaleIcon}
               color='bg-green-50'

@@ -6,7 +6,7 @@ function PreviousWorkout() {
     usePreviousWorkoutData();
 
   return (
-    <div className='h-full w-full rounded-xl border-2 border-sky-500 p-2'>
+    <div className='h-full w-full rounded-xl border-2 border-sky-500 px-2 py-4'>
       {isLoading ? (
         <div className='w-3/4'>
           <Skeleton variant='text' sx={{ fontSize: '1rem' }} />

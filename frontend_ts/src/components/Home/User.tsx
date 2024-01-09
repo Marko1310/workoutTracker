@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import HomeWrapper from '../../ui/Home/HomeWrapper';
 
 function User() {
   const { user } = useAuth()!;
   const navigate = useNavigate();
 
   return (
-    <div className='flex h-full w-full justify-between rounded-xl border-2 border-sky-500 p-2'>
+    <HomeWrapper>
       <div className='mb-2 flex flex-col gap-2'>
         <h1 className='text-2xl'>Welcome {user?.name}!</h1>
         <h1>What workout are you doing today?</h1>
@@ -20,7 +21,7 @@ function User() {
           Start a workout
         </button>
       </div>
-    </div>
+    </HomeWrapper>
   );
 }
 
