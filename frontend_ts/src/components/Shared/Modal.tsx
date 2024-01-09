@@ -14,10 +14,10 @@ const Modal = forwardRef<HTMLDialogElement, Props>(({ children }, ref) => {
       ref={ref}
     >
       <button
-        className='absolute right-4 top-2 text-sm font-thin ease-out hover:cursor-pointer'
+        className='absolute right-4 top-2 text-base font-extrabold text-red-500 ease-out hover:cursor-pointer hover:text-red-600'
         onClick={closeModal}
       >
-        Close
+        X
       </button>
       {children}
     </dialog>
