@@ -2,7 +2,7 @@ import { useState } from 'react';
 import AuthFormTitle from './AuthFormTitle';
 import SwitchForm from './SwitchForm';
 import LoginForm from './LoginForm';
-import SignupForm from '../Application/SignupForm';
+import SignupForm from './SignupForm';
 import { useAuth } from '../../context/AuthContext';
 
 const Forms = {

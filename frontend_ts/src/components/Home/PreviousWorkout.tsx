@@ -3,8 +3,7 @@ import { Skeleton } from '@mui/material';
 import HomeWrapper from '../../ui/Home/HomeWrapper';
 
 function PreviousWorkout() {
-  const { previousWorkout, workoutExercisesArray, isLoading } =
-    usePreviousWorkoutData();
+  const { previousWorkoutWithDetails, isLoading } = usePreviousWorkoutData();
 
   return (
     <HomeWrapper>
@@ -20,17 +19,17 @@ function PreviousWorkout() {
             <div className='flex items-center gap-2'>
               <h1 className='text-lg'>Your previous workout:</h1>
               <h2 className='text-primary-foreground text-lg'>
-                {previousWorkout?.workouts?.workout_name}
+                {previousWorkoutWithDetails?.workout_name}
               </h2>
             </div>
             <h1 className='text-primary-foreground'>
-              Week {previousWorkout?.week}
+              Week {previousWorkoutWithDetails?.week}
             </h1>
           </div>
 
           <div>
             <h1>Exercises: </h1>
-            {workoutExercisesArray?.map((exercise) => {
+            {previousWorkoutWithDetails?.exercises?.map((exercise) => {
               return (
                 <div
                   key={exercise.exercises_id}

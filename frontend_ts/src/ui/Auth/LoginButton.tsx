@@ -9,11 +9,11 @@ function LoginButton({
     <button
       disabled={isSubmitting}
       className={`mt-12 h-14 w-full rounded-md uppercase text-white transition-all ${
-        isSubmitting ? 'hover:bg-slate-200' : 'hover:bg-slate-800'
+        isSubmitting ? 'hover:bg-slate-200' : 'hover:bg-primary-foreground'
       }
-       ${isSubmitting ? 'bg-slate-200' : 'bg-slate-500 '}`}
+       ${isSubmitting ? 'bg-slate-200' : 'bg-primary '}`}
     >
-      {title}
+      {isSubmitting ? 'Loading...' : title}
     </button>
   );
 }

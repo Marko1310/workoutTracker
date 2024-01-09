@@ -1,6 +1,6 @@
 import {
-  useDetailsForWorkout,
   usePreviousWorkout,
+  usePreviousWorkoutWithDetails,
 } from '../queries/workoutQueries';
 
 export const usePreviousWorkoutData = () => {
@@ -11,16 +11,13 @@ export const usePreviousWorkoutData = () => {
   } = usePreviousWorkout();
 
   const {
-    workoutExercisesArray,
+    previousWorkoutWithDetails,
     isLoading: loadingExercises,
     error: errorExercises,
-  } = useDetailsForWorkout(
-    previousWorkout?.workouts?.workouts_id,
-    previousWorkout?.week,
-  );
+  } = usePreviousWorkoutWithDetails(previousWorkout?.workouts?.workouts_id);
 
   const isLoading = loadingWorkout || loadingExercises;
   const error = errorWorkout || errorExercises;
 
-  return { previousWorkout, workoutExercisesArray, isLoading, error };
+  return { previousWorkoutWithDetails, isLoading, error };
 };

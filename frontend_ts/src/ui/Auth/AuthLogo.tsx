@@ -1,7 +1,7 @@
-import logo from '../../assets/images/login/workout-icon.jpg';
+import logo from '../../assets/images/login/training.png';
 
 function AuthLogo() {
-  return <img src={logo} alt='logo' className='h-16 w-16' />;
+  return <img src={logo} color='#fb923c' alt='logo' className='h-16 w-16' />;
 }
 
 export default AuthLogo;

@@ -1,7 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import workoutServices from '../services/workoutServices';
 import {
-  exercisesArrayDto,
   previousWorkoutDetailsDto,
   workoutLogsByWeekDto,
 } from '../types/workoutData';
@@ -109,18 +108,6 @@ const usePreviousWorkout = () => {
   return { previousWorkout, isLoading, error };
 };
 
-const useDetailsForWorkout = (workoutId: number, week: number) => {
-  const { data, isLoading, error } = useQuery({
-    queryKey: [workoutQueryKeys.DETAILS_FOR_WORKOUT, workoutId],
-    queryFn: () => workoutServices.getDetailsForWorkoutByWeek(workoutId, week),
-    enabled: !!workoutId,
-  });
-
-  //TODO: preetier
-  const workoutExercisesArray: exercisesArrayDto = data?.data[0]?.exercises;
-  return { workoutExercisesArray, isLoading, error };
-};
-
 const useGetWorkoutLogCount = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: [workoutQueryKeys.WORKOUT_LOGS_COUNT],
@@ -137,7 +124,6 @@ export {
   usePreviousWorkout,
   usePreviousWorkoutWithDetails,
   useWorkoutWithExercises,
-  useDetailsForWorkout,
   useAddNewWorkout,
   useDeleteWorkout,
   useGetWorkoutLogCount,

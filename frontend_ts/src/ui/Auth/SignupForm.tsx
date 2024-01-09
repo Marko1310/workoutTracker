@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import LoginButton from '../Auth/LoginButton';
+import LoginButton from './LoginButton';
 import { useAuth } from '../../context/AuthContext';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
