@@ -10,11 +10,11 @@ const Modal = forwardRef<HTMLDialogElement, Props>(({ children }, ref) => {
 
   return (
     <dialog
-      className='relative rounded-md pt-6 backdrop:bg-black/20 backdrop:backdrop-blur-sm'
+      className='text-text relative rounded-md bg-foreground pt-6 backdrop:bg-black/20 backdrop:backdrop-blur-sm'
       ref={ref}
     >
       <button
-        className='absolute right-4 top-2 text-base font-extrabold text-red-500 ease-out hover:cursor-pointer hover:text-red-600'
+        className='hover:text-destructive-foreground absolute right-4 top-2 text-base font-extrabold text-destructive ease-out hover:cursor-pointer'
         onClick={closeModal}
       >
         X

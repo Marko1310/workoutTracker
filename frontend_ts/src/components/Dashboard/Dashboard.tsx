@@ -29,32 +29,32 @@ function Dashboard() {
               isLoading={isLoadingLogCount}
               title='Total number of workouts done'
               icon={ChecklistIcon}
-              color='bg-orange-100'
+              color='bg-card-1'
             />
             <Stats
               data={setCount}
               isLoading={isLoadingSets}
               title='Total number of sets'
               icon={EventAvailableIcon}
-              color='bg-violet-100'
+              color='bg-card-2'
             />
             <Stats
               data={totalReps}
               isLoading={isLoadingReps}
               title='Total number of reps'
               icon={ImportExportIcon}
-              color='bg-pink-100'
+              color='bg-card-3'
             />
             <Stats
               data={totalWeight}
               isLoading={isLoadingWeight}
               title='Total weight lifted (kg)'
               icon={ScaleIcon}
-              color='bg-green-50'
+              color='bg-card-4'
             />
           </div>
           <div className='flex h-full items-end lg:items-center'>
-            <div className='flex h-80 w-full justify-center rounded-2xl border border-border shadow-md lg:h-full lg:items-center'>
+            <div className='flex h-80 w-full justify-center rounded-2xl border border-border bg-foreground shadow-md lg:h-full lg:items-center'>
               <WeekChart />
             </div>
           </div>

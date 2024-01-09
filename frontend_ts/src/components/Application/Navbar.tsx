@@ -18,7 +18,7 @@ function Navbar({ user }: { user: NavbarProps | null }) {
 
   return (
     <div
-      className={`absolute top-0 z-40 flex h-fit w-screen flex-col overflow-hidden border-2 bg-white transition-all duration-300 md:hidden`}
+      className={`absolute top-0 z-40 flex h-fit w-screen flex-col overflow-hidden rounded-b-lg border border-border  bg-foreground shadow-lg transition-all duration-300 md:hidden`}
     >
       <div className='flex h-16 w-full flex-row items-center justify-between gap-4 px-4'>
         <MenuIcon onClick={handleToggleNavbar} />
@@ -28,7 +28,7 @@ function Navbar({ user }: { user: NavbarProps | null }) {
       </div>
       <div
         className={`${
-          isOpen ? 'max-h-40 border-t-2' : 'max-h-0'
+          isOpen ? 'max-h-40 ' : 'max-h-0'
         } flex h-fit flex-col items-center justify-between pl-4 transition-all duration-300`}
       >
         <NavButton title='Home' route='home' />

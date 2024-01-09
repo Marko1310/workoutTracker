@@ -16,7 +16,7 @@ function Heatmap() {
   };
 
   return (
-    <div className='w-full rounded-xl border border-border p-6 shadow-md'>
+    <div className='text-text w-full rounded-xl border border-border bg-foreground p-6 shadow-md'>
       <div className='flex flex-col items-center'>
         <div className='mb-4 flex w-full justify-between'>
           <h2 className='text-primary-foreground text-base font-semibold '>
@@ -25,7 +25,7 @@ function Heatmap() {
           <div className='flex items-center gap-2'>
             <p>Select a year: </p>
             <select
-              className='border border-border p-1'
+              className='border border-border bg-foreground p-1 '
               id='year-select'
               onChange={handleYearChange}
             >

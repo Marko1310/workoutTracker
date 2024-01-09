@@ -58,7 +58,7 @@ function NewProgramModal({ closeModal }: newProgramModalProps) {
 
       <button
         disabled={!isValid || isPending}
-        className='mt-6 flex h-14 w-full items-center justify-center rounded-md bg-orange-300 p-3 transition-all hover:bg-orange-400 disabled:bg-slate-300'
+        className='hover:bg-primary-foreground disabled:bg-disabled mt-6 flex h-14 w-full items-center justify-center rounded-md bg-primary p-3 transition-all'
         type='submit'
       >
         {isPending ? 'Saving...' : 'Add Program'}

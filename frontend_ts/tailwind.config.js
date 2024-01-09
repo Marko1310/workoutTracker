@@ -37,7 +37,21 @@ module.exports = {
         },
         card: {
           DEFAULT: 'var(--card)',
-          foreground: 'var(--card-foreground)',
+          1: 'var(--card-1)',
+          2: 'var(--card-2)',
+          3: 'var(--card-3)',
+          4: 'var(--card-4)',
+        },
+        text: {
+          DEFAULT: 'var(--text)',
+        },
+        hover: {
+          DEFAULT: 'var(--hover)',
+          select: 'var(--hover-select)',
+        },
+        disabled: {
+          DEFAULT: 'var(--disabled)',
+          foreground: 'var(--disabled-foreground)',
         },
       },
       fontFamily: {

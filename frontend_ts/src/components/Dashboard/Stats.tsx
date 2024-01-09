@@ -22,11 +22,11 @@ function Stats({ data, isLoading, title, icon: Icon, color }: statsProps) {
         <DashboardSkeleteon />
       ) : (
         <>
-          <div className='mb-4'>
+          <div className='text-text mb-4'>
             <Icon fontSize='large' />
           </div>
-          <p className='text-center text-xs'>{title}</p>
-          <p className='text-3xl font-bold'>
+          <p className='text-text text-center text-xs'>{title}</p>
+          <p className='text-text text-3xl font-bold'>
             <CountUp
               start={0}
               end={data}

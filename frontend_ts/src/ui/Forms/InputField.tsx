@@ -11,7 +11,7 @@ type InputFieldProps<TFieldValues extends FieldValues> = {
   register: UseFormRegister<TFieldValues>;
   placeholder: string;
   errors: FieldErrors<TFieldValues>;
-  type: React.HTMLInputTypeAttribute | undefined;
+  type?: React.HTMLInputTypeAttribute | undefined;
 };
 
 const InputField = <TFieldValues extends FieldValues>({
@@ -26,10 +26,12 @@ const InputField = <TFieldValues extends FieldValues>({
       type={type}
       {...register(name)}
       placeholder={placeholder}
-      className='h-14 w-full rounded-md border-[1px] border-neutral-400 pl-2 font-montserrat text-lg font-light transition-all focus-within:border-2 hover:border-2 hover:border-neutral-400 focus:border-neutral-600 focus:outline-none'
+      className='text-text h-14 w-full rounded-md border-[1px] border-border bg-foreground pl-2 font-montserrat text-lg font-light transition-all focus-within:border-2 hover:border-2 hover:border-neutral-400 focus:border-neutral-600 focus:outline-none'
     />
     {errors[name] && (
-      <p className='text-red-500'>{errors[name]?.message as ReactNode}</p>
+      <p className='text-destructive-foreground'>
+        {errors[name]?.message as ReactNode}
+      </p>
     )}
   </div>
 );

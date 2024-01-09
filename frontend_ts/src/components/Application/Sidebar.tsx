@@ -19,7 +19,7 @@ function Sidebar({ user }: { user: SidebarProps | null }) {
   };
 
   return (
-    <aside className='hidden rounded-2xl border-r border-border bg-foreground transition-all duration-300 md:flex md:h-screen md:w-80 md:flex-col md:shadow-xl'>
+    <aside className='hidden rounded-r-2xl border-r border-border bg-foreground transition-all duration-300 md:flex md:h-screen md:w-80 md:flex-col md:shadow-xl'>
       <Avatar user={user} />
 
       <div className='flex h-full w-full flex-col justify-between text-left'>

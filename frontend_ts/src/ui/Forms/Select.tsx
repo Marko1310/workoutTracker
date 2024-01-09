@@ -24,7 +24,7 @@ const Select = <TFieldValues extends FieldValues>({
   <>
     <select
       defaultValue={defaultValue}
-      className='h-14 w-full rounded-md border-[1px] border-neutral-400 pl-2 focus-within:border-2 hover:border-2 hover:border-neutral-400 focus:border-neutral-600 focus:outline-none'
+      className='text-text h-14 w-full rounded-md border border-neutral-400 bg-foreground pl-2 focus-within:border-2 hover:border-2 hover:border-neutral-400 focus:border-neutral-600 focus:outline-none'
       {...register(name, { setValueAs: (value) => Number(value) })}
     >
       <option value='' disabled></option>

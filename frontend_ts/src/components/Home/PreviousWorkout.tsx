@@ -17,7 +17,7 @@ function PreviousWorkout() {
         <div className='flex max-h-full w-full flex-col overflow-hidden'>
           <div className='mb-2 flex items-center justify-between'>
             <div className='flex items-center gap-2'>
-              <h1 className='text-lg'>Your previous workout:</h1>
+              <h1 className='text-xl'>Previous workout:</h1>
               <h2 className='text-primary-foreground text-lg'>
                 {previousWorkoutWithDetails?.workout_name}
               </h2>

@@ -45,6 +45,7 @@ function WeekChart() {
   return (
     <Bar
       options={{
+        // backgroundColor: { col },
         maintainAspectRatio: false,
         responsive: true,
         scales: {

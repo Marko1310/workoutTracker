@@ -27,7 +27,7 @@ export default function WorkoutMenu({ openModal }: workoutMenuProps) {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        <MoreVertIcon color='action' />
+        <MoreVertIcon color='warning' />
       </Button>
       <Menu
         sx={{ width: 400 }}

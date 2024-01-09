@@ -18,7 +18,7 @@ function Programs() {
           <CircularProgress color='warning' size={80} />
         </div>
       ) : (
-        <div className='flex flex-col gap-6'>
+        <div className='flex flex-col gap-10'>
           <div className='flex w-full justify-end'>
             <button
               onClick={openModal}
@@ -29,7 +29,7 @@ function Programs() {
           </div>
 
           <div className='flex flex-col gap-0'>
-            <h1>Select your Program:</h1>
+            <h1 className='text-lg'>Your Programs:</h1>
             <div className='flex flex-col px-4'>
               <ProgramList allProgramsData={allProgramsData} />
             </div>

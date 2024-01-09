@@ -61,10 +61,10 @@ function WorkoutList({ workouts, programId }: workoutListProps) {
         })}
       </ul>
       <div>
-        <div className='flex w-full justify-center p-4'>
+        <div className='flex w-full justify-end p-4'>
           <button
             onClick={openNewWorkoutModal}
-            className='hover:bg-accent-foreground flex rounded-lg bg-accent px-4 py-2 transition-all'
+            className='hover:bg-disabled-foreground bg-disabled flex rounded-lg px-4 py-2 transition-all'
           >
             + Add new workout
           </button>

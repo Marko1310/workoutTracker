@@ -6,46 +6,45 @@
   :root {
     --background: #ffffff;
     --foreground: #ffffff;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
+    --card-1: #ffedd5;
+    --card-2: #ede9fe;
+    --card-3: #fce7f3;
+    --card-4: #f0fdf4;
     --primary: #fdba74;
     --primary-foreground: #fb923c;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
     --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
     --accent: #93c5fd;
     --accent-foreground: #60a5fa;
     --destructive: #fca5a5;
     --destructive-foreground: #f87171;
     --border: #e5e7eb;
-    --input: 240 5.9% 90%;
-    --ring: 142.1 76.2% 36.3%;
-    --radius: 0.75rem;
+    --text: #171717;
+    --hover: #f1f5f9;
+    --hover-select: #e2e8f0;
+    --disabled: #cbd5e1;
+    --disabled-foreground: #94a3b8;
   }
 
   .dark {
-    --background: 20 14.3% 4.1%;
-    --foreground: 0 0% 95%;
-    --card: 24 9.8% 10%;
-    --card-foreground: 0 0% 95%;
-    --popover: 0 0% 9%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 142.1 70.6% 45.3%;
-    --primary-foreground: 144.9 80.4% 10%;
+    --background: #0d0b0b;
+    --foreground: #1c1917;
+    --card-1: #8a4e97;
+    --card-2: #173f27;
+    --card-3: #2c3039;
+    --card-4: #006a71;
+    --primary: #fb923c;
+    --primary-foreground: #f97316;
     --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 12 6.5% 15.1%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 85.7% 97.3%;
-    --border: #374151;
-    --input: 240 3.7% 15.9%;
-    --ring: 142.4 71.8% 29.2%;
+    --accent: #60a5fa;
+    --accent-foreground: #3b82f6;
+    --destructive: #fca5a5;
+    --destructive-foreground: #f87171;
+    --border: #27272a;
+    --text: #e5e7eb;
+    --hover: #292524;
+    --hover-select: #44403c;
+    --disabled: #334155;
+    --disabled-foreground: #1e293b;
   }
 }
 
@@ -57,6 +56,9 @@
   }
   html {
     font-family: 'Inter';
+  }
+  body {
+    color: var(--text);
   }
 }
 

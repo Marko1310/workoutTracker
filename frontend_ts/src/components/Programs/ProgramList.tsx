@@ -25,7 +25,7 @@ export default function ProgramList({ allProgramsData }: programListProps) {
         return (
           <li
             key={program.programs_id}
-            className='my-4 w-full flex-col rounded-md border border-border pb-0 shadow-sm'
+            className='my-4 w-full flex-col rounded-md border border-border bg-foreground pb-0 shadow-md'
           >
             <div className='flex justify-between py-2'>
               <h1 className='text-primary-foreground px-4 text-lg font-semibold uppercase'>
@@ -37,7 +37,7 @@ export default function ProgramList({ allProgramsData }: programListProps) {
               onClick={() => handleChange(program.programs_id)}
               className='flex w-full flex-col items-center justify-center pb-0 pt-4 hover:cursor-pointer'
             >
-              <p className='text-xs'>List of workouts</p>
+              <p className='text-xs'>Select a workout</p>
               {expandedIndex === program.programs_id ? (
                 <KeyboardArrowUpIcon color='warning' fontSize='medium' />
               ) : (

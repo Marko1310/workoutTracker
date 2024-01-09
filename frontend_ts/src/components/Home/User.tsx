@@ -10,8 +10,8 @@ function User() {
     <HomeWrapper>
       <div className='mb-2 flex flex-col gap-2'>
         <div className='flex gap-2'>
-          <h1 className='mb-4 text-3xl'>Welcome</h1>
-          <h1 className='text-primary-foreground mb-4 text-3xl'>
+          <h1 className='mb-4 text-xl lg:text-3xl'>Welcome</h1>
+          <h1 className='text-primary-foreground mb-4 text-xl lg:text-3xl'>
             {user?.name}!
           </h1>
         </div>
@@ -21,7 +21,7 @@ function User() {
       <div className='flex h-full items-start'>
         <button
           onClick={() => navigate('/app/programs')}
-          className='hover:bg-primary-foreground flex h-16 items-center rounded-lg border border-border bg-primary p-4 text-black transition-all'
+          className='hover:bg-primary-foreground flex items-center rounded-lg border border-border bg-primary p-2 transition-all lg:p-5'
         >
           Start a workout
         </button>

@@ -17,7 +17,7 @@ function CurrentProgram() {
       ) : (
         <div className='flex max-h-full flex-col overflow-hidden'>
           <div className='mb-6 flex items-center gap-2'>
-            <h1 className='text-xl'>Your current Program:</h1>
+            <h1 className='text-xl'>Current Program:</h1>
             <h1 className=' text-primary-foreground text-xl'>
               {currentProgramData?.programs_name}
             </h1>

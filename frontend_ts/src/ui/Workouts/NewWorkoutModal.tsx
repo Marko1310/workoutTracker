@@ -45,7 +45,7 @@ function NewProgramModal({ programId }: { programId: number }) {
           <input
             {...register('title', { required: true })}
             placeholder='Workout Title*'
-            className='h-14 w-full rounded-md border-[1px] border-neutral-400 pl-2 font-montserrat text-lg font-light transition-all focus-within:border-2 hover:border-2 hover:border-neutral-400 focus:border-neutral-600 focus:outline-none'
+            className='h-14 w-full rounded-md border border-border bg-foreground pl-2 font-montserrat text-lg font-light transition-all focus-within:border-2 hover:border-2 hover:border-neutral-400 focus:border-neutral-600 focus:outline-none'
           />
           {errors?.title && (
             <p className='text-red-500'>
@@ -57,7 +57,7 @@ function NewProgramModal({ programId }: { programId: number }) {
 
       <div className='w-full py-2 md:w-96'>
         <table className='w-full text-center text-sm font-light'>
-          <thead className='border-b-2 border-neutral-500 font-medium text-neutral-800'>
+          <thead className='border-b-2 border-neutral-500 font-medium'>
             <tr>
               <th scope='col' className='px-1 py-4'>
                 <h1 className='w-32 md:w-full'>Exercises</h1>
@@ -83,7 +83,7 @@ function NewProgramModal({ programId }: { programId: number }) {
                       required: true,
                     })}
                     placeholder='e.g. Bench press'
-                    className='h-10 w-32 rounded-md border border-border text-center focus:border-neutral-600 focus:outline-none md:w-full'
+                    className='h-10 w-32 rounded-md border border-border bg-foreground text-center focus:border-neutral-600 focus:outline-none md:w-full'
                   />
                 </td>
                 <td className='py-4'>
@@ -94,7 +94,7 @@ function NewProgramModal({ programId }: { programId: number }) {
                     })}
                     type='number'
                     placeholder='3'
-                    className='h-10 w-16 rounded-md border border-border text-center  focus:border-neutral-600 focus:outline-none'
+                    className='h-10 w-16 rounded-md border border-border bg-foreground text-center focus:border-neutral-600 focus:outline-none'
                   />
                 </td>
                 <td className='py-4'>
@@ -105,13 +105,13 @@ function NewProgramModal({ programId }: { programId: number }) {
                     })}
                     type='number'
                     placeholder='12'
-                    className='h-10 w-16 rounded-md border border-border  text-center focus:border-neutral-600 focus:outline-none'
+                    className='h-10 w-16 rounded-md border border-border bg-foreground  text-center focus:border-neutral-600 focus:outline-none'
                   />
                 </td>
                 <td className='flex py-4 md:w-full'>
                   {index !== 0 && (
                     <div
-                      className='flex h-10 w-4 items-center justify-end font-bold text-red-500 hover:cursor-pointer'
+                      className='text-destructive-foreground flex h-10 w-4 items-center justify-end font-bold hover:cursor-pointer'
                       onClick={() => remove(index)}
                     >
                       X

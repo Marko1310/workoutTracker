@@ -17,8 +17,8 @@ function SidebarButton({ title, route, icon: Icon }: SidebarButtonProps) {
   return (
     <nav
       className={`${
-        location.pathname === route && 'bg-slate-100 hover:bg-slate-100'
-      } flex w-full items-center justify-start gap-8 pl-8 transition-all duration-300 hover:bg-slate-200`}
+        location.pathname === route && 'bg-hover-select hover:bg-hover-select'
+      } hover:bg-hover flex w-full items-center justify-start gap-8 pl-8 transition-all duration-300`}
     >
       <Icon color='warning' />
       <NavButton title={title} route={route} />

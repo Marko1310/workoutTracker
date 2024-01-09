@@ -1,6 +1,6 @@
 function ExerciseTitle() {
   return (
-    <thead className=' border-b bg-white font-medium'>
+    <thead className=' border-b bg-foreground font-medium'>
       <tr>
         <th
           scope='col'
