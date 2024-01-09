@@ -18,7 +18,7 @@ function Programs() {
           <CircularProgress size={80} />
         </div>
       ) : (
-        <div className='flex flex-col gap-2'>
+        <div className='flex flex-col gap-6'>
           <div className='flex w-full justify-end'>
             <button
               onClick={openModal}
@@ -26,7 +26,6 @@ function Programs() {
             >
               + Add new Program
             </button>
-            {isLoading && <p>gagadfgfadgdafgadfgagrad</p>}
           </div>
 
           <div className='flex flex-col gap-0'>
