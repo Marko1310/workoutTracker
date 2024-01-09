@@ -2,6 +2,7 @@ import { SyntheticEvent } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import Avatar from '../../ui/Application/Avatar';
 import SidebarButton from '../../ui/Application/SidebarButton';
+import DarkModeToggle from '../../ui/Application/DarkModeToggle';
 import SpaceDashboardRoundedIcon from '@mui/icons-material/SpaceDashboard';
 import HomeRounded from '@mui/icons-material/Home';
 import FitnessCenterRoundedIcon from '@mui/icons-material/FitnessCenter';
@@ -36,12 +37,15 @@ function Sidebar({ user }: { user: SidebarProps | null }) {
             icon={FitnessCenterRoundedIcon}
           />
         </div>
-        <div
-          onClick={handleLogout}
-          className='flex w-fit cursor-pointer items-center justify-start pl-2 '
-        >
-          <LogoutRoundedIcon color='warning' />
-          <button className='h-14 pl-2 text-left'>Logout</button>
+        <div className='flex w-full justify-between px-4 py-2'>
+          <div
+            onClick={handleLogout}
+            className='flex cursor-pointer items-center '
+          >
+            <LogoutRoundedIcon color='warning' />
+            <button className='h-14 pl-2 text-left'>Logout</button>
+          </div>
+          <DarkModeToggle />
         </div>
       </div>
     </aside>

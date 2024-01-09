@@ -53,6 +53,9 @@ module.exports = {
           DEFAULT: 'var(--disabled)',
           foreground: 'var(--disabled-foreground)',
         },
+        success: {
+          DEFAULT: 'var(--success)',
+        },
       },
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],

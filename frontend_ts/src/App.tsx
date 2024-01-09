@@ -10,35 +10,38 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Notifications from './components/Shared/Notifications';
+import { DarkModeProvider } from './context/DarkModeContext';
 
 const queryCLient = new QueryClient();
 
 function App() {
   return (
-    <QueryClientProvider client={queryCLient}>
-      <AuthProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path='' element={<Auth />} />
-            <Route
-              path='app'
-              element={
-                <Protected>
-                  <Application />
-                </Protected>
-              }
-            >
-              <Route index path='home' element={<Home />} />
-              <Route path='dashboard' element={<Dashboard />} />
-              <Route path='programs' element={<Programs />} />
-              <Route path='session/:workoutId' element={<WorkoutSession />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </AuthProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
-      <Notifications />
-    </QueryClientProvider>
+    <DarkModeProvider>
+      <QueryClientProvider client={queryCLient}>
+        <AuthProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path='' element={<Auth />} />
+              <Route
+                path='app'
+                element={
+                  <Protected>
+                    <Application />
+                  </Protected>
+                }
+              >
+                <Route index path='home' element={<Home />} />
+                <Route path='dashboard' element={<Dashboard />} />
+                <Route path='programs' element={<Programs />} />
+                <Route path='session/:workoutId' element={<WorkoutSession />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </AuthProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <Notifications />
+      </QueryClientProvider>
+    </DarkModeProvider>
   );
 }
 

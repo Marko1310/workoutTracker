@@ -14,6 +14,11 @@ export default function ProgramMenu({ openModal }: programMenuProps) {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
+  const handleDelete = () => {
+    setAnchorEl(null);
+    openModal();
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -47,7 +52,7 @@ export default function ProgramMenu({ openModal }: programMenuProps) {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={openModal}>Delete Program</MenuItem>
+        <MenuItem onClick={handleDelete}>Delete Program</MenuItem>
       </Menu>
     </div>
   );

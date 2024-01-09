@@ -14,6 +14,12 @@ export default function WorkoutMenu({ openModal }: workoutMenuProps) {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const handleDelete = () => {
+    setAnchorEl(null);
+    openModal();
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -47,8 +53,7 @@ export default function WorkoutMenu({ openModal }: workoutMenuProps) {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={handleClose}>Details</MenuItem>
-        <MenuItem onClick={openModal}>Delete Workout</MenuItem>
+        <MenuItem onClick={handleDelete}>Delete Workout</MenuItem>
       </Menu>
     </div>
   );

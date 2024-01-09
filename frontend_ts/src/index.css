@@ -23,6 +23,7 @@
     --hover-select: #e2e8f0;
     --disabled: #cbd5e1;
     --disabled-foreground: #94a3b8;
+    --success: #dcfce7;
   }
 
   .dark {
@@ -45,6 +46,7 @@
     --hover-select: #44403c;
     --disabled: #334155;
     --disabled-foreground: #1e293b;
+    --success: #173f27;
   }
 }
 

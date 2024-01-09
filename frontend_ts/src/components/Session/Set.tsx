@@ -36,7 +36,7 @@ function Set({
   }, [weight, reps, set]);
 
   return (
-    <tr className={`${isPR && ' bg-green-100'} border-b`}>
+    <tr className={`${isPR ? ' bg-success' : 'bg-foreground'} border-b`}>
       <td className='whitespace-nowrap px-2 py-4 text-center font-bold'>
         {isPR && <p> PR!</p>}
       </td>
@@ -57,7 +57,7 @@ function Set({
             },
           )}
           className={` ${
-            isPR && ' bg-green-100'
+            isPR ? 'bg-success' : 'bg-foreground'
           } w-16 py-2 text-center outline-none`}
           type='number'
           placeholder='kg'
@@ -73,7 +73,7 @@ function Set({
             setValueAs: (value) => Number(value),
           })}
           className={` ${
-            isPR && ' bg-green-100'
+            isPR ? 'bg-success' : 'bg-foreground'
           } w-16 py-2 text-center outline-none`}
           type='number'
           placeholder='reps'

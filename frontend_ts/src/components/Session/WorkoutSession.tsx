@@ -60,7 +60,7 @@ function WorkoutSession() {
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className=' h-fit flex-col lg:px-16'>
-          <div className='flex w-full items-center justify-between border-b border-black pb-2'>
+          <div className='flex w-full items-center justify-between border-b border-border pb-2'>
             <p className='text-primary-foreground text-xl font-bold'>
               {workout?.workout_name}
             </p>

@@ -3,8 +3,9 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import DarkModeToggle from './DarkModeToggle';
 
-type AvatarProps = { user: UserDto | null; logout: () => void };
+type AvatarProps = { user?: UserDto | null; logout: () => void };
 
 function AvatarNavbar({ user, logout }: AvatarProps) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -27,13 +28,8 @@ function AvatarNavbar({ user, logout }: AvatarProps) {
           onClick={handleClick}
           color='inherit'
         >
-          <div className='flex w-auto items-center justify-between gap-4 p-3 md:border-b-2 md:border-gray-300'>
-            {/* //TODO: add random image*/}
-            <img className='h-10 w-10 rounded-full border-2 border-gray-300 md:h-14 md:w-14' />
-            <div className='break-words text-sm font-black md:text-base'>
-              {user?.name}
-            </div>
-          </div>
+          {/* //TODO: add random image*/}
+          <img className='h-10 w-10 rounded-full border-2 border-gray-300 md:h-14 md:w-14' />
         </Button>
         <Menu
           anchorOrigin={{
@@ -52,8 +48,11 @@ function AvatarNavbar({ user, logout }: AvatarProps) {
             'aria-labelledby': 'user-button',
           }}
         >
-          <MenuItem sx={{ width: 120 }} onClick={logout}>
+          <MenuItem sx={{ width: 150 }} onClick={logout}>
             Logout
+          </MenuItem>
+          <MenuItem sx={{ width: 120, gap: 6 }} onClick={handleClose}>
+            Toogle <DarkModeToggle />
           </MenuItem>
         </Menu>
       </div>

@@ -9,7 +9,6 @@ type NavbarProps = UserDto;
 
 function Navbar({ user }: { user: NavbarProps | null }) {
   const { logout } = useAuth()!;
-
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggleNavbar = () => {
