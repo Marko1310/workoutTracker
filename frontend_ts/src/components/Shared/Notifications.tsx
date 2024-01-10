@@ -13,8 +13,8 @@ function Notifications() {
           fontSize: '16px',
           maxWidth: '500px',
           padding: '16px 24px',
-          background: 'white',
-          color: 'var(--color-grey-700)',
+          background: 'var(--foreground)',
+          color: 'var(--text)',
         },
       }}
     />

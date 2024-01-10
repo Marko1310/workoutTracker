@@ -38,7 +38,7 @@ function App() {
             </Routes>
           </BrowserRouter>
         </AuthProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
         <Notifications />
       </QueryClientProvider>
     </DarkModeProvider>
