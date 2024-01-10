@@ -32,6 +32,7 @@ export class IdentityController {
       await this.identityService.signup(signupDto);
     res.cookie('access_token', access_token, {
       httpOnly: true,
+      secure: true,
       sameSite: 'none',
     });
     return { id: identity.user_id, name: identity.name, email: identity.email };
@@ -46,6 +47,7 @@ export class IdentityController {
     );
     res.cookie('access_token', access_token, {
       httpOnly: true,
+      secure: true,
       sameSite: 'none',
     });
     return { id: identity.user_id, name: identity.name, email: identity.email };
@@ -61,6 +63,7 @@ export class IdentityController {
   signout(@Res({ passthrough: true }) res: Response) {
     res.clearCookie('access_token', {
       httpOnly: true,
+      secure: true,
       sameSite: 'none',
     });
   }
