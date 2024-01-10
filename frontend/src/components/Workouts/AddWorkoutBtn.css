@@ -1,8 +1,0 @@
-.addNewExercise-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  bottom: -10rem;
-  z-index: 1;
-}

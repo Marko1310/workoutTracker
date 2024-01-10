@@ -4,7 +4,7 @@
   "description": "package for 'concurrently'",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm start\" "
+    "dev": "concurrently \"cd backend && npm run start:dev\" \"cd frontend && npm run dev\" "
   },
   "author": "",
   "license": "ISC",
