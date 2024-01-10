@@ -22,7 +22,7 @@
     "typeorm:run-migrations": "npm run typeorm migration:run -- -d ./typeOrm.config.ts",
     "typeorm:generate-migration": "npm run typeorm -- -d ./typeOrm.config.ts migration:generate src/shared/database/migrations/migration/$npm_config_name",
     "typeorm:revert-migration": "npm run typeorm -- -d ./typeOrm.config.ts migration:revert",
-    "install-build-migrate": "npm install && npm run build && npm run typeorm:generate-migration && npm run typeorm:run-migrations"
+    "install-build-migrate": "npm install && npm run build && npm run typeorm:run-migrations"
   },
   "dependencies": {
     "@casl/ability": "^6.5.0",
