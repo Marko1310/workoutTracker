@@ -3,7 +3,7 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import DarkModeToggle from './DarkModeToggle';
+import AvatarImage from '@mui/material/Avatar';
 
 type AvatarProps = { user?: UserDto | null; logout: () => void };
 
@@ -28,8 +28,11 @@ function AvatarNavbar({ user, logout }: AvatarProps) {
           onClick={handleClick}
           color='inherit'
         >
-          {/* //TODO: add random image*/}
-          <img className='h-10 w-10 rounded-full border-2 border-gray-300 md:h-14 md:w-14' />
+          <AvatarImage
+            sx={{ bgcolor: 'darkorange' }}
+            alt={user?.name}
+            src='/broken-image.jpg'
+          />
         </Button>
         <Menu
           anchorOrigin={{
@@ -50,9 +53,6 @@ function AvatarNavbar({ user, logout }: AvatarProps) {
         >
           <MenuItem sx={{ width: 150 }} onClick={logout}>
             Logout
-          </MenuItem>
-          <MenuItem sx={{ width: 120, gap: 6 }} onClick={handleClose}>
-            Toogle <DarkModeToggle />
           </MenuItem>
         </Menu>
       </div>
