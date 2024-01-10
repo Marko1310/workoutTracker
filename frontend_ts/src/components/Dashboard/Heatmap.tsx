@@ -47,7 +47,11 @@ function Heatmap() {
               dark: ['#C3C0BF', '#fb923c'],
             }}
             renderBlock={(block, activity) => (
-              <MuiTooltip title={` Workout completed on ${activity.date}`}>
+              <MuiTooltip
+                title={
+                  activity.level > 0 && `Workout completed on ${activity.date}`
+                }
+              >
                 {block}
               </MuiTooltip>
             )}

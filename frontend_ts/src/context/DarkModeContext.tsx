@@ -9,7 +9,7 @@ type DarkModeContextType = {
 const DarkModeContext = createContext<DarkModeContextType | null>(null);
 
 function DarkModeProvider({ children }: { children: ReactNode }) {
-  const [isDarkMode, setIsDarkMode] = useLocalStorageState(false, 'isDarkMode');
+  const [isDarkMode, setIsDarkMode] = useLocalStorageState(true, 'isDarkMode');
 
   useEffect(() => {
     if (isDarkMode) {

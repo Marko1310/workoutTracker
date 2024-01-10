@@ -3,7 +3,7 @@ import AuthTitle from './AuthTitle';
 
 function AuthHeader() {
   return (
-    <div className='mb-12 mt-10 flex flex-row items-center justify-center gap-2'>
+    <div className='text-text mb-12 mt-10 flex flex-row items-center justify-center gap-2'>
       <AuthLogo />
       <AuthTitle />
     </div>

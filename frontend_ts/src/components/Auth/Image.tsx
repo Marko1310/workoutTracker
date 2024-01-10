@@ -9,8 +9,7 @@ function Image() {
   }, []);
 
   return (
-    <img
-      alt=''
+    <div
       className='hidden h-full w-full bg-cover bg-center md:block'
       style={{
         backgroundImage: `url(${image})`,

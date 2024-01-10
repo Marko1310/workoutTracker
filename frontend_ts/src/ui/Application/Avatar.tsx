@@ -5,7 +5,7 @@ type AvatarProps = UserDto;
 
 function Avatar({ user }: { user: AvatarProps | null }) {
   return (
-    <div className='flex w-auto items-center justify-between gap-4 p-3 md:border-b md:border-border'>
+    <div className='flex w-auto items-center justify-between px-6 py-4 md:border-b md:border-border'>
       <AvatarImage
         sx={{ bgcolor: 'darkorange' }}
         alt={user?.name}

@@ -1,6 +1,5 @@
 import axios from 'axios';
-//TODO: export to .env
-const BASE_API_URL = 'http://localhost:3000';
+const BASE_API_URL = import.meta.env.VITE_BASE_API_URL;
 
 const workout_api = axios.create({
   baseURL: BASE_API_URL,

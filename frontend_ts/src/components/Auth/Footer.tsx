@@ -1,8 +1,13 @@
+import DarkModeToggle from '../../ui/Application/DarkModeToggle';
+
 function Footer() {
   return (
-    <p className='mt-auto flex w-full justify-center align-bottom text-sm text-slate-400 '>
-      © 2023 Marko Čabo. All rights reserved.
-    </p>
+    <div className='text-text mt-auto flex w-full items-center justify-between align-bottom text-sm'>
+      <p className='text-disabled-foreground'>
+        © 2023 Marko Čabo. All rights reserved.
+      </p>
+      <DarkModeToggle />
+    </div>
   );
 }
 

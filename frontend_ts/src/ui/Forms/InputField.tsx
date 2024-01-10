@@ -26,7 +26,7 @@ const InputField = <TFieldValues extends FieldValues>({
       type={type}
       {...register(name)}
       placeholder={placeholder}
-      className='text-text h-14 w-full rounded-md border-[1px] border-border bg-foreground pl-2 font-montserrat text-lg font-light transition-all focus-within:border-2 hover:border-2 hover:border-neutral-400 focus:border-neutral-600 focus:outline-none'
+      className='text-text h-14 w-full rounded-md border border-border bg-foreground pl-2 font-montserrat text-lg font-light transition-all focus-within:border-2 hover:border-2 hover:border-neutral-400 focus:border-neutral-600 focus:outline-none'
     />
     {errors[name] && (
       <p className='text-destructive-foreground'>

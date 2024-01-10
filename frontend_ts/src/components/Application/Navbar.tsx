@@ -32,9 +32,17 @@ function Navbar({ user }: { user: NavbarProps | null }) {
           isOpen ? 'max-h-40 ' : 'max-h-0'
         } flex h-fit flex-col items-center justify-between pl-4 transition-all duration-300`}
       >
-        <NavButton title='Home' route='home' />
-        <NavButton title='Dashboard' route='dashboard' />
-        <NavButton title='Programs' route='programs' />
+        <NavButton title='Home' route='home' toggle={handleToggleNavbar} />
+        <NavButton
+          title='Dashboard'
+          route='dashboard'
+          toggle={handleToggleNavbar}
+        />
+        <NavButton
+          title='Programs'
+          route='programs'
+          toggle={handleToggleNavbar}
+        />
       </div>
     </div>
   );
