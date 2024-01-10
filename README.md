@@ -1,8 +1,6 @@
 ## Workout Tracker
 
-<div style="text-align: center;">
-<img src="readme/HomeScreen.png" alt="Workout Tracker Logo" style="width:700px;"/>
-</div>
+![Workout Tracker Logo](readme/HomeScreen.png)
 
 Workout Tracker is a fullstack application designed to help users keep track of their workouts. It utilizes NestJS on the backend, PostgreSQL as the database, and React on the frontend.
 
