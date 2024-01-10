@@ -4,6 +4,7 @@ import SwitchForm from './SwitchForm';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
 import { useAuth } from '../../context/AuthContext';
+import Note from './Note';
 
 const Forms = {
   Signup: 'signup',
@@ -26,6 +27,7 @@ function AuthForm() {
       <AuthFormTitle formType={formType} />
       {formType === 'signup' ? <SignupForm /> : <LoginForm />}
       <SwitchForm formType={formType} changeForm={changeForm} />
+      <Note />
     </>
   );
 }
