@@ -61,7 +61,11 @@ export class IdentityController {
 
   @Get('logout')
   signout(@Res({ passthrough: true }) res: Response) {
-    res.clearCookie('access_token');
+    res.clearCookie('access_token', {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+    });
   }
 
   @Get('user')

@@ -8,7 +8,6 @@ import WorkoutSession from './components/Session/WorkoutSession';
 import { AuthProvider } from './context/AuthContext';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Notifications from './components/Shared/Notifications';
 import { DarkModeProvider } from './context/DarkModeContext';
 
@@ -38,7 +37,6 @@ function App() {
             </Routes>
           </BrowserRouter>
         </AuthProvider>
-        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
         <Notifications />
       </QueryClientProvider>
     </DarkModeProvider>
