@@ -7,6 +7,7 @@ const appSchema = z.object({
     secret: z.string(),
   }),
   clientUrl: z.string(),
+  serverPing: z.string().optional(),
 });
 
 export default registerAs('app', () => {
@@ -16,6 +17,7 @@ export default registerAs('app', () => {
       secret: process.env.JWT_SECRET,
     },
     clientUrl: process.env.CLIENT_URL,
+    serverPing: process.env.SERVER_PING,
   });
   return config;
 });

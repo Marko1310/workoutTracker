@@ -14,10 +14,11 @@ async function bootstrap() {
   const config = app.get(ConfigService);
   const port = config.get<number>('app.port');
   const clientUrl = config.get<string>('app.clientUrl');
+  const serverPing = config.get<string>('app.serverPing');
 
   app.enableCors({
     credentials: true,
-    origin: [clientUrl],
+    origin: [clientUrl, serverPing],
   });
 
   app.use(cookieParser());
