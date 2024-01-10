@@ -70,7 +70,7 @@ function WorkoutSession() {
               type='submit'
               className='hover:bg-accent-foreground rounded-lg bg-accent px-4 py-3 transition-all disabled:bg-slate-400'
             >
-              {isPending ? 'Saving...' : 'Finish Workout'}
+              {isPending ? 'Saving' : 'Finish'}
             </button>
           </div>
 

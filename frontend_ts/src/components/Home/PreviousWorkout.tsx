@@ -14,7 +14,7 @@ function PreviousWorkout() {
           <Skeleton variant='text' sx={{ fontSize: '1rem' }} />
         </div>
       ) : (
-        <div className='flex max-h-full w-full flex-col overflow-hidden'>
+        <div className='flex max-h-full w-full flex-col gap-4 overflow-hidden'>
           <div className='mb-2 flex items-center justify-between'>
             <div className='flex items-center gap-2'>
               <h1 className='text-xl'>Previous workout:</h1>

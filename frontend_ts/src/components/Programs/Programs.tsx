@@ -5,6 +5,7 @@ import NewProgramModal from '../../ui/Programs/NewProgramModal';
 import useModal from '../../hooks/useModal';
 import { useAllPrograms } from '../../queries/programQueries';
 import CircularProgress from '@mui/material/CircularProgress';
+import NoPrograms from './NoPrograms';
 
 function Programs() {
   const { allProgramsData, isLoading, isFetching } = useAllPrograms();
@@ -28,12 +29,16 @@ function Programs() {
             </button>
           </div>
 
-          <div className='flex flex-col gap-0'>
-            <h1 className='text-lg'>Your Programs:</h1>
-            <div className='flex flex-col px-4'>
-              <ProgramList allProgramsData={allProgramsData} />
+          {allProgramsData?.length === 0 ? (
+            <NoPrograms />
+          ) : (
+            <div className='flex flex-col gap-0'>
+              <h1 className='text-lg'>Your Programs:</h1>
+              <div className='flex flex-col px-4'>
+                <ProgramList allProgramsData={allProgramsData} />
+              </div>
             </div>
-          </div>
+          )}
 
           <Modal ref={addNewWProgramModalRef}>
             <NewProgramModal closeModal={closeModal} />

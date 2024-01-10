@@ -61,7 +61,7 @@ function NewProgramModal({ closeModal }: newProgramModalProps) {
         className='hover:bg-primary-foreground disabled:bg-disabled mt-6 flex h-14 w-full items-center justify-center rounded-md bg-primary p-3 transition-all'
         type='submit'
       >
-        {isPending ? 'Saving...' : 'Add Program'}
+        {isPending ? 'Saving' : 'Add Program'}
       </button>
     </form>
   );

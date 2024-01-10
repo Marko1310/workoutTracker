@@ -10,7 +10,7 @@ const Modal = forwardRef<HTMLDialogElement, Props>(({ children }, ref) => {
 
   return (
     <dialog
-      className='text-text relative rounded-md bg-foreground pt-6 backdrop:bg-black/20 backdrop:backdrop-blur-sm'
+      className='text-text relative max-w-max rounded-md bg-foreground pt-6 backdrop:bg-black/20 backdrop:backdrop-blur-sm'
       ref={ref}
     >
       <button
