@@ -31,8 +31,9 @@ export class IdentityController {
     const { access_token, identity } =
       await this.identityService.signup(signupDto);
     res.cookie('access_token', access_token, {
-      httpOnly: false,
-      secure: false,
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
     });
     return { id: identity.user_id, name: identity.name, email: identity.email };
   }
@@ -45,8 +46,9 @@ export class IdentityController {
       req.user,
     );
     res.cookie('access_token', access_token, {
-      httpOnly: false,
-      secure: false,
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
     });
     return { id: identity.user_id, name: identity.name, email: identity.email };
   }
