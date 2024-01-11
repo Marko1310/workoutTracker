@@ -20,9 +20,12 @@ Follow these steps to set up the application locally:
    git clone https://github.com/Marko1310/workoutTracker
    ```
 
-2. Install dependencies in the frontend and backend folders:
+2. Install dependencies in the main folder, frontend, and backend:
 
    ```bash
+   cd workout-tracker
+   npm install
+
    cd workoutTracker/frontend
    npm install
 
@@ -30,7 +33,10 @@ Follow these steps to set up the application locally:
    npm install
    ```
 
-3. Generate and run database migrations
+3. Create .env files:
+   In both frontend and backend folder, create a .env file with the required fields as mentioned in .env.example.
+
+4. Generate and run database migrations
 
    ```bash
    cd ../backend
@@ -38,9 +44,9 @@ Follow these steps to set up the application locally:
    npm run typeorm:run-migrations
    ```
 
-4. In the main folder, run the development server to start the app:
+5. In the main folder, run the development server to start the app:
    ```bash
-   npm run start dev
+   npm run dev
    ```
 
 # 👨‍💻 Tech stack
