@@ -14,7 +14,7 @@ import { WorkoutExistsPipe } from '@training-modules/workouts/pipes/workoutExist
 import { Permission, PermissionGuard } from 'shared/auth/permission.guard';
 import { RequestUser } from '@users-modules/decorator/requestUser.decorator';
 import { RequestUserDto } from '@users-modules/dto/request-user.dto';
-import { WorkoutsLogService } from 'workouts-log/workouts-log.service';
+import { WorkoutsLogService } from '@training-modules/workouts-log/workouts-log.service';
 
 @Controller('sessions')
 @UseGuards(PermissionGuard)
