@@ -1,4 +1,3 @@
-import { UserDto } from '../types/applications';
 import { LoginDto, SignupDto } from '../types/auth';
 import { workout_api } from './api_config';
 
@@ -18,21 +17,9 @@ const getUser = async () => {
   return await workout_api.get('identity/user');
 };
 
-const addUserLocalStorage = (response: UserDto) => {
-  const user = JSON.stringify(response);
-
-  localStorage.setItem('user', user);
-};
-
-const removeUserLocalStorage = () => {
-  localStorage.clear();
-};
-
 export default {
   signup,
   login,
   logout,
   getUser,
-  addUserLocalStorage,
-  removeUserLocalStorage,
 };

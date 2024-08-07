@@ -26,15 +26,13 @@ type ActionType =
 
 type AuthStateType = {
   user: UserDto | null;
-  isAuthenticated: boolean;
   isLoading: boolean;
   error: any;
 };
 
-const initalState: AuthStateType = {
+const initialState: AuthStateType = {
   user: null,
-  isAuthenticated: localStorage.getItem('user') !== null,
-  isLoading: false,
+  isLoading: true,
   error: null,
 };
 
@@ -53,7 +51,6 @@ const reducer = (state: AuthStateType, action: ActionType) => {
       return {
         ...state,
         user: action.payload,
-        isAuthenticated: true,
         isLoading: false,
         error: null,
       };
@@ -73,15 +70,14 @@ const reducer = (state: AuthStateType, action: ActionType) => {
         isLoading: false,
         error: false,
         user: null,
-        isAuthenticated: false,
       };
   }
 };
 
 function AuthProvider({ children }: { children: ReactNode }) {
-  const [{ user, isAuthenticated, isLoading, error }, dispatch] = useReducer(
+  const [{ user, isLoading, error }, dispatch] = useReducer(
     reducer,
-    initalState,
+    initialState,
   );
 
   useEffect(() => {
@@ -89,10 +85,8 @@ function AuthProvider({ children }: { children: ReactNode }) {
       dispatch({ type: ACTION.LOADING });
       try {
         const response = await userServices.getUser();
-        userServices.addUserLocalStorage(response.data);
         dispatch({ type: ACTION.SUCCESS, payload: response.data });
       } catch (error: any) {
-        userServices.removeUserLocalStorage();
         dispatch({ type: ACTION.ERROR, payload: error.response.data });
       }
     };
@@ -104,7 +98,6 @@ function AuthProvider({ children }: { children: ReactNode }) {
     dispatch({ type: ACTION.LOADING });
     try {
       const response = await userServices.signup(data);
-      userServices.addUserLocalStorage(response.data);
       dispatch({ type: ACTION.SUCCESS, payload: response.data });
     } catch (error: any) {
       dispatch({ type: ACTION.ERROR, payload: error.response.data });
@@ -116,7 +109,6 @@ function AuthProvider({ children }: { children: ReactNode }) {
     try {
       const response = await userServices.login(data);
 
-      userServices.addUserLocalStorage(response.data);
       dispatch({ type: ACTION.SUCCESS, payload: response.data });
     } catch (error: any) {
       dispatch({ type: ACTION.ERROR, payload: error.response.data });
@@ -129,7 +121,6 @@ function AuthProvider({ children }: { children: ReactNode }) {
 
   async function logout() {
     await userServices.logout();
-    userServices.removeUserLocalStorage();
     dispatch({ type: ACTION.RESET });
   }
 
@@ -137,7 +128,6 @@ function AuthProvider({ children }: { children: ReactNode }) {
     <AuthContext.Provider
       value={{
         user,
-        isAuthenticated,
         isLoading,
         error,
         signup,

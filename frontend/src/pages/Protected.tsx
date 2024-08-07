@@ -4,10 +4,7 @@ import { Navigate } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 
 function Protected({ children }: { children: ReactNode }) {
-  const { isAuthenticated, isLoading } = useAuth()!;
-  if (!isAuthenticated) {
-    return <Navigate to={'/'} />;
-  }
+  const { user, isLoading } = useAuth()!;
 
   if (isLoading) {
     return (
@@ -17,7 +14,11 @@ function Protected({ children }: { children: ReactNode }) {
     );
   }
 
-  if (isAuthenticated && !isLoading) {
+  if (!user) {
+    return <Navigate to={'/'} />;
+  }
+
+  if (user && !isLoading) {
     return <>{children}</>;
   }
 }

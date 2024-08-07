@@ -5,12 +5,12 @@ import AuthPanel from '../components/Auth/AuthPanel';
 import { useAuth } from '../context/AuthContext';
 
 function Auth() {
-  const { isAuthenticated } = useAuth()!;
+  const { user } = useAuth()!;
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isAuthenticated) navigate('/app/home');
-  }, [isAuthenticated, navigate]);
+    if (user) navigate('/app/home');
+  }, [user, navigate]);
 
   return (
     <div className='grid h-screen w-screen overflow-y-hidden bg-white md:grid-cols-[1fr,1fr] lg:grid-cols-[1.5fr,1fr]'>
